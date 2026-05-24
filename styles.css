@@ -11,13 +11,18 @@
   --text-weaker: #879399;
   --text-disabled: #bbc4c8;
   --text-inverse-strong: #ffffff;
+  --text-strong-alpha: rgba(9, 22, 26, 0.95);
   --font-family-heading: Roboto, var(--font);
+  --font-family-body: Roboto, var(--font);
   --font-size-heading-4: 20px;
+  --font-size-tiny: 14px;
   --font-weight-strong: 600;
   --line-height-heading-4: 28px;
+  --line-height-tiny: 20px;
   --spacing-0: 0px;
   --spacing-4: 4px;
   --spacing-8: 8px;
+  --spacing-12: 12px;
   --spacing-16: 16px;
   --spacing-20: 20px;
   --spacing-24: 24px;
@@ -28,9 +33,11 @@
   --fill-weaker: #f7fafa;
   --fill-disabled: #eef2f3;
   --fill-inverse: #0f2026;
+  --fill-inverse-strong: #ffffff;
   --stroke-strong: #d7dee1;
   --stroke-weak: #e7ecee;
   --stroke-focus: #c7f0fa;
+  --stroke-inverse-strong: rgba(255, 255, 255, 0.6);
   --error-1000: #ee1010;
   --error-800: #f04444;
   --error-50: #fff0f0;
@@ -507,6 +514,11 @@ pre {
   box-shadow: 0 0 0 4px var(--stroke-focus);
 }
 
+.yco-button--inverse.yco-button--primary:focus-visible,
+.yco-button--inverse.yco-button--primary.is-focus {
+  box-shadow: 0 0 0 3px var(--stroke-inverse-strong);
+}
+
 .yco-button:disabled,
 .yco-button.is-disabled {
   background: var(--fill-disabled);
@@ -545,9 +557,18 @@ pre {
 .yco-button--tiny {
   min-height: 32px;
   gap: var(--spacing-4);
-  padding: 0 12px;
-  font-size: 14px;
-  line-height: 20px;
+  padding: 0 var(--spacing-12);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.yco-button--tiny .button-icon,
+.yco-button--tiny .spinner {
+  width: 16px;
+  height: 16px;
+  flex-basis: 16px;
+  font-size: 16px;
 }
 
 .yco-button--brand {
@@ -581,13 +602,13 @@ pre {
 }
 
 .yco-button--inverse {
-  --button-strong: var(--text-inverse-strong);
+  --button-strong: var(--fill-inverse-strong);
   --button-strong-hover: var(--fill-hover);
   --button-strong-press: var(--fill-press);
   --button-weak: transparent;
   --button-weak-hover: rgba(255, 255, 255, 0.08);
   --button-weak-press: rgba(255, 255, 255, 0.14);
-  --button-fg-on-strong: var(--text-strong);
+  --button-fg-on-strong: var(--text-strong-alpha);
 }
 
 .yco-button--primary {
