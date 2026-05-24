@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YCO Component Library - Buttons</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Component navigation">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">Y</div>
+          <div>
+            <p class="eyebrow">YCO Design System</p>
+            <h1>Components</h1>
+          </div>
+        </div>
+        <nav class="side-nav">
+          <a class="side-link is-active" href="#buttons">
+            <span class="nav-icon" aria-hidden="true"></span>
+            Buttons
+          </a>
+          <a class="side-link is-disabled" href="#" aria-disabled="true">Inputs</a>
+          <a class="side-link is-disabled" href="#" aria-disabled="true">Selection</a>
+          <a class="side-link is-disabled" href="#" aria-disabled="true">Feedback</a>
+        </nav>
+        <div class="token-panel">
+          <p class="panel-title">Core Tokens</p>
+          <div class="token-row">
+            <span class="swatch brand"></span>
+            <span>Brand / 1000</span>
+          </div>
+          <div class="token-row">
+            <span class="swatch text"></span>
+            <span>Text / Strong</span>
+          </div>
+          <div class="token-row">
+            <span class="swatch stroke"></span>
+            <span>Stroke / Weak</span>
+          </div>
+          <div class="token-row">
+            <span class="swatch danger"></span>
+            <span>Error / Strong</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content" id="buttons">
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">Components</p>
+            <h2>Buttons</h2>
+            <p class="intro">
+              Built from YCO semantic tokens read through Figma MCP. Engineers can switch states, sizes, icons, and themes, then copy the generated code.
+            </p>
+          </div>
+          <div class="header-actions" role="group" aria-label="Theme">
+            <button class="theme-button is-active" type="button" data-theme="light">Light</button>
+            <button class="theme-button" type="button" data-theme="dark">Dark</button>
+          </div>
+        </header>
+
+        <section class="workspace" aria-label="Button playground">
+          <div class="preview-pane">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Playground</p>
+                <h3>Button Preview</h3>
+              </div>
+              <span class="status-pill" id="stateLabel">Default</span>
+            </div>
+            <div class="preview-surface" id="previewSurface">
+              <button class="yco-button yco-button--primary yco-button--medium" id="previewButton" type="button">
+                <span class="button-icon" aria-hidden="true">+</span>
+                <span>Button</span>
+              </button>
+            </div>
+            <div class="variant-strip" aria-label="Button variants">
+              <button class="yco-button yco-button--primary yco-button--small" type="button">Primary</button>
+              <button class="yco-button yco-button--secondary yco-button--small" type="button">Secondary</button>
+              <button class="yco-button yco-button--ghost yco-button--small" type="button">Ghost</button>
+              <button class="yco-button yco-button--danger yco-button--small" type="button">Danger</button>
+              <button class="yco-button yco-button--success yco-button--small" type="button">Success</button>
+            </div>
+            <div class="size-spec" aria-label="Button sizes">
+              <div><span>Large / 56</span><button class="yco-button yco-button--primary yco-button--large" type="button">Button</button></div>
+              <div><span>Medium</span><button class="yco-button yco-button--primary yco-button--medium" type="button">Button</button></div>
+              <div><span>Small</span><button class="yco-button yco-button--primary yco-button--small" type="button">Button</button></div>
+              <div><span>Tiny</span><button class="yco-button yco-button--primary yco-button--tiny" type="button">Button</button></div>
+            </div>
+          </div>
+
+          <form class="control-pane" aria-label="Button controls">
+            <div class="control-group">
+              <label for="variant">Variant</label>
+              <select id="variant" name="variant">
+                <option value="primary">Primary</option>
+                <option value="secondary">Secondary</option>
+                <option value="ghost">Ghost</option>
+                <option value="danger">Danger</option>
+                <option value="warning">Warning</option>
+                <option value="success">Success</option>
+                <option value="inverse">Inverse</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="size">Size</label>
+              <div class="segmented" id="size" role="radiogroup" aria-label="Size">
+                <button type="button" data-size="large">Large</button>
+                <button class="is-active" type="button" data-size="medium">Medium</button>
+                <button type="button" data-size="small">Small</button>
+                <button type="button" data-size="tiny">Tiny</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="state">State</label>
+              <select id="state" name="state">
+                <option value="default">Default</option>
+                <option value="hover">Hover</option>
+                <option value="pressed">Pressed</option>
+                <option value="focused">Focused</option>
+                <option value="disabled">Disabled</option>
+                <option value="loading">Loading</option>
+              </select>
+            </div>
+            <div class="control-grid">
+              <label class="check-control">
+                <input id="leadingIcon" type="checkbox" checked />
+                <span>Leading icon</span>
+              </label>
+              <label class="check-control">
+                <input id="trailingIcon" type="checkbox" />
+                <span>Trailing icon</span>
+              </label>
+              <label class="check-control">
+                <input id="fullWidth" type="checkbox" />
+                <span>Full width</span>
+              </label>
+            </div>
+            <div class="control-group">
+              <label for="label">Label</label>
+              <input id="label" type="text" value="Button" />
+            </div>
+          </form>
+        </section>
+
+        <section class="docs-grid" aria-label="Implementation docs">
+          <article class="doc-block">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Usage</p>
+                <h3>Copy Code</h3>
+              </div>
+              <button class="copy-button" type="button" data-copy-target="codeBlock">Copy</button>
+            </div>
+            <pre><code id="codeBlock"></code></pre>
+          </article>
+          <article class="doc-block">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Anatomy</p>
+                <h3>State Matrix</h3>
+              </div>
+            </div>
+            <div class="state-table">
+              <div>Default</div><div>Base fill + strong text</div>
+              <div>Hover</div><div>Fill / Brand Hover or neutral hover token</div>
+              <div>Pressed</div><div>Fill / Brand Press or neutral press token</div>
+              <div>Focused</div><div>Stroke / Focus token with visible ring</div>
+              <div>Disabled</div><div>Text / Disabled + Fill / Disabled</div>
+              <div>Radius</div><div>All button sizes use pill radius: 32px</div>
+              <div>Large</div><div>Height 56, horizontal padding 24, text 20/28 semi bold</div>
+            </div>
+          </article>
+        </section>
+
+        <section class="token-reference" aria-label="Semantic tokens">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Foundation</p>
+              <h3>Semantic Tokens Used</h3>
+            </div>
+          </div>
+          <div class="token-table">
+            <div class="token-head">Name</div>
+            <div class="token-head">Light</div>
+            <div class="token-head">Dark</div>
+            <div>Text / Strong</div>
+            <div><span class="swatch text"></span> Grey/Light/1000</div>
+            <div><span class="swatch dark-text"></span> Grey/Dark/1000</div>
+            <div>Fill / Brand strong</div>
+            <div><span class="swatch brand"></span> Fill/Brand strong #03ADE2</div>
+            <div><span class="swatch dark-brand"></span> Brand/Dark/1000</div>
+            <div>Stroke / Focus</div>
+            <div><span class="swatch brand-weak"></span> Brand/Light/200</div>
+            <div><span class="swatch dark-brand-weak"></span> Brand/Dark/200</div>
+            <div>Fill / Error strong</div>
+            <div><span class="swatch danger"></span> Red/Light/1000</div>
+            <div><span class="swatch dark-danger"></span> Red/Dark/1000</div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+    <script src="./script.js?v=3"></script>
+  </body>
+</html>
