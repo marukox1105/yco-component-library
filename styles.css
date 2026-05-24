@@ -217,9 +217,9 @@ h3 {
 }
 
 .content {
-  width: min(1180px, 100%);
+  width: min(1320px, 100%);
   min-width: 0;
-  padding: 36px;
+  padding: 32px;
 }
 
 .page-header,
@@ -279,7 +279,8 @@ h3 {
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 390px;
+  grid-template-columns: minmax(520px, 1fr) 390px;
+  align-items: start;
   gap: 18px;
   min-width: 0;
   margin-bottom: 18px;
@@ -291,9 +292,14 @@ h3 {
   padding: 20px;
 }
 
+.preview-pane {
+  align-self: start;
+}
+
 .preview-surface {
   display: grid;
-  min-height: 300px;
+  min-height: 340px;
+  aspect-ratio: 16 / 7;
   margin: 20px 0;
   place-items: center;
   border: 1px dashed var(--stroke-strong);
@@ -703,6 +709,11 @@ pre {
 
   .workspace {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .preview-surface {
+    aspect-ratio: auto;
+    min-height: 280px;
   }
 }
 
