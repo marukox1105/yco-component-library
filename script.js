@@ -5,7 +5,8 @@ const codeBlock = document.querySelector("#codeBlock");
 const toast = document.querySelector("#toast");
 
 const controls = {
-  variant: document.querySelector("#variant"),
+  type: document.querySelector("#type"),
+  tone: document.querySelector("#tone"),
   state: document.querySelector("#state"),
   label: document.querySelector("#label"),
   leadingIcon: document.querySelector("#leadingIcon"),
@@ -15,79 +16,76 @@ const controls = {
 
 let currentSize = "medium";
 
-const variantLabels = {
+const typeLabels = {
   primary: "Primary",
   secondary: "Secondary",
-  ghost: "Ghost",
-  danger: "Danger",
-  warning: "Warning",
-  success: "Success",
+  tertiary: "Tertiary",
+};
+
+const toneLabels = {
+  brand: "Brand",
+  neutral: "Neutral",
+  destructive: "Destructive",
   inverse: "Inverse",
 };
 
 const stateLabels = {
   default: "Default",
   hover: "Hover",
-  pressed: "Pressed",
-  focused: "Focused",
+  press: "Press",
+  focus: "Focus",
   disabled: "Disabled",
-  loading: "Loading",
 };
 
 function buttonMarkup() {
   const label = controls.label.value.trim() || "Button";
   const leading = controls.leadingIcon.checked ? '<span class="button-icon" aria-hidden="true">+</span>\n  ' : "";
   const trailing = controls.trailingIcon.checked ? '\n  <span class="button-icon" aria-hidden="true">›</span>' : "";
-  const loading = controls.state.value === "loading" ? '<span class="spinner" aria-hidden="true"></span>\n  ' : "";
   const disabled = controls.state.value === "disabled" ? " disabled" : "";
-  const busy = controls.state.value === "loading" ? ' aria-busy="true"' : "";
   const extraClass = controls.fullWidth.checked ? " is-full-width" : "";
 
-  return `<button class="yco-button yco-button--${controls.variant.value} yco-button--${currentSize}${extraClass}" type="button"${disabled}${busy}>
-  ${loading}${leading}<span class="button-label">${label}</span>${trailing}
+  return `<button class="yco-button yco-button--${controls.tone.value} yco-button--${controls.type.value} yco-button--${currentSize}${extraClass}" type="button"${disabled}>
+  ${leading}<span class="button-label">${label}</span>${trailing}
 </button>`;
 }
 
 function reactMarkup() {
   const label = controls.label.value.trim() || "Button";
   const props = [
-    `variant="${controls.variant.value}"`,
+    `type="${typeLabels[controls.type.value]}"`,
+    `tone="${toneLabels[controls.tone.value]}"`,
+    `state="${stateLabels[controls.state.value]}"`,
     `size="${currentSize}"`,
     controls.fullWidth.checked ? "fullWidth" : "",
-    controls.leadingIcon.checked ? "leadingIcon={<PlusIcon />}" : "",
-    controls.trailingIcon.checked ? "trailingIcon={<ChevronRightIcon />}" : "",
-    controls.state.value === "loading" ? "loading" : "",
-    controls.state.value === "disabled" ? "disabled" : "",
+    controls.leadingIcon.checked ? "iconLeft" : "",
+    controls.trailingIcon.checked ? "iconRight" : "",
   ].filter(Boolean).join("\n  ");
 
   return `<Button
   ${props}
 >
   ${label}
-  </Button>`;
+</Button>`;
 }
 
 function updatePreview() {
-  const variant = controls.variant.value;
+  const type = controls.type.value;
+  const tone = controls.tone.value;
   const state = controls.state.value;
   const label = controls.label.value.trim() || "Button";
 
   previewButton.className = [
     "yco-button",
-    `yco-button--${variant}`,
+    `yco-button--${tone}`,
+    `yco-button--${type}`,
     `yco-button--${currentSize}`,
     controls.fullWidth.checked ? "is-full-width" : "",
     state !== "default" ? `is-${state}` : "",
   ].filter(Boolean).join(" ");
 
   previewButton.disabled = state === "disabled";
-  if (state === "loading") {
-    previewButton.setAttribute("aria-busy", "true");
-  } else {
-    previewButton.removeAttribute("aria-busy");
-  }
+  previewButton.removeAttribute("aria-busy");
   previewButton.innerHTML = [
-    state === "loading" ? '<span class="spinner" aria-hidden="true"></span>' : "",
     controls.leadingIcon.checked ? '<span class="button-icon" aria-hidden="true">+</span>' : "",
     `<span class="button-label">${label}</span>`,
     controls.trailingIcon.checked ? '<span class="button-icon" aria-hidden="true">›</span>' : "",
@@ -95,7 +93,7 @@ function updatePreview() {
 
   stateLabel.textContent = stateLabels[state];
   codeBlock.textContent = `${buttonMarkup()}\n\n/* React usage */\n${reactMarkup()}`;
-  document.title = `YCO Buttons - ${variantLabels[variant]}`;
+  document.title = `YCO Buttons - ${toneLabels[tone]} ${typeLabels[type]}`;
 }
 
 document.querySelectorAll("[data-theme]").forEach((button) => {
