@@ -114,43 +114,22 @@
               <label for="label">Label</label>
               <input id="label" type="text" value="Button" />
             </div>
+            <div class="inline-code-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Implementation</p>
+                  <h3>Code</h3>
+                </div>
+                <button class="copy-button" type="button" data-copy-target="codeBlock">Copy</button>
+              </div>
+              <div class="code-tabs" role="tablist" aria-label="Code format">
+                <button class="is-active" type="button" data-code-tab="html">HTML</button>
+                <button type="button" data-code-tab="react">React</button>
+                <button type="button" data-code-tab="css">CSS</button>
+              </div>
+              <pre><code id="codeBlock"></code></pre>
+            </div>
           </form>
-        </section>
-
-        <section class="docs-grid" aria-label="Implementation docs">
-          <article class="doc-block">
-            <div class="section-heading">
-              <div>
-                <p class="eyebrow">Implementation</p>
-                <h3>Code</h3>
-              </div>
-              <button class="copy-button" type="button" data-copy-target="codeBlock">Copy</button>
-            </div>
-            <div class="code-tabs" role="tablist" aria-label="Code format">
-              <button class="is-active" type="button" data-code-tab="html">HTML</button>
-              <button type="button" data-code-tab="react">React</button>
-              <button type="button" data-code-tab="css">CSS</button>
-            </div>
-            <pre><code id="codeBlock"></code></pre>
-          </article>
-          <article class="doc-block">
-            <div class="section-heading">
-              <div>
-                <p class="eyebrow">Anatomy</p>
-                <h3>State Matrix</h3>
-              </div>
-            </div>
-            <div class="state-table">
-              <div>Default</div><div>Base fill + strong text</div>
-              <div>Hover</div><div>Fill / Brand Hover or neutral hover token</div>
-              <div>Press</div><div>Fill / Brand Press or neutral press token</div>
-              <div>Focus</div><div>Stroke / Focus token with visible ring</div>
-              <div>Disabled</div><div>Text / Disabled + Fill / Disabled</div>
-              <div>Combinations</div><div>Brand, Neutral, Destructive, Inverse × Primary, Secondary, Tertiary</div>
-              <div>Radius</div><div>All button sizes use pill radius: 32px</div>
-              <div>Large</div><div>Height 56, horizontal padding 24, text 20/28 semi bold</div>
-            </div>
-          </article>
         </section>
 
       </main>

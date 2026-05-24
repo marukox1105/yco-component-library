@@ -209,7 +209,6 @@ h3 {
   background: currentColor;
 }
 
-.doc-block,
 .preview-pane,
 .control-pane {
   border: 1px solid var(--stroke-weak);
@@ -280,15 +279,14 @@ h3 {
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 330px;
+  grid-template-columns: minmax(0, 1fr) 390px;
   gap: 18px;
   min-width: 0;
   margin-bottom: 18px;
 }
 
 .preview-pane,
-.control-pane,
-.doc-block {
+.control-pane {
   min-width: 0;
   padding: 20px;
 }
@@ -409,13 +407,6 @@ input[type="text"] {
   accent-color: var(--brand-1000);
 }
 
-.docs-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
-  gap: 18px;
-  margin-bottom: 18px;
-}
-
 .copy-button {
   min-width: 72px;
   padding: 0 14px;
@@ -423,10 +414,17 @@ input[type="text"] {
   color: var(--fill-base);
 }
 
+.inline-code-panel {
+  display: grid;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--stroke-weak);
+}
+
 .code-tabs {
   display: inline-flex;
   gap: 4px;
-  margin-top: 18px;
+  margin-top: 0;
   padding: 3px;
   border: 1px solid var(--stroke-weak);
   border-radius: var(--radius-md);
@@ -452,48 +450,14 @@ input[type="text"] {
 pre {
   overflow: auto;
   max-width: 100%;
-  min-height: 286px;
-  margin: 18px 0 0;
+  max-height: 260px;
+  margin: 0;
   padding: 16px;
   border-radius: var(--radius-sm);
   background: var(--fill-inverse);
   color: var(--text-inverse-strong);
   font-size: 13px;
   line-height: 1.65;
-}
-
-.state-table,
-.state-table {
-  display: grid;
-  min-width: 0;
-  margin-top: 18px;
-  border: 1px solid var(--stroke-weak);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.state-table {
-  grid-template-columns: 130px minmax(0, 1fr);
-}
-
-.state-table > div,
-.state-table > div {
-  min-height: 48px;
-  padding: 13px 14px;
-  border-right: 1px solid var(--stroke-weak);
-  border-bottom: 1px solid var(--stroke-weak);
-  color: var(--text-weak);
-}
-
-.state-table > div:nth-child(2n + 1),
-.state-table > div:nth-last-child(-n + 2),
-.state-table > div:nth-last-child(-n + 2) {
-  border-bottom: 0;
-}
-
-.state-table > div:nth-child(2n),
-.state-table > div:nth-child(2n) {
-  border-right: 0;
 }
 
 .yco-button {
@@ -737,8 +701,7 @@ pre {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .workspace,
-  .docs-grid {
+  .workspace {
     grid-template-columns: minmax(0, 1fr);
   }
 }
