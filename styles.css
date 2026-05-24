@@ -423,6 +423,32 @@ input[type="text"] {
   color: var(--fill-base);
 }
 
+.code-tabs {
+  display: inline-flex;
+  gap: 4px;
+  margin-top: 18px;
+  padding: 3px;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--radius-md);
+  background: var(--fill-weaker);
+}
+
+.code-tabs button {
+  min-height: 30px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-weak);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.code-tabs button.is-active {
+  background: var(--fill-raised);
+  color: var(--text-strong);
+}
+
 pre {
   overflow: auto;
   max-width: 100%;
