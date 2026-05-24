@@ -310,6 +310,11 @@ h3 {
   background-size: 16px 16px;
 }
 
+.preview-surface.is-inverse-preview {
+  border-color: #243238;
+  background: #0c181d;
+}
+
 .control-label {
   color: var(--text-weak);
   font-size: 13px;

@@ -1,5 +1,6 @@
 const root = document.documentElement;
 const previewButton = document.querySelector("#previewButton");
+const previewSurface = document.querySelector("#previewSurface");
 const stateLabel = document.querySelector("#stateLabel");
 const codeBlock = document.querySelector("#codeBlock");
 const toast = document.querySelector("#toast");
@@ -84,6 +85,7 @@ function updatePreview() {
     controls.fullWidth.checked ? "is-full-width" : "",
     state !== "default" ? `is-${state}` : "",
   ].filter(Boolean).join(" ");
+  previewSurface.classList.toggle("is-inverse-preview", tone === "inverse");
 
   previewButton.disabled = state === "disabled";
   previewButton.removeAttribute("aria-busy");
