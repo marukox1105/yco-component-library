@@ -76,12 +76,22 @@
                 <span>Button</span>
               </button>
             </div>
-            <div class="variant-strip" aria-label="Button type and tone examples">
-              <button class="yco-button yco-button--brand yco-button--primary yco-button--small" type="button">Primary</button>
-              <button class="yco-button yco-button--brand yco-button--secondary yco-button--small" type="button">Secondary</button>
-              <button class="yco-button yco-button--brand yco-button--tertiary yco-button--small" type="button">Tertiary</button>
-              <button class="yco-button yco-button--destructive yco-button--primary yco-button--small" type="button">Primary</button>
-              <button class="yco-button yco-button--neutral yco-button--primary yco-button--small" type="button">Primary</button>
+            <div class="example-section" aria-label="Button type examples">
+              <span class="example-label">Type</span>
+              <div class="variant-strip">
+                <button class="yco-button yco-button--brand yco-button--primary yco-button--small" type="button">Primary</button>
+                <button class="yco-button yco-button--brand yco-button--secondary yco-button--small" type="button">Secondary</button>
+                <button class="yco-button yco-button--brand yco-button--tertiary yco-button--small" type="button">Tertiary</button>
+              </div>
+            </div>
+            <div class="example-section" aria-label="Button tone examples">
+              <span class="example-label">Tone</span>
+              <div class="variant-strip">
+                <button class="yco-button yco-button--brand yco-button--primary yco-button--small" type="button">Brand</button>
+                <button class="yco-button yco-button--neutral yco-button--primary yco-button--small" type="button">Neutral</button>
+                <button class="yco-button yco-button--destructive yco-button--primary yco-button--small" type="button">Destructive</button>
+                <button class="yco-button yco-button--inverse yco-button--primary yco-button--small" type="button">Inverse</button>
+              </div>
             </div>
             <div class="size-spec" aria-label="Button sizes">
               <div><span>Large / 56</span><button class="yco-button yco-button--brand yco-button--primary yco-button--large" type="button">Button</button></div>
@@ -93,40 +103,40 @@
 
           <form class="control-pane" aria-label="Button controls">
             <div class="control-group">
-              <label for="type">Type</label>
-              <select id="type" name="type">
-                <option value="primary">Primary</option>
-                <option value="secondary">Secondary</option>
-                <option value="tertiary">Tertiary</option>
-              </select>
-            </div>
-            <div class="control-group">
-              <label for="tone">Tone</label>
-              <select id="tone" name="tone">
-                <option value="brand">Brand</option>
-                <option value="neutral">Neutral</option>
-                <option value="destructive">Destructive</option>
-                <option value="inverse">Inverse</option>
-              </select>
-            </div>
-            <div class="control-group">
-              <label for="size">Size</label>
-              <div class="segmented" id="size" role="radiogroup" aria-label="Size">
-                <button type="button" data-size="large">Large</button>
-                <button class="is-active" type="button" data-size="medium">Medium</button>
-                <button type="button" data-size="small">Small</button>
-                <button type="button" data-size="tiny">Tiny</button>
+              <span class="control-label">Type</span>
+              <div class="segmented segmented--stack" role="radiogroup" aria-label="Type">
+                <button class="is-active" type="button" data-control="type" data-value="primary">Primary</button>
+                <button type="button" data-control="type" data-value="secondary">Secondary</button>
+                <button type="button" data-control="type" data-value="tertiary">Tertiary</button>
               </div>
             </div>
             <div class="control-group">
-              <label for="state">State</label>
-              <select id="state" name="state">
-                <option value="default">Default</option>
-                <option value="hover">Hover</option>
-                <option value="press">Press</option>
-                <option value="focus">Focus</option>
-                <option value="disabled">Disabled</option>
-              </select>
+              <span class="control-label">Tone</span>
+              <div class="segmented segmented--stack" role="radiogroup" aria-label="Tone">
+                <button class="is-active" type="button" data-control="tone" data-value="brand">Brand</button>
+                <button type="button" data-control="tone" data-value="neutral">Neutral</button>
+                <button type="button" data-control="tone" data-value="destructive">Destructive</button>
+                <button type="button" data-control="tone" data-value="inverse">Inverse</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Size</span>
+              <div class="segmented segmented--stack" role="radiogroup" aria-label="Size">
+                <button type="button" data-control="size" data-value="large">Large</button>
+                <button class="is-active" type="button" data-control="size" data-value="medium">Medium</button>
+                <button type="button" data-control="size" data-value="small">Small</button>
+                <button type="button" data-control="size" data-value="tiny">Tiny</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">State</span>
+              <div class="segmented segmented--wrap" role="radiogroup" aria-label="State">
+                <button class="is-active" type="button" data-control="state" data-value="default">Default</button>
+                <button type="button" data-control="state" data-value="hover">Hover</button>
+                <button type="button" data-control="state" data-value="press">Press</button>
+                <button type="button" data-control="state" data-value="focus">Focus</button>
+                <button type="button" data-control="state" data-value="disabled">Disabled</button>
+              </div>
             </div>
             <div class="control-grid">
               <label class="check-control">

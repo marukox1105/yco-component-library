@@ -5,16 +5,18 @@ const codeBlock = document.querySelector("#codeBlock");
 const toast = document.querySelector("#toast");
 
 const controls = {
-  type: document.querySelector("#type"),
-  tone: document.querySelector("#tone"),
-  state: document.querySelector("#state"),
   label: document.querySelector("#label"),
   leadingIcon: document.querySelector("#leadingIcon"),
   trailingIcon: document.querySelector("#trailingIcon"),
   fullWidth: document.querySelector("#fullWidth"),
 };
 
-let currentSize = "medium";
+const selections = {
+  type: "primary",
+  tone: "brand",
+  state: "default",
+  size: "medium",
+};
 
 const typeLabels = {
   primary: "Primary",
@@ -41,10 +43,10 @@ function buttonMarkup() {
   const label = controls.label.value.trim() || "Button";
   const leading = controls.leadingIcon.checked ? '<span class="button-icon" aria-hidden="true">+</span>\n  ' : "";
   const trailing = controls.trailingIcon.checked ? '\n  <span class="button-icon" aria-hidden="true">›</span>' : "";
-  const disabled = controls.state.value === "disabled" ? " disabled" : "";
+  const disabled = selections.state === "disabled" ? " disabled" : "";
   const extraClass = controls.fullWidth.checked ? " is-full-width" : "";
 
-  return `<button class="yco-button yco-button--${controls.tone.value} yco-button--${controls.type.value} yco-button--${currentSize}${extraClass}" type="button"${disabled}>
+  return `<button class="yco-button yco-button--${selections.tone} yco-button--${selections.type} yco-button--${selections.size}${extraClass}" type="button"${disabled}>
   ${leading}<span class="button-label">${label}</span>${trailing}
 </button>`;
 }
@@ -52,10 +54,10 @@ function buttonMarkup() {
 function reactMarkup() {
   const label = controls.label.value.trim() || "Button";
   const props = [
-    `type="${typeLabels[controls.type.value]}"`,
-    `tone="${toneLabels[controls.tone.value]}"`,
-    `state="${stateLabels[controls.state.value]}"`,
-    `size="${currentSize}"`,
+    `type="${typeLabels[selections.type]}"`,
+    `tone="${toneLabels[selections.tone]}"`,
+    `state="${stateLabels[selections.state]}"`,
+    `size="${selections.size}"`,
     controls.fullWidth.checked ? "fullWidth" : "",
     controls.leadingIcon.checked ? "iconLeft" : "",
     controls.trailingIcon.checked ? "iconRight" : "",
@@ -69,16 +71,16 @@ function reactMarkup() {
 }
 
 function updatePreview() {
-  const type = controls.type.value;
-  const tone = controls.tone.value;
-  const state = controls.state.value;
+  const type = selections.type;
+  const tone = selections.tone;
+  const state = selections.state;
   const label = controls.label.value.trim() || "Button";
 
   previewButton.className = [
     "yco-button",
     `yco-button--${tone}`,
     `yco-button--${type}`,
-    `yco-button--${currentSize}`,
+    `yco-button--${selections.size}`,
     controls.fullWidth.checked ? "is-full-width" : "",
     state !== "default" ? `is-${state}` : "",
   ].filter(Boolean).join(" ");
@@ -104,11 +106,12 @@ document.querySelectorAll("[data-theme]").forEach((button) => {
   });
 });
 
-document.querySelectorAll("[data-size]").forEach((button) => {
+document.querySelectorAll("[data-control]").forEach((button) => {
   button.addEventListener("click", () => {
-    document.querySelectorAll("[data-size]").forEach((item) => item.classList.remove("is-active"));
+    const control = button.dataset.control;
+    document.querySelectorAll(`[data-control="${control}"]`).forEach((item) => item.classList.remove("is-active"));
     button.classList.add("is-active");
-    currentSize = button.dataset.size;
+    selections[control] = button.dataset.value;
     updatePreview();
   });
 });

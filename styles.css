@@ -99,8 +99,7 @@ body {
 }
 
 button,
-input,
-select {
+input {
   font: inherit;
 }
 
@@ -292,6 +291,20 @@ h3 {
   background: var(--fill-weaker);
 }
 
+.segmented--stack {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  width: 100%;
+}
+
+.segmented--wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  width: 100%;
+}
+
 .theme-button,
 .segmented button,
 .copy-button {
@@ -307,6 +320,12 @@ h3 {
 .theme-button,
 .segmented button {
   padding: 0 14px;
+}
+
+.segmented--stack button,
+.segmented--wrap button {
+  min-width: 0;
+  padding: 0 10px;
 }
 
 .theme-button.is-active,
@@ -353,6 +372,21 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.example-section {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.example-label,
+.control-label {
+  color: var(--text-weak);
+  font-size: 13px;
+  font-weight: 750;
 }
 
 .size-spec {
@@ -405,7 +439,6 @@ label {
   font-weight: 750;
 }
 
-select,
 input[type="text"] {
   width: 100%;
   min-height: 42px;
