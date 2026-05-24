@@ -281,8 +281,7 @@ h3 {
   line-height: 1.7;
 }
 
-.header-actions,
-.segmented {
+.header-actions {
   display: inline-grid;
   grid-auto-flow: column;
   padding: 3px;
@@ -291,22 +290,7 @@ h3 {
   background: var(--fill-weaker);
 }
 
-.segmented--stack {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
-  width: 100%;
-}
-
-.segmented--wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-  width: 100%;
-}
-
 .theme-button,
-.segmented button,
 .copy-button {
   min-height: 34px;
   border: 0;
@@ -318,18 +302,11 @@ h3 {
 }
 
 .theme-button,
-.segmented button {
+.copy-button {
   padding: 0 14px;
 }
 
-.segmented--stack button,
-.segmented--wrap button {
-  min-width: 0;
-  padding: 0 10px;
-}
-
-.theme-button.is-active,
-.segmented button.is-active {
+.theme-button.is-active {
   background: var(--fill-raised);
   color: var(--text-strong);
   box-shadow: 0 1px 3px rgba(15, 32, 38, 0.12);
@@ -368,25 +345,10 @@ h3 {
   background-size: 16px 16px;
 }
 
-.variant-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.example-section {
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  align-items: center;
-  gap: 12px;
-  margin-top: 14px;
-}
-
-.example-label,
 .control-label {
   color: var(--text-weak);
-  font-size: 13px;
-  font-weight: 750;
+  font-size: 22px;
+  font-weight: 500;
 }
 
 .size-spec {
@@ -430,7 +392,38 @@ h3 {
 
 .control-group {
   display: grid;
-  gap: 8px;
+  gap: 14px;
+}
+
+.choice-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.choice-chips button {
+  min-height: 44px;
+  padding: 0 24px;
+  border: 1px solid var(--stroke-strong);
+  border-radius: 999px;
+  background: var(--fill-base);
+  color: var(--text-weak);
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.choice-chips button.is-active {
+  border-color: var(--fill-inverse);
+  background: var(--fill-inverse);
+  color: var(--text-inverse-strong);
+}
+
+.choice-chips button:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
 }
 
 label {

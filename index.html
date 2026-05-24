@@ -76,23 +76,6 @@
                 <span>Button</span>
               </button>
             </div>
-            <div class="example-section" aria-label="Button type examples">
-              <span class="example-label">Type</span>
-              <div class="variant-strip">
-                <button class="yco-button yco-button--brand yco-button--primary yco-button--small" type="button">Primary</button>
-                <button class="yco-button yco-button--brand yco-button--secondary yco-button--small" type="button">Secondary</button>
-                <button class="yco-button yco-button--brand yco-button--tertiary yco-button--small" type="button">Tertiary</button>
-              </div>
-            </div>
-            <div class="example-section" aria-label="Button tone examples">
-              <span class="example-label">Tone</span>
-              <div class="variant-strip">
-                <button class="yco-button yco-button--brand yco-button--primary yco-button--small" type="button">Brand</button>
-                <button class="yco-button yco-button--neutral yco-button--primary yco-button--small" type="button">Neutral</button>
-                <button class="yco-button yco-button--destructive yco-button--primary yco-button--small" type="button">Destructive</button>
-                <button class="yco-button yco-button--inverse yco-button--primary yco-button--small" type="button">Inverse</button>
-              </div>
-            </div>
             <div class="size-spec" aria-label="Button sizes">
               <div><span>Large / 56</span><button class="yco-button yco-button--brand yco-button--primary yco-button--large" type="button">Button</button></div>
               <div><span>Medium</span><button class="yco-button yco-button--brand yco-button--primary yco-button--medium" type="button">Button</button></div>
@@ -104,38 +87,38 @@
           <form class="control-pane" aria-label="Button controls">
             <div class="control-group">
               <span class="control-label">Type</span>
-              <div class="segmented segmented--stack" role="radiogroup" aria-label="Type">
-                <button class="is-active" type="button" data-control="type" data-value="primary">Primary</button>
-                <button type="button" data-control="type" data-value="secondary">Secondary</button>
-                <button type="button" data-control="type" data-value="tertiary">Tertiary</button>
+              <div class="choice-chips" role="radiogroup" aria-label="Type">
+                <button class="is-active" type="button" data-control="type" data-value="primary">primary</button>
+                <button type="button" data-control="type" data-value="secondary">secondary</button>
+                <button type="button" data-control="type" data-value="tertiary">tertiary</button>
               </div>
             </div>
             <div class="control-group">
               <span class="control-label">Tone</span>
-              <div class="segmented segmented--stack" role="radiogroup" aria-label="Tone">
-                <button class="is-active" type="button" data-control="tone" data-value="brand">Brand</button>
-                <button type="button" data-control="tone" data-value="neutral">Neutral</button>
-                <button type="button" data-control="tone" data-value="destructive">Destructive</button>
-                <button type="button" data-control="tone" data-value="inverse">Inverse</button>
+              <div class="choice-chips" role="radiogroup" aria-label="Tone">
+                <button class="is-active" type="button" data-control="tone" data-value="brand">brand</button>
+                <button type="button" data-control="tone" data-value="neutral">neutral</button>
+                <button type="button" data-control="tone" data-value="destructive">destructive</button>
+                <button type="button" data-control="tone" data-value="inverse">inverse</button>
               </div>
             </div>
             <div class="control-group">
               <span class="control-label">Size</span>
-              <div class="segmented segmented--stack" role="radiogroup" aria-label="Size">
-                <button type="button" data-control="size" data-value="large">Large</button>
-                <button class="is-active" type="button" data-control="size" data-value="medium">Medium</button>
-                <button type="button" data-control="size" data-value="small">Small</button>
-                <button type="button" data-control="size" data-value="tiny">Tiny</button>
+              <div class="choice-chips" role="radiogroup" aria-label="Size">
+                <button type="button" data-control="size" data-value="large">large</button>
+                <button class="is-active" type="button" data-control="size" data-value="medium">medium</button>
+                <button type="button" data-control="size" data-value="small">small</button>
+                <button type="button" data-control="size" data-value="tiny">tiny</button>
               </div>
             </div>
             <div class="control-group">
               <span class="control-label">State</span>
-              <div class="segmented segmented--wrap" role="radiogroup" aria-label="State">
-                <button class="is-active" type="button" data-control="state" data-value="default">Default</button>
-                <button type="button" data-control="state" data-value="hover">Hover</button>
-                <button type="button" data-control="state" data-value="press">Press</button>
-                <button type="button" data-control="state" data-value="focus">Focus</button>
-                <button type="button" data-control="state" data-value="disabled">Disabled</button>
+              <div class="choice-chips" role="radiogroup" aria-label="State">
+                <button class="is-active" type="button" data-control="state" data-value="default">default</button>
+                <button type="button" data-control="state" data-value="hover">hover</button>
+                <button type="button" data-control="state" data-value="press">press</button>
+                <button type="button" data-control="state" data-value="focus">focus</button>
+                <button type="button" data-control="state" data-value="disabled">disabled</button>
               </div>
             </div>
             <div class="control-grid">
