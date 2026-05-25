@@ -1,95 +1,170 @@
 :root {
   color-scheme: light;
-  --brand-1000: #03ade2;
-  --brand-800: #1498c7;
-  --brand-500: #73d5ee;
-  --brand-200: #c7f0fa;
-  --brand-100: #e6f8fd;
-  --brand-50: #f0fbfe;
-  --text-strong: #0b2026;
-  --text-weak: #5f6f75;
-  --text-weaker: #879399;
-  --text-disabled: #bbc4c8;
-  --text-inverse-strong: #ffffff;
-  --text-strong-alpha: rgba(9, 22, 26, 0.95);
+  --blue-light-1000: #03ade2;
+  --blue-light-200: #03ade233;
+  --blue-light-50: #03ade20d;
+  --blue-light-500: #03ade280;
+  --blue-light-800: #03ade2cc;
+  --grey-neutral-dark-100: #ffffff1f;
+  --grey-neutral-dark-1000: #ffffff;
+  --grey-neutral-dark-50: #ffffff0f;
+  --grey-neutral-dark-500: #ffffff99;
+  --grey-neutral-dark-700: #ffffffc7;
+  --grey-slate-solid-0: #ffffff;
+  --grey-slate-solid-50: #f5f9fa;
+  --grey-slate-solid-850: #1d2426;
+  --grey-slate-solid-900: #12181a;
+  --grey-slate-light-100: #11181a1a;
+  --grey-slate-light-1000: #09161af2;
+  --grey-slate-light-200: #11181a33;
+  --grey-slate-light-25: #11181a05;
+  --grey-slate-light-50: #11181a0a;
+  --grey-slate-light-500: #11181a73;
+  --grey-slate-light-700: #11181aa6;
+  --red-light-1000: #de0000;
+  --red-light-200: #de000024;
+  --red-light-50: #de00000d;
+  --red-light-800: #de0000cc;
+  --brand-light-1000: var(--blue-light-1000);
+  --brand-light-200: var(--blue-light-200);
+  --brand-light-50: var(--blue-light-50);
+  --brand-light-500: var(--blue-light-500);
+  --brand-light-800: var(--blue-light-800);
+  --grey-solid-0: var(--grey-slate-solid-0);
+  --grey-solid-50: var(--grey-slate-solid-50);
+  --grey-solid-850: var(--grey-slate-solid-850);
+  --grey-solid-900: var(--grey-slate-solid-900);
+  --grey-dark-100: var(--grey-neutral-dark-100);
+  --grey-dark-1000: var(--grey-neutral-dark-1000);
+  --grey-dark-50: var(--grey-neutral-dark-50);
+  --grey-dark-500: var(--grey-neutral-dark-500);
+  --grey-dark-700: var(--grey-neutral-dark-700);
+  --grey-light-100: var(--grey-slate-light-100);
+  --grey-light-1000: var(--grey-slate-light-1000);
+  --grey-light-200: var(--grey-slate-light-200);
+  --grey-light-25: var(--grey-slate-light-25);
+  --grey-light-50: var(--grey-slate-light-50);
+  --grey-light-500: var(--grey-slate-light-500);
+  --grey-light-700: var(--grey-slate-light-700);
+  --grey-light-900: var(--grey-slate-light-900);
+  --background-base: var(--grey-solid-0);
+  --background-raised: var(--grey-solid-0);
+  --background-sunken: var(--grey-solid-50);
+  --background-inverse: var(--grey-solid-900);
+  --fill-brand-hover: var(--brand-light-50);
+  --fill-brand-press: var(--brand-light-200);
+  --fill-brand-strong: var(--brand-light-1000);
+  --fill-brand-weak: var(--brand-light-50);
+  --fill-disabled: var(--grey-light-200);
+  --fill-error-strong: var(--red-light-1000);
+  --fill-error-weak: var(--red-light-50);
+  --fill-hover: var(--grey-light-50);
+  --fill-inverse-hover: var(--grey-dark-50);
+  --fill-inverse-press: var(--grey-dark-100);
+  --fill-inverse-strong: var(--grey-solid-0);
+  --fill-overlay: var(--grey-neutral-light-700, #00000099);
+  --fill-press: var(--grey-light-100);
+  --fill-strong: var(--grey-light-1000);
+  --fill-weak: var(--grey-light-50);
+  --fill-weaker: var(--grey-light-25);
+  --stroke-error-strong: var(--red-light-800);
+  --stroke-focus: var(--brand-light-200);
+  --stroke-inverse-strong: var(--grey-dark-500);
+  --stroke-inverse-weak: var(--grey-dark-100);
+  --stroke-strong: var(--grey-light-200);
+  --stroke-weak: var(--grey-light-100);
+  --text-brand: var(--brand-light-1000);
+  --text-disabled: var(--grey-light-200);
+  --text-error: var(--red-light-1000);
+  --text-inverse-strong: var(--grey-dark-1000);
+  --text-strong: var(--grey-light-1000);
+  --text-weak: var(--grey-light-700);
+  --text-weaker: var(--grey-light-500);
   --font-family-heading: Roboto, var(--font);
   --font-family-body: Roboto, var(--font);
-  --font-size-heading-4: 20px;
-  --font-size-tiny: 14px;
+  --font-size-heading-5: 1.125rem;
+  --font-size-heading-4: 1.25rem;
+  --font-size-small: 1rem;
+  --font-size-tiny: 0.875rem;
   --font-weight-strong: 600;
-  --line-height-heading-4: 28px;
-  --line-height-tiny: 20px;
-  --spacing-0: 0px;
-  --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-20: 20px;
-  --spacing-24: 24px;
-  --fill-base: #ffffff;
-  --fill-raised: #ffffff;
-  --fill-hover: #f2f5f6;
-  --fill-press: #e8eef0;
-  --fill-weaker: #f7fafa;
-  --fill-disabled: #eef2f3;
-  --fill-inverse: #0f2026;
-  --fill-inverse-strong: #ffffff;
-  --stroke-strong: #d7dee1;
-  --stroke-weak: #e7ecee;
-  --stroke-focus: #c7f0fa;
-  --stroke-inverse-strong: rgba(255, 255, 255, 0.6);
-  --error-1000: #ee1010;
-  --error-800: #f04444;
-  --error-50: #fff0f0;
-  --warning-1000: #a77d10;
-  --warning-800: #c79922;
-  --warning-50: #fff8e8;
-  --success-1000: #009b74;
-  --success-800: #15b08b;
-  --success-50: #e9fbf6;
-  --surface: #f5f8f9;
-  --surface-subtle: #edf3f5;
+  --line-height-heading-4: 1.75rem;
+  --line-height-small: 1.5rem;
+  --line-height-tiny: 1.25rem;
+  --corner-radius-6: 0.375rem;
+  --corner-radius-8: 0.5rem;
+  --corner-radius-32: 2rem;
+  --spacing-0: 0rem;
+  --spacing-4: 0.25rem;
+  --spacing-8: 0.5rem;
+  --spacing-12: 0.75rem;
+  --spacing-16: 1rem;
+  --spacing-20: 1.25rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+  --spacing-40: 2.5rem;
+  --spacing-48: 3rem;
+  --spacing-56: 3.5rem;
+  --brand-1000: var(--fill-brand-strong);
+  --brand-800: var(--brand-light-800);
+  --brand-200: var(--fill-brand-press);
+  --brand-100: var(--fill-brand-hover);
+  --brand-50: var(--fill-brand-weak);
+  --fill-base: var(--background-base);
+  --fill-raised: var(--background-raised);
+  --fill-inverse: var(--fill-strong);
+  --surface: var(--background-sunken);
+  --surface-subtle: var(--background-sunken);
   --shadow: 0 20px 50px rgba(15, 32, 38, 0.12);
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --button-radius-pill: 32px;
+  --radius-sm: var(--corner-radius-6);
+  --radius-md: var(--corner-radius-8);
+  --button-radius-pill: var(--corner-radius-32);
   --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --brand-1000: #8edff0;
-  --brand-800: #70cfe3;
-  --brand-500: #3b91a8;
-  --brand-200: #1f5563;
-  --brand-100: #143e49;
-  --brand-50: #102f37;
-  --text-strong: #ffffff;
-  --text-weak: #d6dde0;
-  --text-weaker: #aab5ba;
-  --text-disabled: #66757b;
-  --text-inverse-strong: #0b2026;
-  --fill-base: #111f25;
-  --fill-raised: #17272e;
-  --fill-hover: #26363d;
-  --fill-press: #30434b;
-  --fill-weaker: #0c181d;
-  --fill-disabled: #253238;
-  --fill-inverse: #ffffff;
-  --stroke-strong: #3d4d54;
-  --stroke-weak: #2d3c43;
-  --stroke-focus: #1f5563;
-  --error-1000: #ff8d95;
-  --error-800: #ff7b83;
-  --error-50: #3b191f;
-  --warning-1000: #edc869;
-  --warning-800: #e6bd54;
-  --warning-50: #332812;
-  --success-1000: #68cdb7;
-  --success-800: #5fc4ad;
-  --success-50: #15352f;
-  --surface: #0c181d;
-  --surface-subtle: #13252c;
+  --blue-dark-1000: #a3eaff;
+  --blue-dark-200: #a3eaff33;
+  --blue-dark-50: #a3eaff0f;
+  --blue-dark-800: #a3eaffcc;
+  --grey-neutral-light-100: #0000001a;
+  --grey-neutral-light-1000: #000000e5;
+  --grey-neutral-light-50: #0000000a;
+  --grey-neutral-light-700: #00000099;
+  --grey-slate-solid-850: #1d2426;
+  --grey-slate-solid-900: #12181a;
+  --grey-neutral-dark-1000: #ffffff;
+  --grey-neutral-dark-700: #ffffffc7;
+  --grey-neutral-dark-500: #ffffff99;
+  --grey-neutral-dark-200: #ffffff38;
+  --grey-neutral-dark-100: #ffffff1f;
+  --grey-neutral-dark-50: #ffffff0f;
+  --red-dark-1000: #ff9c9c;
+  --red-dark-200: #ff9c9c33;
+  --red-dark-50: #ff9c9c14;
+  --red-dark-800: #ff9c9ccc;
+  --brand-light-1000: var(--blue-dark-1000);
+  --brand-light-200: var(--blue-dark-200);
+  --brand-light-50: var(--blue-dark-50);
+  --brand-light-800: var(--blue-dark-800);
+  --background-base: var(--grey-slate-solid-900);
+  --background-raised: var(--grey-slate-solid-850);
+  --background-sunken: var(--grey-slate-solid-900);
+  --fill-error-strong: var(--red-dark-1000);
+  --fill-error-weak: var(--red-dark-50);
+  --stroke-error-strong: var(--red-dark-800);
+  --text-error: var(--red-dark-1000);
+  --fill-hover: var(--grey-neutral-dark-50);
+  --fill-press: var(--grey-neutral-dark-100);
+  --fill-strong: var(--grey-neutral-dark-1000);
+  --fill-weaker: #ffffff08;
+  --stroke-strong: var(--grey-neutral-dark-200);
+  --stroke-weak: var(--grey-neutral-dark-100);
+  --text-strong: var(--grey-neutral-dark-1000);
+  --text-weak: var(--grey-neutral-dark-700);
+  --text-weaker: var(--grey-neutral-dark-500);
+  --text-disabled: var(--grey-neutral-dark-200);
+  --text-inverse-strong: var(--grey-neutral-light-1000);
   --shadow: 0 20px 50px rgba(0, 0, 0, 0.32);
 }
 
@@ -340,7 +415,7 @@ h3 {
 
 .theme-button[data-theme="dark"].is-active {
   background: var(--fill-inverse-strong);
-  color: var(--text-strong-alpha);
+  color: var(--text-strong);
 }
 
 .workspace {
@@ -388,8 +463,8 @@ h3 {
 }
 
 .preview-surface.is-inverse-preview {
-  border-color: #243238;
-  background: #0c181d;
+  border-color: var(--stroke-inverse-weak, var(--stroke-weak));
+  background: var(--background-inverse);
 }
 
 .control-label {
@@ -498,8 +573,8 @@ input[type="text"] {
 .check-control input::before {
   width: 9px;
   height: 5px;
-  border-bottom: 2px solid #ffffff;
-  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid var(--text-inverse-strong);
+  border-left: 2px solid var(--text-inverse-strong);
   content: "";
   opacity: 0;
   transform: translateY(-1px) rotate(-45deg);
@@ -680,12 +755,12 @@ pre {
 }
 
 .yco-button {
-  --button-strong: var(--brand-1000);
-  --button-strong-hover: var(--brand-800);
-  --button-strong-press: #0d86b1;
-  --button-weak: var(--brand-50);
-  --button-weak-hover: var(--brand-100);
-  --button-weak-press: var(--brand-200);
+  --button-strong: var(--fill-brand-strong);
+  --button-strong-hover: var(--brand-light-800);
+  --button-strong-press: var(--brand-light-800);
+  --button-weak: var(--fill-brand-weak);
+  --button-weak-hover: var(--fill-brand-hover);
+  --button-weak-press: var(--fill-brand-press);
   --button-fg-on-strong: var(--text-inverse-strong);
   --button-fg: var(--button-fg-on-strong);
   --button-bg: var(--button-strong);
@@ -749,7 +824,7 @@ pre {
 
 .yco-button--large,
 .yco-button--lg {
-  min-height: 56px;
+  min-height: var(--spacing-56);
   gap: var(--spacing-4);
   padding: 0 var(--spacing-24);
   font-size: var(--font-size-heading-4);
@@ -758,24 +833,24 @@ pre {
 
 .yco-button--medium,
 .yco-button--md {
-  min-height: 48px;
+  min-height: var(--spacing-48);
   gap: var(--spacing-4);
   padding: 0 var(--spacing-20);
-  font-size: 18px;
-  line-height: 24px;
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-small);
 }
 
 .yco-button--small,
 .yco-button--sm {
-  min-height: 40px;
+  min-height: var(--spacing-40);
   gap: var(--spacing-4);
   padding: 0 var(--spacing-16);
-  font-size: 16px;
-  line-height: 22px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
 }
 
 .yco-button--tiny {
-  min-height: 32px;
+  min-height: var(--spacing-32);
   gap: var(--spacing-4);
   padding: 0 var(--spacing-12);
   font-family: var(--font-family-body);
@@ -785,26 +860,26 @@ pre {
 
 .yco-button--tiny .button-icon,
 .yco-button--tiny .spinner {
-  width: 16px;
-  height: 16px;
-  flex-basis: 16px;
-  font-size: 16px;
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+  flex-basis: var(--spacing-16);
+  font-size: var(--font-size-small);
 }
 
 .yco-button--brand {
-  --button-strong: var(--brand-1000);
-  --button-strong-hover: var(--brand-800);
-  --button-strong-press: #0d86b1;
-  --button-weak: var(--brand-50);
-  --button-weak-hover: var(--brand-100);
-  --button-weak-press: var(--brand-200);
+  --button-strong: var(--fill-brand-strong);
+  --button-strong-hover: var(--brand-light-800);
+  --button-strong-press: var(--brand-light-800);
+  --button-weak: var(--fill-brand-weak);
+  --button-weak-hover: var(--fill-brand-hover);
+  --button-weak-press: var(--fill-brand-press);
   --button-fg-on-strong: var(--text-inverse-strong);
 }
 
 .yco-button--neutral {
-  --button-strong: var(--fill-inverse);
-  --button-strong-hover: #243238;
-  --button-strong-press: #34454d;
+  --button-strong: var(--text-strong);
+  --button-strong-hover: var(--grey-light-900, var(--text-strong));
+  --button-strong-press: var(--grey-light-700, var(--text-weak));
   --button-weak: var(--fill-weaker);
   --button-weak-hover: var(--fill-hover);
   --button-weak-press: var(--fill-press);
@@ -812,13 +887,13 @@ pre {
 }
 
 .yco-button--destructive {
-  --button-strong: var(--error-1000);
-  --button-strong-hover: var(--error-800);
-  --button-strong-press: #c90000;
-  --button-weak: var(--error-50);
-  --button-weak-hover: #ffe1e1;
-  --button-weak-press: #ffcaca;
-  --button-fg-on-strong: #ffffff;
+  --button-strong: var(--fill-error-strong);
+  --button-strong-hover: var(--stroke-error-strong);
+  --button-strong-press: var(--stroke-error-strong);
+  --button-weak: var(--fill-error-weak);
+  --button-weak-hover: var(--fill-error-weak);
+  --button-weak-press: var(--red-light-200, var(--fill-error-weak));
+  --button-fg-on-strong: var(--text-inverse-strong);
 }
 
 .yco-button--inverse {
@@ -826,9 +901,9 @@ pre {
   --button-strong-hover: var(--fill-hover);
   --button-strong-press: var(--fill-press);
   --button-weak: transparent;
-  --button-weak-hover: rgba(255, 255, 255, 0.08);
-  --button-weak-press: rgba(255, 255, 255, 0.14);
-  --button-fg-on-strong: var(--text-strong-alpha);
+  --button-weak-hover: var(--fill-inverse-hover);
+  --button-weak-press: var(--fill-inverse-press);
+  --button-fg-on-strong: var(--text-strong);
 }
 
 .yco-button--primary {
@@ -848,17 +923,17 @@ pre {
 }
 
 .yco-button--neutral.yco-button--secondary {
-  --button-bg: rgba(255, 255, 255, 0.01);
-  --button-fg: var(--text-strong-alpha);
-  --button-border: rgba(17, 24, 26, 0.2);
+  --button-bg: var(--grey-slate-light-25);
+  --button-fg: var(--text-strong);
+  --button-border: var(--stroke-strong);
 }
 
 .yco-button--inverse.yco-button--secondary {
   --button-bg: transparent;
-  --button-bg-hover: rgba(255, 255, 255, 0.08);
-  --button-bg-press: rgba(255, 255, 255, 0.14);
-  --button-fg: #ffffff;
-  --button-border: rgba(255, 255, 255, 0.6);
+  --button-bg-hover: var(--fill-inverse-hover);
+  --button-bg-press: var(--fill-inverse-press);
+  --button-fg: var(--text-inverse-strong);
+  --button-border: var(--stroke-inverse-strong);
 }
 
 .yco-button--tertiary {
@@ -890,9 +965,9 @@ pre {
 
 .button-icon {
   display: inline-grid;
-  width: 24px;
-  height: 24px;
-  flex: 0 0 24px;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: 0 0 var(--spacing-24);
   place-items: center;
   line-height: 1;
 }
@@ -965,7 +1040,7 @@ pre {
     position: fixed;
     inset: 0;
     z-index: 20;
-    background: rgba(9, 22, 26, 0.38);
+    background: var(--fill-overlay);
     content: "";
     opacity: 0;
     pointer-events: none;

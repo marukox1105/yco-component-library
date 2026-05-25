@@ -61,46 +61,46 @@ const baseCss = `.yco-button {
   align-items: center;
   justify-content: center;
   border: 1px solid var(--button-border);
-  border-radius: 32px;
+  border-radius: var(--corner-radius-32);
   background: var(--button-bg);
   color: var(--button-fg);
-  font-family: Roboto, system-ui, sans-serif;
-  font-weight: 600;
+  font-family: var(--font-family-heading, Roboto), system-ui, sans-serif;
+  font-weight: var(--font-weight-strong, 600);
   letter-spacing: 0;
 }`;
 
 const toneCss = {
   brand: `.yco-button--brand {
-  --button-strong: #03ade2;
-  --button-strong-hover: #1498c7;
-  --button-strong-press: #0d86b1;
-  --button-weak-hover: #e6f8fd;
-  --button-weak-press: #c7f0fa;
-  --button-fg-on-strong: #ffffff;
+  --button-strong: var(--fill-brand-strong);
+  --button-strong-hover: var(--brand-light-800);
+  --button-strong-press: var(--brand-light-800);
+  --button-weak-hover: var(--fill-brand-hover);
+  --button-weak-press: var(--fill-brand-press);
+  --button-fg-on-strong: var(--text-inverse-strong);
 }`,
   neutral: `.yco-button--neutral {
-  --button-strong: #0f2026;
-  --button-strong-hover: #243238;
-  --button-strong-press: #34454d;
-  --button-weak-hover: #f2f5f6;
-  --button-weak-press: #e8eef0;
-  --button-fg-on-strong: #ffffff;
+  --button-strong: var(--text-strong);
+  --button-strong-hover: var(--grey-light-900, var(--text-strong));
+  --button-strong-press: var(--grey-light-700, var(--text-weak));
+  --button-weak-hover: var(--fill-hover);
+  --button-weak-press: var(--fill-press);
+  --button-fg-on-strong: var(--text-inverse-strong);
 }`,
   destructive: `.yco-button--destructive {
-  --button-strong: #ee1010;
-  --button-strong-hover: #f04444;
-  --button-strong-press: #c90000;
-  --button-weak-hover: #ffe1e1;
-  --button-weak-press: #ffcaca;
-  --button-fg-on-strong: #ffffff;
+  --button-strong: var(--fill-error-strong);
+  --button-strong-hover: var(--stroke-error-strong);
+  --button-strong-press: var(--stroke-error-strong);
+  --button-weak-hover: var(--fill-error-weak);
+  --button-weak-press: var(--red-light-200, var(--fill-error-weak));
+  --button-fg-on-strong: var(--text-inverse-strong);
 }`,
   inverse: `.yco-button--inverse {
-  --button-strong: #ffffff;
-  --button-strong-hover: #f2f5f6;
-  --button-strong-press: #e8eef0;
-  --button-weak-hover: rgba(255, 255, 255, 0.08);
-  --button-weak-press: rgba(255, 255, 255, 0.14);
-  --button-fg-on-strong: rgba(9, 22, 26, 0.95);
+  --button-strong: var(--fill-inverse-strong);
+  --button-strong-hover: var(--fill-hover);
+  --button-strong-press: var(--fill-press);
+  --button-weak-hover: var(--fill-inverse-hover);
+  --button-weak-press: var(--fill-inverse-press);
+  --button-fg-on-strong: var(--text-strong);
 }`,
 };
 
@@ -113,7 +113,7 @@ const typeCss = {
   --button-border: transparent;
 }`,
   secondary: `.yco-button--secondary {
-  --button-bg: #ffffff;
+  --button-bg: var(--background-base);
   --button-bg-hover: var(--button-weak-hover);
   --button-bg-press: var(--button-weak-press);
   --button-fg: var(--button-strong);
@@ -131,18 +131,18 @@ const typeCss = {
 const inverseTypeCss = {
   secondary: `.yco-button--inverse.yco-button--secondary {
   --button-bg: transparent;
-  --button-bg-hover: rgba(255, 255, 255, 0.08);
-  --button-bg-press: rgba(255, 255, 255, 0.14);
-  --button-fg: #ffffff;
-  --button-border: rgba(255, 255, 255, 0.6);
+  --button-bg-hover: var(--fill-inverse-hover);
+  --button-bg-press: var(--fill-inverse-press);
+  --button-fg: var(--text-inverse-strong);
+  --button-border: var(--stroke-inverse-strong);
 }`,
 };
 
 const neutralTypeCss = {
   secondary: `.yco-button--neutral.yco-button--secondary {
-  --button-bg: rgba(255, 255, 255, 0.01);
-  --button-fg: rgba(9, 22, 26, 0.95);
-  --button-border: rgba(17, 24, 26, 0.2);
+  --button-bg: var(--grey-slate-light-25);
+  --button-fg: var(--text-strong);
+  --button-border: var(--stroke-strong);
 }`,
 };
 
@@ -161,32 +161,32 @@ const brandTypeCss = {
 
 const sizeCss = {
   large: `.yco-button--large {
-  min-height: 56px;
-  gap: 4px;
-  padding: 0 24px;
-  font-size: 20px;
-  line-height: 28px;
+  min-height: var(--spacing-56);
+  gap: var(--spacing-4);
+  padding: var(--spacing-0) var(--spacing-24);
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
 }`,
   medium: `.yco-button--medium {
-  min-height: 48px;
-  gap: 4px;
-  padding: 0 20px;
-  font-size: 18px;
-  line-height: 24px;
+  min-height: var(--spacing-48);
+  gap: var(--spacing-4);
+  padding: var(--spacing-0) var(--spacing-20);
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-small);
 }`,
   small: `.yco-button--small {
-  min-height: 40px;
-  gap: 4px;
-  padding: 0 16px;
-  font-size: 16px;
-  line-height: 22px;
+  min-height: var(--spacing-40);
+  gap: var(--spacing-4);
+  padding: var(--spacing-0) var(--spacing-16);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
 }`,
   tiny: `.yco-button--tiny {
-  min-height: 32px;
-  gap: 4px;
-  padding: 0 12px;
-  font-size: 14px;
-  line-height: 20px;
+  min-height: var(--spacing-32);
+  gap: var(--spacing-4);
+  padding: var(--spacing-0) var(--spacing-12);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
 }`,
 };
 
@@ -227,15 +227,15 @@ function cssMarkup() {
     ? `.yco-button:focus-visible,
 .yco-button.is-focus {
   outline: 0;
-  box-shadow: 0 0 0 4px #c7f0fa;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
 }
 
 .yco-button--inverse.yco-button--secondary.is-focus {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 3px var(--stroke-inverse-strong);
 }
 
 .yco-button--inverse.yco-button--primary.is-focus {
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 3px var(--stroke-inverse-strong);
 }`
     : `.yco-button:hover,
 .yco-button.is-hover {
@@ -250,9 +250,9 @@ function cssMarkup() {
   const iconCss = `.button-icon {
   display: inline-grid;
   place-items: center;
-  width: ${selections.size === "tiny" ? "16px" : "24px"};
-  height: ${selections.size === "tiny" ? "16px" : "24px"};
-  flex: 0 0 ${selections.size === "tiny" ? "16px" : "24px"};
+  width: ${selections.size === "tiny" ? "var(--spacing-16)" : "var(--spacing-24)"};
+  height: ${selections.size === "tiny" ? "var(--spacing-16)" : "var(--spacing-24)"};
+  flex: 0 0 ${selections.size === "tiny" ? "var(--spacing-16)" : "var(--spacing-24)"};
 }
 
 .button-icon svg {
