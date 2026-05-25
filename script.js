@@ -4,6 +4,8 @@ const previewSurface = document.querySelector("#previewSurface");
 const stateLabel = document.querySelector("#stateLabel");
 const codeBlock = document.querySelector("#codeBlock");
 const toast = document.querySelector("#toast");
+const sidebar = document.querySelector(".sidebar");
+const menuButton = document.querySelector(".menu-button");
 let activeCodeTab = "html";
 
 const controls = {
@@ -40,6 +42,19 @@ const stateLabels = {
   focus: "Focus",
   disabled: "Disabled",
 };
+
+const plusIcon = `<span class="button-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" focusable="false">
+    <path d="M5 12h14"></path>
+    <path d="M12 5v14"></path>
+  </svg>
+</span>`;
+
+const chevronRightIcon = `<span class="button-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24" focusable="false">
+    <path d="m9 18 6-6-6-6"></path>
+  </svg>
+</span>`;
 
 const baseCss = `.yco-button {
   display: inline-flex;
@@ -113,6 +128,37 @@ const typeCss = {
 }`,
 };
 
+const inverseTypeCss = {
+  secondary: `.yco-button--inverse.yco-button--secondary {
+  --button-bg: transparent;
+  --button-bg-hover: rgba(255, 255, 255, 0.08);
+  --button-bg-press: rgba(255, 255, 255, 0.14);
+  --button-fg: #ffffff;
+  --button-border: rgba(255, 255, 255, 0.6);
+}`,
+};
+
+const neutralTypeCss = {
+  secondary: `.yco-button--neutral.yco-button--secondary {
+  --button-bg: rgba(255, 255, 255, 0.01);
+  --button-fg: rgba(9, 22, 26, 0.95);
+  --button-border: rgba(17, 24, 26, 0.2);
+}`,
+};
+
+const brandTypeCss = {
+  tertiary: `.yco-button--brand.yco-button--tertiary {
+  --button-bg-hover: transparent;
+  --button-bg-press: transparent;
+}
+
+.yco-button--brand.yco-button--tertiary .button-label {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}`,
+};
+
 const sizeCss = {
   large: `.yco-button--large {
   min-height: 56px;
@@ -146,8 +192,8 @@ const sizeCss = {
 
 function buttonMarkup() {
   const label = controls.label.value.trim() || "Button";
-  const leading = controls.leadingIcon.checked ? '<span class="button-icon" aria-hidden="true">+</span>\n  ' : "";
-  const trailing = controls.trailingIcon.checked ? '\n  <span class="button-icon" aria-hidden="true">›</span>' : "";
+  const leading = controls.leadingIcon.checked ? `${plusIcon}\n  ` : "";
+  const trailing = controls.trailingIcon.checked ? `\n  ${chevronRightIcon}` : "";
   const disabled = selections.state === "disabled" ? " disabled" : "";
   const extraClass = controls.fullWidth.checked ? " is-full-width" : "";
 
@@ -159,13 +205,14 @@ function buttonMarkup() {
 function reactMarkup() {
   const label = controls.label.value.trim() || "Button";
   const props = [
-    `type="${typeLabels[selections.type]}"`,
-    `tone="${toneLabels[selections.tone]}"`,
-    `state="${stateLabels[selections.state]}"`,
+    `variant="${selections.type}"`,
+    `tone="${selections.tone}"`,
     `size="${selections.size}"`,
+    selections.state === "disabled" ? "disabled" : "",
+    selections.state !== "default" && selections.state !== "disabled" ? `state="${selections.state}"` : "",
     controls.fullWidth.checked ? "fullWidth" : "",
-    controls.leadingIcon.checked ? "iconLeft" : "",
-    controls.trailingIcon.checked ? "iconRight" : "",
+    controls.leadingIcon.checked ? "leadingIcon={PlusIcon}" : "",
+    controls.trailingIcon.checked ? "trailingIcon={ChevronRightIcon}" : "",
   ].filter(Boolean).join("\n  ");
 
   return `<Button
@@ -181,6 +228,10 @@ function cssMarkup() {
 .yco-button.is-focus {
   outline: 0;
   box-shadow: 0 0 0 4px #c7f0fa;
+}
+
+.yco-button--inverse.yco-button--secondary.is-focus {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.6);
 }
 
 .yco-button--inverse.yco-button--primary.is-focus {
@@ -202,15 +253,64 @@ function cssMarkup() {
   width: ${selections.size === "tiny" ? "16px" : "24px"};
   height: ${selections.size === "tiny" ? "16px" : "24px"};
   flex: 0 0 ${selections.size === "tiny" ? "16px" : "24px"};
+}
+
+.button-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
 }`;
 
-  return [baseCss, toneCss[selections.tone], typeCss[selections.type], sizeCss[selections.size], stateCss, iconCss].join("\n\n");
+  return [
+    baseCss,
+    toneCss[selections.tone],
+    typeCss[selections.type],
+    selections.tone === "brand" ? brandTypeCss[selections.type] : "",
+    selections.tone === "neutral" ? neutralTypeCss[selections.type] : "",
+    selections.tone === "inverse" ? inverseTypeCss[selections.type] : "",
+    sizeCss[selections.size],
+    stateCss,
+    iconCss,
+  ].filter(Boolean).join("\n\n");
 }
 
 function codeMarkup() {
   if (activeCodeTab === "react") return reactMarkup();
   if (activeCodeTab === "css") return cssMarkup();
   return buttonMarkup();
+}
+
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function highlightMarkup(value) {
+  return escapeHtml(value).replace(/(&lt;\/?)([A-Za-z][\w-]*)([\s\S]*?)(\/?&gt;)/g, (match, open, tag, attrs, close) => {
+    const highlightedAttrs = attrs.replace(/([\w:-]+)(=)(&quot;[^&]*?&quot;|\{[\s\S]*?\})/g, '<span class="token attr">$1</span>$2<span class="token string">$3</span>');
+    return `<span class="token punctuation">${open}</span><span class="token tag">${tag}</span>${highlightedAttrs}<span class="token punctuation">${close}</span>`;
+  });
+}
+
+function highlightCss(value) {
+  return escapeHtml(value)
+    .replace(/(#[0-9a-fA-F]{3,8}|rgba?\([^)]+\)|\b\d+(?:\.\d+)?(?:px|rem|em|%|ms|s)?\b)/g, '<span class="token number">$1</span>')
+    .replace(/(--[\w-]+|[\w-]+)(?=:)/g, '<span class="token attr">$1</span>')
+    .replace(/(\.[\w-]+|:[\w-]+|::[\w-]+)/g, '<span class="token selector">$1</span>')
+    .replace(/(var\()(<span class="token attr">--[\w-]+<\/span>)(\))/g, '<span class="token function">$1</span>$2<span class="token function">$3</span>');
+}
+
+function highlightCode(value) {
+  if (activeCodeTab === "css") return highlightCss(value);
+  return highlightMarkup(value);
 }
 
 function updatePreview() {
@@ -232,13 +332,14 @@ function updatePreview() {
   previewButton.disabled = state === "disabled";
   previewButton.removeAttribute("aria-busy");
   previewButton.innerHTML = [
-    controls.leadingIcon.checked ? '<span class="button-icon" aria-hidden="true">+</span>' : "",
+    controls.leadingIcon.checked ? plusIcon : "",
     `<span class="button-label">${label}</span>`,
-    controls.trailingIcon.checked ? '<span class="button-icon" aria-hidden="true">›</span>' : "",
+    controls.trailingIcon.checked ? chevronRightIcon : "",
   ].filter(Boolean).join("");
 
+  const code = codeMarkup();
   stateLabel.textContent = stateLabels[state];
-  codeBlock.textContent = codeMarkup();
+  codeBlock.innerHTML = highlightCode(code);
   document.title = `YCO Buttons - ${toneLabels[tone]} ${typeLabels[type]}`;
 }
 
@@ -248,6 +349,28 @@ document.querySelectorAll("[data-theme]").forEach((button) => {
     button.classList.add("is-active");
     root.dataset.theme = button.dataset.theme;
   });
+});
+
+function setMenuOpen(isOpen) {
+  sidebar.classList.toggle("is-menu-open", isOpen);
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+  menuButton.setAttribute("aria-label", isOpen ? "Close component menu" : "Open component menu");
+}
+
+menuButton.addEventListener("click", () => {
+  setMenuOpen(!sidebar.classList.contains("is-menu-open"));
+});
+
+sidebar.addEventListener("click", (event) => {
+  if (event.target === sidebar || event.target.closest(".side-link")) {
+    setMenuOpen(false);
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setMenuOpen(false);
+  }
 });
 
 document.querySelectorAll("[data-control]").forEach((button) => {
