@@ -6,10 +6,11 @@ const codeBlock = document.querySelector("#codeBlock");
 const toast = document.querySelector("#toast");
 const sidebar = document.querySelector(".sidebar");
 const menuButton = document.querySelector(".menu-button");
+const defaultLabel = "Button";
+const mobileThemeQuery = window.matchMedia("(max-width: 960px)");
 let activeCodeTab = "html";
 
 const controls = {
-  label: document.querySelector("#label"),
   leadingIcon: document.querySelector("#leadingIcon"),
   trailingIcon: document.querySelector("#trailingIcon"),
   fullWidth: document.querySelector("#fullWidth"),
@@ -43,6 +44,22 @@ const stateLabels = {
   disabled: "Disabled",
 };
 
+const sizeLabels = {
+  large: "Large",
+  medium: "Medium",
+  small: "Small",
+  tiny: "Tiny",
+};
+
+function previewStateLabel() {
+  return [
+    typeLabels[selections.type],
+    toneLabels[selections.tone],
+    sizeLabels[selections.size],
+    stateLabels[selections.state],
+  ].join(" / ");
+}
+
 const plusIcon = `<span class="button-icon" aria-hidden="true">
   <svg viewBox="0 0 24 24" focusable="false">
     <path d="M5 12h14"></path>
@@ -57,105 +74,367 @@ const chevronRightIcon = `<span class="button-icon" aria-hidden="true">
 </span>`;
 
 const baseCss = `.yco-button {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--button-border);
+  border: 1px solid transparent;
   border-radius: var(--corner-radius-32);
-  background: var(--button-bg);
-  color: var(--button-fg);
   font-family: var(--font-family-heading, Roboto), system-ui, sans-serif;
   font-weight: var(--font-weight-strong, 600);
   letter-spacing: 0;
-}`;
-
-const toneCss = {
-  brand: `.yco-button--brand {
-  --button-strong: var(--fill-brand-strong);
-  --button-strong-hover: var(--brand-light-800);
-  --button-strong-press: var(--brand-light-800);
-  --button-weak-hover: var(--fill-brand-hover);
-  --button-weak-press: var(--fill-brand-press);
-  --button-fg-on-strong: var(--text-inverse-strong);
-}`,
-  neutral: `.yco-button--neutral {
-  --button-strong: var(--text-strong);
-  --button-strong-hover: var(--grey-light-900, var(--text-strong));
-  --button-strong-press: var(--grey-light-700, var(--text-weak));
-  --button-weak-hover: var(--fill-hover);
-  --button-weak-press: var(--fill-press);
-  --button-fg-on-strong: var(--text-inverse-strong);
-}`,
-  destructive: `.yco-button--destructive {
-  --button-strong: var(--fill-error-strong);
-  --button-strong-hover: var(--stroke-error-strong);
-  --button-strong-press: var(--stroke-error-strong);
-  --button-weak-hover: var(--fill-error-weak);
-  --button-weak-press: var(--red-light-200, var(--fill-error-weak));
-  --button-fg-on-strong: var(--text-inverse-strong);
-}`,
-  inverse: `.yco-button--inverse {
-  --button-strong: var(--fill-inverse-strong);
-  --button-strong-hover: var(--fill-hover);
-  --button-strong-press: var(--fill-press);
-  --button-weak-hover: var(--fill-inverse-hover);
-  --button-weak-press: var(--fill-inverse-press);
-  --button-fg-on-strong: var(--text-strong);
-}`,
-};
-
-const typeCss = {
-  primary: `.yco-button--primary {
-  --button-bg: var(--button-strong);
-  --button-bg-hover: var(--button-strong-hover);
-  --button-bg-press: var(--button-strong-press);
-  --button-fg: var(--button-fg-on-strong);
-  --button-border: transparent;
-}`,
-  secondary: `.yco-button--secondary {
-  --button-bg: var(--background-base);
-  --button-bg-hover: var(--button-weak-hover);
-  --button-bg-press: var(--button-weak-press);
-  --button-fg: var(--button-strong);
-  --button-border: var(--button-strong);
-}`,
-  tertiary: `.yco-button--tertiary {
-  --button-bg: transparent;
-  --button-bg-hover: var(--button-weak-hover);
-  --button-bg-press: var(--button-weak-press);
-  --button-fg: var(--button-strong);
-  --button-border: transparent;
-}`,
-};
-
-const inverseTypeCss = {
-  secondary: `.yco-button--inverse.yco-button--secondary {
-  --button-bg: transparent;
-  --button-bg-hover: var(--fill-inverse-hover);
-  --button-bg-press: var(--fill-inverse-press);
-  --button-fg: var(--text-inverse-strong);
-  --button-border: var(--stroke-inverse-strong);
-}`,
-};
-
-const neutralTypeCss = {
-  secondary: `.yco-button--neutral.yco-button--secondary {
-  --button-bg: var(--grey-slate-light-25);
-  --button-fg: var(--text-strong);
-  --button-border: var(--stroke-strong);
-}`,
-};
-
-const brandTypeCss = {
-  tertiary: `.yco-button--brand.yco-button--tertiary {
-  --button-bg-hover: transparent;
-  --button-bg-press: transparent;
 }
 
-.yco-button--brand.yco-button--tertiary .button-label {
+.yco-button::before {
+  content: "";
+  position: absolute;
+  inset: var(--spacing-0);
+  z-index: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+}
+
+.yco-button > * {
+  position: relative;
+  z-index: 1;
+}`;
+
+const variantCss = {
+  "brand-primary": `.yco-button--brand.yco-button--primary {
+  background: var(--fill-brand-strong);
+  color: var(--text-inverse-strong);
+}
+
+.yco-button--brand.yco-button--primary .button-icon {
+  color: var(--icon-inverse-strong);
+}
+
+.yco-button--brand.yco-button--primary:hover,
+.yco-button--brand.yco-button--primary.is-hover {
+  background: var(--fill-brand-strong);
+}
+
+.yco-button--brand.yco-button--primary:hover::before,
+.yco-button--brand.yco-button--primary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--brand.yco-button--primary:active,
+.yco-button--brand.yco-button--primary.is-press {
+  background: var(--fill-brand-strong);
+}
+
+.yco-button--brand.yco-button--primary:active::before,
+.yco-button--brand.yco-button--primary.is-press::before {
+  background: var(--fill-press);
+}`,
+  "neutral-primary": `.yco-button--neutral.yco-button--primary {
+  background: var(--fill-strong);
+  color: var(--text-inverse-strong);
+}
+
+.yco-button--neutral.yco-button--primary .button-icon {
+  color: var(--icon-inverse-strong);
+}
+
+.yco-button--neutral.yco-button--primary:hover,
+.yco-button--neutral.yco-button--primary.is-hover {
+  background: var(--fill-strong);
+}
+
+.yco-button--neutral.yco-button--primary:hover::before,
+.yco-button--neutral.yco-button--primary.is-hover::before {
+  background: var(--fill-inverse-hover);
+}
+
+.yco-button--neutral.yco-button--primary:active,
+.yco-button--neutral.yco-button--primary.is-press {
+  background: var(--fill-strong);
+}
+
+.yco-button--neutral.yco-button--primary:active::before,
+.yco-button--neutral.yco-button--primary.is-press::before {
+  background: var(--fill-inverse-press);
+}`,
+  "destructive-primary": `.yco-button--destructive.yco-button--primary {
+  background: var(--fill-error-strong);
+  color: var(--text-inverse-strong);
+}
+
+.yco-button--destructive.yco-button--primary .button-icon {
+  color: var(--icon-inverse-strong);
+}
+
+.yco-button--destructive.yco-button--primary:hover,
+.yco-button--destructive.yco-button--primary.is-hover {
+  background: var(--fill-error-strong);
+}
+
+.yco-button--destructive.yco-button--primary:hover::before,
+.yco-button--destructive.yco-button--primary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--destructive.yco-button--primary:active,
+.yco-button--destructive.yco-button--primary.is-press {
+  background: var(--fill-error-strong);
+}
+
+.yco-button--destructive.yco-button--primary:active::before,
+.yco-button--destructive.yco-button--primary.is-press::before {
+  background: var(--fill-press);
+}`,
+  "inverse-primary": `.yco-button--inverse.yco-button--primary {
+  background: var(--fill-inverse-strong);
+  color: var(--text-strong);
+}
+
+.yco-button--inverse.yco-button--primary .button-icon {
+  color: var(--icon-neutral);
+}
+
+.yco-button--inverse.yco-button--primary:hover,
+.yco-button--inverse.yco-button--primary.is-hover {
+  background: var(--fill-inverse-strong);
+}
+
+.yco-button--inverse.yco-button--primary:hover::before,
+.yco-button--inverse.yco-button--primary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--inverse.yco-button--primary:active,
+.yco-button--inverse.yco-button--primary.is-press {
+  background: var(--fill-inverse-strong);
+}
+
+.yco-button--inverse.yco-button--primary:active::before,
+.yco-button--inverse.yco-button--primary.is-press::before {
+  background: var(--fill-press);
+}`,
+  "brand-secondary": `.yco-button--brand.yco-button--secondary {
+  border-color: var(--stroke-brand-strong);
+  background: transparent;
+  color: var(--text-brand);
+}
+
+.yco-button--brand.yco-button--secondary .button-icon {
+  color: var(--icon-brand);
+}
+
+.yco-button--brand.yco-button--secondary:hover,
+.yco-button--brand.yco-button--secondary.is-hover {
+  background: transparent;
+}
+
+.yco-button--brand.yco-button--secondary:hover::before,
+.yco-button--brand.yco-button--secondary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--brand.yco-button--secondary:active,
+.yco-button--brand.yco-button--secondary.is-press {
+  background: transparent;
+}
+
+.yco-button--brand.yco-button--secondary:active::before,
+.yco-button--brand.yco-button--secondary.is-press::before {
+  background: var(--fill-press);
+}`,
+  "neutral-secondary": `.yco-button--neutral.yco-button--secondary {
+  border-color: var(--stroke-strong);
+  background: var(--grey-slate-light-25);
+  color: var(--text-strong);
+}
+
+.yco-button--neutral.yco-button--secondary .button-icon {
+  color: var(--icon-neutral);
+}
+
+.yco-button--neutral.yco-button--secondary:hover,
+.yco-button--neutral.yco-button--secondary.is-hover {
+  background: var(--grey-slate-light-25);
+}
+
+.yco-button--neutral.yco-button--secondary:hover::before,
+.yco-button--neutral.yco-button--secondary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--neutral.yco-button--secondary:active,
+.yco-button--neutral.yco-button--secondary.is-press {
+  background: var(--fill-press);
+}`,
+  "destructive-secondary": `.yco-button--destructive.yco-button--secondary {
+  border-color: var(--stroke-error-strong);
+  background: transparent;
+  color: var(--text-error);
+}
+
+.yco-button--destructive.yco-button--secondary .button-icon {
+  color: var(--icon-error);
+}
+
+.yco-button--destructive.yco-button--secondary:hover,
+.yco-button--destructive.yco-button--secondary.is-hover {
+  background: transparent;
+}
+
+.yco-button--destructive.yco-button--secondary:hover::before,
+.yco-button--destructive.yco-button--secondary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--destructive.yco-button--secondary:active,
+.yco-button--destructive.yco-button--secondary.is-press {
+  background: transparent;
+}
+
+.yco-button--destructive.yco-button--secondary:active::before,
+.yco-button--destructive.yco-button--secondary.is-press::before {
+  background: var(--fill-press);
+}`,
+  "inverse-secondary": `.yco-button--inverse.yco-button--secondary {
+  border-color: var(--stroke-inverse-strong);
+  background: transparent;
+  color: var(--text-inverse-strong);
+}
+
+.yco-button--inverse.yco-button--secondary .button-icon {
+  color: var(--icon-inverse-strong);
+}
+
+.yco-button--inverse.yco-button--secondary:hover,
+.yco-button--inverse.yco-button--secondary.is-hover {
+  background: var(--fill-inverse-hover);
+}
+
+.yco-button--inverse.yco-button--secondary:active,
+.yco-button--inverse.yco-button--secondary.is-press {
+  background: var(--fill-inverse-press);
+}`,
+  "brand-tertiary": `.yco-button--brand.yco-button--tertiary {
+  background: transparent;
+  color: var(--text-brand);
+}
+
+.yco-button--brand.yco-button--tertiary .button-icon {
+  color: var(--icon-brand);
+}
+
+.yco-button--tertiary .button-label {
   text-decoration: underline;
   text-decoration-skip-ink: none;
   text-underline-position: from-font;
+}
+
+.yco-button--brand.yco-button--tertiary:hover,
+.yco-button--brand.yco-button--tertiary.is-hover {
+  background: transparent;
+}
+
+.yco-button--brand.yco-button--tertiary:hover::before,
+.yco-button--brand.yco-button--tertiary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--brand.yco-button--tertiary:active,
+.yco-button--brand.yco-button--tertiary.is-press {
+  background: transparent;
+}
+
+.yco-button--brand.yco-button--tertiary:active::before,
+.yco-button--brand.yco-button--tertiary.is-press::before {
+  background: var(--fill-press);
+}`,
+  "neutral-tertiary": `.yco-button--neutral.yco-button--tertiary {
+  background: transparent;
+  color: var(--text-strong);
+}
+
+.yco-button--neutral.yco-button--tertiary .button-icon {
+  color: var(--icon-neutral);
+}
+
+.yco-button--tertiary .button-label {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}
+
+.yco-button--neutral.yco-button--tertiary:hover,
+.yco-button--neutral.yco-button--tertiary.is-hover {
+  background: transparent;
+}
+
+.yco-button--neutral.yco-button--tertiary:hover::before,
+.yco-button--neutral.yco-button--tertiary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--neutral.yco-button--tertiary:active,
+.yco-button--neutral.yco-button--tertiary.is-press {
+  background: var(--fill-press);
+}`,
+  "destructive-tertiary": `.yco-button--destructive.yco-button--tertiary {
+  background: transparent;
+  color: var(--text-error);
+}
+
+.yco-button--destructive.yco-button--tertiary .button-icon {
+  color: var(--icon-error);
+}
+
+.yco-button--tertiary .button-label {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}
+
+.yco-button--destructive.yco-button--tertiary:hover,
+.yco-button--destructive.yco-button--tertiary.is-hover {
+  background: transparent;
+}
+
+.yco-button--destructive.yco-button--tertiary:hover::before,
+.yco-button--destructive.yco-button--tertiary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.yco-button--destructive.yco-button--tertiary:active,
+.yco-button--destructive.yco-button--tertiary.is-press {
+  background: transparent;
+}
+
+.yco-button--destructive.yco-button--tertiary:active::before,
+.yco-button--destructive.yco-button--tertiary.is-press::before {
+  background: var(--fill-press);
+}`,
+  "inverse-tertiary": `.yco-button--inverse.yco-button--tertiary {
+  background: transparent;
+  color: var(--text-inverse-strong);
+}
+
+.yco-button--inverse.yco-button--tertiary .button-icon {
+  color: var(--icon-inverse-strong);
+}
+
+.yco-button--tertiary .button-label {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}
+
+.yco-button--inverse.yco-button--tertiary:hover,
+.yco-button--inverse.yco-button--tertiary.is-hover {
+  background: var(--fill-inverse-hover);
+}
+
+.yco-button--inverse.yco-button--tertiary:active,
+.yco-button--inverse.yco-button--tertiary.is-press {
+  background: var(--fill-inverse-press);
 }`,
 };
 
@@ -170,7 +449,7 @@ const sizeCss = {
   medium: `.yco-button--medium {
   min-height: var(--spacing-48);
   gap: var(--spacing-4);
-  padding: var(--spacing-0) var(--spacing-20);
+  padding: var(--spacing-0) var(--spacing-16);
   font-size: var(--font-size-heading-5);
   line-height: var(--line-height-small);
 }`,
@@ -191,19 +470,17 @@ const sizeCss = {
 };
 
 function buttonMarkup() {
-  const label = controls.label.value.trim() || "Button";
   const leading = controls.leadingIcon.checked ? `${plusIcon}\n  ` : "";
   const trailing = controls.trailingIcon.checked ? `\n  ${chevronRightIcon}` : "";
   const disabled = selections.state === "disabled" ? " disabled" : "";
   const extraClass = controls.fullWidth.checked ? " is-full-width" : "";
 
   return `<button class="yco-button yco-button--${selections.tone} yco-button--${selections.type} yco-button--${selections.size}${extraClass}" type="button"${disabled}>
-  ${leading}<span class="button-label">${label}</span>${trailing}
+  ${leading}<span class="button-label">${defaultLabel}</span>${trailing}
 </button>`;
 }
 
 function reactMarkup() {
-  const label = controls.label.value.trim() || "Button";
   const props = [
     `variant="${selections.type}"`,
     `tone="${selections.tone}"`,
@@ -218,11 +495,17 @@ function reactMarkup() {
   return `<Button
   ${props}
 >
-  ${label}
+  ${defaultLabel}
 </Button>`;
 }
 
 function cssMarkup() {
+  const iconSize = selections.size === "large"
+    ? "24px"
+    : selections.size === "tiny"
+      ? "16px"
+      : "20px";
+
   const stateCss = selections.state === "focus"
     ? `.yco-button:focus-visible,
 .yco-button.is-focus {
@@ -230,29 +513,100 @@ function cssMarkup() {
   box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
 }
 
-.yco-button--inverse.yco-button--secondary.is-focus {
+.yco-button--inverse.yco-button--secondary.is-focus,
+.yco-button--inverse.yco-button--tertiary.is-focus {
   box-shadow: 0 0 0 3px var(--stroke-inverse-strong);
 }
 
 .yco-button--inverse.yco-button--primary.is-focus {
   box-shadow: 0 0 0 3px var(--stroke-inverse-strong);
 }`
-    : `.yco-button:hover,
-.yco-button.is-hover {
-  background: var(--button-bg-hover);
+    : selections.state === "disabled"
+      ? `.yco-button:disabled,
+.yco-button.is-disabled {
+  cursor: not-allowed;
+  transform: none;
 }
 
-.yco-button:active,
-.yco-button.is-press {
-  background: var(--button-bg-press);
-}`;
+.yco-button.yco-button--primary:disabled,
+.yco-button.yco-button--primary.is-disabled {
+  border-color: transparent;
+  background: var(--fill-disabled);
+  color: var(--text-inverse-strong);
+}
+
+.yco-button.yco-button--primary:disabled .button-icon,
+.yco-button.yco-button--primary.is-disabled .button-icon {
+  color: var(--icon-inverse-strong);
+}
+
+.yco-button.yco-button--secondary:disabled,
+.yco-button.yco-button--secondary.is-disabled {
+  border-color: var(--stroke-disabled);
+  background: transparent;
+  color: var(--text-disabled);
+}
+
+.yco-button.yco-button--secondary:disabled .button-icon,
+.yco-button.yco-button--secondary.is-disabled .button-icon {
+  color: var(--icon-disabled);
+}
+
+.yco-button.yco-button--tertiary:disabled,
+.yco-button.yco-button--tertiary.is-disabled {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-disabled);
+}
+
+.yco-button.yco-button--tertiary:disabled .button-icon,
+.yco-button.yco-button--tertiary.is-disabled .button-icon {
+  color: var(--icon-disabled);
+}
+
+.yco-button.yco-button--inverse.yco-button--primary:disabled,
+.yco-button.yco-button--inverse.yco-button--primary.is-disabled {
+  border-color: transparent;
+  background: var(--fill-inverse-disabled);
+  color: var(--text-strong);
+}
+
+.yco-button.yco-button--inverse.yco-button--primary:disabled .button-icon,
+.yco-button.yco-button--inverse.yco-button--primary.is-disabled .button-icon {
+  color: var(--icon-neutral);
+}
+
+.yco-button.yco-button--inverse.yco-button--secondary:disabled,
+.yco-button.yco-button--inverse.yco-button--secondary.is-disabled {
+  border-color: var(--stroke-inverse-disabled);
+  background: transparent;
+  color: var(--text-inverse-disabled);
+}
+
+.yco-button.yco-button--inverse.yco-button--secondary:disabled .button-icon,
+.yco-button.yco-button--inverse.yco-button--secondary.is-disabled .button-icon {
+  color: var(--icon-inverse-disabled);
+}
+
+.yco-button.yco-button--inverse.yco-button--tertiary:disabled,
+.yco-button.yco-button--inverse.yco-button--tertiary.is-disabled {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-inverse-disabled);
+}
+
+.yco-button.yco-button--inverse.yco-button--tertiary:disabled .button-icon,
+.yco-button.yco-button--inverse.yco-button--tertiary.is-disabled .button-icon {
+  color: var(--icon-inverse-disabled);
+}`
+    : "";
 
   const iconCss = `.button-icon {
   display: inline-grid;
   place-items: center;
-  width: ${selections.size === "tiny" ? "var(--spacing-16)" : "var(--spacing-24)"};
-  height: ${selections.size === "tiny" ? "var(--spacing-16)" : "var(--spacing-24)"};
-  flex: 0 0 ${selections.size === "tiny" ? "var(--spacing-16)" : "var(--spacing-24)"};
+  width: ${iconSize};
+  height: ${iconSize};
+  flex: 0 0 ${iconSize};
 }
 
 .button-icon svg {
@@ -268,11 +622,7 @@ function cssMarkup() {
 
   return [
     baseCss,
-    toneCss[selections.tone],
-    typeCss[selections.type],
-    selections.tone === "brand" ? brandTypeCss[selections.type] : "",
-    selections.tone === "neutral" ? neutralTypeCss[selections.type] : "",
-    selections.tone === "inverse" ? inverseTypeCss[selections.type] : "",
+    variantCss[`${selections.tone}-${selections.type}`],
     sizeCss[selections.size],
     stateCss,
     iconCss,
@@ -317,7 +667,6 @@ function updatePreview() {
   const type = selections.type;
   const tone = selections.tone;
   const state = selections.state;
-  const label = controls.label.value.trim() || "Button";
 
   previewButton.className = [
     "yco-button",
@@ -333,21 +682,26 @@ function updatePreview() {
   previewButton.removeAttribute("aria-busy");
   previewButton.innerHTML = [
     controls.leadingIcon.checked ? plusIcon : "",
-    `<span class="button-label">${label}</span>`,
+    `<span class="button-label">${defaultLabel}</span>`,
     controls.trailingIcon.checked ? chevronRightIcon : "",
   ].filter(Boolean).join("");
 
   const code = codeMarkup();
-  stateLabel.textContent = stateLabels[state];
+  stateLabel.textContent = previewStateLabel();
   codeBlock.innerHTML = highlightCode(code);
   document.title = `YCO Buttons - ${toneLabels[tone]} ${typeLabels[type]}`;
 }
 
 document.querySelectorAll("[data-theme]").forEach((button) => {
   button.addEventListener("click", () => {
+    const currentTheme = root.dataset.theme || "light";
+    const nextTheme = mobileThemeQuery.matches
+      ? currentTheme === "light" ? "dark" : "light"
+      : button.dataset.theme;
+
     document.querySelectorAll("[data-theme]").forEach((item) => item.classList.remove("is-active"));
-    button.classList.add("is-active");
-    root.dataset.theme = button.dataset.theme;
+    document.querySelector(`[data-theme="${nextTheme}"]`)?.classList.add("is-active");
+    root.dataset.theme = nextTheme;
   });
 });
 
