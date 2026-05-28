@@ -539,8 +539,8 @@ function reactMarkup() {
     : "";
 
   return `import styles from './index.module.scss';
-import ButtonWrapper from './ButtonWrapper';
-import { disabledVariants } from './types/buttonWrapperTypes';
+import ButtonWrapper from '@/components/common/button-wrapper';
+import { disabledVariants } from '@/components/common/button-wrapper/types/buttonWrapperTypes';
 
 <ButtonWrapper
   className={[
@@ -571,20 +571,36 @@ function cssMarkup() {
       ? "16px"
       : "20px";
 
-  const moduleBaseCss = `.button {
+  const toModuleScss = (value) => value
+    .replace(/\.yco-button--([a-z]+)\.yco-button--([a-z]+)/g, ".$1.$2")
+    .replace(/\.yco-button--([a-z]+)/g, ".$1")
+    .replaceAll(".yco-button", `.${selections.type}`)
+    .replaceAll(".button-icon", ".icon")
+    .replaceAll(".button-label", ".label")
+    .replaceAll(".is-hover", ".hover")
+    .replaceAll(".is-press", ".press")
+    .replace(/var\(--(background|fill|icon|stroke|text)-([\w-]+)\)/g, "color($1-$2)")
+    .replace(/var\(--corner-radius-([\w-]+)\)/g, "border-radius(corner-radius-$1)")
+    .replace(/var\(--font-size-heading-([0-9])\)/g, "font-size(heading$1)")
+    .replace(/var\(--line-height-heading-([0-9])\)/g, "line-height(heading$1)")
+    .replace(/var\(--font-size-([\w-]+)\)/g, "font-size($1)")
+    .replace(/var\(--line-height-([\w-]+)\)/g, "line-height($1)");
+
+  const moduleBaseCss = `@import "@/styles/variables.scss";
+
+.${selections.type} {
   position: relative;
   isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 1px solid transparent;
-  border-radius: var(--corner-radius-32);
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-strong);
+  border-radius: border-radius(corner-radius-32);
+  font-weight: 600;
   letter-spacing: 0;
 }
 
-.button::before {
+.${selections.type}::before {
   content: "";
   position: absolute;
   inset: var(--spacing-0);
@@ -594,114 +610,108 @@ function cssMarkup() {
   pointer-events: none;
 }
 
-.button > * {
+.${selections.type} > * {
   position: relative;
   z-index: 1;
 }`;
 
-  const moduleVariantCss = variantCss[`${selections.tone}-${selections.type}`]
-    .replaceAll(".yco-button--", ".")
-    .replaceAll(".yco-button", ".button")
-    .replaceAll(".button-icon", ".icon")
-    .replaceAll(".button-label", ".label")
-    .replaceAll(".is-", ".");
+  const moduleVariantCss = toModuleScss(variantCss[`${selections.tone}-${selections.type}`])
+    .replaceAll("var(--grey-slate-light-25)", "color(fill-weaker)");
 
-  const moduleSizeCss = sizeCss[selections.size]
-    .replaceAll(".yco-button--", ".")
-    .replaceAll(".yco-button", ".button");
+  const moduleSizeCss = toModuleScss(sizeCss[selections.size]);
 
   const stateCss = selections.state === "focus"
-    ? `.button:focus-visible,
-.button.focus {
+    ? `.${selections.type}:focus-visible,
+.${selections.type}.focus {
   outline: 0;
-  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+  box-shadow: 0 0 0 var(--spacing-4) color(stroke-focus);
 }
 
-.button.inverse.secondary.focus,
-.button.inverse.tertiary.focus {
-  box-shadow: 0 0 0 3px var(--stroke-inverse-strong);
+.inverse.secondary.focus,
+.inverse.tertiary.focus {
+  box-shadow: 0 0 0 3px color(stroke-inverse-strong);
 }
 
-.button.inverse.primary.focus {
-  box-shadow: 0 0 0 3px var(--stroke-inverse-strong);
+.inverse.primary.focus {
+  box-shadow: 0 0 0 3px color(stroke-inverse-strong);
 }`
     : selections.state === "disabled"
-      ? `.button:disabled,
-.button.disabled {
+      ? `.${selections.type}:disabled,
+.${selections.type}.disabled {
   cursor: not-allowed;
   transform: none;
 }
 
-.button.primary:disabled,
-.button.primary.disabled {
+.primary:disabled,
+.primary.disabled {
   border-color: transparent;
-  background: var(--fill-disabled);
-  color: var(--text-inverse-strong);
+  background: color(fill-disabled);
+  color: color(text-inverse-strong);
 }
 
-.button.primary:disabled .icon,
-.button.primary.disabled .icon {
-  color: var(--icon-inverse-strong);
+.primary:disabled .icon,
+.primary.disabled .icon {
+  color: color(icon-inverse-strong);
 }
 
-.button.secondary:disabled,
-.button.secondary.disabled {
-  border-color: var(--stroke-disabled);
+.secondary:disabled,
+.secondary.disabled {
+  border-color: color(stroke-disabled);
   background: transparent;
-  color: var(--text-disabled);
+  color: color(text-disabled);
 }
 
-.button.secondary:disabled .icon,
-.button.secondary.disabled .icon {
-  color: var(--icon-disabled);
+.secondary:disabled .icon,
+.secondary.disabled .icon {
+  color: color(icon-disabled);
 }
 
-.button.tertiary:disabled,
-.button.tertiary.disabled {
-  border-color: transparent;
-  background: transparent;
-  color: var(--text-disabled);
-}
-
-.button.tertiary:disabled .icon,
-.button.tertiary.disabled .icon {
-  color: var(--icon-disabled);
-}
-
-.button.inverse.primary:disabled,
-.button.inverse.primary.disabled {
-  border-color: transparent;
-  background: var(--fill-inverse-disabled);
-  color: var(--text-strong);
-}
-
-.button.inverse.primary:disabled .icon,
-.button.inverse.primary.disabled .icon {
-  color: var(--icon-neutral);
-}
-
-.button.inverse.secondary:disabled,
-.button.inverse.secondary.disabled {
-  border-color: var(--stroke-inverse-disabled);
-  background: transparent;
-  color: var(--text-inverse-disabled);
-}
-
-.button.inverse.secondary:disabled .icon,
-.button.inverse.secondary.disabled .icon {
-  color: var(--icon-inverse-disabled);
-}
-
-.button.inverse.tertiary:disabled,
-.button.inverse.tertiary.disabled {
+.tertiary:disabled,
+.tertiary.disabled {
   border-color: transparent;
   background: transparent;
-  color: var(--text-inverse-disabled);
+  color: color(text-disabled);
 }
 
-.button.inverse.tertiary:disabled .icon,
-.button.inverse.tertiary.disabled .icon {
-  color: var(--icon-inverse-disabled);
+.tertiary:disabled .icon,
+.tertiary.disabled .icon {
+  color: color(icon-disabled);
+}
+
+.inverse.primary:disabled,
+.inverse.primary.disabled {
+  border-color: transparent;
+  background: color(fill-inverse-disabled);
+  color: color(text-strong);
+}
+
+.inverse.primary:disabled .icon,
+.inverse.primary.disabled .icon {
+  color: color(icon-neutral);
+}
+
+.inverse.secondary:disabled,
+.inverse.secondary.disabled {
+  border-color: color(stroke-inverse-disabled);
+  background: transparent;
+  color: color(text-inverse-disabled);
+}
+
+.inverse.secondary:disabled .icon,
+.inverse.secondary.disabled .icon {
+  color: color(icon-inverse-disabled);
+}
+
+.inverse.tertiary:disabled,
+.inverse.tertiary.disabled {
+  border-color: transparent;
+  background: transparent;
+  color: color(text-inverse-disabled);
+}
+
+.inverse.tertiary:disabled .icon,
+.inverse.tertiary.disabled .icon {
+  color: color(icon-inverse-disabled);
 }`
     : "";
 
@@ -717,11 +727,7 @@ function cssMarkup() {
   display: block;
   width: 100%;
   height: 100%;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2.5;
+  fill: currentColor;
 }`;
 
   return [
@@ -873,215 +879,260 @@ function alertMarkup() {
 }
 
 function alertReactMarkup() {
-  const toneClass = alertSelections.tone.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
-  const classNames = [
-    "styles.toast",
-    `styles.${toneClass}`,
-    `styles.${alertSelections.size}`,
-    `styles.${alertSelections.layout}`,
-    alertControls.border.checked ? "styles.hasBorder" : "",
-  ].filter(Boolean).join(",\n      ");
-  const icon = alertControls.icon.checked
-    ? `\n      <ToastIcon className={styles.icon} aria-hidden="true" />`
-    : "";
-  const dismiss = alertControls.dismissible.checked
-    ? `\n      <button className={styles.dismiss} type="button" aria-label="Dismiss toast">
-        <CloseIcon aria-hidden="true" />
-      </button>`
-    : "";
-  const link = alertControls.link.checked
-    ? `\n        <LinkWithLocale className={styles.link} href={href}>
-          Anchor link
-        </LinkWithLocale>`
-    : "";
+  const typeMap = {
+    error: "toastTypes.ERROR",
+    warning: "toastTypes.WARNING",
+    success: "toastTypes.SUCCESS",
+    information: "toastTypes.INFO",
+    neutral: "toastTypes.INFO",
+    brand: "toastTypes.INFO",
+    "inverse-neutral": "toastTypes.INFO",
+    "inverse-brand": "toastTypes.INFO",
+  };
+  const variant = alertSelections.size === "small"
+    ? "toastVariantTypes.COMPACT"
+    : "toastVariantTypes.DEFAULT";
+  const position = alertSelections.layout === "horizontal"
+    ? "toastPositionTypes.FIXED"
+    : "toastPositionTypes.BOTTOM_RIGHT";
   const actions = alertControls.buttons.checked
-    ? `\n        <div className={styles.actions}>
-          <ButtonWrapper className={[styles.actionButton, styles.primary].join(' ')}>
-            Label
-          </ButtonWrapper>
-          <ButtonWrapper className={[styles.actionButton, styles.secondary].join(' ')}>
-            Label
-          </ButtonWrapper>
-        </div>`
+    ? `,
+    actions: [
+      { label: 'Label', variant: 'filled', eventName: 'toast-primary-action' },
+      { label: 'Label', variant: 'outlined', eventName: 'toast-secondary-action' },
+    ]`
     : "";
 
-  return `import styles from './index.module.scss';
-import ButtonWrapper from '@/components/button-wrapper';
-import LinkWithLocale from '@/components/utils/link-with-locale';
+  return `import { useDispatch } from 'react-redux';
+import { setToast } from '@/store/actions/uiAction';
+import {
+  toastTypes,
+  toastPositionTypes,
+  toastVariantTypes,
+} from '@/components/common/yce-toast/toastTypes';
 
-<div
-  className={[
-      ${classNames}
-    ].filter(Boolean).join(' ')}
-  role="alert"
->
-  {borderLeft && <div className={styles.border} aria-hidden="true" />}
-  <div className={styles.content}>${icon}
-    <div className={styles.text}>
-      <strong className={styles.title}>Heading</strong>
-      <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit dolor sit.</p>${link}${actions}
-    </div>${dismiss}
-  </div>
-</div>`;
+const dispatch = useDispatch();
+
+dispatch(setToast({
+  isShow: true,
+  title: 'Heading',
+  description: 'Lorem ipsum dolor sit amet, consec tetur adipiscing elit dolor sit.',
+  type: ${typeMap[alertSelections.tone]},
+  position: ${position},
+  variant: ${variant},
+  autoClose: ${alertControls.dismissible.checked ? "true" : "false"},
+  autoCloseDelay: 3000${actions},
+}));`;
 }
 
-const alertBaseCss = `.toast {
+const alertBaseCss = `@import "@/styles/variables.scss";
+
+.wrapper {
   display: flex;
   width: min(100%, 600px);
   overflow: hidden;
-  border: 1px solid var(--toast-border);
-  border-radius: var(--corner-radius-8);
-  background: var(--toast-background);
-  color: var(--toast-body);
+  border: 1px solid color(stroke-weak);
+  border-left: 0;
+  border-radius: border-radius(corner-radius-8);
+  background: color(background-base);
+  color: color(text-weak);
+  position: relative;
 }`;
 
 const alertToneCss = {
-  error: `.error {
-  --toast-background: var(--background-base);
-  --toast-border: var(--stroke-error-weak);
-  --toast-fill: var(--fill-error-weak);
-  --toast-icon: var(--icon-error);
-  --toast-title: var(--text-strong);
-  --toast-body: var(--text-weak);
-  --toast-action: var(--text-error);
+  error: `.type-error {
+  border-color: color(stroke-error-weak);
+  background:
+    linear-gradient(color(fill-error-weak), color(fill-error-weak)),
+    color(background-base);
+
+  &::before {
+    background: color(stroke-error-strong);
+  }
+
+  .icon,
+  .closeIcon {
+    color: color(icon-error);
+  }
 }`,
-  warning: `.warning {
-  --toast-background: var(--background-base);
-  --toast-border: var(--stroke-warning-weak);
-  --toast-fill: var(--fill-warning-weak);
-  --toast-icon: var(--icon-warning);
-  --toast-title: var(--text-strong);
-  --toast-body: var(--text-weak);
-  --toast-action: var(--text-warning);
+  warning: `.type-warning {
+  border-color: color(stroke-warning-weak);
+  background:
+    linear-gradient(color(fill-warning-weak), color(fill-warning-weak)),
+    color(background-base);
+
+  &::before {
+    background: color(stroke-warning-strong);
+  }
+
+  .icon,
+  .closeIcon {
+    color: color(icon-warning);
+  }
 }`,
-  success: `.success {
-  --toast-background: var(--background-base);
-  --toast-border: var(--stroke-success-weak);
-  --toast-fill: var(--fill-success-weak);
-  --toast-icon: var(--icon-success);
-  --toast-title: var(--text-strong);
-  --toast-body: var(--text-weak);
-  --toast-action: var(--text-success);
+  success: `.type-success {
+  border-color: color(stroke-success-weak);
+  background:
+    linear-gradient(color(fill-success-weak), color(fill-success-weak)),
+    color(background-base);
+
+  &::before {
+    background: color(stroke-success-strong);
+  }
+
+  .icon,
+  .closeIcon {
+    color: color(icon-success);
+  }
 }`,
-  information: `.information {
-  --toast-background: var(--background-base);
-  --toast-border: var(--stroke-information-weak);
-  --toast-fill: var(--fill-information-weak);
-  --toast-icon: var(--icon-information);
-  --toast-title: var(--text-strong);
-  --toast-body: var(--text-weak);
-  --toast-action: var(--text-information);
+  information: `.type-info {
+  border-color: color(stroke-information-weak);
+  background:
+    linear-gradient(color(fill-information-weak), color(fill-information-weak)),
+    color(background-base);
+
+  &::before {
+    background: color(stroke-information-strong);
+  }
+
+  .icon,
+  .closeIcon {
+    color: color(icon-information);
+  }
 }`,
-  neutral: `.neutral {
-  --toast-background: var(--background-base);
-  --toast-border: var(--stroke-weak);
-  --toast-fill: transparent;
-  --toast-icon: var(--icon-neutral);
-  --toast-title: var(--text-strong);
-  --toast-body: var(--text-weak);
-  --toast-action: var(--text-strong);
+  neutral: `.type-neutral {
+  border-color: color(stroke-weak);
+
+  &::before {
+    background: color(stroke-strong);
+  }
+
+  .icon,
+  .closeIcon {
+    color: color(icon-neutral);
+  }
 }`,
-  brand: `.brand {
-  --toast-background: var(--background-base);
-  --toast-border: var(--stroke-brand-weak);
-  --toast-fill: var(--fill-brand-weak);
-  --toast-icon: var(--icon-brand);
-  --toast-title: var(--text-strong);
-  --toast-body: var(--text-weak);
-  --toast-action: var(--text-brand);
+  brand: `.type-brand {
+  border-color: color(stroke-brand-weak);
+  background:
+    linear-gradient(color(fill-brand-weak), color(fill-brand-weak)),
+    color(background-base);
+
+  &::before {
+    background: color(stroke-brand-strong);
+  }
+
+  .icon,
+  .closeIcon {
+    color: color(icon-brand);
+  }
 }`,
-  "inverse-neutral": `.inverseNeutral {
-  --toast-background: var(--background-inverse);
-  --toast-border: transparent;
-  --toast-fill: transparent;
-  --toast-icon: var(--icon-inverse-strong);
-  --toast-title: var(--text-inverse-strong);
-  --toast-body: var(--text-inverse-weak);
-  --toast-action: var(--text-inverse-strong);
+  "inverse-neutral": `.type-inverse-neutral {
+  border-color: transparent;
+  background: color(background-inverse);
+  color: color(text-inverse-weak);
+
+  &::before {
+    background: color(stroke-inverse-strong);
+  }
+
+  .title,
+  .icon,
+  .closeIcon {
+    color: color(text-inverse-strong);
+  }
 }`,
-  "inverse-brand": `.inverseBrand {
-  --toast-background: var(--fill-brand-strong);
-  --toast-border: transparent;
-  --toast-fill: transparent;
-  --toast-icon: var(--icon-inverse-strong);
-  --toast-title: var(--text-inverse-strong);
-  --toast-body: var(--text-inverse-weak);
-  --toast-action: var(--text-inverse-strong);
+  "inverse-brand": `.type-inverse-brand {
+  border-color: transparent;
+  background: color(fill-brand-strong);
+  color: color(text-inverse-weak);
+
+  &::before {
+    background: color(stroke-inverse-strong);
+  }
+
+  .title,
+  .icon,
+  .closeIcon {
+    color: color(text-inverse-strong);
+  }
 }`,
 };
 
-const alertLayoutCss = `.border {
+const alertLayoutCss = `.wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
   width: 4px;
-  flex: 0 0 4px;
-  align-self: stretch;
-  background: var(--toast-icon);
+  border-radius: border-radius(corner-radius-8) 0 0 border-radius(corner-radius-8);
 }
 
-.content {
+.container {
   display: flex;
   flex: 1 1 auto;
-  gap: var(--spacing-12);
   align-items: flex-start;
-  background: var(--toast-fill);
+  width: 100%;
+  padding: 24px;
 }
 
-.large .content {
-  padding: var(--spacing-24);
+.variant-compact .container {
+  padding: 16px;
 }
 
-.small .content {
-  padding: var(--spacing-16);
+.flexBasic {
+  flex: 0 0 24px;
+  margin: 0 12px;
 }
 
-.vertical .content {
-  flex-direction: column;
+.flexCenter {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .icon {
   width: 24px;
   height: 24px;
-  flex: 0 0 24px;
-  color: var(--toast-icon);
+  margin-top: 2px;
 }
 
-.text {
-  display: grid;
-  flex: 1 1 auto;
-  min-width: 0;
-  gap: 2px;
-  padding-top: 2px;
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  cursor: pointer;
 }
 
 .title {
-  color: var(--toast-title);
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-strong);
+  @include text-style(heading4, heading4);
+
+  color: color(text-strong);
+  font-weight: 600;
 }
 
-.text p {
-  margin: 0;
-  color: var(--toast-body);
+.description {
+  @include text-style(small, small);
+
+  margin-top: 4px;
+  color: color(text-weak);
 }
 
-.link {
-  color: var(--toast-action);
-  font-weight: var(--font-weight-strong);
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  text-underline-position: from-font;
+.actionsRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
 }
 
-.dismiss {
-  display: grid;
-  width: 24px;
-  height: 24px;
-  flex: 0 0 24px;
-  place-items: center;
-  margin-left: auto;
-  padding: 0;
-  border: 0;
+.actionBtn {
+  height: 32px;
+  padding: 0 16px;
+  border: 1px solid color(fill-strong);
+  border-radius: border-radius(corner-radius-32);
   background: transparent;
-  color: var(--toast-action);
+  color: color(text-strong);
+  font-size: font-size(small);
+  line-height: line-height(small);
+  font-weight: 600;
+  cursor: pointer;
 }`;
 
 function alertCssMarkup() {
