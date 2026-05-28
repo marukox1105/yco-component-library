@@ -23,9 +23,9 @@
         </div>
         <nav class="side-nav" id="componentNav">
           <a class="side-link is-active" href="#buttons" data-page-link="buttons">Buttons</a>
+          <a class="side-link" href="#toast" data-page-link="toast">Toast</a>
           <a class="side-link is-disabled" href="#" aria-disabled="true">Inputs</a>
           <a class="side-link is-disabled" href="#" aria-disabled="true">Selection</a>
-          <a class="side-link" href="#feedback" data-page-link="feedback">Feedback</a>
         </nav>
       </aside>
 
@@ -151,13 +151,13 @@
 
       </main>
 
-      <main class="content component-page" id="feedback" data-page="feedback" hidden>
+      <main class="content component-page" id="toast" data-page="toast" hidden>
         <header class="page-header">
           <div>
             <p class="eyebrow">Components</p>
-            <h2>Feedback</h2>
+            <h2>Toast</h2>
             <p class="intro">
-              Alert components built from YCO semantic tokens. Switch status, size, layout, and optional content to inspect implementation-ready states.
+              Toast components built from YCO semantic tokens. Switch status, size, layout, and optional content to inspect implementation-ready states.
             </p>
           </div>
           <div class="header-actions" role="group" aria-label="Theme">
@@ -178,25 +178,25 @@
           </div>
         </header>
 
-        <section class="workspace" aria-label="Alert playground">
+        <section class="workspace" aria-label="Toast playground">
           <div class="preview-pane">
             <div class="section-heading">
               <div>
                 <p class="eyebrow">Playground</p>
-                <h3>Alert Preview</h3>
+                <h3>Toast Preview</h3>
               </div>
               <span class="status-pill" id="alertStateLabel">Error / Large / Horizontal</span>
             </div>
-            <div class="alert-preview-surface" id="alertPreviewSurface">
-              <div class="yco-alert yco-alert--error yco-alert--large yco-alert--horizontal" id="alertPreview" role="alert">
-                <div class="alert-border" aria-hidden="true"></div>
-                <div class="alert-content">
-                  <span class="alert-icon" aria-hidden="true"></span>
-                  <div class="alert-text">
-                    <strong class="alert-title">Heading</strong>
+            <div class="toast-preview-surface" id="alertPreviewSurface">
+              <div class="yco-toast yco-toast--error yco-toast--large yco-toast--horizontal" id="alertPreview" role="alert">
+                <div class="toast-border" aria-hidden="true"></div>
+                <div class="toast-content">
+                  <span class="toast-icon" aria-hidden="true"></span>
+                  <div class="toast-text">
+                    <strong class="toast-title">Heading</strong>
                     <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit dolor sit.</p>
                   </div>
-                  <button class="alert-dismiss" type="button" aria-label="Dismiss alert"></button>
+                  <button class="toast-dismiss" type="button" aria-label="Dismiss toast"></button>
                 </div>
               </div>
             </div>
@@ -207,7 +207,7 @@
                   <h3>Code</h3>
                 </div>
               </div>
-              <div class="code-tabs" role="tablist" aria-label="Alert code format">
+              <div class="code-tabs" role="tablist" aria-label="Toast code format">
                 <button class="is-active" type="button" data-alert-code-tab="html">HTML</button>
                 <button type="button" data-alert-code-tab="react">React</button>
                 <button type="button" data-alert-code-tab="css">CSS</button>
@@ -219,7 +219,7 @@
             </div>
           </div>
 
-          <form class="control-pane" aria-label="Alert controls">
+          <form class="control-pane" aria-label="Toast controls">
             <div class="control-group">
               <span class="control-label">Tone</span>
               <div class="choice-chips" role="radiogroup" aria-label="Alert tone">

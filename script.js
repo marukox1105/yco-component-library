@@ -825,10 +825,10 @@ const closeIcon = `<svg viewBox="0 0 24 24" focusable="false">
 
 function alertMessageMarkup() {
   const link = alertControls.link.checked
-    ? `\n      <a class="alert-link" href="#">Anchor link</a>`
+    ? `\n      <a class="toast-link" href="#">Anchor link</a>`
     : "";
   const buttons = alertControls.buttons.checked
-    ? `\n      <div class="alert-actions">
+    ? `\n      <div class="toast-actions">
         <button class="yco-button yco-button--neutral yco-button--primary yco-button--tiny" type="button">
           <span class="button-label">Label</span>
         </button>
@@ -838,33 +838,33 @@ function alertMessageMarkup() {
       </div>`
     : "";
 
-  return `<div class="alert-text">
-    <strong class="alert-title">Heading</strong>
+  return `<div class="toast-text">
+    <strong class="toast-title">Heading</strong>
     <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit dolor sit.</p>${link}${buttons}
   </div>`;
 }
 
 function alertMarkup() {
   const classes = [
-    "yco-alert",
-    `yco-alert--${alertSelections.tone}`,
-    `yco-alert--${alertSelections.size}`,
-    `yco-alert--${alertSelections.layout}`,
+    "yco-toast",
+    `yco-toast--${alertSelections.tone}`,
+    `yco-toast--${alertSelections.size}`,
+    `yco-toast--${alertSelections.layout}`,
     alertControls.icon.checked ? "has-icon" : "",
     alertControls.dismissible.checked ? "is-dismissible" : "",
     alertControls.border.checked ? "has-border" : "",
   ].filter(Boolean).join(" ");
 
-  const icon = `<span class="alert-icon" aria-hidden="true">
+  const icon = `<span class="toast-icon" aria-hidden="true">
     ${alertIconMarkup()}
   </span>`;
-  const dismiss = `<button class="alert-dismiss" type="button" aria-label="Dismiss alert">
+  const dismiss = `<button class="toast-dismiss" type="button" aria-label="Dismiss toast">
     ${closeIcon}
   </button>`;
 
   return `<div class="${classes}" id="alertPreview" role="alert">
-  <div class="alert-border" aria-hidden="true"></div>
-  <div class="alert-content">
+  <div class="toast-border" aria-hidden="true"></div>
+  <div class="toast-content">
     ${icon}
     ${alertMessageMarkup()}
     ${dismiss}
@@ -875,17 +875,17 @@ function alertMarkup() {
 function alertReactMarkup() {
   const toneClass = alertSelections.tone.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
   const classNames = [
-    "styles.alert",
+    "styles.toast",
     `styles.${toneClass}`,
     `styles.${alertSelections.size}`,
     `styles.${alertSelections.layout}`,
     alertControls.border.checked ? "styles.hasBorder" : "",
   ].filter(Boolean).join(",\n      ");
   const icon = alertControls.icon.checked
-    ? `\n      <AlertIcon className={styles.icon} aria-hidden="true" />`
+    ? `\n      <ToastIcon className={styles.icon} aria-hidden="true" />`
     : "";
   const dismiss = alertControls.dismissible.checked
-    ? `\n      <button className={styles.dismiss} type="button" aria-label="Dismiss alert">
+    ? `\n      <button className={styles.dismiss} type="button" aria-label="Dismiss toast">
         <CloseIcon aria-hidden="true" />
       </button>`
     : "";
@@ -925,88 +925,88 @@ import LinkWithLocale from '@/components/utils/link-with-locale';
 </div>`;
 }
 
-const alertBaseCss = `.alert {
+const alertBaseCss = `.toast {
   display: flex;
   width: min(100%, 600px);
   overflow: hidden;
-  border: 1px solid var(--alert-border);
+  border: 1px solid var(--toast-border);
   border-radius: var(--corner-radius-8);
-  background: var(--alert-background);
-  color: var(--alert-body);
+  background: var(--toast-background);
+  color: var(--toast-body);
 }`;
 
 const alertToneCss = {
   error: `.error {
-  --alert-background: var(--background-base);
-  --alert-border: var(--stroke-error-weak);
-  --alert-fill: var(--fill-error-weak);
-  --alert-icon: var(--icon-error);
-  --alert-title: var(--text-strong);
-  --alert-body: var(--text-weak);
-  --alert-action: var(--text-error);
+  --toast-background: var(--background-base);
+  --toast-border: var(--stroke-error-weak);
+  --toast-fill: var(--fill-error-weak);
+  --toast-icon: var(--icon-error);
+  --toast-title: var(--text-strong);
+  --toast-body: var(--text-weak);
+  --toast-action: var(--text-error);
 }`,
   warning: `.warning {
-  --alert-background: var(--background-base);
-  --alert-border: var(--stroke-warning-weak);
-  --alert-fill: var(--fill-warning-weak);
-  --alert-icon: var(--icon-warning);
-  --alert-title: var(--text-strong);
-  --alert-body: var(--text-weak);
-  --alert-action: var(--text-warning);
+  --toast-background: var(--background-base);
+  --toast-border: var(--stroke-warning-weak);
+  --toast-fill: var(--fill-warning-weak);
+  --toast-icon: var(--icon-warning);
+  --toast-title: var(--text-strong);
+  --toast-body: var(--text-weak);
+  --toast-action: var(--text-warning);
 }`,
   success: `.success {
-  --alert-background: var(--background-base);
-  --alert-border: var(--stroke-success-weak);
-  --alert-fill: var(--fill-success-weak);
-  --alert-icon: var(--icon-success);
-  --alert-title: var(--text-strong);
-  --alert-body: var(--text-weak);
-  --alert-action: var(--text-success);
+  --toast-background: var(--background-base);
+  --toast-border: var(--stroke-success-weak);
+  --toast-fill: var(--fill-success-weak);
+  --toast-icon: var(--icon-success);
+  --toast-title: var(--text-strong);
+  --toast-body: var(--text-weak);
+  --toast-action: var(--text-success);
 }`,
   information: `.information {
-  --alert-background: var(--background-base);
-  --alert-border: var(--stroke-information-weak);
-  --alert-fill: var(--fill-information-weak);
-  --alert-icon: var(--icon-information);
-  --alert-title: var(--text-strong);
-  --alert-body: var(--text-weak);
-  --alert-action: var(--text-information);
+  --toast-background: var(--background-base);
+  --toast-border: var(--stroke-information-weak);
+  --toast-fill: var(--fill-information-weak);
+  --toast-icon: var(--icon-information);
+  --toast-title: var(--text-strong);
+  --toast-body: var(--text-weak);
+  --toast-action: var(--text-information);
 }`,
   neutral: `.neutral {
-  --alert-background: var(--background-base);
-  --alert-border: var(--stroke-weak);
-  --alert-fill: transparent;
-  --alert-icon: var(--icon-neutral);
-  --alert-title: var(--text-strong);
-  --alert-body: var(--text-weak);
-  --alert-action: var(--text-strong);
+  --toast-background: var(--background-base);
+  --toast-border: var(--stroke-weak);
+  --toast-fill: transparent;
+  --toast-icon: var(--icon-neutral);
+  --toast-title: var(--text-strong);
+  --toast-body: var(--text-weak);
+  --toast-action: var(--text-strong);
 }`,
   brand: `.brand {
-  --alert-background: var(--background-base);
-  --alert-border: var(--stroke-brand-weak);
-  --alert-fill: var(--fill-brand-weak);
-  --alert-icon: var(--icon-brand);
-  --alert-title: var(--text-strong);
-  --alert-body: var(--text-weak);
-  --alert-action: var(--text-brand);
+  --toast-background: var(--background-base);
+  --toast-border: var(--stroke-brand-weak);
+  --toast-fill: var(--fill-brand-weak);
+  --toast-icon: var(--icon-brand);
+  --toast-title: var(--text-strong);
+  --toast-body: var(--text-weak);
+  --toast-action: var(--text-brand);
 }`,
   "inverse-neutral": `.inverseNeutral {
-  --alert-background: var(--background-inverse);
-  --alert-border: transparent;
-  --alert-fill: transparent;
-  --alert-icon: var(--icon-inverse-strong);
-  --alert-title: var(--text-inverse-strong);
-  --alert-body: var(--text-inverse-weak);
-  --alert-action: var(--text-inverse-strong);
+  --toast-background: var(--background-inverse);
+  --toast-border: transparent;
+  --toast-fill: transparent;
+  --toast-icon: var(--icon-inverse-strong);
+  --toast-title: var(--text-inverse-strong);
+  --toast-body: var(--text-inverse-weak);
+  --toast-action: var(--text-inverse-strong);
 }`,
   "inverse-brand": `.inverseBrand {
-  --alert-background: var(--fill-brand-strong);
-  --alert-border: transparent;
-  --alert-fill: transparent;
-  --alert-icon: var(--icon-inverse-strong);
-  --alert-title: var(--text-inverse-strong);
-  --alert-body: var(--text-inverse-weak);
-  --alert-action: var(--text-inverse-strong);
+  --toast-background: var(--fill-brand-strong);
+  --toast-border: transparent;
+  --toast-fill: transparent;
+  --toast-icon: var(--icon-inverse-strong);
+  --toast-title: var(--text-inverse-strong);
+  --toast-body: var(--text-inverse-weak);
+  --toast-action: var(--text-inverse-strong);
 }`,
 };
 
@@ -1014,7 +1014,7 @@ const alertLayoutCss = `.border {
   width: 4px;
   flex: 0 0 4px;
   align-self: stretch;
-  background: var(--alert-icon);
+  background: var(--toast-icon);
 }
 
 .content {
@@ -1022,7 +1022,7 @@ const alertLayoutCss = `.border {
   flex: 1 1 auto;
   gap: var(--spacing-12);
   align-items: flex-start;
-  background: var(--alert-fill);
+  background: var(--toast-fill);
 }
 
 .large .content {
@@ -1041,7 +1041,7 @@ const alertLayoutCss = `.border {
   width: 24px;
   height: 24px;
   flex: 0 0 24px;
-  color: var(--alert-icon);
+  color: var(--toast-icon);
 }
 
 .text {
@@ -1053,18 +1053,18 @@ const alertLayoutCss = `.border {
 }
 
 .title {
-  color: var(--alert-title);
+  color: var(--toast-title);
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-strong);
 }
 
 .text p {
   margin: 0;
-  color: var(--alert-body);
+  color: var(--toast-body);
 }
 
 .link {
-  color: var(--alert-action);
+  color: var(--toast-action);
   font-weight: var(--font-weight-strong);
   text-decoration: underline;
   text-decoration-skip-ink: none;
@@ -1081,7 +1081,7 @@ const alertLayoutCss = `.border {
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--alert-action);
+  color: var(--toast-action);
 }`;
 
 function alertCssMarkup() {
@@ -1108,7 +1108,7 @@ function updateAlertPreview() {
   alertCodeBlock.innerHTML = activeAlertCodeTab === "css"
     ? highlightCss(alertCodeMarkup())
     : highlightMarkup(alertCodeMarkup());
-  document.title = `YCO Feedback - ${alertToneLabels[alertSelections.tone]} Alert`;
+  document.title = `YCO Toast - ${alertToneLabels[alertSelections.tone]} Toast`;
 }
 
 function setActivePage(pageId) {
@@ -1124,7 +1124,7 @@ function setActivePage(pageId) {
     link.removeAttribute("aria-disabled");
   });
 
-  if (pageId === "feedback") {
+  if (pageId === "toast") {
     updateAlertPreview();
   } else {
     updatePreview();
@@ -1247,7 +1247,7 @@ async function copyText(text) {
   return copied;
 }
 
-const initialPage = window.location.hash.replace("#", "") === "feedback" ? "feedback" : "buttons";
+const initialPage = window.location.hash.replace("#", "") === "toast" ? "toast" : "buttons";
 setActivePage(initialPage);
 updatePreview();
 updateAlertPreview();
