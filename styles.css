@@ -11,16 +11,28 @@
   --blue-dark-500: #a3eaff80;
   --blue-dark-800: #a3eaffcc;
   --amber-light-1000: #8f6c1a;
+  --amber-light-200: #8f6c1a33;
+  --amber-light-50: #ffc02e0d;
   --amber-light-800: #8f6c1acc;
   --amber-dark-1000: #e0be70;
+  --amber-dark-200: #e0be7033;
+  --amber-dark-50: #e0be7014;
   --amber-dark-800: #e0be70cc;
   --green-light-1000: #067a57;
+  --green-light-200: #067a5733;
+  --green-light-50: #0acc920d;
   --green-light-800: #067a57cc;
   --green-dark-1000: #77c7af;
+  --green-dark-200: #77c7af33;
+  --green-dark-50: #77c7af14;
   --green-dark-800: #77c7afcc;
   --teal-light-1000: #1a74a8;
+  --teal-light-200: #1a74a833;
+  --teal-light-50: #26b0ff0d;
   --teal-light-800: #1a74a8cc;
   --teal-dark-1000: #7ec0e5;
+  --teal-dark-200: #7ec0e533;
+  --teal-dark-50: #7ec0e514;
   --teal-dark-800: #7ec0e5cc;
   --grey-neutral-dark-100: #ffffff1f;
   --grey-neutral-dark-1000: #ffffff;
@@ -99,6 +111,8 @@
   --fill-error-strong: var(--red-light-1000);
   --fill-error-weak: var(--red-light-50);
   --fill-hover: var(--grey-light-100);
+  --fill-information-strong: var(--teal-light-1000);
+  --fill-information-weak: var(--teal-light-50);
   --fill-inverse-hover: var(--grey-dark-50);
   --fill-inverse-press: var(--grey-dark-100);
   --fill-inverse-disabled: var(--grey-dark-100);
@@ -106,6 +120,10 @@
   --fill-overlay: var(--grey-neutral-light-700);
   --fill-press: var(--grey-light-50);
   --fill-strong: var(--grey-light-1000);
+  --fill-success-strong: var(--green-light-1000);
+  --fill-success-weak: var(--green-light-50);
+  --fill-warning-strong: var(--amber-light-1000);
+  --fill-warning-weak: var(--amber-light-50);
   --fill-weak: var(--grey-light-50);
   --fill-weaker: var(--grey-light-25);
   --icon-brand: var(--brand-light-1000);
@@ -121,18 +139,28 @@
   --stroke-brand-strong: var(--brand-light-800);
   --stroke-disabled: var(--grey-light-100);
   --stroke-error-strong: var(--red-light-800);
+  --stroke-error-weak: var(--red-light-200);
   --stroke-focus: var(--brand-light-200);
+  --stroke-information-strong: var(--teal-light-800);
+  --stroke-information-weak: var(--teal-light-200);
   --stroke-inverse-disabled: var(--grey-dark-100);
   --stroke-inverse-strong: var(--grey-dark-500);
   --stroke-inverse-weak: var(--grey-dark-100);
   --stroke-strong: var(--grey-light-200);
+  --stroke-success-strong: var(--green-light-800);
+  --stroke-success-weak: var(--green-light-200);
+  --stroke-warning-strong: var(--amber-light-800);
+  --stroke-warning-weak: var(--amber-light-200);
   --stroke-weak: var(--grey-light-100);
   --text-brand: var(--brand-light-1000);
   --text-disabled: var(--grey-light-200);
   --text-error: var(--red-light-1000);
+  --text-information: var(--teal-light-1000);
   --text-inverse-disabled: var(--grey-dark-100);
   --text-inverse-strong: var(--grey-dark-1000);
   --text-strong: var(--grey-light-1000);
+  --text-success: var(--green-light-1000);
+  --text-warning: var(--amber-light-1000);
   --text-weak: var(--grey-light-700);
   --text-weaker: var(--grey-light-500);
   --font-family-heading: Roboto, var(--font);
@@ -429,6 +457,10 @@ h3 {
   width: 100%;
   min-width: 0;
   padding: 32px;
+}
+
+.component-page[hidden] {
+  display: none;
 }
 
 .page-header,
@@ -1390,6 +1422,234 @@ pre::-webkit-scrollbar-thumb {
 
 .is-full-width {
   width: 100%;
+}
+
+.alert-preview-surface {
+  display: grid;
+  justify-self: stretch;
+  width: 100%;
+  min-height: 220px;
+  padding: var(--spacing-32);
+  place-items: center;
+  border: 1px dashed var(--stroke-strong);
+  border-radius: var(--radius-md);
+  background: var(--fill-base);
+}
+
+.alert-preview-surface.is-inverse-preview {
+  background: var(--background-sunken);
+}
+
+.yco-alert {
+  --alert-background: var(--background-base);
+  --alert-border: var(--stroke-weak);
+  --alert-fill: transparent;
+  --alert-icon: var(--icon-neutral);
+  --alert-title: var(--text-strong);
+  --alert-body: var(--text-weak);
+  --alert-action: var(--text-strong);
+  position: relative;
+  display: flex;
+  width: min(100%, 600px);
+  overflow: hidden;
+  border: 1px solid var(--alert-border);
+  border-radius: var(--corner-radius-8);
+  background: var(--alert-background);
+  color: var(--alert-body);
+  font-family: var(--font-family-body);
+}
+
+.yco-alert--error {
+  --alert-border: var(--stroke-error-weak);
+  --alert-fill: var(--fill-error-weak);
+  --alert-icon: var(--icon-error);
+  --alert-action: var(--text-error);
+}
+
+.yco-alert--warning {
+  --alert-border: var(--stroke-warning-weak);
+  --alert-fill: var(--fill-warning-weak);
+  --alert-icon: var(--icon-warning);
+  --alert-action: var(--text-warning);
+}
+
+.yco-alert--success {
+  --alert-border: var(--stroke-success-weak);
+  --alert-fill: var(--fill-success-weak);
+  --alert-icon: var(--icon-success);
+  --alert-action: var(--text-success);
+}
+
+.yco-alert--information {
+  --alert-border: var(--stroke-information-weak);
+  --alert-fill: var(--fill-information-weak);
+  --alert-icon: var(--icon-information);
+  --alert-action: var(--text-information);
+}
+
+.yco-alert--brand {
+  --alert-border: var(--stroke-brand-weak);
+  --alert-fill: var(--fill-brand-weak);
+  --alert-icon: var(--icon-brand);
+  --alert-action: var(--text-brand);
+}
+
+.yco-alert--inverse-neutral {
+  --alert-background: var(--background-inverse);
+  --alert-border: transparent;
+  --alert-fill: transparent;
+  --alert-icon: var(--icon-inverse-strong);
+  --alert-title: var(--text-inverse-strong);
+  --alert-body: var(--text-inverse-weak);
+  --alert-action: var(--text-inverse-strong);
+}
+
+.yco-alert--inverse-brand {
+  --alert-background: var(--fill-brand-strong);
+  --alert-border: transparent;
+  --alert-fill: transparent;
+  --alert-icon: var(--icon-inverse-strong);
+  --alert-title: var(--text-inverse-strong);
+  --alert-body: var(--text-inverse-weak);
+  --alert-action: var(--text-inverse-strong);
+}
+
+.alert-border {
+  width: 4px;
+  flex: 0 0 4px;
+  align-self: stretch;
+  background: var(--alert-icon);
+}
+
+.yco-alert:not(.has-border) .alert-border {
+  display: none;
+}
+
+.alert-content {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--spacing-12);
+  align-items: flex-start;
+  background: var(--alert-fill);
+}
+
+.yco-alert--large .alert-content {
+  padding: var(--spacing-24);
+}
+
+.yco-alert--small .alert-content {
+  padding: var(--spacing-16);
+}
+
+.yco-alert--vertical .alert-content {
+  flex-direction: column;
+}
+
+.alert-icon {
+  position: relative;
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  place-items: center;
+  color: var(--alert-icon);
+}
+
+.alert-icon svg,
+.alert-dismiss svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.yco-alert:not(.has-icon) .alert-icon {
+  display: none;
+}
+
+.alert-text {
+  display: grid;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.alert-title {
+  color: var(--alert-title);
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-strong);
+  letter-spacing: 0;
+}
+
+.yco-alert--large .alert-title {
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+}
+
+.yco-alert--small .alert-title {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.alert-text p {
+  margin: 0;
+  color: var(--alert-body);
+  letter-spacing: 0;
+}
+
+.yco-alert--large .alert-text p {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.yco-alert--small .alert-text p {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.alert-link {
+  color: var(--alert-action);
+  font-weight: var(--font-weight-strong);
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}
+
+.alert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  margin-top: var(--spacing-12);
+}
+
+.alert-dismiss {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  place-items: center;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--alert-action);
+  cursor: pointer;
+}
+
+.yco-alert:not(.is-dismissible) .alert-dismiss {
+  display: none;
+}
+
+.yco-alert--vertical .alert-dismiss {
+  position: absolute;
+  top: var(--spacing-16);
+  right: var(--spacing-16);
 }
 
 .toast {

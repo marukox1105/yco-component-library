@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>YCO Component Library - Buttons</title>
-    <link rel="stylesheet" href="./styles.css?v=27" />
+    <title>YCO Component Library</title>
+    <link rel="stylesheet" href="./styles.css?v=28" />
   </head>
   <body>
     <div class="app-shell">
@@ -22,14 +22,14 @@
           </button>
         </div>
         <nav class="side-nav" id="componentNav">
-          <a class="side-link is-active" href="#buttons">Buttons</a>
+          <a class="side-link is-active" href="#buttons" data-page-link="buttons">Buttons</a>
           <a class="side-link is-disabled" href="#" aria-disabled="true">Inputs</a>
           <a class="side-link is-disabled" href="#" aria-disabled="true">Selection</a>
-          <a class="side-link is-disabled" href="#" aria-disabled="true">Feedback</a>
+          <a class="side-link" href="#feedback" data-page-link="feedback">Feedback</a>
         </nav>
       </aside>
 
-      <main class="content" id="buttons">
+      <main class="content component-page is-active" id="buttons" data-page="buttons">
         <header class="page-header">
           <div>
             <p class="eyebrow">Components</p>
@@ -150,9 +150,131 @@
         </section>
 
       </main>
+
+      <main class="content component-page" id="feedback" data-page="feedback" hidden>
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">Components</p>
+            <h2>Feedback</h2>
+            <p class="intro">
+              Alert components built from YCO semantic tokens. Switch status, size, layout, and optional content to inspect implementation-ready states.
+            </p>
+          </div>
+          <div class="header-actions" role="group" aria-label="Theme">
+            <button class="theme-button is-active" type="button" data-theme="light" aria-label="Use light theme">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"></path>
+              </svg>
+              <span class="visually-hidden">Light</span>
+            </button>
+            <button class="theme-button" type="button" data-theme="dark" aria-label="Use dark theme">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 14.4A7.2 7.2 0 0 1 9.6 4a8.2 8.2 0 1 0 10.4 10.4Z"></path>
+                <path d="m17.6 3.6.6 1.5 1.5.6-1.5.6-.6 1.5-.6-1.5-1.5-.6 1.5-.6.6-1.5Z"></path>
+              </svg>
+              <span class="visually-hidden">Dark</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="workspace" aria-label="Alert playground">
+          <div class="preview-pane">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Playground</p>
+                <h3>Alert Preview</h3>
+              </div>
+              <span class="status-pill" id="alertStateLabel">Error / Large / Horizontal</span>
+            </div>
+            <div class="alert-preview-surface" id="alertPreviewSurface">
+              <div class="yco-alert yco-alert--error yco-alert--large yco-alert--horizontal" id="alertPreview" role="alert">
+                <div class="alert-border" aria-hidden="true"></div>
+                <div class="alert-content">
+                  <span class="alert-icon" aria-hidden="true"></span>
+                  <div class="alert-text">
+                    <strong class="alert-title">Heading</strong>
+                    <p>Lorem ipsum dolor sit amet, consec tetur adipiscing elit dolor sit.</p>
+                  </div>
+                  <button class="alert-dismiss" type="button" aria-label="Dismiss alert"></button>
+                </div>
+              </div>
+            </div>
+            <div class="inline-code-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Implementation</p>
+                  <h3>Code</h3>
+                </div>
+              </div>
+              <div class="code-tabs" role="tablist" aria-label="Alert code format">
+                <button class="is-active" type="button" data-alert-code-tab="html">HTML</button>
+                <button type="button" data-alert-code-tab="react">React</button>
+                <button type="button" data-alert-code-tab="css">CSS</button>
+              </div>
+              <div class="code-frame">
+                <button class="copy-button" type="button" data-copy-target="alertCodeBlock">Copy</button>
+                <pre><code id="alertCodeBlock"></code></pre>
+              </div>
+            </div>
+          </div>
+
+          <form class="control-pane" aria-label="Alert controls">
+            <div class="control-group">
+              <span class="control-label">Tone</span>
+              <div class="choice-chips" role="radiogroup" aria-label="Alert tone">
+                <button class="is-active" type="button" data-alert-control="tone" data-value="error">error</button>
+                <button type="button" data-alert-control="tone" data-value="warning">warning</button>
+                <button type="button" data-alert-control="tone" data-value="success">success</button>
+                <button type="button" data-alert-control="tone" data-value="information">information</button>
+                <button type="button" data-alert-control="tone" data-value="neutral">neutral</button>
+                <button type="button" data-alert-control="tone" data-value="brand">brand</button>
+                <button type="button" data-alert-control="tone" data-value="inverse-neutral">inverse neutral</button>
+                <button type="button" data-alert-control="tone" data-value="inverse-brand">inverse brand</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Size</span>
+              <div class="choice-chips" role="radiogroup" aria-label="Alert size">
+                <button class="is-active" type="button" data-alert-control="size" data-value="large">large</button>
+                <button type="button" data-alert-control="size" data-value="small">small</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <span class="control-label">Layout</span>
+              <div class="choice-chips" role="radiogroup" aria-label="Alert layout">
+                <button class="is-active" type="button" data-alert-control="layout" data-value="horizontal">horizontal</button>
+                <button type="button" data-alert-control="layout" data-value="vertical">vertical</button>
+              </div>
+            </div>
+            <div class="control-grid">
+              <label class="check-control">
+                <input id="alertIcon" type="checkbox" checked />
+                <span>Icon</span>
+              </label>
+              <label class="check-control">
+                <input id="alertDismissible" type="checkbox" checked />
+                <span>Dismissible</span>
+              </label>
+              <label class="check-control">
+                <input id="alertBorder" type="checkbox" checked />
+                <span>Border left</span>
+              </label>
+              <label class="check-control">
+                <input id="alertLink" type="checkbox" />
+                <span>Text link</span>
+              </label>
+              <label class="check-control">
+                <input id="alertButtons" type="checkbox" />
+                <span>Button group</span>
+              </label>
+            </div>
+          </form>
+        </section>
+      </main>
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
-    <script src="./script.js?v=31"></script>
+    <script src="./script.js?v=32"></script>
   </body>
 </html>
