@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>YCO Component Library</title>
-    <link rel="stylesheet" href="./styles.css?v=28" />
+    <link rel="stylesheet" href="./styles.css?v=29" />
+    <link rel="stylesheet" href="./button.module.css?v=1" />
+    <link rel="stylesheet" href="./preview-states.css?v=1" />
   </head>
   <body>
     <div class="app-shell">
@@ -66,14 +68,14 @@
               <span class="status-pill" id="stateLabel">Primary / Brand / Medium / Default</span>
             </div>
             <div class="preview-surface" id="previewSurface">
-              <button class="yco-button yco-button--brand yco-button--primary yco-button--medium" id="previewButton" type="button">
-                <span class="button-icon" aria-hidden="true">
+              <button class="ycoButton tone_brand variant_primary size_medium" id="previewButton" type="button">
+                <span class="buttonIcon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" focusable="false">
                     <path d="M5 12h14"></path>
                     <path d="M12 5v14"></path>
                   </svg>
                 </span>
-                <span class="button-label">Button</span>
+                <span class="label">Button</span>
               </button>
             </div>
             <div class="inline-code-panel">
@@ -86,7 +88,7 @@
               <div class="code-tabs" role="tablist" aria-label="Code format">
                 <button class="is-active" type="button" data-code-tab="html">HTML</button>
                 <button type="button" data-code-tab="react">React</button>
-                <button type="button" data-code-tab="css">CSS</button>
+                <button type="button" data-code-tab="css">SCSS</button>
               </div>
               <div class="code-frame">
                 <button class="copy-button" type="button" data-copy-target="codeBlock">Copy</button>
@@ -97,11 +99,11 @@
 
           <form class="control-pane" aria-label="Button controls">
             <div class="control-group">
-              <span class="control-label">Type</span>
-              <div class="choice-chips" role="radiogroup" aria-label="Type">
-                <button class="is-active" type="button" data-control="type" data-value="primary">primary</button>
-                <button type="button" data-control="type" data-value="secondary">secondary</button>
-                <button type="button" data-control="type" data-value="tertiary">tertiary</button>
+              <span class="control-label">Variant</span>
+              <div class="choice-chips" role="radiogroup" aria-label="Variant">
+                <button class="is-active" type="button" data-control="variant" data-value="primary">primary</button>
+                <button type="button" data-control="variant" data-value="secondary">secondary</button>
+                <button type="button" data-control="variant" data-value="tertiary">tertiary</button>
               </div>
             </div>
             <div class="control-group">
@@ -111,6 +113,8 @@
                 <button type="button" data-control="tone" data-value="neutral">neutral</button>
                 <button type="button" data-control="tone" data-value="destructive">destructive</button>
                 <button type="button" data-control="tone" data-value="inverse">inverse</button>
+                <button type="button" data-control="tone" data-value="warning">warning</button>
+                <button type="button" data-control="tone" data-value="success">success</button>
               </div>
             </div>
             <div class="control-group">
@@ -140,10 +144,6 @@
               <label class="check-control">
                 <input id="trailingIcon" type="checkbox" />
                 <span>Icon right</span>
-              </label>
-              <label class="check-control">
-                <input id="fullWidth" type="checkbox" />
-                <span>Full width</span>
               </label>
             </div>
           </form>
@@ -275,6 +275,6 @@
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
-    <script src="./script.js?v=32"></script>
+    <script src="./script.js?v=33"></script>
   </body>
 </html>

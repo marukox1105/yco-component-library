@@ -1,0 +1,73 @@
+/* =====================================================================
+   preview-states.css — DOC-PREVIEW ONLY. NOT part of the component,
+   NOT exported, NOT copied to yce-frontend.
+
+   Maps the playground's forced-state classes (.is-hover / .is-press /
+   .is-focus) to the same visuals as the real :hover / :active /
+   :focus-visible in button.module.css, so the "State" control can show
+   those states without a real pointer/focus.
+   ===================================================================== */
+
+.ycoButton.is-focus {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+/* ----- hover ----- */
+.tone_brand.variant_primary.is-hover::before,
+.tone_brand.variant_secondary.is-hover::before,
+.tone_brand.variant_tertiary.is-hover::before,
+.tone_destructive.variant_primary.is-hover::before,
+.tone_destructive.variant_secondary.is-hover::before,
+.tone_destructive.variant_tertiary.is-hover::before,
+.tone_warning.variant_primary.is-hover::before,
+.tone_warning.variant_secondary.is-hover::before,
+.tone_warning.variant_tertiary.is-hover::before,
+.tone_success.variant_primary.is-hover::before,
+.tone_success.variant_secondary.is-hover::before,
+.tone_success.variant_tertiary.is-hover::before,
+.tone_neutral.variant_secondary.is-hover::before,
+.tone_neutral.variant_tertiary.is-hover::before,
+.tone_inverse.variant_primary.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_neutral.variant_primary.is-hover::before {
+  background: var(--fill-inverse-hover);
+}
+
+.tone_inverse.variant_secondary.is-hover,
+.tone_inverse.variant_tertiary.is-hover {
+  background: var(--fill-inverse-hover);
+}
+
+/* ----- press ----- */
+.tone_brand.variant_primary.is-press::before,
+.tone_brand.variant_secondary.is-press::before,
+.tone_brand.variant_tertiary.is-press::before,
+.tone_destructive.variant_primary.is-press::before,
+.tone_destructive.variant_secondary.is-press::before,
+.tone_destructive.variant_tertiary.is-press::before,
+.tone_warning.variant_primary.is-press::before,
+.tone_warning.variant_secondary.is-press::before,
+.tone_warning.variant_tertiary.is-press::before,
+.tone_success.variant_primary.is-press::before,
+.tone_success.variant_secondary.is-press::before,
+.tone_success.variant_tertiary.is-press::before,
+.tone_inverse.variant_primary.is-press::before {
+  background: var(--fill-press);
+}
+
+.tone_neutral.variant_primary.is-press::before {
+  background: var(--fill-inverse-press);
+}
+
+.tone_neutral.variant_secondary.is-press,
+.tone_neutral.variant_tertiary.is-press {
+  background: var(--fill-press);
+}
+
+.tone_inverse.variant_secondary.is-press,
+.tone_inverse.variant_tertiary.is-press {
+  background: var(--fill-inverse-press);
+}

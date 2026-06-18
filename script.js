@@ -20,11 +20,10 @@ let activeAlertCodeTab = "html";
 const controls = {
   leadingIcon: document.querySelector("#leadingIcon"),
   trailingIcon: document.querySelector("#trailingIcon"),
-  fullWidth: document.querySelector("#fullWidth"),
 };
 
 const selections = {
-  type: "primary",
+  variant: "primary",
   tone: "brand",
   state: "default",
   size: "medium",
@@ -44,7 +43,7 @@ const alertSelections = {
   layout: "horizontal",
 };
 
-const typeLabels = {
+const variantLabels = {
   primary: "Primary",
   secondary: "Secondary",
   tertiary: "Tertiary",
@@ -55,6 +54,8 @@ const toneLabels = {
   neutral: "Neutral",
   destructive: "Destructive",
   inverse: "Inverse",
+  warning: "Warning",
+  success: "Success",
 };
 
 const stateLabels = {
@@ -95,648 +96,72 @@ const alertLayoutLabels = {
 
 function previewStateLabel() {
   return [
-    typeLabels[selections.type],
+    variantLabels[selections.variant],
     toneLabels[selections.tone],
     sizeLabels[selections.size],
     stateLabels[selections.state],
   ].join(" / ");
 }
 
-const plusIcon = `<span class="button-icon" aria-hidden="true">
+const plusIcon = `<span class="buttonIcon" aria-hidden="true">
   <svg viewBox="0 0 24 24" focusable="false">
     <path d="M5 12h14"></path>
     <path d="M12 5v14"></path>
   </svg>
 </span>`;
 
-const chevronRightIcon = `<span class="button-icon" aria-hidden="true">
+const chevronRightIcon = `<span class="buttonIcon" aria-hidden="true">
   <svg viewBox="0 0 24 24" focusable="false">
     <path d="m9 18 6-6-6-6"></path>
   </svg>
 </span>`;
 
-const baseCss = `.yco-button {
-  position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid transparent;
-  border-radius: var(--corner-radius-32);
-  font-family: var(--font-family-heading, Roboto), system-ui, sans-serif;
-  font-weight: var(--font-weight-strong, 600);
-  letter-spacing: 0;
+let componentCss = "";
+
+async function loadComponentCss() {
+  const response = await fetch("./button.module.css");
+  componentCss = await response.text();
 }
-
-.yco-button::before {
-  content: "";
-  position: absolute;
-  inset: var(--spacing-0);
-  z-index: 0;
-  border-radius: inherit;
-  background: transparent;
-  pointer-events: none;
-}
-
-.yco-button > * {
-  position: relative;
-  z-index: 1;
-}`;
-
-const variantCss = {
-  "brand-primary": `.yco-button--brand.yco-button--primary {
-  background: var(--fill-brand-strong);
-  color: var(--text-inverse-strong);
-}
-
-.yco-button--brand.yco-button--primary .button-icon {
-  color: var(--icon-inverse-strong);
-}
-
-.yco-button--brand.yco-button--primary:hover,
-.yco-button--brand.yco-button--primary.is-hover {
-  background: var(--fill-brand-strong);
-}
-
-.yco-button--brand.yco-button--primary:hover::before,
-.yco-button--brand.yco-button--primary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--brand.yco-button--primary:active,
-.yco-button--brand.yco-button--primary.is-press {
-  background: var(--fill-brand-strong);
-}
-
-.yco-button--brand.yco-button--primary:active::before,
-.yco-button--brand.yco-button--primary.is-press::before {
-  background: var(--fill-press);
-}`,
-  "neutral-primary": `.yco-button--neutral.yco-button--primary {
-  background: var(--fill-strong);
-  color: var(--text-inverse-strong);
-}
-
-.yco-button--neutral.yco-button--primary .button-icon {
-  color: var(--icon-inverse-strong);
-}
-
-.yco-button--neutral.yco-button--primary:hover,
-.yco-button--neutral.yco-button--primary.is-hover {
-  background: var(--fill-strong);
-}
-
-.yco-button--neutral.yco-button--primary:hover::before,
-.yco-button--neutral.yco-button--primary.is-hover::before {
-  background: var(--fill-inverse-hover);
-}
-
-.yco-button--neutral.yco-button--primary:active,
-.yco-button--neutral.yco-button--primary.is-press {
-  background: var(--fill-strong);
-}
-
-.yco-button--neutral.yco-button--primary:active::before,
-.yco-button--neutral.yco-button--primary.is-press::before {
-  background: var(--fill-inverse-press);
-}`,
-  "destructive-primary": `.yco-button--destructive.yco-button--primary {
-  background: var(--fill-error-strong);
-  color: var(--text-inverse-strong);
-}
-
-.yco-button--destructive.yco-button--primary .button-icon {
-  color: var(--icon-inverse-strong);
-}
-
-.yco-button--destructive.yco-button--primary:hover,
-.yco-button--destructive.yco-button--primary.is-hover {
-  background: var(--fill-error-strong);
-}
-
-.yco-button--destructive.yco-button--primary:hover::before,
-.yco-button--destructive.yco-button--primary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--destructive.yco-button--primary:active,
-.yco-button--destructive.yco-button--primary.is-press {
-  background: var(--fill-error-strong);
-}
-
-.yco-button--destructive.yco-button--primary:active::before,
-.yco-button--destructive.yco-button--primary.is-press::before {
-  background: var(--fill-press);
-}`,
-  "inverse-primary": `.yco-button--inverse.yco-button--primary {
-  background: var(--fill-inverse-strong);
-  color: var(--text-strong);
-}
-
-.yco-button--inverse.yco-button--primary .button-icon {
-  color: var(--icon-neutral);
-}
-
-.yco-button--inverse.yco-button--primary:hover,
-.yco-button--inverse.yco-button--primary.is-hover {
-  background: var(--fill-inverse-strong);
-}
-
-.yco-button--inverse.yco-button--primary:hover::before,
-.yco-button--inverse.yco-button--primary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--inverse.yco-button--primary:active,
-.yco-button--inverse.yco-button--primary.is-press {
-  background: var(--fill-inverse-strong);
-}
-
-.yco-button--inverse.yco-button--primary:active::before,
-.yco-button--inverse.yco-button--primary.is-press::before {
-  background: var(--fill-press);
-}`,
-  "brand-secondary": `.yco-button--brand.yco-button--secondary {
-  border-color: var(--stroke-brand-strong);
-  background: transparent;
-  color: var(--text-brand);
-}
-
-.yco-button--brand.yco-button--secondary .button-icon {
-  color: var(--icon-brand);
-}
-
-.yco-button--brand.yco-button--secondary:hover,
-.yco-button--brand.yco-button--secondary.is-hover {
-  background: transparent;
-}
-
-.yco-button--brand.yco-button--secondary:hover::before,
-.yco-button--brand.yco-button--secondary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--brand.yco-button--secondary:active,
-.yco-button--brand.yco-button--secondary.is-press {
-  background: transparent;
-}
-
-.yco-button--brand.yco-button--secondary:active::before,
-.yco-button--brand.yco-button--secondary.is-press::before {
-  background: var(--fill-press);
-}`,
-  "neutral-secondary": `.yco-button--neutral.yco-button--secondary {
-  border-color: var(--stroke-strong);
-  background: var(--grey-slate-light-25);
-  color: var(--text-strong);
-}
-
-.yco-button--neutral.yco-button--secondary .button-icon {
-  color: var(--icon-neutral);
-}
-
-.yco-button--neutral.yco-button--secondary:hover,
-.yco-button--neutral.yco-button--secondary.is-hover {
-  background: var(--grey-slate-light-25);
-}
-
-.yco-button--neutral.yco-button--secondary:hover::before,
-.yco-button--neutral.yco-button--secondary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--neutral.yco-button--secondary:active,
-.yco-button--neutral.yco-button--secondary.is-press {
-  background: var(--fill-press);
-}`,
-  "destructive-secondary": `.yco-button--destructive.yco-button--secondary {
-  border-color: var(--stroke-error-strong);
-  background: transparent;
-  color: var(--text-error);
-}
-
-.yco-button--destructive.yco-button--secondary .button-icon {
-  color: var(--icon-error);
-}
-
-.yco-button--destructive.yco-button--secondary:hover,
-.yco-button--destructive.yco-button--secondary.is-hover {
-  background: transparent;
-}
-
-.yco-button--destructive.yco-button--secondary:hover::before,
-.yco-button--destructive.yco-button--secondary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--destructive.yco-button--secondary:active,
-.yco-button--destructive.yco-button--secondary.is-press {
-  background: transparent;
-}
-
-.yco-button--destructive.yco-button--secondary:active::before,
-.yco-button--destructive.yco-button--secondary.is-press::before {
-  background: var(--fill-press);
-}`,
-  "inverse-secondary": `.yco-button--inverse.yco-button--secondary {
-  border-color: var(--stroke-inverse-strong);
-  background: transparent;
-  color: var(--text-inverse-strong);
-}
-
-.yco-button--inverse.yco-button--secondary .button-icon {
-  color: var(--icon-inverse-strong);
-}
-
-.yco-button--inverse.yco-button--secondary:hover,
-.yco-button--inverse.yco-button--secondary.is-hover {
-  background: var(--fill-inverse-hover);
-}
-
-.yco-button--inverse.yco-button--secondary:active,
-.yco-button--inverse.yco-button--secondary.is-press {
-  background: var(--fill-inverse-press);
-}`,
-  "brand-tertiary": `.yco-button--brand.yco-button--tertiary {
-  background: transparent;
-  color: var(--text-brand);
-}
-
-.yco-button--brand.yco-button--tertiary .button-icon {
-  color: var(--icon-brand);
-}
-
-.yco-button--tertiary .button-label {
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  text-underline-position: from-font;
-}
-
-.yco-button--brand.yco-button--tertiary:hover,
-.yco-button--brand.yco-button--tertiary.is-hover {
-  background: transparent;
-}
-
-.yco-button--brand.yco-button--tertiary:hover::before,
-.yco-button--brand.yco-button--tertiary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--brand.yco-button--tertiary:active,
-.yco-button--brand.yco-button--tertiary.is-press {
-  background: transparent;
-}
-
-.yco-button--brand.yco-button--tertiary:active::before,
-.yco-button--brand.yco-button--tertiary.is-press::before {
-  background: var(--fill-press);
-}`,
-  "neutral-tertiary": `.yco-button--neutral.yco-button--tertiary {
-  background: transparent;
-  color: var(--text-strong);
-}
-
-.yco-button--neutral.yco-button--tertiary .button-icon {
-  color: var(--icon-neutral);
-}
-
-.yco-button--tertiary .button-label {
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  text-underline-position: from-font;
-}
-
-.yco-button--neutral.yco-button--tertiary:hover,
-.yco-button--neutral.yco-button--tertiary.is-hover {
-  background: transparent;
-}
-
-.yco-button--neutral.yco-button--tertiary:hover::before,
-.yco-button--neutral.yco-button--tertiary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--neutral.yco-button--tertiary:active,
-.yco-button--neutral.yco-button--tertiary.is-press {
-  background: var(--fill-press);
-}`,
-  "destructive-tertiary": `.yco-button--destructive.yco-button--tertiary {
-  background: transparent;
-  color: var(--text-error);
-}
-
-.yco-button--destructive.yco-button--tertiary .button-icon {
-  color: var(--icon-error);
-}
-
-.yco-button--tertiary .button-label {
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  text-underline-position: from-font;
-}
-
-.yco-button--destructive.yco-button--tertiary:hover,
-.yco-button--destructive.yco-button--tertiary.is-hover {
-  background: transparent;
-}
-
-.yco-button--destructive.yco-button--tertiary:hover::before,
-.yco-button--destructive.yco-button--tertiary.is-hover::before {
-  background: var(--fill-hover);
-}
-
-.yco-button--destructive.yco-button--tertiary:active,
-.yco-button--destructive.yco-button--tertiary.is-press {
-  background: transparent;
-}
-
-.yco-button--destructive.yco-button--tertiary:active::before,
-.yco-button--destructive.yco-button--tertiary.is-press::before {
-  background: var(--fill-press);
-}`,
-  "inverse-tertiary": `.yco-button--inverse.yco-button--tertiary {
-  background: transparent;
-  color: var(--text-inverse-strong);
-}
-
-.yco-button--inverse.yco-button--tertiary .button-icon {
-  color: var(--icon-inverse-strong);
-}
-
-.yco-button--tertiary .button-label {
-  text-decoration: underline;
-  text-decoration-skip-ink: none;
-  text-underline-position: from-font;
-}
-
-.yco-button--inverse.yco-button--tertiary:hover,
-.yco-button--inverse.yco-button--tertiary.is-hover {
-  background: var(--fill-inverse-hover);
-}
-
-.yco-button--inverse.yco-button--tertiary:active,
-.yco-button--inverse.yco-button--tertiary.is-press {
-  background: var(--fill-inverse-press);
-}`,
-};
-
-const sizeCss = {
-  large: `.yco-button--large {
-  min-height: var(--spacing-56);
-  gap: var(--spacing-4);
-  padding: var(--spacing-0) var(--spacing-24);
-  font-size: var(--font-size-heading-4);
-  line-height: var(--line-height-heading-4);
-}`,
-  medium: `.yco-button--medium {
-  min-height: var(--spacing-48);
-  gap: var(--spacing-4);
-  padding: var(--spacing-0) var(--spacing-16);
-  font-size: var(--font-size-heading-5);
-  line-height: var(--line-height-small);
-}`,
-  small: `.yco-button--small {
-  min-height: var(--spacing-40);
-  gap: var(--spacing-4);
-  padding: var(--spacing-0) var(--spacing-16);
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
-}`,
-  tiny: `.yco-button--tiny {
-  min-height: var(--spacing-32);
-  gap: var(--spacing-4);
-  padding: var(--spacing-0) var(--spacing-12);
-  font-size: var(--font-size-tiny);
-  line-height: var(--line-height-tiny);
-}`,
-};
 
 function buttonMarkup() {
   const leading = controls.leadingIcon.checked ? `${plusIcon}\n  ` : "";
   const trailing = controls.trailingIcon.checked ? `\n  ${chevronRightIcon}` : "";
   const disabled = selections.state === "disabled" ? " disabled" : "";
-  const extraClass = controls.fullWidth.checked ? " is-full-width" : "";
 
-  return `<button class="yco-button yco-button--${selections.tone} yco-button--${selections.type} yco-button--${selections.size}${extraClass}" type="button"${disabled}>
-  ${leading}<span class="button-label">${defaultLabel}</span>${trailing}
+  return `<button class="ycoButton tone_${selections.tone} variant_${selections.variant} size_${selections.size}" type="button"${disabled}>
+  ${leading}<span class="label">${defaultLabel}</span>${trailing}
 </button>`;
 }
 
 function reactMarkup() {
-  const classNames = [
-    `styles.${selections.type}`,
-    `styles.${selections.tone}`,
-    `styles.${selections.size}`,
-    selections.state !== "default" && selections.state !== "disabled" ? `styles.${selections.state}` : "",
-    controls.fullWidth.checked ? "styles.fullWidth" : "",
-  ].filter(Boolean).join(",\n      ");
-  const disabled = selections.state === "disabled" ? "true" : "disabled";
-  const leading = controls.leadingIcon.checked
-    ? `\n    <PlusIcon className={styles.icon} aria-hidden="true" />`
-    : "";
-  const trailing = controls.trailingIcon.checked
-    ? `\n    <ChevronRightIcon className={styles.icon} aria-hidden="true" />`
-    : "";
+  const props = [
+    `  variant="${selections.variant}"`,
+    `  tone="${selections.tone}"`,
+    `  size="${selections.size}"`,
+    `  type="button"`,
+  ];
 
-  return `import styles from './index.module.scss';
-import ButtonWrapper from '@/components/common/button-wrapper';
-import { disabledVariants } from '@/components/common/button-wrapper/types/buttonWrapperTypes';
+  if (controls.leadingIcon.checked) {
+    props.push(`  leadingIcon={<PlusIcon />}`);
+  }
+  if (controls.trailingIcon.checked) {
+    props.push(`  trailingIcon={<ChevronRightIcon />}`);
+  }
+  if (selections.state === "disabled") {
+    props.push(`  disabled`);
+  }
+
+  return `import ButtonWrapper from '@/components/common/button-wrapper';
 
 <ButtonWrapper
-  className={[
-      ${classNames}
-    ].filter(Boolean).join(' ')}
-  hideHoverEffect={hideHoverEffect}
-  hoverClass={styles.hover}
-  touchClass={styles.press}
-  order={order}
-  nonce={nonce}
-  gaClass={gaClass}
-  disabled={${disabled}}
-  disabledVariant={disabledVariants.DEFAULT}
-  onTouchStart={onTouchStart}
-  onTouchEnd={onTouchEnd}
-  alt="${defaultLabel}"
-  href={href}
-  type="button"
->${leading}
-  <span className={styles.label}>${defaultLabel}</span>${trailing}
+${props.join("\n")}
+>
+  ${defaultLabel}
 </ButtonWrapper>`;
 }
 
 function cssMarkup() {
-  const iconSize = selections.size === "large"
-    ? "24px"
-    : selections.size === "tiny"
-      ? "16px"
-      : "20px";
-
-  const toModuleScss = (value) => value
-    .replace(/\.yco-button--([a-z]+)\.yco-button--([a-z]+)/g, ".$1.$2")
-    .replace(/\.yco-button--([a-z]+)/g, ".$1")
-    .replaceAll(".yco-button", `.${selections.type}`)
-    .replaceAll(".button-icon", ".icon")
-    .replaceAll(".button-label", ".label")
-    .replaceAll(".is-hover", ".hover")
-    .replaceAll(".is-press", ".press")
-    .replace(/var\(--(background|fill|icon|stroke|text)-([\w-]+)\)/g, "color($1-$2)")
-    .replace(/var\(--corner-radius-([\w-]+)\)/g, "border-radius(corner-radius-$1)")
-    .replace(/var\(--font-size-heading-([0-9])\)/g, "font-size(heading$1)")
-    .replace(/var\(--line-height-heading-([0-9])\)/g, "line-height(heading$1)")
-    .replace(/var\(--font-size-([\w-]+)\)/g, "font-size($1)")
-    .replace(/var\(--line-height-([\w-]+)\)/g, "line-height($1)");
-
-  const moduleBaseCss = `@import "@/styles/variables.scss";
-
-.${selections.type} {
-  position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid transparent;
-  border-radius: border-radius(corner-radius-32);
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-.${selections.type}::before {
-  content: "";
-  position: absolute;
-  inset: var(--spacing-0);
-  z-index: 0;
-  border-radius: inherit;
-  background: transparent;
-  pointer-events: none;
-}
-
-.${selections.type} > * {
-  position: relative;
-  z-index: 1;
-}`;
-
-  const moduleVariantCss = toModuleScss(variantCss[`${selections.tone}-${selections.type}`])
-    .replaceAll("var(--grey-slate-light-25)", "color(fill-weaker)");
-
-  const moduleSizeCss = toModuleScss(sizeCss[selections.size]);
-
-  const stateCss = selections.state === "focus"
-    ? `.${selections.type}:focus-visible,
-.${selections.type}.focus {
-  outline: 0;
-  box-shadow: 0 0 0 var(--spacing-4) color(stroke-focus);
-}
-
-.inverse.secondary.focus,
-.inverse.tertiary.focus {
-  box-shadow: 0 0 0 3px color(stroke-inverse-strong);
-}
-
-.inverse.primary.focus {
-  box-shadow: 0 0 0 3px color(stroke-inverse-strong);
-}`
-    : selections.state === "disabled"
-      ? `.${selections.type}:disabled,
-.${selections.type}.disabled {
-  cursor: not-allowed;
-  transform: none;
-}
-
-.primary:disabled,
-.primary.disabled {
-  border-color: transparent;
-  background: color(fill-disabled);
-  color: color(text-inverse-strong);
-}
-
-.primary:disabled .icon,
-.primary.disabled .icon {
-  color: color(icon-inverse-strong);
-}
-
-.secondary:disabled,
-.secondary.disabled {
-  border-color: color(stroke-disabled);
-  background: transparent;
-  color: color(text-disabled);
-}
-
-.secondary:disabled .icon,
-.secondary.disabled .icon {
-  color: color(icon-disabled);
-}
-
-.tertiary:disabled,
-.tertiary.disabled {
-  border-color: transparent;
-  background: transparent;
-  color: color(text-disabled);
-}
-
-.tertiary:disabled .icon,
-.tertiary.disabled .icon {
-  color: color(icon-disabled);
-}
-
-.inverse.primary:disabled,
-.inverse.primary.disabled {
-  border-color: transparent;
-  background: color(fill-inverse-disabled);
-  color: color(text-strong);
-}
-
-.inverse.primary:disabled .icon,
-.inverse.primary.disabled .icon {
-  color: color(icon-neutral);
-}
-
-.inverse.secondary:disabled,
-.inverse.secondary.disabled {
-  border-color: color(stroke-inverse-disabled);
-  background: transparent;
-  color: color(text-inverse-disabled);
-}
-
-.inverse.secondary:disabled .icon,
-.inverse.secondary.disabled .icon {
-  color: color(icon-inverse-disabled);
-}
-
-.inverse.tertiary:disabled,
-.inverse.tertiary.disabled {
-  border-color: transparent;
-  background: transparent;
-  color: color(text-inverse-disabled);
-}
-
-.inverse.tertiary:disabled .icon,
-.inverse.tertiary.disabled .icon {
-  color: color(icon-inverse-disabled);
-}`
-    : "";
-
-  const iconCss = `.icon {
-  display: inline-grid;
-  place-items: center;
-  width: ${iconSize};
-  height: ${iconSize};
-  flex: 0 0 ${iconSize};
-}
-
-.icon svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  fill: currentColor;
-}`;
-
-  return [
-    moduleBaseCss,
-    moduleVariantCss,
-    moduleSizeCss,
-    stateCss,
-    iconCss,
-  ].filter(Boolean).join("\n\n");
+  return componentCss || "/* button.module.css 載入中… */";
 }
 
 function codeMarkup() {
@@ -774,32 +199,32 @@ function highlightCode(value) {
 }
 
 function updatePreview() {
-  const type = selections.type;
+  const variant = selections.variant;
   const tone = selections.tone;
   const state = selections.state;
 
   previewButton.className = [
-    "yco-button",
-    `yco-button--${tone}`,
-    `yco-button--${type}`,
-    `yco-button--${selections.size}`,
-    controls.fullWidth.checked ? "is-full-width" : "",
-    state !== "default" ? `is-${state}` : "",
+    "ycoButton",
+    `tone_${tone}`,
+    `variant_${variant}`,
+    `size_${selections.size}`,
+    state === "hover" ? "is-hover" : "",
+    state === "press" ? "is-press" : "",
+    state === "focus" ? "is-focus" : "",
   ].filter(Boolean).join(" ");
   previewSurface.classList.toggle("is-inverse-preview", tone === "inverse");
 
   previewButton.disabled = state === "disabled";
-  previewButton.removeAttribute("aria-busy");
   previewButton.innerHTML = [
     controls.leadingIcon.checked ? plusIcon : "",
-    `<span class="button-label">${defaultLabel}</span>`,
+    `<span class="label">${defaultLabel}</span>`,
     controls.trailingIcon.checked ? chevronRightIcon : "",
   ].filter(Boolean).join("");
 
   const code = codeMarkup();
   stateLabel.textContent = previewStateLabel();
   codeBlock.innerHTML = highlightCode(code);
-  document.title = `YCO Buttons - ${toneLabels[tone]} ${typeLabels[type]}`;
+  document.title = `YCO Buttons - ${toneLabels[tone]} ${variantLabels[variant]}`;
 }
 
 function alertStatusLabel() {
@@ -1300,5 +725,5 @@ async function copyText(text) {
 
 const initialPage = window.location.hash.replace("#", "") === "toast" ? "toast" : "buttons";
 setActivePage(initialPage);
-updatePreview();
+loadComponentCss().then(updatePreview);
 updateAlertPreview();
