@@ -151,13 +151,13 @@ function reactMarkup() {
     props.push(`  disabled`);
   }
 
-  return `import ButtonWrapper from '@/components/common/button-wrapper';
+  return `import Button from '@/components/common/button';
 
-<ButtonWrapper
+<Button
 ${props.join("\n")}
 >
   ${defaultLabel}
-</ButtonWrapper>`;
+</Button>`;
 }
 
 function cssMarkup() {

@@ -6,10 +6,13 @@
 
    Consumed by:
    - yco-component-library doc site  →  <link> (plain stylesheet, preview)
-   - yce-frontend button-wrapper     →  import styles from './button.module.css'
+   - yce-frontend common/button      →  import styles from './Button.module.css'
                                         (Next.js CSS Modules: scoped, no leak)
 
    The two repos hold a VERBATIM copy of this file. Keep them identical.
+   DO NOT reformat: byte-identity is what makes `diff` a reliable drift
+   detector, so yce-frontend lists this file in .prettierignore. It stays
+   under stylelint, which reports it clean.
    ===================================================================== */
 
 .ycoButton {
@@ -62,7 +65,10 @@
   opacity: 0.5;
 }
 
-/* ----- Sizes ----- */
+/* ----- Sizes -----
+   Heights come from the Button master, which names its variants "tiny 32 /
+   small 36 / medium 42 / large 56" — small and medium are deliberately off the
+   spacing scale [ebug YCO260831P0009]. */
 .size_tiny {
   min-height: var(--spacing-32);
   gap: var(--spacing-4);
@@ -73,7 +79,7 @@
 }
 
 .size_small {
-  min-height: var(--spacing-40);
+  min-height: 36px;
   gap: var(--spacing-4);
   padding: 0 var(--spacing-16);
   font-size: var(--font-size-small);
@@ -81,11 +87,11 @@
 }
 
 .size_medium {
-  min-height: var(--spacing-48);
+  min-height: 42px;
   gap: var(--spacing-4);
   padding: 0 var(--spacing-16);
   font-size: var(--font-size-heading-5, 1.125rem);
-  line-height: var(--line-height-small);
+  line-height: var(--line-height-heading-5);
 }
 
 .size_large {
@@ -101,138 +107,253 @@
   background: var(--fill-brand-strong);
   color: var(--text-inverse-strong);
 }
-.tone_brand.variant_primary:hover::before { background: var(--fill-hover); }
-.tone_brand.variant_primary:active::before { background: var(--fill-press); }
+
+.tone_brand.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_brand.variant_primary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_brand.variant_secondary {
   border-color: var(--stroke-brand-strong);
   background: transparent;
   color: var(--text-brand);
 }
-.tone_brand.variant_secondary:hover::before { background: var(--fill-hover); }
-.tone_brand.variant_secondary:active::before { background: var(--fill-press); }
+
+.tone_brand.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_brand.variant_secondary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_brand.variant_tertiary {
   background: transparent;
   color: var(--text-brand);
 }
-.tone_brand.variant_tertiary:hover::before { background: var(--fill-hover); }
-.tone_brand.variant_tertiary:active::before { background: var(--fill-press); }
+
+.tone_brand.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_brand.variant_tertiary:active::before {
+  background: var(--fill-press);
+}
 
 /* ----- Neutral × variants ----- */
 .tone_neutral.variant_primary {
   background: var(--fill-strong);
   color: var(--text-inverse-strong);
 }
-.tone_neutral.variant_primary:hover::before { background: var(--fill-inverse-hover); }
-.tone_neutral.variant_primary:active::before { background: var(--fill-inverse-press); }
+
+.tone_neutral.variant_primary:hover::before {
+  background: var(--fill-inverse-hover);
+}
+
+.tone_neutral.variant_primary:active::before {
+  background: var(--fill-inverse-press);
+}
 
 .tone_neutral.variant_secondary {
   border-color: var(--stroke-strong);
   background: var(--grey-slate-light-25);
   color: var(--text-strong);
 }
-.tone_neutral.variant_secondary:hover::before { background: var(--fill-hover); }
-.tone_neutral.variant_secondary:active { background: var(--fill-press); }
+
+.tone_neutral.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_neutral.variant_secondary:active {
+  background: var(--fill-press);
+}
 
 .tone_neutral.variant_tertiary {
   background: transparent;
   color: var(--text-strong);
 }
-.tone_neutral.variant_tertiary:hover::before { background: var(--fill-hover); }
-.tone_neutral.variant_tertiary:active { background: var(--fill-press); }
+
+.tone_neutral.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_neutral.variant_tertiary:active {
+  background: var(--fill-press);
+}
 
 /* ----- Destructive × variants ----- */
 .tone_destructive.variant_primary {
   background: var(--fill-error-strong);
   color: var(--text-inverse-strong);
 }
-.tone_destructive.variant_primary:hover::before { background: var(--fill-hover); }
-.tone_destructive.variant_primary:active::before { background: var(--fill-press); }
+
+.tone_destructive.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_destructive.variant_primary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_destructive.variant_secondary {
   border-color: var(--stroke-error-strong);
   background: transparent;
   color: var(--text-error);
 }
-.tone_destructive.variant_secondary:hover::before { background: var(--fill-hover); }
-.tone_destructive.variant_secondary:active::before { background: var(--fill-press); }
+
+.tone_destructive.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_destructive.variant_secondary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_destructive.variant_tertiary {
   background: transparent;
   color: var(--text-error);
 }
-.tone_destructive.variant_tertiary:hover::before { background: var(--fill-hover); }
-.tone_destructive.variant_tertiary:active::before { background: var(--fill-press); }
+
+.tone_destructive.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_destructive.variant_tertiary:active::before {
+  background: var(--fill-press);
+}
 
 /* ----- Inverse × variants ----- */
 .tone_inverse.variant_primary {
   background: var(--fill-inverse-strong);
   color: var(--text-strong);
 }
-.tone_inverse.variant_primary:hover::before { background: var(--fill-hover); }
-.tone_inverse.variant_primary:active::before { background: var(--fill-press); }
+
+.tone_inverse.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_inverse.variant_primary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_inverse.variant_secondary {
   border-color: var(--stroke-inverse-strong);
   background: transparent;
   color: var(--text-inverse-strong);
 }
-.tone_inverse.variant_secondary:hover { background: var(--fill-inverse-hover); }
-.tone_inverse.variant_secondary:active { background: var(--fill-inverse-press); }
+
+.tone_inverse.variant_secondary:hover {
+  background: var(--fill-inverse-hover);
+}
+
+.tone_inverse.variant_secondary:active {
+  background: var(--fill-inverse-press);
+}
 
 .tone_inverse.variant_tertiary {
   background: transparent;
   color: var(--text-inverse-strong);
 }
-.tone_inverse.variant_tertiary:hover { background: var(--fill-inverse-hover); }
-.tone_inverse.variant_tertiary:active { background: var(--fill-inverse-press); }
+
+.tone_inverse.variant_tertiary:hover {
+  background: var(--fill-inverse-hover);
+}
+
+.tone_inverse.variant_tertiary:active {
+  background: var(--fill-inverse-press);
+}
 
 /* ----- Custom: warning (not in designer spec, used for legacy ffc700) ----- */
 .tone_warning.variant_primary {
   background: var(--fill-warning-strong);
   color: var(--text-inverse-strong);
 }
-.tone_warning.variant_primary:hover::before { background: var(--fill-hover); }
-.tone_warning.variant_primary:active::before { background: var(--fill-press); }
+
+.tone_warning.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_warning.variant_primary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_warning.variant_secondary {
   border-color: var(--stroke-warning-strong);
   background: transparent;
   color: var(--text-warning);
 }
-.tone_warning.variant_secondary:hover::before { background: var(--fill-hover); }
-.tone_warning.variant_secondary:active::before { background: var(--fill-press); }
+
+.tone_warning.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_warning.variant_secondary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_warning.variant_tertiary {
   background: transparent;
   color: var(--text-warning);
 }
-.tone_warning.variant_tertiary:hover::before { background: var(--fill-hover); }
-.tone_warning.variant_tertiary:active::before { background: var(--fill-press); }
+
+.tone_warning.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_warning.variant_tertiary:active::before {
+  background: var(--fill-press);
+}
 
 /* ----- Custom: success (not in designer spec, used for legacy 0ea639) ----- */
 .tone_success.variant_primary {
   background: var(--fill-success-strong);
   color: var(--text-inverse-strong);
 }
-.tone_success.variant_primary:hover::before { background: var(--fill-hover); }
-.tone_success.variant_primary:active::before { background: var(--fill-press); }
+
+.tone_success.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_success.variant_primary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_success.variant_secondary {
   border-color: var(--stroke-success-strong);
   background: transparent;
   color: var(--text-success);
 }
-.tone_success.variant_secondary:hover::before { background: var(--fill-hover); }
-.tone_success.variant_secondary:active::before { background: var(--fill-press); }
+
+.tone_success.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_success.variant_secondary:active::before {
+  background: var(--fill-press);
+}
 
 .tone_success.variant_tertiary {
   background: transparent;
   color: var(--text-success);
 }
-.tone_success.variant_tertiary:hover::before { background: var(--fill-hover); }
-.tone_success.variant_tertiary:active::before { background: var(--fill-press); }
+
+.tone_success.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_success.variant_tertiary:active::before {
+  background: var(--fill-press);
+}
+
+/* The Label container carries a 4px inset of its own on top of the size's
+   padding — 16 + 4 = 20 either side on medium — and it is the same 4 at every
+   size, so it belongs here rather than in .size_* [ebug YCO260831P0009]. */
+.label {
+  padding: 0 var(--spacing-4);
+}
 
 /* ----- Tertiary label gets underline ----- */
 .variant_tertiary .label {

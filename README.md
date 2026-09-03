@@ -9,7 +9,7 @@ The first component page covers Buttons and is built from YCO semantic tokens re
 Each component's styles live in **one plain-CSS file that is the single source of truth**, used by **both** sides with **no translation and no build step**:
 
 - **Here (doc site)** — loaded via `<link>` for the live preview.
-- **In `yce-frontend`** — imported by the component wrapper as a **CSS Module** (scoped class names, no global leak).
+- **In `yce-frontend`** — imported by the `Button` component as a **CSS Module** (scoped class names, no global leak).
 
 The file is plain CSS using CSS-Modules class names (`.ycoButton`, `.variant_primary`, `.tone_brand`, `.size_medium`). Plain CSS is valid **both** as a linked stylesheet (here) **and** as a CSS Module (there), so the *same file works in both places verbatim* — no `.scss`→`.css` conversion, no class-name remap, no CI. Design tokens (`--fill-*`, `--spacing-*`, …) are already global in both repos, so the component CSS only references `var(--…)`.
 
@@ -24,10 +24,10 @@ The file is plain CSS using CSS-Modules class names (`.ycoButton`, `.variant_pri
 ### To change the button
 
 1. Edit `button.module.css` (plain CSS; tokens come from `styles.css` `:root`). Refresh to preview.
-2. Copy `button.module.css` **verbatim** into `yce-frontend` at `src/components/common/button-wrapper/button.module.css` (overwrite). It must stay **byte-identical** between the two repos — it is a copy, never a transform.
-3. Every `<ButtonWrapper variant tone size>` in the app updates at once (they all share the wrapper's one CSS Module).
+2. Copy `button.module.css` **verbatim** into `yce-frontend` at `src/components/common/button/Button.module.css` (overwrite). It must stay **byte-identical** between the two repos — it is a copy, never a transform.
+3. Every `<Button variant tone size>` in the app updates at once (they all share the component's one CSS Module).
 
-> In `yce-frontend` the wrapper does `import variantStyles from './button.module.css'` and applies `variantStyles.ycoButton` / `variantStyles[\`tone_${tone}\`]` etc. — scoped by CSS Modules, so nothing leaks into the global namespace. The legacy `.button` string API stays in the wrapper's own `index.module.scss`.
+> In `yce-frontend` the component does `import styles from './Button.module.css'` and applies `styles.ycoButton` / `styles[\`tone_${tone}\`]` etc. — scoped by CSS Modules, so nothing leaks into the global namespace. The legacy hover/touch class-string API lives in a separate `button-wrapper` component and is not described here.
 
 ### Adding another component
 
