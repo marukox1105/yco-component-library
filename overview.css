@@ -18,7 +18,10 @@
 .ov-table { width: 100%; border: 1px solid var(--stroke-weak); border-radius: var(--radius-md); background: var(--fill-raised); border-collapse: separate; border-spacing: 0; overflow: hidden; }
 .ov-table th { padding: 10px 14px; background: var(--fill-weaker); color: var(--text-weaker); font-size: 12px; font-weight: 700; text-align: left; text-transform: uppercase; }
 .ov-table td { padding: 12px 14px; border-top: 1px solid var(--stroke-weak); color: var(--text-weak); font-size: 14px; vertical-align: top; line-height: 1.5; }
-.ov-table td:first-child { color: var(--text-strong); font-weight: 650; width: 22%; }
+.ov-table th[scope="row"] { padding: 12px 14px; border-top: 1px solid var(--stroke-weak); background: transparent; color: var(--text-strong); font-size: 14px; font-weight: 650; text-align: left; text-transform: none; width: 16%; }
+.ov-table td.ov-preview-cell { width: 36%; padding: 12px; }
+.ov-preview { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-sm); background: #fff; overflow: hidden; }
+.ov-preview img { display: block; width: auto; height: auto; max-width: 100%; max-height: 300px; object-fit: contain; object-position: left top; }
 .ov-sb + .ov-sb { margin-top: 8px; }
 .ov-sb b { color: var(--text-strong); font-weight: 650; }
 .ov-sb code, .ov-note code { padding: 1px 5px; border-radius: 4px; background: var(--fill-weaker); font-size: 12px; }
@@ -41,9 +44,14 @@
 .ov-list code { padding: 1px 5px; border-radius: 4px; background: var(--fill-weaker); font-size: 12px; }
 .ov-foot { color: var(--text-weaker); font-size: 12px; }
 
-@media (max-width: 680px) {
+@media (max-width: 1180px) {
   .ov-table thead { display: none; }
   .ov-table, .ov-table tbody, .ov-table tr, .ov-table td { display: block; width: 100%; }
-  .ov-table td:first-child { width: 100%; border-top: 1px solid var(--stroke-weak); background: var(--fill-weaker); }
-  .ov-table tr:first-child td:first-child { border-top: 0; }
+  .ov-table th[scope="row"] { width: 100%; border-top: 1px solid var(--stroke-weak); background: var(--fill-weaker); }
+  .ov-table tr:first-child th[scope="row"] { border-top: 0; }
+  .ov-table td.ov-preview-cell { width: 100%; }
+  .ov-table tr { display: flex; flex-direction: column; }
+  .ov-table tr > th[scope="row"] { order: 0; }
+  .ov-table tr > td.ov-preview-cell { order: 1; }
+  .ov-table tr > td:not(.ov-preview-cell) { order: 2; }
 }

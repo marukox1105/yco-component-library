@@ -30,16 +30,22 @@
     }).join("");
   }
 
+  function previewCell(i) {
+    // Natural size (Figma exports are 1x); CSS caps width and height. Alt text names the Figma component.
+    return `<div class="ov-preview">${(i.thumbs || []).map((t) =>
+      `<img src="./${esc(t.src)}" width="${t.w}" height="${t.h}" loading="lazy" decoding="async" alt="Figma: ${esc(i.name)}" />`).join("")}</div>`;
+  }
+
   function group(g) {
     const rows = g.items.map((i) => {
       const [cls, label] = MATCH[i.conf];
       return `<tr data-conf="${i.conf}" data-search="${esc((i.name + " " + i.sb.map((id) => comps[id].name + " " + id).join(" ")).toLowerCase())}">
-        <td>${esc(i.name)}</td><td>${sbCell(i.sb)}</td>
+        <td class="ov-preview-cell">${previewCell(i)}</td><th scope="row" class="ov-name">${esc(i.name)}</th><td>${sbCell(i.sb)}</td>
         <td><span class="ov-badge ${cls}">${label}</span>${i.note ? `<span class="ov-note">${esc(i.note)}</span>` : ""}</td></tr>`;
     }).join("");
     return `<section class="ov-group" data-group>
       <h3>${esc(g.name)} <small>${g.items.length} in Figma</small></h3>
-      <table class="ov-table"><thead><tr><th>Figma component</th><th>Storybook</th><th>Match</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+      <table class="ov-table"><thead><tr><th>Figma preview</th><th>Figma component</th><th>Storybook</th><th>Match</th></tr></thead><tbody>${rows}</tbody></table></section>`;
   }
 
   function onlyGroup() {

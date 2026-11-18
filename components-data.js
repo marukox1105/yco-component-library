@@ -3,7 +3,7 @@ window.YCO_CATALOG = {
  "generatedAt": "2026-11-18",
  "source": {
   "repo": "YouCamWeb/yco-collab-space",
-  "commit": "9288495",
+  "commit": "cee9027",
   "storybookRoot": "platform/ui/<component>/"
  },
  "figma": {
@@ -20,7 +20,14 @@ window.YCO_CATALOG = {
       "button"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/button.png",
+       "w": 105,
+       "h": 56
+      }
+     ]
     },
     {
      "name": "Button group",
@@ -28,13 +35,27 @@ window.YCO_CATALOG = {
       "button-group"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/button-group.png",
+       "w": 417,
+       "h": 56
+      }
+     ]
     },
     {
      "name": "Button icon",
      "sb": [],
      "conf": "none",
-     "note": "Icon-only is a Button option; icon-action-buttons is a different (like / dislike / edit / download) component"
+     "note": "Icon-only is a Button option; icon-action-buttons is a different (like / dislike / edit / download) component",
+     "thumbs": [
+      {
+       "src": "assets/figma/button-icon.png",
+       "w": 42,
+       "h": 42
+      }
+     ]
     },
     {
      "name": "Icon container",
@@ -42,7 +63,14 @@ window.YCO_CATALOG = {
       "icon-container"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/icon-container.png",
+       "w": 48,
+       "h": 48
+      }
+     ]
     },
     {
      "name": "Text link",
@@ -50,7 +78,14 @@ window.YCO_CATALOG = {
       "text-link"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/text-link.png",
+       "w": 34,
+       "h": 20
+      }
+     ]
     },
     {
      "name": "Avatar / labelled / dropdown / stack",
@@ -58,13 +93,47 @@ window.YCO_CATALOG = {
       "avatar"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/avatar.png",
+       "w": 32,
+       "h": 32
+      },
+      {
+       "src": "assets/figma/avatar-labelled.png",
+       "w": 111,
+       "h": 32
+      },
+      {
+       "src": "assets/figma/avatar-dropdown.png",
+       "w": 175,
+       "h": 48
+      },
+      {
+       "src": "assets/figma/avatar-stack.png",
+       "w": 156,
+       "h": 36
+      }
+     ]
     },
     {
      "name": "Tag group / Badge",
      "sb": [],
      "conf": "none",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/tag-group.png",
+       "w": 417,
+       "h": 32
+      },
+      {
+       "src": "assets/figma/badge.png",
+       "w": 83,
+       "h": 32
+      }
+     ]
     },
     {
      "name": "Badge count",
@@ -72,7 +141,14 @@ window.YCO_CATALOG = {
       "badge-count"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/badge-count.png",
+       "w": 24,
+       "h": 24
+      }
+     ]
     },
     {
      "name": "Badge dot",
@@ -80,13 +156,27 @@ window.YCO_CATALOG = {
       "badge-dot"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/badge-dot.png",
+       "w": 16,
+       "h": 16
+      }
+     ]
     },
     {
      "name": "Slot",
      "sb": [],
      "conf": "none",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/slot.png",
+       "w": 417,
+       "h": 21
+      }
+     ]
     },
     {
      "name": "Scrollbar",
@@ -94,7 +184,14 @@ window.YCO_CATALOG = {
       "scrollbar"
      ],
      "conf": "figma",
-     "note": "Own Figma page, not on the All components board"
+     "note": "Own Figma page, not on the All components board",
+     "thumbs": [
+      {
+       "src": "assets/figma/scrollbar.png",
+       "w": 179,
+       "h": 204
+      }
+     ]
     }
    ]
   },
@@ -105,7 +202,14 @@ window.YCO_CATALOG = {
      "name": "Text input",
      "sb": [],
      "conf": "none",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/text-input.png",
+       "w": 398,
+       "h": 96
+      }
+     ]
     },
     {
      "name": "Text area",
@@ -113,7 +217,14 @@ window.YCO_CATALOG = {
       "text-area"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/text-area.png",
+       "w": 398,
+       "h": 188
+      }
+     ]
     },
     {
      "name": "Select",
@@ -121,7 +232,14 @@ window.YCO_CATALOG = {
       "dropdown-select"
      ],
      "conf": "inferred",
-     "note": "Contract records Figma node 5967:27085; confirm it is the Select / Dropdown menu page"
+     "note": "Contract records Figma node 5967:27085; confirm it is the Select / Dropdown menu page",
+     "thumbs": [
+      {
+       "src": "assets/figma/select.png",
+       "w": 398,
+       "h": 66
+      }
+     ]
     },
     {
      "name": "Search input",
@@ -129,7 +247,14 @@ window.YCO_CATALOG = {
       "search-input"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/search-input.png",
+       "w": 398,
+       "h": 48
+      }
+     ]
     },
     {
      "name": "Autocomplete",
@@ -137,7 +262,14 @@ window.YCO_CATALOG = {
       "autocomplete"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/autocomplete.png",
+       "w": 398,
+       "h": 76
+      }
+     ]
     },
     {
      "name": "Combobox",
@@ -145,7 +277,14 @@ window.YCO_CATALOG = {
       "combobox"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/combobox.png",
+       "w": 398,
+       "h": 76
+      }
+     ]
     },
     {
      "name": "Date picker",
@@ -153,7 +292,14 @@ window.YCO_CATALOG = {
       "date-picker"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/date-picker.png",
+       "w": 398,
+       "h": 66
+      }
+     ]
     },
     {
      "name": "File upload",
@@ -162,7 +308,14 @@ window.YCO_CATALOG = {
       "upload-prompt"
      ],
      "conf": "inferred",
-     "note": "Closest Storybook components; neither records a Figma node"
+     "note": "Closest Storybook components; neither records a Figma node",
+     "thumbs": [
+      {
+       "src": "assets/figma/file-upload.png",
+       "w": 536,
+       "h": 542
+      }
+     ]
     },
     {
      "name": "Slider",
@@ -170,7 +323,14 @@ window.YCO_CATALOG = {
       "yce-slider"
      ],
      "conf": "inferred",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/slider.png",
+       "w": 398,
+       "h": 75
+      }
+     ]
     },
     {
      "name": "Progress indicator / Bar",
@@ -178,13 +338,32 @@ window.YCO_CATALOG = {
       "progress-indicator"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/progress-indicator.png",
+       "w": 398,
+       "h": 84
+      },
+      {
+       "src": "assets/figma/bar.png",
+       "w": 398,
+       "h": 20
+      }
+     ]
     },
     {
      "name": "Checkbox group",
      "sb": [],
      "conf": "none",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/checkbox-group.png",
+       "w": 398,
+       "h": 276
+      }
+     ]
     },
     {
      "name": "Radio button group",
@@ -192,7 +371,14 @@ window.YCO_CATALOG = {
       "radio-buttons"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/radio-group.png",
+       "w": 398,
+       "h": 236
+      }
+     ]
     },
     {
      "name": "Stepper",
@@ -200,7 +386,14 @@ window.YCO_CATALOG = {
       "stepper"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/stepper.png",
+       "w": 174,
+       "h": 80
+      }
+     ]
     },
     {
      "name": "Toggle",
@@ -208,7 +401,14 @@ window.YCO_CATALOG = {
       "toggle-switch"
      ],
      "conf": "inferred",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/toggle.png",
+       "w": 133,
+       "h": 44
+      }
+     ]
     },
     {
      "name": "Prompt Composer",
@@ -216,7 +416,14 @@ window.YCO_CATALOG = {
       "prompt-field"
      ],
      "conf": "inferred",
-     "note": "Own Figma page"
+     "note": "Own Figma page",
+     "thumbs": [
+      {
+       "src": "assets/figma/prompt-composer.png",
+       "w": 448,
+       "h": 900
+      }
+     ]
     }
    ]
   },
@@ -229,7 +436,14 @@ window.YCO_CATALOG = {
       "yce-toast"
      ],
      "conf": "inferred",
-     "note": "This library’s Toast page is built from Figma Alert tones; not yet verified"
+     "note": "This library’s Toast page is built from Figma Alert tones; not yet verified",
+     "thumbs": [
+      {
+       "src": "assets/figma/alert.png",
+       "w": 536,
+       "h": 114
+      }
+     ]
     },
     {
      "name": "Alert global",
@@ -237,7 +451,14 @@ window.YCO_CATALOG = {
       "notice-banner"
      ],
      "conf": "inferred",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/alert-global.png",
+       "w": 536,
+       "h": 64
+      }
+     ]
     },
     {
      "name": "Empty state",
@@ -245,7 +466,14 @@ window.YCO_CATALOG = {
       "empty-state"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/empty-state.png",
+       "w": 536,
+       "h": 226
+      }
+     ]
     },
     {
      "name": "Empty Image",
@@ -253,13 +481,27 @@ window.YCO_CATALOG = {
       "empty-image"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/empty-image.png",
+       "w": 800,
+       "h": 160
+      }
+     ]
     },
     {
      "name": "Loading bar",
      "sb": [],
      "conf": "none",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/loading-bar.png",
+       "w": 217,
+       "h": 345
+      }
+     ]
     }
    ]
   },
@@ -272,7 +514,14 @@ window.YCO_CATALOG = {
       "navigation-header"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/navigation-header.png",
+       "w": 900,
+       "h": 45
+      }
+     ]
     },
     {
      "name": "Footer",
@@ -280,7 +529,14 @@ window.YCO_CATALOG = {
       "footer"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/footer.png",
+       "w": 900,
+       "h": 153
+      }
+     ]
     },
     {
      "name": "Tabs",
@@ -288,7 +544,14 @@ window.YCO_CATALOG = {
       "gallery-tabs"
      ],
      "conf": "inferred",
-     "note": "Storybook title is “UI/Tabs” but the folder is gallery-tabs"
+     "note": "Storybook title is “UI/Tabs” but the folder is gallery-tabs",
+     "thumbs": [
+      {
+       "src": "assets/figma/tabs.png",
+       "w": 900,
+       "h": 41
+      }
+     ]
     },
     {
      "name": "Pagination",
@@ -296,7 +559,14 @@ window.YCO_CATALOG = {
       "pagination"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/pagination.png",
+       "w": 900,
+       "h": 39
+      }
+     ]
     },
     {
      "name": "Segmented control",
@@ -304,7 +574,14 @@ window.YCO_CATALOG = {
       "segmented-control"
      ],
      "conf": "inferred",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/segmented-control.png",
+       "w": 401,
+       "h": 60
+      }
+     ]
     },
     {
      "name": "Breadcrumbs",
@@ -312,7 +589,14 @@ window.YCO_CATALOG = {
       "breadcrumbs"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/breadcrumbs.png",
+       "w": 134,
+       "h": 20
+      }
+     ]
     },
     {
      "name": "Navigation side",
@@ -320,7 +604,14 @@ window.YCO_CATALOG = {
       "category-rail"
      ],
      "conf": "inferred",
-     "note": "Storybook title is “UI/Navigation Side” but the folder is category-rail"
+     "note": "Storybook title is “UI/Navigation Side” but the folder is category-rail",
+     "thumbs": [
+      {
+       "src": "assets/figma/navigation-side.png",
+       "w": 153,
+       "h": 900
+      }
+     ]
     }
    ]
   },
@@ -330,11 +621,18 @@ window.YCO_CATALOG = {
     {
      "name": "Modal",
      "sb": [
-      "confirm-dialog",
-      "dialog-frame"
+      "modal",
+      "confirm-dialog"
      ],
      "conf": "inferred",
-     "note": "Confirm Dialog follows Figma’s Modal on DialogFrame (local commits 5279deb, 87c86ca)"
+     "note": "Modal follows Figma’s sizes (Small / Large / Huge) but its contract records no Figma node; Confirm Dialog is its Small preset (local commit cee9027, not yet on YouCamWeb main)",
+     "thumbs": [
+      {
+       "src": "assets/figma/modal.png",
+       "w": 900,
+       "h": 640
+      }
+     ]
     },
     {
      "name": "Drawer",
@@ -342,7 +640,14 @@ window.YCO_CATALOG = {
       "bottom-sheet"
      ],
      "conf": "inferred",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/drawer.png",
+       "w": 900,
+       "h": 640
+      }
+     ]
     },
     {
      "name": "Card",
@@ -350,7 +655,14 @@ window.YCO_CATALOG = {
       "card"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/card.png",
+       "w": 376,
+       "h": 462
+      }
+     ]
     },
     {
      "name": "Tooltip",
@@ -358,7 +670,14 @@ window.YCO_CATALOG = {
       "tooltip"
      ],
      "conf": "inferred",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/tooltip.png",
+       "w": 181,
+       "h": 72
+      }
+     ]
     },
     {
      "name": "Dropdown menu / list",
@@ -366,7 +685,19 @@ window.YCO_CATALOG = {
       "menu-select"
      ],
      "conf": "inferred",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/dropdown-menu.png",
+       "w": 108,
+       "h": 42
+      },
+      {
+       "src": "assets/figma/dropdown-menu-list.png",
+       "w": 320,
+       "h": 494
+      }
+     ]
     }
    ]
   },
@@ -379,7 +710,14 @@ window.YCO_CATALOG = {
       "data-table"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/table.png",
+       "w": 900,
+       "h": 728
+      }
+     ]
     },
     {
      "name": "Summary list",
@@ -387,7 +725,14 @@ window.YCO_CATALOG = {
       "summary-list"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/summary-list.png",
+       "w": 600,
+       "h": 400
+      }
+     ]
     },
     {
      "name": "Accordion",
@@ -395,13 +740,27 @@ window.YCO_CATALOG = {
       "accordion"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/accordion.png",
+       "w": 600,
+       "h": 370
+      }
+     ]
     },
     {
      "name": "Text",
      "sb": [],
      "conf": "none",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/text.png",
+       "w": 268,
+       "h": 48
+      }
+     ]
     },
     {
      "name": "Text block",
@@ -409,7 +768,14 @@ window.YCO_CATALOG = {
       "text-block"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/text-block.png",
+       "w": 364,
+       "h": 194
+      }
+     ]
     },
     {
      "name": "Divider",
@@ -417,7 +783,14 @@ window.YCO_CATALOG = {
       "divider"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/divider.png",
+       "w": 600,
+       "h": 1
+      }
+     ]
     }
    ]
   },
@@ -430,7 +803,14 @@ window.YCO_CATALOG = {
       "hero"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/hero.png",
+       "w": 900,
+       "h": 397
+      }
+     ]
     },
     {
      "name": "Testimonial",
@@ -438,7 +818,14 @@ window.YCO_CATALOG = {
       "testimonial"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/testimonial.png",
+       "w": 364,
+       "h": 188
+      }
+     ]
     },
     {
      "name": "Rating",
@@ -446,7 +833,14 @@ window.YCO_CATALOG = {
       "rating"
      ],
      "conf": "figma",
-     "note": ""
+     "note": "",
+     "thumbs": [
+      {
+       "src": "assets/figma/rating.png",
+       "w": 255,
+       "h": 26
+      }
+     ]
     }
    ]
   }
@@ -1365,49 +1759,6 @@ window.YCO_CATALOG = {
    ],
    "description": "A single-date form field with a calendar popover. Built from Figma's [Comp] YCO_web_components_2025 file (JXNIQPJT9I9qFrgtiaCn4i): the Date picker set (node 3617:20663, Open × State × Valid × Size), the _Calendar panel (node 3619:1143) and the _Calendar date set (node 3612:34173,"
   },
-  "dialog-frame": {
-   "id": "dialog-frame",
-   "name": "Dialog Frame",
-   "classification": "composite",
-   "figmaStatus": "pending",
-   "figmaNode": null,
-   "portability": "drop-in",
-   "props": [
-    "open*",
-    "title*",
-    "onClose*",
-    "closeLabel",
-    "headerAction",
-    "footer",
-    "wide",
-    "compact",
-    "small",
-    "icon",
-    "tone",
-    "testId",
-    "roomy",
-    "tall",
-    "escapeCloses",
-    "covered",
-    "children"
-   ],
-   "states": [
-    "default",
-    "header-action",
-    "with-close",
-    "compact",
-    "roomy",
-    "wide-tall",
-    "covered"
-   ],
-   "stories": [
-    {
-     "title": "UI/Dialog Frame",
-     "count": 7
-    }
-   ],
-   "description": "Drop-in port of RD's src/components/common/ui/dialog-frame/ together with the common src/components/common/ui/modal/ it renders into and the src/components/portal/ that modal mounts through (youcam-enhance-frontend 1.35.1.agent, snapshot yce-frontend-gm-261020). It is the outer f"
-  },
   "divider": {
    "id": "divider",
    "name": "Divider",
@@ -2217,6 +2568,55 @@ window.YCO_CATALOG = {
     }
    ],
    "description": "Port of RD's src/components/common/selection-control/menu-select/ (youcam-enhance-frontend 1.35.1.agent, snapshot yce-frontend-gm-261020): a value-based single-choice picker in the YCO \"Dropdown menu list\" style, used where RD would otherwise use a native <select>. Auto Edit uses"
+  },
+  "modal": {
+   "id": "modal",
+   "name": "Modal",
+   "classification": "composite",
+   "figmaStatus": "pending",
+   "figmaNode": null,
+   "portability": "drop-in",
+   "props": [
+    "open*",
+    "title*",
+    "onClose*",
+    "closeLabel",
+    "headerAction",
+    "footer",
+    "wide",
+    "compact",
+    "size",
+    "image",
+    "icon",
+    "tone",
+    "testId",
+    "roomy",
+    "tall",
+    "escapeCloses",
+    "covered",
+    "children"
+   ],
+   "states": [
+    "default",
+    "header-action",
+    "with-close",
+    "compact",
+    "roomy",
+    "wide-tall",
+    "covered",
+    "small",
+    "large",
+    "huge",
+    "destructive",
+    "with-image"
+   ],
+   "stories": [
+    {
+     "title": "UI/Modal",
+     "count": 10
+    }
+   ],
+   "description": "The one blocking popup of the library — Figma's Modal (node 3504:64418). Everything that covers the page and takes focus until it is dismissed is a Modal or sits on ModalOverlay."
   },
   "navigation-header": {
    "id": "navigation-header",

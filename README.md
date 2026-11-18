@@ -51,6 +51,8 @@ Storybook components with no Figma counterpart are listed separately under *Stor
 NODE_PATH=<checkout>/node_modules node tools/build-catalog.mjs <checkout> components-data.js
 ```
 
+Each Figma row shows a thumbnail from `assets/figma/<name>.png`: 1x PNG exports of the instances on Figma's *All components* board (file `JXNIQPJT9I9qFrgtiaCn4i`, page `8703:121838`), taken with the Figma MCP `get_screenshot`. They are static; re-export one when its Figma component changes. The generator fails if a Figma row has no matching file. Storybook-only components have no thumbnail because they have no Figma source.
+
 The Figma-group membership and the pairings live in `tools/build-catalog.mjs` (`FIGMA_GROUPS`, `NOT_IN_FIGMA`). Edit them there when a pairing is confirmed. No component CSS is copied for these components; only `button.module.css` is vendored.
 
 ## Preview Locally

@@ -1,9 +1,10 @@
-// Usage: node build-catalog.mjs <yco-collab-space checkout> <out components-data.js>
+// Usage: node build-catalog.mjs <yco-collab-space checkout or snapshot> <out components-data.js> [source commit]
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { execSync } from 'node:child_process';
-const [SRC, OUT] = process.argv.slice(2);
+const [SRC_ARG, OUT, COMMIT] = process.argv.slice(2);
+const SRC = path.resolve(SRC_ARG);
 const yaml = createRequire(path.join(SRC, 'package.json'))('yaml');
 
 // Figma "All components" page (8703:121838): group -> component. `sb` lists Storybook component ids.
@@ -43,7 +44,7 @@ const FIGMA_GROUPS = [
     F('Navigation side', ['category-rail'], 'inferred', 'Storybook title is “UI/Navigation Side” but the folder is category-rail'),
   ]],
   ['Surfaces', [
-    F('Modal', ['confirm-dialog', 'dialog-frame'], 'inferred', 'Confirm Dialog follows Figma’s Modal on DialogFrame (local commits 5279deb, 87c86ca)'),
+    F('Modal', ['modal', 'confirm-dialog'], 'inferred', 'Modal follows Figma’s sizes (Small / Large / Huge) but its contract records no Figma node; Confirm Dialog is its Small preset (local commit cee9027, not yet on YouCamWeb main)'),
     F('Drawer', ['bottom-sheet'], 'inferred'), F('Card', ['card']), F('Tooltip', ['tooltip'], 'inferred'),
     F('Dropdown menu / list', ['menu-select'], 'inferred'),
   ]],
@@ -66,6 +67,23 @@ const NOT_IN_FIGMA = [
   ['Video features', ['video-history','video-info-dialog','video-results-surface','video-timeline','loading-preview']],
   ['Editor / canvas features', ['background-canvas','background-panel','eraser-panel','interaction-tools-bar','react-scene']],
 ];
+
+// Figma thumbnails live in assets/figma/<slug>.png (exported through the Figma MCP, node ids below for re-export).
+const THUMB_SLUGS = {
+  'Avatar / labelled / dropdown / stack': ['avatar', 'avatar-labelled', 'avatar-dropdown', 'avatar-stack'],
+  'Tag group / Badge': ['tag-group', 'badge'],
+  'Progress indicator / Bar': ['progress-indicator', 'bar'],
+  'Radio button group': ['radio-group'],
+  'Dropdown menu / list': ['dropdown-menu', 'dropdown-menu-list'],
+};
+const OUT_DIR = path.dirname(path.resolve(OUT));
+const thumbsFor = (name) => (THUMB_SLUGS[name] || [name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')]).map((slug) => {
+  const file = path.join(OUT_DIR, 'assets/figma', slug + '.png');
+  if (!fs.existsSync(file)) throw new Error('missing thumbnail ' + file);
+  const b = fs.readFileSync(file);
+  return { src: 'assets/figma/' + slug + '.png', w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+});
+FIGMA_GROUPS.forEach(([, items]) => items.forEach((i) => { i.thumbs = thumbsFor(i.name); }));
 
 const ui = path.join(SRC, 'platform/ui');
 const comps = {};
@@ -113,7 +131,7 @@ const dup = [...placed].filter(([, w]) => w.length > 1);
 if (missing.length) console.error('UNPLACED:', missing.join(', '));
 if (dup.length) console.error('DUPLICATE:', dup.map(([i, w]) => i + ' -> ' + w.join(' & ')).join('; '));
 
-const sourceCommit = execSync('git rev-parse --short HEAD', { cwd: SRC }).toString().trim();
+const sourceCommit = COMMIT || execSync('git rev-parse --short HEAD', { cwd: SRC }).toString().trim();
 const catalog = {
   generatedAt: '2026-11-18',
   source: { repo: 'YouCamWeb/yco-collab-space', commit: sourceCommit, storybookRoot: 'platform/ui/<component>/' },
