@@ -1,0 +1,5 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoCheckboxes_item.is-hover .ycoCheckboxes_box::before { background: var(--fill-hover); }
+.ycoCheckboxes_item.is-press .ycoCheckboxes_box::before { background: var(--fill-press); }
+.ycoCheckboxes_item.is-focus .ycoCheckboxes_box { box-shadow: 0 0 0 3px var(--stroke-focus); }
+.ycoCheckboxes_valid_false.is-focus .ycoCheckboxes_box { box-shadow: 0 0 0 3px var(--stroke-error-weak); }

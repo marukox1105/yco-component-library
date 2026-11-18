@@ -1,0 +1,406 @@
+/* =====================================================================
+   YCO Modal / Overlay · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Modal.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Modal / Overlay (4109:43377), set 3504:64418
+   Type Modal (Size Small 500 / Large 700 / Huge 900, Tone Default / Destructive,
+   Device Desktop / Mobile), Progress Indicator, PhotoPicker.
+   Optional parts: icon, image, heading, secondary text, five slots, button group,
+   close button, scrollbar. The scrim is the overlay; the panel is .ycoModal.
+   ===================================================================== */
+
+.ycoModal_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 13;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-24);
+  padding: var(--spacing-32);
+  overflow: hidden auto;
+  background: var(--fill-overlay);
+  font-family: var(--font-family-body);
+}
+
+.ycoModal_overlay[hidden] {
+  display: none;
+}
+
+.ycoModal_overlay_device_mobile {
+  padding: var(--spacing-16);
+}
+
+/* ----- panel ----- */
+.ycoModal {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-24);
+  margin: auto;
+  padding: var(--spacing-32);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-16);
+  background: var(--background-raised);
+  box-shadow: var(--shadow);
+  color: var(--text-strong);
+  outline: 0;
+}
+
+.ycoModal_size_small {
+  width: 31.25rem;
+}
+
+.ycoModal_size_large {
+  width: 43.75rem;
+}
+
+.ycoModal_size_huge {
+  width: 56.25rem;
+  padding-inline: var(--spacing-40);
+}
+
+/* Figma draws the Destructive Small panel 420 wide (max-width 420), not 500. */
+.ycoModal_tone_destructive.ycoModal_size_small {
+  width: 26.25rem;
+}
+
+.ycoModal_device_mobile {
+  width: 100%;
+  max-width: min(26.25rem, 100%);
+  gap: var(--spacing-24);
+  padding: var(--spacing-16) var(--spacing-24);
+}
+
+.ycoModal_content {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-24);
+}
+
+/* ----- image (placeholder block; real art is the caller's) ----- */
+.ycoModal_image {
+  display: grid;
+  width: 100%;
+  height: 15.3125rem;
+  flex: none;
+  place-items: center;
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-weak);
+  color: var(--icon-neutral);
+}
+
+.ycoModal_imageGlyph {
+  width: 3rem;
+  height: 3rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.5;
+}
+
+/* ----- icon + text ----- */
+.ycoModal_header {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+}
+
+.ycoModal_icon {
+  display: flex;
+  flex: none;
+  padding: var(--spacing-12);
+  border-radius: var(--spacing-48);
+  background: var(--fill-weak);
+  color: var(--icon-neutral);
+}
+
+.ycoModal_tone_destructive .ycoModal_icon {
+  background: var(--fill-error-weak);
+  color: var(--icon-error);
+}
+
+.ycoModal_iconGlyph {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoModal_text {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}
+
+.ycoModal_heading {
+  width: 100%;
+  margin: 0;
+  padding-right: var(--spacing-48);
+  box-sizing: border-box;
+  color: var(--text-strong);
+  font-family: var(--font-family-heading);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 2rem;
+  overflow-wrap: anywhere;
+}
+
+.ycoModal_secondary {
+  width: 100%;
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: var(--line-height-small);
+  overflow-wrap: anywhere;
+}
+
+/* ----- slots (Figma placeholders for swapped-in components) ----- */
+.ycoModal_slot {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-24) var(--spacing-32);
+  overflow: clip;
+  border: 1px dashed var(--stroke-strong);
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-weaker);
+  color: var(--text-weak);
+  font-family: "Roboto Mono", ui-monospace, monospace;
+  font-size: var(--font-size-tiny);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.ycoModal_slot_first {
+  padding-inline: var(--spacing-0);
+  color: var(--text-strong);
+}
+
+/* ----- actions ----- */
+.ycoModal_actions {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}
+
+.ycoModal_device_mobile .ycoModal_actions {
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ycoModal_device_mobile .ycoModal_actions > * {
+  width: 100%;
+}
+
+/* ----- close ----- */
+.ycoModal_close {
+  position: absolute;
+  top: calc(var(--spacing-16) - 1px);
+  right: calc(var(--spacing-16) - 1px);
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: var(--corner-radius-6);
+  background: transparent;
+  color: var(--icon-neutral);
+  cursor: pointer;
+}
+
+.ycoModal_close:hover {
+  background: var(--fill-hover);
+}
+
+.ycoModal_close:active {
+  background: var(--fill-press);
+}
+
+.ycoModal_close:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoModal_closeGlyph {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- scrollbar thumb (Figma shows a 4 x 124 hint at the right edge) ----- */
+.ycoModal_scrollbar {
+  position: absolute;
+  top: 8.4375rem;
+  right: 7px;
+  width: 4px;
+  height: 7.75rem;
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-press);
+  pointer-events: none;
+}
+
+/* ----- Type: Progress Indicator (no panel, text and bar on the scrim) ----- */
+.ycoModal_progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-24);
+  color: var(--text-inverse-strong);
+  text-align: center;
+}
+
+.ycoModal_progressText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.ycoModal_progressTitle {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.ycoModal_progressCaption {
+  margin: 0;
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: 1.375rem;
+}
+
+.ycoModal_progressBar {
+  position: relative;
+  width: min(14rem, 100%);
+  height: 1.9167rem;
+}
+
+.ycoModal_progressTrack {
+  position: absolute;
+  inset: 0.1875rem 0 auto;
+  height: 0.25rem;
+  border-radius: 2px;
+  background: var(--grey-dark-500);
+  opacity: 0.3;
+}
+
+.ycoModal_progressFill {
+  position: absolute;
+  inset: 0 auto auto 0;
+  height: 0.625rem;
+  border-radius: var(--corner-radius-32);
+  background: linear-gradient(90deg, var(--fill-brand-strong), var(--fill-success-strong));
+}
+
+.ycoModal_progressValue {
+  position: absolute;
+  top: calc(50% - 1.33px);
+  right: 0;
+  left: 0;
+  font-size: var(--font-size-tiny);
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 0 0 3px var(--grey-solid-1000);
+}
+
+/* ----- Type: PhotoPicker (Figma shows a native file dialog; drawn as blocks) ----- */
+.ycoModal_picker {
+  display: grid;
+  width: 64.75rem;
+  max-width: 100%;
+  aspect-ratio: 1036 / 649;
+  grid-template-columns: 22% 1fr;
+  grid-template-rows: 2.25rem 1fr 3.5rem;
+  overflow: hidden;
+  background: var(--grey-solid-850);
+}
+
+.ycoModal_pickerBar {
+  grid-column: 1 / -1;
+  background: var(--grey-solid-1000);
+}
+
+.ycoModal_pickerSide {
+  background: var(--grey-solid-900);
+}
+
+.ycoModal_pickerMain {
+  display: flex;
+  gap: var(--spacing-16);
+  padding: var(--spacing-24);
+  background: var(--grey-solid-850);
+}
+
+.ycoModal_pickerThumb {
+  width: 4rem;
+  height: 3rem;
+  border-radius: 2px;
+  background: var(--grey-solid-800);
+}
+
+.ycoModal_pickerFoot {
+  grid-column: 1 / -1;
+  background: var(--grey-solid-800);
+}
+
+/* Phone widths use the Mobile layout whatever the Device says (768px, the site's phone breakpoint). */
+@media (max-width: 48rem) {
+  .ycoModal_overlay {
+    padding: var(--spacing-16);
+  }
+
+  .ycoModal {
+    max-width: min(26.25rem, 100%);
+    padding: var(--spacing-16) var(--spacing-24);
+  }
+
+  .ycoModal_actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ycoModal_actions > * {
+    width: 100%;
+  }
+
+  .ycoModal_picker {
+    grid-template-columns: 1fr;
+  }
+
+  .ycoModal_pickerSide {
+    display: none;
+  }
+}

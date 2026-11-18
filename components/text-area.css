@@ -1,0 +1,148 @@
+/* =====================================================================
+   YCO Text area · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './TextArea.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Text area (3449:60808)
+   States Default / Hover / Press / Focus / Disabled x Valid true / false.
+   Boolean props: Required, Optional, Hint, Placeholder, Filled.
+   Hover, Press and Focus are real :hover, :active and :focus-visible.
+   The error message sits between the label text and the field, as drawn.
+   ===================================================================== */
+
+.ycoTextArea {
+  display: flex;
+  width: 100%;
+  max-width: 364px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoTextArea_text {
+  width: 100%;
+}
+
+.ycoTextArea_labelRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  color: var(--text-strong);
+  white-space: nowrap;
+}
+
+.ycoTextArea_labelRow label {
+  color: inherit;
+  font: inherit;
+}
+
+.ycoTextArea_required {
+  color: var(--text-weak);
+}
+
+.ycoTextArea_optional,
+.ycoTextArea_hint {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTextArea_error {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: var(--spacing-4) 0;
+  color: var(--text-error);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTextArea_errorIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoTextArea_field {
+  display: flex;
+  width: 100%;
+  height: 10rem;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-inverse-strong);
+}
+
+/* The focus ring is drawn outside the border, 3px wide, as in Figma. */
+.ycoTextArea_field:focus-within {
+  border-color: var(--stroke-selected);
+  outline: 3px solid var(--stroke-focus);
+}
+
+.ycoTextArea_input {
+  display: block;
+  flex: 1 0 0;
+  min-width: 0;
+  height: 100%;
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 0;
+  border-radius: var(--spacing-8);
+  background: transparent;
+  color: var(--text-strong);
+  font: inherit;
+  outline: 0;
+  resize: none;
+}
+
+.ycoTextArea_input::placeholder {
+  color: var(--text-weak);
+  opacity: 1;
+}
+
+.ycoTextArea_input:hover {
+  background: var(--fill-hover);
+}
+
+.ycoTextArea_input:active {
+  background: var(--fill-press);
+}
+
+.ycoTextArea_input:focus-visible {
+  background: transparent;
+}
+
+/* ----- invalid ----- */
+.ycoTextArea_valid_false .ycoTextArea_field {
+  border-color: var(--stroke-error-strong);
+  background: var(--fill-error-weak);
+}
+
+.ycoTextArea_valid_false .ycoTextArea_field:focus-within {
+  border-color: var(--stroke-error-strong);
+  outline-color: var(--stroke-error-weak);
+}
+
+/* ----- disabled ----- */
+.ycoTextArea_disabled .ycoTextArea_labelRow,
+.ycoTextArea_disabled .ycoTextArea_required {
+  color: var(--text-disabled);
+}
+
+.ycoTextArea_disabled .ycoTextArea_field {
+  border-color: var(--stroke-disabled);
+}
+
+.ycoTextArea_input:disabled {
+  background: transparent;
+  cursor: not-allowed;
+}

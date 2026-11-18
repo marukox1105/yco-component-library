@@ -1,0 +1,484 @@
+/* =====================================================================
+   YCO Combobox · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Combobox.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Combobox (6736:182931)
+   Type Single / Multiple x Open False / True x State Default / Hover /
+   Press / Focus / Disabled x Valid true / false x Size Large (48px) /
+   Small (36px). The open list is part of the component.
+   Hover, Press and Focus are real :hover, :active and :focus-within; an open list
+   looks focused (selected border and inner ring).
+   ===================================================================== */
+
+.ycoCombobox {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 364px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoCombobox_text {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  white-space: nowrap;
+}
+
+.ycoCombobox_labelRow {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  color: var(--text-strong);
+}
+
+.ycoCombobox_size_small .ycoCombobox_labelRow {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoCombobox_labelRow label {
+  color: inherit;
+  font: inherit;
+}
+
+.ycoCombobox_required {
+  color: var(--text-error);
+}
+
+.ycoCombobox_optional {
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* Micro (12px / 16px) has no token in styles.css. */
+.ycoCombobox_hint {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.ycoCombobox_control {
+  position: relative;
+  width: 100%;
+}
+
+.ycoCombobox_field {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-inverse-strong);
+}
+
+.ycoCombobox_size_small .ycoCombobox_field {
+  min-height: 2.25rem;
+}
+
+.ycoCombobox_field:focus-within,
+.ycoCombobox_field:has(.ycoCombobox_input[aria-expanded="true"]:not(:disabled)) {
+  border-color: var(--stroke-selected);
+}
+
+.ycoCombobox_state {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: 0 var(--spacing-16);
+  border-radius: var(--spacing-8);
+  color: var(--text-strong);
+}
+
+.ycoCombobox_size_small .ycoCombobox_state {
+  padding: 0 var(--spacing-12);
+}
+
+.ycoCombobox_state:hover {
+  background: var(--fill-hover);
+}
+
+.ycoCombobox_state:active {
+  background: var(--fill-press);
+}
+
+.ycoCombobox_state:focus-within,
+.ycoCombobox_state:has(.ycoCombobox_input[aria-expanded="true"]:not(:disabled)) {
+  background: transparent;
+  box-shadow: inset 0 0 0 3px var(--stroke-brand-weak);
+}
+
+.ycoCombobox_clearIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: var(--icon-neutral);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoCombobox_size_small .ycoCombobox_clearIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+input.ycoCombobox_input {
+  width: 100%;
+  min-width: 3rem;
+  min-height: 0;
+  height: 100%;
+  flex: 1 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-strong);
+  font: inherit;
+  outline: 0;
+}
+
+.ycoCombobox_input::placeholder {
+  color: var(--text-weak);
+  opacity: 1;
+}
+
+.ycoCombobox_clear {
+  display: grid;
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--spacing-4);
+  background: transparent;
+  cursor: pointer;
+}
+
+.ycoCombobox_clear[hidden] {
+  display: none;
+}
+
+.ycoCombobox_clear:focus-visible,
+.ycoCombobox_tagRemove:focus-visible {
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: 1px;
+}
+
+.ycoCombobox_divider {
+  width: 1px;
+  height: 1.5rem;
+  flex: none;
+  background: var(--stroke-weak);
+}
+
+.ycoCombobox_toggle {
+  display: grid;
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--spacing-4);
+  background: transparent;
+  cursor: pointer;
+}
+
+.ycoCombobox_chevron {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: var(--icon-neutral);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoCombobox_chevronUp,
+.ycoCombobox_toggle[aria-expanded="true"] .ycoCombobox_chevronDown {
+  display: none;
+}
+
+.ycoCombobox_toggle[aria-expanded="true"] .ycoCombobox_chevronUp {
+  display: block;
+}
+
+.ycoCombobox_toggle:focus-visible {
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: 1px;
+}
+
+/* ----- multiple: tag group ----- */
+.ycoCombobox_tags {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8) var(--spacing-4);
+  padding: var(--spacing-8) 0;
+}
+
+.ycoCombobox_size_small .ycoCombobox_tags {
+  padding: var(--spacing-4) 0;
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoCombobox_tag {
+  position: relative;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4) var(--spacing-8);
+  border-radius: var(--spacing-16);
+  background: var(--fill-weak);
+}
+
+.ycoCombobox_size_small .ycoCombobox_tag {
+  height: 1.5rem;
+  padding-block: 0;
+}
+
+.ycoCombobox_tag::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-16);
+  content: "";
+  pointer-events: none;
+}
+
+.ycoCombobox_tagLabel {
+  padding: 0 var(--spacing-4);
+  white-space: nowrap;
+}
+
+.ycoCombobox_tagRemove {
+  display: grid;
+  padding: 0;
+  border: 0;
+  border-radius: var(--spacing-4);
+  background: transparent;
+  cursor: pointer;
+}
+
+.ycoCombobox_tagIcon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: var(--icon-neutral);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+/* ----- list ----- */
+.ycoCombobox_menu {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + var(--spacing-8));
+  left: 0;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 0;
+  padding: var(--spacing-8) 1px;
+  overflow: hidden;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-8);
+  background: var(--background-raised);
+  box-shadow: 0 8px 24px -4px color-mix(in srgb, var(--fill-overlay) 27%, transparent);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  list-style: none;
+}
+
+.ycoCombobox_menu[hidden] {
+  display: none;
+}
+
+.ycoCombobox_option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
+  cursor: pointer;
+}
+
+.ycoCombobox_option[hidden] {
+  display: none;
+}
+
+.ycoCombobox_option:hover,
+.ycoCombobox_option_active {
+  background: var(--fill-hover);
+}
+
+.ycoCombobox_option:active {
+  background: var(--fill-press);
+}
+
+.ycoCombobox_option[aria-selected="true"] {
+  background: var(--fill-brand-weak);
+}
+
+.ycoCombobox_type_single .ycoCombobox_option[aria-selected="true"] {
+  background: transparent;
+}
+
+.ycoCombobox_type_single .ycoCombobox_option:hover,
+.ycoCombobox_type_single .ycoCombobox_option_active {
+  background: var(--fill-hover);
+}
+
+.ycoCombobox_optionLabel {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.ycoCombobox_type_multiple .ycoCombobox_optionLabel {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoCombobox_optionIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: var(--icon-neutral);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoCombobox_check {
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--spacing-4);
+  background: var(--fill-inverse-strong);
+}
+
+.ycoCombobox_checkIcon {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: var(--icon-inverse-strong);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoCombobox_option[aria-selected="true"] .ycoCombobox_check {
+  border-color: var(--fill-brand-strong);
+  background: var(--fill-brand-strong);
+}
+
+.ycoCombobox_option[aria-selected="true"] .ycoCombobox_checkIcon {
+  display: block;
+}
+
+/* ----- error ----- */
+.ycoCombobox_error {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: var(--spacing-4) 0;
+  color: var(--text-error);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 1rem;
+}
+
+.ycoCombobox_errorIcon {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- invalid ----- */
+.ycoCombobox_valid_false .ycoCombobox_field {
+  border-color: var(--stroke-error-strong);
+  background: var(--fill-error-weak);
+}
+
+.ycoCombobox_valid_false .ycoCombobox_field:focus-within,
+.ycoCombobox_valid_false .ycoCombobox_field:has(.ycoCombobox_input[aria-expanded="true"]:not(:disabled)) {
+  border-color: var(--stroke-error-strong);
+}
+
+.ycoCombobox_valid_false .ycoCombobox_state:focus-within,
+.ycoCombobox_valid_false .ycoCombobox_state:has(.ycoCombobox_input[aria-expanded="true"]:not(:disabled)) {
+  box-shadow: inset 0 0 0 3px var(--stroke-error-weak);
+}
+
+/* ----- disabled ----- */
+.ycoCombobox_disabled .ycoCombobox_labelRow,
+.ycoCombobox_disabled .ycoCombobox_required,
+.ycoCombobox_disabled .ycoCombobox_hint {
+  color: var(--text-disabled);
+}
+
+.ycoCombobox_disabled .ycoCombobox_field {
+  border-color: var(--stroke-disabled);
+}
+
+.ycoCombobox_disabled .ycoCombobox_state:hover,
+.ycoCombobox_disabled .ycoCombobox_state:active {
+  background: transparent;
+}
+
+.ycoCombobox_disabled .ycoCombobox_chevron,
+.ycoCombobox_disabled .ycoCombobox_clearIcon,
+.ycoCombobox_disabled .ycoCombobox_tagIcon {
+  stroke: var(--icon-disabled);
+}
+
+.ycoCombobox_disabled .ycoCombobox_tag {
+  color: var(--text-disabled);
+}
+
+.ycoCombobox_disabled .ycoCombobox_divider {
+  background: var(--stroke-disabled);
+}
+
+input.ycoCombobox_input:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.ycoCombobox_disabled .ycoCombobox_input::placeholder {
+  color: var(--text-disabled);
+}
+
+.ycoCombobox_toggle:disabled,
+.ycoCombobox_clear:disabled,
+.ycoCombobox_tagRemove:disabled {
+  cursor: not-allowed;
+}

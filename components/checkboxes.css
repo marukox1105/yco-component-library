@@ -1,0 +1,261 @@
+/* =====================================================================
+   YCO Checkboxes · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Checkboxes.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Checkboxes (3832:41623)
+   Checkbox (3449:65713): Type Unselected / Selected / Indeterminate x
+   Size Large / Small x State Default / Hover / Pressed / Focused /
+   Disabled x Valid true / false. Checkbox group (3449:65755): legend,
+   required / optional marks, hint, error message and the list.
+   The control is a real <input type="checkbox">; hover, press and focus
+   are :hover, :active and :focus-visible. Indeterminate is aria-checked="mixed"
+   (set input.indeterminate in script as well).
+   ===================================================================== */
+
+/* ----- group ----- */
+.ycoCheckboxes {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: 364px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoCheckboxes_legend {
+  float: none;
+  width: 100%;
+  margin: 0 0 var(--spacing-4);
+  padding: 0;
+  color: var(--text-strong);
+  font-weight: 400;
+}
+
+.ycoCheckboxes_labelRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  white-space: nowrap;
+}
+
+.ycoCheckboxes_required {
+  color: var(--text-weak);
+}
+
+.ycoCheckboxes_optional,
+.ycoCheckboxes_hint {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoCheckboxes_hint {
+  display: block;
+}
+
+.ycoCheckboxes_error {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: var(--spacing-4) 0;
+  color: var(--text-error);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoCheckboxes_errorIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoCheckboxes_list {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  padding-top: var(--spacing-24);
+}
+
+/* ----- one checkbox ----- */
+.ycoCheckboxes_item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: var(--line-height-small);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ycoCheckboxes_size_small {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* The real input stays in the layout (so it can take focus) but is invisible. */
+.ycoCheckboxes_input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  clip-path: inset(50%);
+}
+
+.ycoCheckboxes_box {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  box-sizing: border-box;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--spacing-4);
+  background: var(--fill-inverse-strong);
+  color: var(--icon-inverse-strong);
+}
+
+.ycoCheckboxes_size_small .ycoCheckboxes_box {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+}
+
+/* Hover / press wash over the box (Figma "State" layer). */
+.ycoCheckboxes_box::before {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  content: "";
+}
+
+.ycoCheckboxes_mark {
+  width: 1.75rem;
+  height: 1.75rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoCheckboxes_size_small .ycoCheckboxes_mark {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ycoCheckboxes_check,
+.ycoCheckboxes_dash {
+  display: none;
+}
+
+.ycoCheckboxes_label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  white-space: nowrap;
+}
+
+.ycoCheckboxes_labelIcon {
+  width: var(--spacing-12);
+  height: var(--spacing-12);
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- selected and indeterminate ----- */
+.ycoCheckboxes_input:checked + .ycoCheckboxes_box,
+.ycoCheckboxes_input[aria-checked="mixed"] + .ycoCheckboxes_box {
+  border-color: transparent;
+  background: var(--fill-brand-strong);
+}
+
+.ycoCheckboxes_input:checked + .ycoCheckboxes_box .ycoCheckboxes_check {
+  display: inline;
+}
+
+.ycoCheckboxes_input[aria-checked="mixed"] + .ycoCheckboxes_box .ycoCheckboxes_dash {
+  display: inline;
+}
+
+.ycoCheckboxes_input[aria-checked="mixed"] + .ycoCheckboxes_box .ycoCheckboxes_check {
+  display: none;
+}
+
+/* ----- hover, press, focus ----- */
+.ycoCheckboxes_item:hover .ycoCheckboxes_input:enabled + .ycoCheckboxes_box::before {
+  background: var(--fill-hover);
+}
+
+.ycoCheckboxes_item:active .ycoCheckboxes_input:enabled + .ycoCheckboxes_box::before {
+  background: var(--fill-press);
+}
+
+.ycoCheckboxes_input:focus-visible + .ycoCheckboxes_box {
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+/* ----- invalid ----- */
+.ycoCheckboxes_valid_false .ycoCheckboxes_box {
+  border-width: 2px;
+  border-color: var(--stroke-error-strong);
+  background: var(--fill-error-weak);
+}
+
+.ycoCheckboxes_valid_false .ycoCheckboxes_box::before {
+  inset: -2px;
+}
+
+.ycoCheckboxes_valid_false .ycoCheckboxes_input:checked + .ycoCheckboxes_box,
+.ycoCheckboxes_valid_false .ycoCheckboxes_input[aria-checked="mixed"] + .ycoCheckboxes_box {
+  border-color: transparent;
+  background: var(--fill-error-strong);
+}
+
+.ycoCheckboxes_valid_false .ycoCheckboxes_input:focus-visible + .ycoCheckboxes_box {
+  box-shadow: 0 0 0 3px var(--stroke-error-weak);
+}
+
+/* ----- disabled ----- */
+.ycoCheckboxes_item:has(.ycoCheckboxes_input:disabled) {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.ycoCheckboxes_input:disabled + .ycoCheckboxes_box {
+  border-color: var(--stroke-disabled);
+  background: var(--fill-inverse-strong);
+}
+
+.ycoCheckboxes_input:disabled:checked + .ycoCheckboxes_box,
+.ycoCheckboxes_input:disabled[aria-checked="mixed"] + .ycoCheckboxes_box {
+  border-color: transparent;
+  background: var(--fill-disabled);
+}

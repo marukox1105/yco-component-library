@@ -1,0 +1,518 @@
+/* =====================================================================
+   YCO Table · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Table.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Table (5418:55773)
+   Table: Default / Striped. Heading cell: Header left / right / checkbox,
+   State Default / Hover, Sortable No / Yes / Down / Up. Data cell: 12 types
+   (Text, Text bold, Number, Link, Secondary text, Badge, Tags, Avatar,
+   Avatar group, Checkbox, Action icons, Action links) x Colour Default / Alternate.
+   Footer: pagination. Hover is real :hover; sort buttons are real <button>s.
+   ===================================================================== */
+
+.ycoTable {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  background: var(--background-base);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoTable_scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ycoTable_table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+/* ---------- heading cells ---------- */
+
+.ycoTable_th {
+  height: 3rem;
+  padding: 0 var(--spacing-24);
+  border-top: 1px solid var(--stroke-weak);
+  border-bottom: 1px solid var(--stroke-weak);
+  background: var(--background-sunken);
+  color: var(--text-strong);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.ycoTable_th_right {
+  text-align: right;
+}
+
+/* One cell shown on its own (variant grid). */
+.ycoTable_table_single {
+  width: 100%;
+  max-width: 15rem;
+  min-width: 0;
+}
+
+.ycoTable_th_check {
+  width: 1px;
+  padding-left: 0;
+}
+
+.ycoTable_th:hover {
+  background: var(--fill-weaker);
+}
+
+.ycoTable_sort {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  gap: var(--spacing-0);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: inherit;
+}
+
+.ycoTable_sortLabel {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.ycoTable_th_right .ycoTable_sort {
+  flex-direction: row-reverse;
+}
+
+.ycoTable_sort:focus-visible {
+  border-radius: var(--corner-radius-6);
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: 2px;
+}
+
+.ycoTable_sortIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  opacity: 0;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+/* The idle sort arrow appears on hover or focus; an active sort keeps its arrow. */
+.ycoTable_sort:hover .ycoTable_sortIcon,
+.ycoTable_sort:focus-visible .ycoTable_sortIcon,
+.ycoTable_th[aria-sort="ascending"] .ycoTable_sortIcon,
+.ycoTable_th[aria-sort="descending"] .ycoTable_sortIcon {
+  opacity: 1;
+}
+
+.ycoTable_sortIcon_up,
+.ycoTable_sortIcon_down {
+  display: none;
+}
+
+.ycoTable_th[aria-sort="ascending"] .ycoTable_sortIcon_idle,
+.ycoTable_th[aria-sort="descending"] .ycoTable_sortIcon_idle {
+  display: none;
+}
+
+.ycoTable_th[aria-sort="ascending"] .ycoTable_sortIcon_up,
+.ycoTable_th[aria-sort="descending"] .ycoTable_sortIcon_down {
+  display: block;
+}
+
+/* ---------- data cells ---------- */
+
+.ycoTable_td {
+  height: 5rem;
+  padding: 0 var(--spacing-20);
+  border-bottom: 1px solid var(--stroke-weak);
+  vertical-align: middle;
+}
+
+.ycoTable_td_check {
+  width: 1px;
+  padding-left: 0;
+}
+
+.ycoTable_td_right {
+  text-align: right;
+}
+
+.ycoTable_td_bold {
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+}
+
+.ycoTable_td_alt {
+  background: var(--fill-weaker);
+}
+
+.ycoTable_striped .ycoTable_row:nth-child(even) .ycoTable_td {
+  background: var(--fill-weaker);
+}
+
+.ycoTable_row_selected .ycoTable_td {
+  background: var(--fill-brand-weak);
+}
+
+.ycoTable_cellRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.ycoTable_td_right .ycoTable_cellRow,
+.ycoTable_cellRow_end {
+  justify-content: flex-end;
+}
+
+.ycoTable_cellRow_links {
+  gap: var(--spacing-16);
+}
+
+.ycoTable_secondary {
+  display: block;
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTable_link {
+  color: var(--text-brand);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.ycoTable_link_bold {
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+}
+
+.ycoTable_link_small {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTable_trend {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.ycoTable_trend_up {
+  color: var(--icon-success);
+}
+
+.ycoTable_trend_down {
+  color: var(--icon-error);
+}
+
+/* ---------- checkbox ---------- */
+
+.ycoTable_check {
+  position: relative;
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  vertical-align: middle;
+}
+
+.ycoTable_checkInput {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.ycoTable_checkBox {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--spacing-4);
+  background: var(--fill-inverse-strong);
+  color: var(--fill-inverse-strong);
+  pointer-events: none;
+}
+
+.ycoTable_checkMark {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  opacity: 0;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.ycoTable_checkInput:checked + .ycoTable_checkBox,
+.ycoTable_checkInput:indeterminate + .ycoTable_checkBox {
+  border-color: var(--fill-brand-strong);
+  background: var(--fill-brand-strong);
+}
+
+.ycoTable_checkInput:checked + .ycoTable_checkBox .ycoTable_checkMark_tick,
+.ycoTable_checkInput:indeterminate + .ycoTable_checkBox .ycoTable_checkMark_dash {
+  opacity: 1;
+}
+
+.ycoTable_checkInput:focus-visible + .ycoTable_checkBox {
+  box-shadow: 0 0 0 3px var(--stroke-brand-weak);
+}
+
+/* ---------- badge, tags, avatars, icon buttons: drawn here, no dependency on other pages ---------- */
+
+.ycoTable_badge {
+  display: inline-flex;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-8);
+  border: 1px solid var(--stroke-success-weak);
+  border-radius: var(--spacing-16);
+  background: var(--fill-success-weak);
+  color: var(--text-success);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  white-space: nowrap;
+}
+
+.ycoTable_badgeIcon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.ycoTable_badgeLabel {
+  padding: 0 var(--spacing-4);
+}
+
+.ycoTable_tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8) var(--spacing-4);
+}
+
+.ycoTable_tag {
+  display: inline-flex;
+  height: 2rem;
+  align-items: center;
+  padding: 0 var(--spacing-12);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-16);
+  background: var(--fill-weaker);
+  font-weight: var(--font-weight-strong);
+  white-space: nowrap;
+}
+
+.ycoTable_person {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.ycoTable_avatar {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--stroke-weak);
+  border-radius: 50%;
+  background: var(--fill-weak);
+  color: var(--icon-neutral);
+}
+
+.ycoTable_avatar_small {
+  width: 2rem;
+  height: 2rem;
+}
+
+.ycoTable_avatarIcon {
+  width: 60%;
+  height: 60%;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.ycoTable_stack {
+  display: flex;
+}
+
+.ycoTable_stackItem {
+  margin-right: calc(var(--spacing-8) * -1);
+  border: 2px solid var(--background-base);
+  border-radius: 50%;
+  background: var(--background-base);
+}
+
+.ycoTable_stackItem:last-child {
+  margin-right: 0;
+}
+
+.ycoTable_count {
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTable_actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ycoTable_iconButton {
+  display: grid;
+  width: 2.625rem;
+  height: 2.625rem;
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: none;
+  color: var(--icon-neutral);
+  cursor: pointer;
+}
+
+.ycoTable_iconButton:hover {
+  background: var(--fill-hover);
+}
+
+.ycoTable_iconButton:active {
+  background: var(--fill-press);
+}
+
+.ycoTable_iconButton:focus-visible {
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: -2px;
+}
+
+.ycoTable_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+/* ---------- footer: pagination ---------- */
+
+.ycoTable_footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTable_pager {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.ycoTable_pagerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.ycoTable_pagerLink:first-child {
+  padding-right: var(--spacing-16);
+}
+
+.ycoTable_pagerLink:last-child {
+  padding-left: var(--spacing-16);
+}
+
+.ycoTable_pagerIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.ycoTable_page {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--corner-radius-8);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.ycoTable_page:hover {
+  background: var(--fill-hover);
+}
+
+.ycoTable_page[aria-current="page"] {
+  border-color: var(--stroke-strong);
+}
+
+.ycoTable_pagerLink:focus-visible,
+.ycoTable_page:focus-visible {
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: 2px;
+}
+
+.ycoTable_gap {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+}

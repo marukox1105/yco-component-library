@@ -1,0 +1,4 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoToggle.is-hover .ycoToggle_input + .ycoToggle_track::before { background: var(--fill-hover); }
+.ycoToggle.is-press .ycoToggle_input + .ycoToggle_track::before { background: var(--fill-press); }
+.ycoToggle.is-focus .ycoToggle_input + .ycoToggle_track { outline: 3px solid var(--stroke-focus); outline-offset: 0; }

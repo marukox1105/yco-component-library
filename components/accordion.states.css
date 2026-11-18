@@ -1,0 +1,6 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoAccordion_item.is-hover { background: var(--fill-hover); }
+.ycoAccordion_item.is-hover .ycoAccordion_label { text-decoration: underline; text-underline-position: from-font; }
+.ycoAccordion_item.is-press { background: var(--fill-press); }
+.ycoAccordion_item.is-press .ycoAccordion_label { text-decoration: underline; text-underline-position: from-font; }
+.ycoAccordion_item.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: 4px; }

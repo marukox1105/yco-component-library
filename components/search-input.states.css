@@ -1,0 +1,6 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoSearchInput_state.is-hover { background: var(--fill-hover); }
+.ycoSearchInput_state.is-press { background: var(--fill-press); }
+.ycoSearchInput_state.is-focus { background: transparent; }
+.ycoSearchInput:has(.is-focus) { outline: 3px solid var(--stroke-focus); outline-offset: -1px; }
+.ycoSearchInput_field:has(.is-focus) { border-color: var(--stroke-selected); }

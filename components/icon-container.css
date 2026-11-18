@@ -1,0 +1,128 @@
+/* =====================================================================
+   YCO Icon container · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './IconContainer.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Icon container (6638:143252)
+   A 48px round holder for one 24px icon.
+   Tone Neutral / Brand / Inverse / Destructive / Warning / Success /
+   Information x Style Filled / Stroked. No interactive states.
+   ===================================================================== */
+
+.ycoIconContainer {
+  display: inline-grid;
+  flex: none;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  box-sizing: border-box;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: var(--icon-neutral);
+  line-height: 0;
+}
+
+.ycoIconContainer_icon {
+  display: block;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- stroked: an outline, no fill ----- */
+.ycoIconContainer_style_stroked {
+  background: transparent;
+}
+
+/* ----- filled: a tinted fill, no outline ----- */
+.ycoIconContainer_style_filled {
+  border-color: transparent;
+}
+
+/* ----- tones ----- */
+.ycoIconContainer_tone_neutral {
+  color: var(--icon-neutral);
+}
+
+.ycoIconContainer_tone_neutral.ycoIconContainer_style_filled {
+  background: var(--fill-weak);
+}
+
+.ycoIconContainer_tone_neutral.ycoIconContainer_style_stroked {
+  border-color: var(--stroke-weak);
+}
+
+.ycoIconContainer_tone_brand {
+  color: var(--icon-brand);
+}
+
+.ycoIconContainer_tone_brand.ycoIconContainer_style_filled {
+  background: var(--fill-brand-weak);
+}
+
+.ycoIconContainer_tone_brand.ycoIconContainer_style_stroked {
+  border-color: var(--stroke-brand-weak);
+}
+
+.ycoIconContainer_tone_inverse {
+  color: var(--icon-inverse);
+}
+
+.ycoIconContainer_tone_inverse.ycoIconContainer_style_filled {
+  background: var(--fill-inverse-hover);
+}
+
+.ycoIconContainer_tone_inverse.ycoIconContainer_style_stroked {
+  border-color: var(--stroke-inverse-weak);
+}
+
+.ycoIconContainer_tone_destructive {
+  color: var(--icon-error);
+}
+
+.ycoIconContainer_tone_destructive.ycoIconContainer_style_filled {
+  background: var(--fill-error-weak);
+}
+
+.ycoIconContainer_tone_destructive.ycoIconContainer_style_stroked {
+  border-color: var(--stroke-error-weak);
+}
+
+.ycoIconContainer_tone_warning {
+  color: var(--icon-warning);
+}
+
+.ycoIconContainer_tone_warning.ycoIconContainer_style_filled {
+  background: var(--fill-warning-weak);
+}
+
+.ycoIconContainer_tone_warning.ycoIconContainer_style_stroked {
+  border-color: var(--stroke-warning-weak);
+}
+
+.ycoIconContainer_tone_success {
+  color: var(--icon-success);
+}
+
+.ycoIconContainer_tone_success.ycoIconContainer_style_filled {
+  background: var(--fill-success-weak);
+}
+
+.ycoIconContainer_tone_success.ycoIconContainer_style_stroked {
+  border-color: var(--stroke-success-weak);
+}
+
+.ycoIconContainer_tone_information {
+  color: var(--icon-information);
+}
+
+.ycoIconContainer_tone_information.ycoIconContainer_style_filled {
+  background: var(--fill-information-weak);
+}
+
+.ycoIconContainer_tone_information.ycoIconContainer_style_stroked {
+  border-color: var(--stroke-information-weak);
+}

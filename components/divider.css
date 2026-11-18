@@ -1,0 +1,25 @@
+/* =====================================================================
+   YCO Divider · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Divider.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Divider (3981:37904)
+   Type: Weak / Strong. A 1px horizontal rule that fills its container.
+   ===================================================================== */
+
+.ycoDivider {
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin: var(--spacing-0);
+  padding: var(--spacing-0);
+  border: 0;
+  flex: none;
+}
+
+.ycoDivider_type_weak {
+  background: var(--stroke-weak);
+}
+
+.ycoDivider_type_strong {
+  background: var(--stroke-strong);
+}

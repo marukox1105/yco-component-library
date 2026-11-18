@@ -1,0 +1,6 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoTextLink_underline_true.is-hover,
+.ycoTextLink_underline_true.is-press { text-decoration: none; }
+.ycoTextLink_underline_false.is-hover,
+.ycoTextLink_underline_false.is-press { text-decoration: underline; }
+.ycoTextLink.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: 2px; }

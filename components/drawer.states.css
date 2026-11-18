@@ -1,0 +1,15 @@
+/* Doc-only: the live overlay is position:fixed in the product. Inside the preview it is drawn within the stage. Not exported. */
+.ycoDrawer_stage {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 35rem;
+  overflow: hidden;
+  border-radius: var(--corner-radius-8);
+  background: var(--background-base);
+}
+.ycoDrawer_stage .ycoDrawer_overlay { position: absolute; z-index: 1; }
+.ycoDrawer_stage_device_mobile { width: 26.75rem; max-width: calc(100vw - 8.5rem); margin-inline: auto; }
+.ycoDrawer_stage_variant { min-height: 35rem; }
+.ycoDrawer_stageOpen { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.ycoDrawer_stageOpen[hidden] { display: none; }

@@ -1,0 +1,4 @@
+/* Doc-only: shows Hover / Press / Focus of the menu item without a real pointer. Not exported to yce-frontend. */
+.ycoNavigationHeader_menuItem.is-hover { background: var(--fill-hover); }
+.ycoNavigationHeader_menuItem.is-press { background: var(--fill-press); }
+.ycoNavigationHeader_menuItem.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: 4px; }

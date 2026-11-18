@@ -1,0 +1,14 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoNavigationSide_item.is-hover { background: var(--fill-hover); }
+.ycoNavigationSide_item.is-press { background: var(--fill-press); }
+.ycoNavigationSide_item.is-focus { box-shadow: 0 0 0 4px var(--stroke-focus); }
+.ycoNavigationSide_item[aria-current="page"].is-hover { background: var(--fill-brand-hover); box-shadow: inset 0 0 0 2px var(--stroke-selected); }
+.ycoNavigationSide_item[aria-current="page"].is-press { background: var(--fill-brand-press); box-shadow: inset 0 0 0 2px var(--stroke-selected); }
+.ycoNavigationSide_railItem.is-hover .ycoNavigationSide_railIcon { background: var(--fill-hover); }
+.ycoNavigationSide_railItem.is-press .ycoNavigationSide_railIcon { background: var(--fill-press); }
+.ycoNavigationSide_railItem.is-focus .ycoNavigationSide_railIcon { box-shadow: 0 0 0 4px var(--stroke-focus); }
+.ycoNavigationSide_railItem[aria-current="page"].is-hover .ycoNavigationSide_railIcon { background: var(--fill-brand-hover); box-shadow: inset 0 0 0 2px var(--stroke-selected); }
+.ycoNavigationSide_railItem[aria-current="page"].is-press .ycoNavigationSide_railIcon { background: var(--fill-brand-press); box-shadow: inset 0 0 0 2px var(--stroke-selected); }
+.ycoNavigationSide_row.is-hover { background: var(--fill-brand-hover); color: var(--text-brand); }
+.ycoNavigationSide_row.is-press { background: var(--fill-brand-weak); color: var(--text-brand); }
+.ycoNavigationSide_row.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: -2px; }

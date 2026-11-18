@@ -1,0 +1,8 @@
+/* Doc-only: the light ground Figma draws the illustrations on, so white paper stays visible. Not exported to yce-frontend. */
+.ycoEmptyImage_stage {
+  display: inline-block;
+  padding: var(--spacing-16);
+  border-radius: var(--corner-radius-8);
+  background: var(--background-sunken);
+  line-height: 0;
+}

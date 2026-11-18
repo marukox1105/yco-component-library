@@ -1,0 +1,321 @@
+/* =====================================================================
+   YCO Avatar · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Avatar.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Avatar (3531:66915), Avatar
+   stack (3633:1630), Avatar labelled (4017:38201), Avatar dropdown
+   (5691:49022).
+   Avatar: Type Photo / Icon / Initials x Size Small 32 / Medium 40 /
+   Large 64, with an optional status dot (bottom right) and notification
+   dot (top right). Stack, labelled and dropdown compose it.
+   ===================================================================== */
+
+.ycoAvatar {
+  position: relative;
+  display: inline-grid;
+  flex: none;
+  width: var(--spacing-40);
+  height: var(--spacing-40);
+  box-sizing: border-box;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--fill-weak);
+  color: var(--icon-neutral);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-small);
+}
+
+/* The 1px inside stroke sits over the photo. */
+.ycoAvatar::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--stroke-weak);
+  content: "";
+  pointer-events: none;
+}
+
+.ycoAvatar.ycoAvatar_size_small {
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+}
+
+.ycoAvatar.ycoAvatar_size_medium {
+  width: var(--spacing-40);
+  height: var(--spacing-40);
+}
+
+.ycoAvatar.ycoAvatar_size_large {
+  width: 4rem;
+  height: 4rem;
+}
+
+.ycoAvatar_image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ycoAvatar_icon {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoAvatar_size_small .ycoAvatar_icon {
+  width: var(--spacing-20);
+  height: var(--spacing-20);
+}
+
+.ycoAvatar_size_large .ycoAvatar_icon {
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+}
+
+.ycoAvatar_initials {
+  color: var(--text-weak);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  white-space: nowrap;
+}
+
+.ycoAvatar_size_small .ycoAvatar_initials {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoAvatar_size_large .ycoAvatar_initials {
+  font-size: 1.5rem;
+  line-height: var(--spacing-32);
+}
+
+/* ----- status (bottom right) and notification (top right) dots ----- */
+.ycoAvatar_badge {
+  position: absolute;
+  display: grid;
+  width: 0.75rem;
+  height: 0.75rem;
+  box-sizing: border-box;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--background-base);
+  line-height: 0;
+}
+
+.ycoAvatar_badgeDot {
+  display: grid;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  place-items: center;
+  border-radius: 50%;
+  color: var(--grey-solid-0);
+}
+
+.ycoAvatar_badgeGlyph {
+  width: 66%;
+  height: 66%;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoAvatar_badge_status {
+  top: 2.25rem;
+  left: 2.25rem;
+}
+
+.ycoAvatar_badge_notification {
+  top: 0;
+  left: 1.75rem;
+}
+
+.ycoAvatar_size_large .ycoAvatar_badge {
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+}
+
+.ycoAvatar_size_large .ycoAvatar_badge_status {
+  top: var(--spacing-48);
+  left: var(--spacing-48);
+}
+
+.ycoAvatar_size_large .ycoAvatar_badge_notification {
+  top: 0;
+  left: var(--spacing-48);
+}
+
+.ycoAvatar_size_small .ycoAvatar_badge_status {
+  top: 1.375rem;
+  left: 1.375rem;
+}
+
+.ycoAvatar_size_small .ycoAvatar_badge_notification {
+  top: 0;
+  left: var(--spacing-24);
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+}
+
+.ycoAvatar_size_small .ycoAvatar_badge_notification .ycoAvatar_badgeDot {
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+}
+
+.ycoAvatar_status_online {
+  background: var(--fill-success-strong);
+}
+
+.ycoAvatar_status_busy,
+.ycoAvatar_status_notification {
+  background: var(--fill-error-strong);
+}
+
+.ycoAvatar_status_away {
+  background: var(--fill-warning-strong);
+}
+
+.ycoAvatar_status_offline {
+  background: var(--fill-disabled);
+  color: var(--icon-neutral);
+}
+
+/* ----- labelled: avatar with a name and an optional second line ----- */
+.ycoAvatar_labelled {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--spacing-12);
+  font-family: var(--font-family-body);
+}
+
+.ycoAvatar_labelled.ycoAvatar_size_small {
+  gap: var(--spacing-8);
+}
+
+.ycoAvatar_text {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ycoAvatar_primary {
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoAvatar_secondary {
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoAvatar_size_small .ycoAvatar_primary {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* ----- stack: overlapping avatars, each cut out with a 2px ring of the page colour ----- */
+.ycoAvatar_stack {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ycoAvatar_stackItem {
+  display: inline-flex;
+  flex: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--background-base);
+}
+
+.ycoAvatar_stackItem + .ycoAvatar_stackItem {
+  margin-left: -0.75rem;
+}
+
+.ycoAvatar_stack.ycoAvatar_size_small .ycoAvatar_stackItem + .ycoAvatar_stackItem {
+  margin-left: -0.5rem;
+}
+
+.ycoAvatar_stack.ycoAvatar_size_large .ycoAvatar_stackItem + .ycoAvatar_stackItem {
+  margin-left: -1rem;
+}
+
+/* ----- dropdown trigger: a labelled avatar that opens a menu ----- */
+.ycoAvatar_dropdown {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: var(--spacing-8) var(--spacing-16);
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  font: inherit;
+  outline: 0;
+  text-align: left;
+}
+
+.ycoAvatar_dropdown:hover:not(:disabled) {
+  background: var(--fill-hover);
+}
+
+.ycoAvatar_dropdown:active:not(:disabled) {
+  background: var(--fill-press);
+}
+
+.ycoAvatar_dropdown:focus-visible {
+  background: var(--fill-hover);
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+.ycoAvatar_dropdown:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.ycoAvatar_dropdown_navigation {
+  display: flex;
+  width: 100%;
+  max-width: 20rem;
+  padding: var(--spacing-12) var(--spacing-24);
+  border-radius: 0;
+}
+
+.ycoAvatar_dropdown_navigation .ycoAvatar_labelled {
+  flex: 1 0 0;
+}
+
+.ycoAvatar_dropdown_navigation:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--stroke-focus);
+}
+
+.ycoAvatar_trailing {
+  display: block;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: none;
+  fill: none;
+  stroke: var(--icon-neutral);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The chevron points up while the menu is open. */
+.ycoAvatar_dropdown[aria-expanded="true"] .ycoAvatar_chevronDown,
+.ycoAvatar_dropdown:not([aria-expanded="true"]) .ycoAvatar_chevronUp {
+  display: none;
+}

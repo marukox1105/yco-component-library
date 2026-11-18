@@ -1,0 +1,10 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoButtonIcon.is-hover::before { background: var(--fill-hover); }
+.ycoButtonIcon.is-press::before { background: var(--fill-press); }
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_neutral.is-hover::before,
+.ycoButtonIcon_tone_inverse:not(.ycoButtonIcon_type_primary).is-hover::before { background: var(--fill-inverse-hover); }
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_neutral.is-press::before,
+.ycoButtonIcon_tone_inverse:not(.ycoButtonIcon_type_primary).is-press::before { background: var(--fill-inverse-press); }
+.ycoButtonIcon.is-focus { box-shadow: 0 0 0 3px var(--stroke-focus); }
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_destructive.is-focus { box-shadow: 0 0 0 3px var(--stroke-error-weak); }
+.ycoButtonIcon_tone_inverse.is-focus { box-shadow: 0 0 0 3px var(--stroke-inverse-strong); }

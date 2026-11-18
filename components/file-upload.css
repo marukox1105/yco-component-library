@@ -1,0 +1,392 @@
+/* =====================================================================
+   YCO File upload · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './FileUpload.module.css').
+   Figma: [Comp] YCO_web_components_2025 · File upload (5285:79574)
+   File upload (5327:19008): Type Photo / Default / Invalid / Files, with the
+   label, required / optional marks and hint. File (5327:18948 / 5327:18737):
+   Uploading (progress bar) and Uploaded (name is a link). The drop zone is
+   a real <input type="file"> inside a label; dragging files onto it is wired
+   by the page script.
+   ===================================================================== */
+
+.ycoFileUpload {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: var(--line-height-small);
+}
+
+.ycoFileUpload_type_files {
+  gap: var(--spacing-16);
+}
+
+.ycoFileUpload_group {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}
+
+/* ----- label block ----- */
+.ycoFileUpload_text {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.ycoFileUpload_labelRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  white-space: nowrap;
+}
+
+.ycoFileUpload_required {
+  color: var(--text-weak);
+}
+
+.ycoFileUpload_optional,
+.ycoFileUpload_hint {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoFileUpload_error {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: var(--spacing-4) 0;
+  color: var(--text-error);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoFileUpload_errorIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- drop zone ----- */
+.ycoFileUpload_zone {
+  position: relative;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-24);
+  padding: var(--spacing-32);
+  border: 1px dashed var(--stroke-strong);
+  border-radius: 1rem;
+  background: var(--fill-weaker);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* The real input is invisible but stays focusable. */
+.ycoFileUpload_input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  clip-path: inset(50%);
+}
+
+.ycoFileUpload_zone:has(:focus-visible) {
+  outline: 3px solid var(--stroke-focus);
+  outline-offset: 2px;
+}
+
+.ycoFileUpload_zone:hover,
+.ycoFileUpload_zone_dragover {
+  border-color: var(--stroke-selected);
+  background: var(--fill-brand-weak);
+}
+
+.ycoFileUpload_content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16);
+}
+
+.ycoFileUpload_iconBox {
+  display: grid;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  flex: none;
+  place-items: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--fill-brand-weak);
+  color: var(--icon-brand);
+}
+
+.ycoFileUpload_icon {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoFileUpload_copy {
+  display: flex;
+  width: 100%;
+  max-width: 33.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.ycoFileUpload_heading {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+}
+
+.ycoFileUpload_note {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* Buttons are drawn here (the input is the real control): solid, outline, and brand outline. */
+.ycoFileUpload_button {
+  display: inline-flex;
+  height: var(--spacing-32);
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 var(--spacing-16);
+  border: 1px solid transparent;
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-brand-strong);
+  color: var(--text-inverse-strong);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+  white-space: nowrap;
+}
+
+.ycoFileUpload_button_outline {
+  border-color: var(--stroke-strong);
+  background: transparent;
+  color: var(--text-strong);
+}
+
+.ycoFileUpload_button_brand {
+  border-color: var(--stroke-brand-strong);
+  background: transparent;
+  color: var(--text-brand);
+}
+
+/* ----- photo ----- */
+.ycoFileUpload_photo {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--spacing-12);
+  border-radius: 1.5rem;
+  background: var(--background-base);
+}
+
+.ycoFileUpload_type_photo .ycoFileUpload_zone {
+  background: var(--background-base);
+}
+
+.ycoFileUpload_type_photo .ycoFileUpload_zone:hover,
+.ycoFileUpload_type_photo .ycoFileUpload_zone_dragover {
+  background: var(--fill-brand-weak);
+}
+
+.ycoFileUpload_type_photo .ycoFileUpload_iconBox {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.ycoFileUpload_type_photo .ycoFileUpload_icon {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.ycoFileUpload_type_photo .ycoFileUpload_button {
+  height: 2.625rem;
+  padding: 0 var(--spacing-20);
+  font-size: var(--font-size-heading-5);
+  line-height: 1.625rem;
+}
+
+.ycoFileUpload_pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.ycoFileUpload_pickNote {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+}
+
+/* ----- invalid ----- */
+.ycoFileUpload_type_invalid .ycoFileUpload_zone {
+  border-color: var(--stroke-error-strong);
+  background: var(--fill-error-weak);
+}
+
+.ycoFileUpload_type_invalid .ycoFileUpload_iconBox {
+  background: var(--fill-error-weak);
+  color: var(--icon-error);
+}
+
+.ycoFileUpload_type_invalid .ycoFileUpload_note {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoFileUpload_type_invalid .ycoFileUpload_zone:has(:focus-visible) {
+  outline-color: var(--stroke-error-weak);
+}
+
+/* ----- file list ----- */
+.ycoFileUpload_list {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ycoFileUpload_file {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-16) 0;
+  border-bottom: 1px solid var(--stroke-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoFileUpload_fileIcon {
+  display: grid;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--fill-weak);
+  color: var(--icon-neutral);
+}
+
+.ycoFileUpload_fileText {
+  display: flex;
+  min-width: 1px;
+  flex: 1 0 0;
+  flex-direction: column;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.ycoFileUpload_fileName {
+  overflow: hidden;
+  color: var(--text-strong);
+  text-overflow: ellipsis;
+}
+
+a.ycoFileUpload_fileName {
+  color: var(--text-brand);
+  text-decoration: underline;
+}
+
+.ycoFileUpload_fileSize {
+  color: var(--text-weak);
+}
+
+.ycoFileUpload_progress {
+  display: flex;
+  min-width: 1px;
+  flex: 1 0 0;
+  align-items: center;
+  padding-right: var(--spacing-16);
+}
+
+.ycoFileUpload_track {
+  position: relative;
+  height: var(--spacing-8);
+  flex: 1 0 0;
+  overflow: hidden;
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-weak);
+  box-shadow: inset 0 1px 4px var(--grey-neutral-light-100);
+}
+
+.ycoFileUpload_fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-brand-strong);
+  box-shadow: inset 0 1px 4px var(--grey-neutral-light-100);
+}
+
+.ycoFileUpload_remove {
+  display: grid;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: none;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--corner-radius-6);
+  background: transparent;
+  color: var(--icon-neutral);
+  cursor: pointer;
+}
+
+.ycoFileUpload_remove:hover {
+  background: var(--fill-hover);
+}
+
+.ycoFileUpload_remove:focus-visible {
+  outline: 3px solid var(--stroke-focus);
+  outline-offset: 1px;
+}

@@ -1,0 +1,20 @@
+/* Doc-only: shows Hover / Press / Focus on list items without a pointer, and room around the trigger. Not exported to yce-frontend. */
+.ycoDropdownMenu_item.is-hover { background: var(--fill-hover); }
+.ycoDropdownMenu_item.is-press { background: var(--fill-press); }
+.ycoDropdownMenu_item.is-focus { background: transparent; box-shadow: inset 0 0 0 2px var(--stroke-focus); }
+.ycoDropdownMenu_item_selected.is-hover,
+.ycoDropdownMenu_item_selected.is-press,
+.ycoDropdownMenu_item_selected.is-focus { background: var(--fill-brand-weak); box-shadow: inset 4px 0 0 var(--stroke-selected); }
+.ycoDropdownMenu_item_selected.is-focus { box-shadow: inset 4px 0 0 var(--stroke-selected), inset 0 0 0 2px var(--stroke-focus); }
+
+.ycoDropdownMenu_stage { display: flex; width: 100%; box-sizing: border-box; align-items: flex-start; justify-content: flex-start; padding: 1rem; }
+.ycoDropdownMenu_stage_right { justify-content: flex-end; }
+.ycoDropdownMenu_stage_bottom_pad { min-height: 36rem; }
+.ycoDropdownMenu_stage_top { align-items: flex-end; min-height: 36rem; }
+.ycoDropdownMenu_stage_open_bottom { min-height: 36rem; }
+.ycoDropdownMenu_stage_tight { min-height: 0; }
+.ycoDropdownMenu_itemsDemo { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start; }
+.ycoDropdownMenu_itemsCol { display: flex; width: 17.5rem; max-width: 100%; flex-direction: column; gap: 4px; }
+.ycoDropdownMenu_itemsCol .ycoDropdownMenu_item,
+.ycoDropdownMenu_itemsCol .ycoDropdownMenu_heading,
+.ycoDropdownMenu_itemsCol .ycoDropdownMenu_divider { outline: 1px dashed var(--stroke-weak); }

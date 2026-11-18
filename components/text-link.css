@@ -1,0 +1,110 @@
+/* =====================================================================
+   YCO Text link · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './TextLink.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Text link (4783:91903)
+   Tone x State x Size Small / Tiny x Weight Bold / Regular x Underline,
+   with an optional 20px icon on either side.
+   Hover and Press flip the underline: a link drawn underlined loses it,
+   a link drawn plain gains it. Focus draws a 2px ring 2px outside.
+   ===================================================================== */
+
+.ycoTextLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  border-radius: 0.125rem;
+  color: var(--text-brand);
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: var(--line-height-small);
+  outline: 0;
+  text-decoration: none;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+  white-space: nowrap;
+}
+
+/* ----- size and weight ----- */
+.ycoTextLink_size_tiny {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTextLink_weight_bold {
+  font-weight: var(--font-weight-strong);
+}
+
+.ycoTextLink_size_small.ycoTextLink_weight_bold {
+  font-size: var(--font-size-heading-5);
+  line-height: 1.625rem;
+}
+
+/* ----- underline ----- */
+.ycoTextLink_underline_true {
+  text-decoration: underline;
+}
+
+.ycoTextLink_underline_true:hover:not([aria-disabled="true"]),
+.ycoTextLink_underline_true:active:not([aria-disabled="true"]) {
+  text-decoration: none;
+}
+
+.ycoTextLink_underline_false:hover:not([aria-disabled="true"]),
+.ycoTextLink_underline_false:active:not([aria-disabled="true"]) {
+  text-decoration: underline;
+}
+
+/* ----- focus ----- */
+.ycoTextLink:focus-visible {
+  outline: 2px solid var(--stroke-focus);
+  outline-offset: 2px;
+}
+
+/* ----- tones ----- */
+.ycoTextLink_tone_neutral-strong {
+  color: var(--text-strong);
+}
+
+.ycoTextLink_tone_neutral-weak {
+  color: var(--text-weak);
+}
+
+.ycoTextLink_tone_destructive {
+  color: var(--text-error);
+}
+
+.ycoTextLink_tone_inverse-strong {
+  color: var(--text-inverse-strong);
+}
+
+.ycoTextLink_tone_inverse-weak {
+  color: var(--icon-inverse);
+}
+
+/* ----- disabled ----- */
+.ycoTextLink[aria-disabled="true"] {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.ycoTextLink_tone_inverse-strong[aria-disabled="true"],
+.ycoTextLink_tone_inverse-weak[aria-disabled="true"] {
+  color: var(--text-inverse-disabled);
+}
+
+/* ----- optional 20px icons ----- */
+.ycoTextLink_icon {
+  display: block;
+  width: var(--spacing-20);
+  height: var(--spacing-20);
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

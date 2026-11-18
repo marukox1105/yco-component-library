@@ -1,0 +1,5 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoRadioButtons_item.is-hover .ycoRadioButtons_circle::before { background: var(--fill-hover); }
+.ycoRadioButtons_item.is-press .ycoRadioButtons_circle::before { background: var(--fill-press); }
+.ycoRadioButtons_item.is-focus .ycoRadioButtons_circle { box-shadow: 0 0 0 3px var(--stroke-focus); }
+.ycoRadioButtons_valid_false.is-focus .ycoRadioButtons_circle { box-shadow: 0 0 0 3px var(--stroke-error-weak); }

@@ -1,0 +1,96 @@
+/* =====================================================================
+   YCO Progress indicator · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './ProgressIndicator.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Progress indicator (4157:47199, set 3694:2033)
+   Step 1 to 5 of 5: "Step n of 5" title, five segments, and a Back text link.
+   ===================================================================== */
+
+.ycoProgressIndicator {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-heading-5);
+  font-weight: 400;
+}
+
+.ycoProgressIndicator_row {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}
+
+.ycoProgressIndicator_title {
+  width: 100%;
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+}
+
+.ycoProgressIndicator_steps {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.ycoProgressIndicator_step {
+  display: block;
+  height: var(--spacing-8);
+  flex: 1 0 0;
+  min-width: 1px;
+  border-radius: var(--spacing-4);
+  background: var(--stroke-weak);
+  box-shadow: inset 0 1px 4px var(--grey-neutral-light-100);
+}
+
+.ycoProgressIndicator_step_done {
+  background: var(--fill-brand-strong);
+  box-shadow: none;
+}
+
+/* Back is a text link: brand colour, 20px arrow, 18px semibold label. */
+.ycoProgressIndicator_back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--corner-radius-6);
+  background: transparent;
+  color: var(--text-brand);
+  font: inherit;
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+  cursor: pointer;
+}
+
+.ycoProgressIndicator_back:hover {
+  text-decoration: underline;
+}
+
+.ycoProgressIndicator_back:focus-visible {
+  outline: 3px solid var(--stroke-focus);
+  outline-offset: 2px;
+}
+
+.ycoProgressIndicator_backIcon {
+  width: var(--spacing-20);
+  height: var(--spacing-20);
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

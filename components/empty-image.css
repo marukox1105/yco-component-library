@@ -1,0 +1,75 @@
+/* =====================================================================
+   YCO Empty image · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './EmptyImage.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Empty Image (13023:12548)
+   A 120px illustration for an empty area. Type: general, video, edt,
+   upload_drag, t2i, i2v, voice-microphone, t2v, face_swap_photo,
+   face_swap_video. Page: Tool (white paper) or Gallery (paper is
+   transparent on the lighter ground). Every colour is a token, so the
+   artwork follows the theme.
+   ===================================================================== */
+
+.ycoEmptyImage {
+  display: block;
+  width: 7.5rem;
+  height: 7.5rem;
+  flex: none;
+}
+
+.ycoEmptyImage_ground {
+  fill: var(--fill-hover);
+}
+
+.ycoEmptyImage_groundStrong {
+  fill: var(--fill-disabled);
+}
+
+.ycoEmptyImage_paper {
+  fill: var(--fill-inverse-strong);
+}
+
+.ycoEmptyImage_hole {
+  fill: var(--fill-inverse-strong);
+}
+
+.ycoEmptyImage_holeDark {
+  fill: var(--fill-hover);
+}
+
+.ycoEmptyImage_glyph {
+  fill: var(--text-weak);
+}
+
+.ycoEmptyImage_glyphLight {
+  fill: var(--text-weaker);
+}
+
+.ycoEmptyImage_stroke {
+  fill: none;
+  stroke: var(--text-weak);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoEmptyImage_strokeLight {
+  fill: none;
+  stroke: var(--text-weaker);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoEmptyImage_sparkle {
+  fill: var(--text-weaker);
+}
+
+/* Gallery: the paper cards lose their white fill. */
+.ycoEmptyImage_page_gallery .ycoEmptyImage_paper {
+  fill: var(--fill-weaker);
+}
+
+.ycoEmptyImage_page_gallery .ycoEmptyImage_hole {
+  fill: var(--fill-weaker);
+}

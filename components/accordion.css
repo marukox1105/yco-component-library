@@ -1,0 +1,117 @@
+/* =====================================================================
+   YCO Accordion · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Accordion.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Accordion (3812:28380)
+   Item: Open True / False x State Default / Hover / Press / Focus / Disabled.
+   Built on <details>/<summary>; items sharing a `name` open one at a time.
+   Hover, Press and Focus are real :hover, :active and :focus-visible.
+   ===================================================================== */
+
+.ycoAccordion {
+  width: 100%;
+  border-bottom: 1px solid var(--stroke-weak);
+  font-family: var(--font-family-body);
+}
+
+.ycoAccordion_item {
+  padding: var(--spacing-16) var(--spacing-0);
+  border-top: 1px solid var(--stroke-weak);
+  color: var(--text-strong);
+}
+
+.ycoAccordion_item:hover {
+  background: var(--fill-hover);
+}
+
+.ycoAccordion_item:hover .ycoAccordion_label {
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.ycoAccordion_item:active {
+  background: var(--fill-press);
+}
+
+.ycoAccordion_item:has(.ycoAccordion_header:focus-visible) {
+  outline: 2px solid var(--stroke-focus);
+  outline-offset: 4px;
+}
+
+.ycoAccordion_header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+}
+
+.ycoAccordion_header::-webkit-details-marker {
+  display: none;
+}
+
+.ycoAccordion_item[open] > .ycoAccordion_header {
+  gap: var(--spacing-24);
+}
+
+.ycoAccordion_label {
+  min-width: 0;
+  flex: 1 1 0;
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+  text-align: left;
+}
+
+.ycoAccordion_chevron {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.ycoAccordion_item[open] .ycoAccordion_chevron {
+  transform: rotate(180deg);
+}
+
+.ycoAccordion_content {
+  padding: var(--spacing-8) var(--spacing-32) var(--spacing-0) var(--spacing-0);
+  color: var(--text-weak);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoAccordion_content > :first-child {
+  margin-top: 0;
+}
+
+.ycoAccordion_content > :last-child {
+  margin-bottom: 0;
+}
+
+/* Disabled: aria-disabled on the summary; the doc page also removes it from the tab order. */
+.ycoAccordion_item_disabled,
+.ycoAccordion_item_disabled:hover,
+.ycoAccordion_item_disabled:active {
+  border-top-color: var(--stroke-disabled);
+  background: none;
+  color: var(--text-disabled);
+}
+
+.ycoAccordion_item_disabled .ycoAccordion_header {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.ycoAccordion_item_disabled:hover .ycoAccordion_label {
+  text-decoration: none;
+}
+
+.ycoAccordion_item_disabled .ycoAccordion_content {
+  color: var(--text-disabled);
+}

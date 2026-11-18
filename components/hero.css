@@ -1,0 +1,517 @@
+/* =====================================================================
+   YCO Hero · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Hero.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Hero (6689:40167)
+   Type: Horizontal, Horizontal padded, Vertical, Vertical large,
+   Vertical small. Device: Desktop (1440), Tablet (768), Mobile (428).
+   Optional label, tag, email field, button group and social proof.
+   The image is a token-coloured placeholder; the product supplies the
+   picture. Buttons are the shared Button.
+   ===================================================================== */
+
+.ycoHero {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 90rem;
+  box-sizing: border-box;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--stroke-weak);
+  background: var(--fill-weaker);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+}
+
+.ycoHero_content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-32);
+  box-sizing: border-box;
+}
+
+.ycoHero_top {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+}
+
+.ycoHero_eyebrow {
+  width: 100%;
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  letter-spacing: 2px;
+  line-height: var(--line-height-tiny);
+  text-transform: uppercase;
+}
+
+.ycoHero_tag {
+  display: inline-flex;
+  height: var(--spacing-32);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4) var(--spacing-12);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-16);
+  background: var(--fill-inverse-strong);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-small);
+  white-space: nowrap;
+}
+
+.ycoHero_text {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-24);
+  overflow-wrap: anywhere;
+}
+
+.ycoHero_title {
+  width: 100%;
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-family-heading);
+  font-size: 3.5rem;
+  font-weight: var(--font-weight-strong);
+  letter-spacing: -1px;
+  line-height: 4rem;
+}
+
+.ycoHero_description {
+  width: 100%;
+  margin: 0;
+  color: var(--text-weak);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+}
+
+/* ----- email field ----- */
+.ycoHero_form {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  margin: 0;
+}
+
+.ycoHero_field {
+  display: flex;
+  width: 18.75rem;
+  max-width: 100%;
+  height: var(--spacing-48);
+  box-sizing: border-box;
+  align-items: center;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-inverse-strong);
+}
+
+.ycoHero_field:focus-within {
+  border-color: var(--stroke-selected);
+  box-shadow: 0 0 0 3px var(--stroke-brand-weak);
+}
+
+.ycoHero_input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 var(--spacing-16);
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: transparent;
+  color: var(--text-strong);
+  font: inherit;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  outline: 0;
+}
+
+.ycoHero_input::placeholder {
+  color: var(--text-weak);
+  opacity: 1;
+}
+
+.ycoHero_submit {
+  min-height: var(--spacing-48);
+}
+
+.ycoHero_buttons {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}
+
+/* ----- social proof ----- */
+.ycoHero_proof {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+}
+
+.ycoHero_avatars {
+  display: flex;
+  align-items: flex-start;
+}
+
+.ycoHero_avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  box-sizing: content-box;
+  flex: none;
+  margin-right: -0.75rem;
+  border: 2px solid var(--background-base);
+  border-radius: var(--corner-radius-32);
+  background: var(--background-base);
+  box-shadow: inset 0 0 0 1px var(--stroke-weak);
+}
+
+.ycoHero_avatar:last-child {
+  margin-right: 0;
+}
+
+.ycoHero_avatarFace {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--spacing-48);
+  background: var(--fill-disabled);
+}
+
+.ycoHero_avatar:nth-child(even) .ycoHero_avatarFace {
+  background: var(--fill-hover);
+}
+
+.ycoHero_rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--spacing-4);
+}
+
+.ycoHero_ratingMain {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.ycoHero_stars {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.ycoHero_star {
+  display: block;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: none;
+  fill: var(--fill-warning-strong);
+  stroke: var(--stroke-warning-strong);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoHero_starEmpty {
+  fill: none;
+}
+
+.ycoHero_starHalf {
+  fill: none;
+}
+
+.ycoHero_starHalfFill {
+  fill: var(--fill-warning-strong);
+  stroke: none;
+}
+
+.ycoHero_score {
+  color: var(--text-strong);
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+}
+
+.ycoHero_reviews {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  white-space: nowrap;
+}
+
+.ycoHero_link {
+  color: var(--text-brand);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.ycoHero_link:focus-visible {
+  border-radius: var(--corner-radius-6);
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+/* ----- media placeholder ----- */
+.ycoHero_media {
+  display: flex;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.ycoHero_image {
+  display: grid;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  place-items: center;
+  background: var(--fill-hover);
+  color: var(--text-weaker);
+}
+
+.ycoHero_imageIcon {
+  width: 4rem;
+  height: 4rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* =====================================================================
+   DESKTOP
+   ===================================================================== */
+.ycoHero_device_desktop.ycoHero_type_horizontal {
+  padding-left: 7.5rem;
+}
+
+.ycoHero_device_desktop.ycoHero_type_horizontal .ycoHero_content {
+  flex: 1 1 0;
+  padding: 8rem 4rem 8rem 0;
+}
+
+.ycoHero_device_desktop.ycoHero_type_horizontal .ycoHero_media {
+  flex: 1 1 0;
+  align-self: stretch;
+  min-height: 24rem;
+}
+
+.ycoHero_device_desktop.ycoHero_type_horizontal-padded {
+  gap: var(--spacing-32);
+  padding: 6rem 7.5rem;
+}
+
+.ycoHero_device_desktop.ycoHero_type_horizontal-padded .ycoHero_content {
+  flex: 1 1 0;
+  gap: var(--spacing-40);
+  padding: var(--spacing-32) var(--spacing-32) var(--spacing-32) 0;
+}
+
+.ycoHero_device_desktop.ycoHero_type_horizontal-padded .ycoHero_media {
+  flex: 1 1 0;
+  align-self: stretch;
+  min-height: 24rem;
+}
+
+.ycoHero_device_desktop.ycoHero_type_horizontal-padded .ycoHero_image {
+  border-radius: var(--spacing-24);
+}
+
+/* Vertical family: centred copy, image underneath */
+.ycoHero_type_vertical,
+.ycoHero_type_vertical-large,
+.ycoHero_type_vertical-small {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ycoHero_type_vertical .ycoHero_content,
+.ycoHero_type_vertical-large .ycoHero_content,
+.ycoHero_type_vertical-small .ycoHero_content {
+  align-items: center;
+  text-align: center;
+}
+
+.ycoHero_type_vertical .ycoHero_top,
+.ycoHero_type_vertical-large .ycoHero_top,
+.ycoHero_type_vertical-small .ycoHero_top {
+  max-width: 49.375rem;
+  align-items: center;
+}
+
+.ycoHero_type_vertical .ycoHero_text,
+.ycoHero_type_vertical-large .ycoHero_text,
+.ycoHero_type_vertical-small .ycoHero_text {
+  align-items: stretch;
+}
+
+.ycoHero_device_desktop.ycoHero_type_vertical .ycoHero_content,
+.ycoHero_device_desktop.ycoHero_type_vertical-large .ycoHero_content,
+.ycoHero_device_desktop.ycoHero_type_vertical-small .ycoHero_content {
+  padding: 6rem 7.5rem 4rem;
+}
+
+.ycoHero_device_desktop.ycoHero_type_vertical .ycoHero_media,
+.ycoHero_device_desktop.ycoHero_type_vertical-large .ycoHero_media,
+.ycoHero_device_desktop.ycoHero_type_vertical-small .ycoHero_media {
+  height: 37.5rem;
+}
+
+.ycoHero_device_desktop.ycoHero_type_vertical-large .ycoHero_media {
+  padding: 0 7.5rem;
+}
+
+.ycoHero_device_desktop.ycoHero_type_vertical-large .ycoHero_image {
+  border-radius: var(--spacing-24);
+}
+
+.ycoHero_device_desktop.ycoHero_type_vertical-small {
+  padding-bottom: 6rem;
+}
+
+.ycoHero_device_desktop.ycoHero_type_vertical-small .ycoHero_media {
+  width: 100%;
+  max-width: 49.375rem;
+  height: 33.125rem;
+  align-self: center;
+}
+
+.ycoHero_device_desktop.ycoHero_type_vertical-small .ycoHero_image {
+  border-radius: var(--spacing-24);
+}
+
+/* =====================================================================
+   TABLET (768)
+   ===================================================================== */
+.ycoHero_device_tablet {
+  max-width: 48rem;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ycoHero_device_tablet .ycoHero_content {
+  padding: 5rem var(--spacing-48) 4rem;
+}
+
+.ycoHero_device_tablet .ycoHero_media {
+  height: 37.5rem;
+}
+
+.ycoHero_device_tablet.ycoHero_type_horizontal-padded .ycoHero_media,
+.ycoHero_device_tablet.ycoHero_type_vertical-large .ycoHero_media,
+.ycoHero_device_tablet.ycoHero_type_vertical-small .ycoHero_media {
+  padding: 0 var(--spacing-48);
+}
+
+.ycoHero_device_tablet.ycoHero_type_horizontal-padded .ycoHero_content {
+  padding-bottom: 4rem;
+}
+
+.ycoHero_device_tablet.ycoHero_type_horizontal-padded,
+.ycoHero_device_tablet.ycoHero_type_vertical-small {
+  padding-bottom: 5rem;
+}
+
+.ycoHero_device_tablet.ycoHero_type_horizontal-padded .ycoHero_image,
+.ycoHero_device_tablet.ycoHero_type_vertical-large .ycoHero_image,
+.ycoHero_device_tablet.ycoHero_type_vertical-small .ycoHero_image {
+  border-radius: var(--spacing-24);
+}
+
+.ycoHero_device_tablet.ycoHero_type_vertical-small .ycoHero_media {
+  height: 28rem;
+}
+
+/* =====================================================================
+   MOBILE (428)
+   ===================================================================== */
+.ycoHero_device_mobile {
+  max-width: 26.75rem;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ycoHero_device_mobile .ycoHero_content {
+  padding: 4rem var(--spacing-32) 3rem;
+}
+
+.ycoHero_device_mobile .ycoHero_text {
+  gap: var(--spacing-16);
+}
+
+.ycoHero_device_mobile .ycoHero_title {
+  font-size: 2.25rem;
+  letter-spacing: -0.5px;
+  line-height: 2.75rem;
+}
+
+.ycoHero_device_mobile .ycoHero_description {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoHero_device_mobile .ycoHero_form {
+  width: 100%;
+  flex-direction: column;
+}
+
+.ycoHero_device_mobile .ycoHero_field {
+  width: 100%;
+}
+
+.ycoHero_device_mobile .ycoHero_submit {
+  width: 100%;
+}
+
+.ycoHero_device_mobile .ycoHero_buttons {
+  width: 100%;
+  flex-direction: column;
+}
+
+.ycoHero_device_mobile .ycoHero_button {
+  width: 100%;
+}
+
+.ycoHero_device_mobile .ycoHero_media {
+  height: 22.75rem;
+}
+
+.ycoHero_device_mobile.ycoHero_type_horizontal-padded .ycoHero_media,
+.ycoHero_device_mobile.ycoHero_type_vertical-large .ycoHero_media,
+.ycoHero_device_mobile.ycoHero_type_vertical-small .ycoHero_media {
+  padding: 0 var(--spacing-32);
+}
+
+.ycoHero_device_mobile.ycoHero_type_horizontal-padded {
+  padding-bottom: 4rem;
+}
+
+.ycoHero_device_mobile.ycoHero_type_horizontal-padded .ycoHero_image,
+.ycoHero_device_mobile.ycoHero_type_vertical-large .ycoHero_image,
+.ycoHero_device_mobile.ycoHero_type_vertical-small .ycoHero_image {
+  border-radius: var(--spacing-24);
+}
+
+.ycoHero_device_mobile.ycoHero_type_vertical .ycoHero_media {
+  height: 26.75rem;
+}

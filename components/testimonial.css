@@ -1,0 +1,89 @@
+/* =====================================================================
+   YCO Testimonial · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Testimonial.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Testimonial (8120:53922)
+   Align Left / Centre. Optional avatar with name and email, quote and
+   five-star rating. 364px wide in Figma.
+   ===================================================================== */
+
+.ycoTestimonial {
+  display: flex;
+  width: 100%;
+  max-width: 22.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-24);
+  margin: 0;
+  font-family: var(--font-family-body);
+}
+
+.ycoTestimonial_align_centre {
+  align-items: center;
+}
+
+.ycoTestimonial_person {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.ycoTestimonial_avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  box-sizing: border-box;
+  flex: none;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-48);
+  background: var(--fill-disabled);
+}
+
+.ycoTestimonial_who {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ycoTestimonial_name {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoTestimonial_email {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTestimonial_quote {
+  width: 100%;
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoTestimonial_align_centre .ycoTestimonial_quote {
+  text-align: center;
+}
+
+.ycoTestimonial_stars {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.ycoTestimonial_star {
+  display: block;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: none;
+  fill: var(--fill-warning-strong);
+  stroke: var(--stroke-warning-strong);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

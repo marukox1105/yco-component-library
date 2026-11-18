@@ -1,0 +1,5 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoStepper.is-hover .ycoStepper_input { background: var(--fill-hover); }
+.ycoStepper.is-press .ycoStepper_input { background: var(--fill-press); }
+.ycoStepper.is-focus .ycoStepper_field { outline: 3px solid var(--stroke-focus); outline-offset: 1px; }
+.ycoStepper_valid_false.is-focus .ycoStepper_field { outline-color: var(--stroke-error-weak); }

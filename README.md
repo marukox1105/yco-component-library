@@ -35,9 +35,18 @@ Same pattern: one `*.module.css` per component (plain CSS, CSS-Modules class nam
 
 ## Component pages — real components, one page each
 
-The sidebar lists every component on Figma's component board, grouped the way the board groups them. A page is built, not screenshotted: a plain-CSS file (`components/<id>.css`, the single source shared with `yce-frontend`) plus a small config (`components/<id>.js`) that the playground engine (`engine.js`) draws as a live preview, controls, HTML / React / CSS code, and a grid of every Figma variant. Entries without a page show *Soon*.
+The sidebar lists every component on Figma's component board, grouped the way the board groups them (53 pages). A page is built, not screenshotted: a plain-CSS file (`components/<id>.css`, the single source shared with `yce-frontend`) plus a small config (`components/<id>.js`) that the playground engine (`engine.js`) draws as a live preview, controls, HTML / React / CSS code, and a grid of every Figma variant. Pages carry a *Notes* box for token gaps and Figma quirks.
 
-`COMPONENT-PAGES.md` is the contract for adding one. `node tools/check-components.mjs [id]` lints the CSS (class prefix, tokens defined in the light theme, no raw colours). Built so far: Badge dot and Text input (reference pages), plus the original Buttons and Toast.
+`COMPONENT-PAGES.md` is the contract for adding or changing one. Checks (all run their own headless Chrome, so they work in parallel):
+
+| Command | What it checks |
+|---|---|
+| `node tools/check-components.mjs [id]` | CSS: class prefix, tokens defined in the light theme, no raw colours |
+| `node tools/check-page.mjs <id> <outDir>` | Renders desktop / dark / 375px, clicks every control, writes screenshots, flags console errors, overflow, empty previews |
+| `node tools/check-scenarios.mjs [id ...]` | Real pointer and keyboard scenarios for the interactive pages (open, choose, close, switch) |
+| `node tools/check-interactions.mjs <id> ...` | Broad click / key smoke test; its "dead click" count is a hint only (hidden inputs and closed menus read as dead) |
+
+Playwright comes from a checkout of `yco-collab-space` (`PLAYWRIGHT_FROM`, default in the scripts).
 
 ## Overview page — Storybook catalogue grouped by Figma
 

@@ -1,0 +1,209 @@
+/* =====================================================================
+   YCO Drawer · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Drawer.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Drawer (5358:7210), set 5358:7442
+   Size Small 400 / Large 600, Device Desktop / Mobile, five optional slots.
+   A full-height panel on the right edge: header (heading + close),
+   scrolling content, footer (button group). The scrim blurs the page.
+   ===================================================================== */
+
+.ycoDrawer_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 13;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: flex-end;
+  align-items: stretch;
+  overflow: clip;
+  background: var(--fill-overlay);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-family-body);
+}
+
+.ycoDrawer_overlay[hidden] {
+  display: none;
+}
+
+.ycoDrawer_overlay_device_mobile {
+  padding-left: 4rem;
+}
+
+/* ----- panel ----- */
+.ycoDrawer {
+  position: relative;
+  display: flex;
+  min-height: 0;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: stretch;
+  border: 1px solid var(--stroke-weak);
+  background: var(--background-raised);
+  box-shadow: var(--shadow);
+  color: var(--text-strong);
+  outline: 0;
+}
+
+.ycoDrawer_size_small {
+  width: 25rem;
+}
+
+.ycoDrawer_size_large {
+  width: 37.5rem;
+}
+
+.ycoDrawer_device_mobile {
+  width: 100%;
+}
+
+.ycoDrawer_header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-24) var(--spacing-32);
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.ycoDrawer_heading {
+  min-width: 0;
+  flex: 1 0 0;
+  margin: 0;
+  padding-right: var(--spacing-48);
+  color: var(--text-strong);
+  font-family: var(--font-family-heading);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 2rem;
+  overflow-wrap: anywhere;
+}
+
+.ycoDrawer_close {
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: var(--corner-radius-6);
+  background: transparent;
+  color: var(--icon-neutral);
+  cursor: pointer;
+}
+
+.ycoDrawer_close:hover {
+  background: var(--fill-hover);
+}
+
+.ycoDrawer_close:active {
+  background: var(--fill-press);
+}
+
+.ycoDrawer_close:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoDrawer_closeGlyph {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- content ----- */
+.ycoDrawer_content {
+  position: relative;
+  display: flex;
+  min-height: 0;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-32);
+  padding: var(--spacing-48) var(--spacing-32);
+  overflow-y: auto;
+}
+
+.ycoDrawer_slot {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-24) var(--spacing-32);
+  overflow: clip;
+  border: 1px dashed var(--stroke-strong);
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-weaker);
+  color: var(--text-weak);
+  font-family: "Roboto Mono", ui-monospace, monospace;
+  font-size: var(--font-size-tiny);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Figma shows a 6 x 150 thumb on the content's right edge. */
+.ycoDrawer_scrollbar {
+  position: absolute;
+  top: 21.9375rem;
+  right: var(--spacing-8);
+  width: 6px;
+  height: 9.375rem;
+  border-radius: var(--corner-radius-8);
+  background: var(--stroke-weak);
+  pointer-events: none;
+}
+
+/* ----- footer ----- */
+.ycoDrawer_footer {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-24) var(--spacing-32);
+  border-top: 1px solid var(--stroke-weak);
+}
+
+.ycoDrawer_actions {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}
+
+.ycoDrawer_device_mobile .ycoDrawer_actions {
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.ycoDrawer_device_mobile .ycoDrawer_actions > * {
+  width: 100%;
+}
+
+/* Phone widths use the Mobile layout whatever the Device says (768px, the site's phone breakpoint). */
+@media (max-width: 48rem) {
+  .ycoDrawer_overlay {
+    padding-left: 4rem;
+  }
+
+  .ycoDrawer {
+    width: 100%;
+  }
+
+  .ycoDrawer_actions {
+    flex: 1 0 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ycoDrawer_actions > * {
+    width: 100%;
+  }
+}

@@ -1,0 +1,165 @@
+/* =====================================================================
+   YCO Tag · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Tag.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Tag (3667:21811) and Tag group
+   (6735:174735).
+   Selected False / True x Size Medium 32 / Small 24 x State Default /
+   Hover / Press / Focus / Disabled x Radius Pill / Rounded, with an
+   optional dismiss button. A tag is a toggle: the main button carries
+   aria-pressed. Hover, press and focus are real pseudo-classes.
+   ===================================================================== */
+
+.ycoTag {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  height: var(--spacing-32);
+  box-sizing: border-box;
+  align-items: stretch;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-inverse-strong);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-small);
+}
+
+.ycoTag_size_small {
+  height: var(--spacing-24);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTag_radius_rounded {
+  border-radius: var(--spacing-4);
+}
+
+/* The group's dismissible tags are filled with a soft grey instead of white. */
+.ycoTag_fill_weak {
+  background: var(--fill-weak);
+}
+
+/* ----- main button: the State layer of Figma ----- */
+.ycoTag_button {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  margin: 0;
+  padding: 0 var(--spacing-8);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: 0;
+}
+
+.ycoTag_button:hover:not(:disabled) {
+  background: var(--fill-hover);
+}
+
+.ycoTag_button:active:not(:disabled) {
+  background: var(--fill-press);
+}
+
+.ycoTag_button:disabled {
+  cursor: not-allowed;
+}
+
+.ycoTag_label {
+  padding: 0 var(--spacing-4);
+  white-space: nowrap;
+}
+
+.ycoTag_check {
+  display: none;
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- dismiss button ----- */
+.ycoTag_close {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 var(--spacing-8) 0 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  outline: 0;
+}
+
+.ycoTag_close:disabled {
+  cursor: not-allowed;
+}
+
+.ycoTag_closeIcon {
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoTag_close + .ycoTag_button,
+.ycoTag_button + .ycoTag_close {
+  margin-left: 0;
+}
+
+.ycoTag_button:has(+ .ycoTag_close) {
+  padding-right: 0;
+}
+
+/* ----- focus ring: 3px, just outside the tag ----- */
+.ycoTag:has(:focus-visible) {
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+/* ----- selected ----- */
+.ycoTag_selected_true {
+  border-color: transparent;
+  background: var(--fill-brand-strong);
+  color: var(--text-inverse-strong);
+}
+
+.ycoTag_selected_true .ycoTag_check {
+  display: block;
+}
+
+.ycoTag_selected_true.ycoTag_icon_false .ycoTag_check {
+  display: none;
+}
+
+/* ----- disabled ----- */
+.ycoTag_disabled {
+  border-color: var(--stroke-disabled);
+  color: var(--text-disabled);
+}
+
+.ycoTag_disabled.ycoTag_selected_true {
+  border-color: transparent;
+  background: var(--fill-disabled);
+  color: var(--text-inverse-strong);
+}
+
+/* ----- tag group: tags wrap onto further rows ----- */
+.ycoTag_group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-8) var(--spacing-4);
+}

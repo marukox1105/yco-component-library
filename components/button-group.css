@@ -1,0 +1,133 @@
+/* =====================================================================
+   YCO Button group · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './ButtonGroup.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Button group (3506:64616)
+   Layout Horizontal / Vertical x Order Default / Reverse x Size Large /
+   Medium / Small; each group holds a primary, a secondary and a text
+   (tertiary) button, any of which may be left out.
+   The buttons are drawn here, not borrowed from Button, so this file
+   stands alone. Hover, press and focus are real pseudo-classes.
+   ===================================================================== */
+
+.ycoButtonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  font-family: var(--font-family-body);
+}
+
+.ycoButtonGroup_layout_vertical {
+  width: 100%;
+  max-width: 22.75rem;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.ycoButtonGroup_layout_vertical .ycoButtonGroup_button {
+  width: 100%;
+}
+
+.ycoButtonGroup_button {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 var(--spacing-16);
+  border: 1px solid transparent;
+  border-radius: var(--corner-radius-32);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-strong);
+  outline: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Figma's State layer: a tint over the fill on hover and press. */
+.ycoButtonGroup_button::before {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+.ycoButtonGroup_button:hover:not(:disabled)::before {
+  background: var(--fill-hover);
+}
+
+.ycoButtonGroup_button:active:not(:disabled)::before {
+  background: var(--fill-press);
+}
+
+.ycoButtonGroup_button:focus-visible {
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+.ycoButtonGroup_button:disabled {
+  cursor: not-allowed;
+}
+
+/* ----- sizes (the 4px label-container padding is part of the inline padding) ----- */
+.ycoButtonGroup_size_large .ycoButtonGroup_button {
+  height: 3.5rem;
+  padding: 0 1.75rem;
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+}
+
+.ycoButtonGroup_size_medium .ycoButtonGroup_button {
+  height: 2.625rem;
+  padding: 0 var(--spacing-20);
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-small);
+}
+
+.ycoButtonGroup_size_small .ycoButtonGroup_button {
+  height: var(--spacing-32);
+  padding: 0 var(--spacing-16);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* Stacked large buttons are 64px tall in Figma, 8px more than side by side. */
+.ycoButtonGroup_layout_vertical.ycoButtonGroup_size_large .ycoButtonGroup_button {
+  height: 4rem;
+}
+
+/* ----- types ----- */
+.ycoButtonGroup_type_primary {
+  background: var(--fill-brand-strong);
+  color: var(--text-inverse-strong);
+}
+
+.ycoButtonGroup_type_primary:disabled {
+  background: var(--fill-disabled);
+}
+
+.ycoButtonGroup_type_secondary {
+  border-color: var(--stroke-brand-strong);
+  color: var(--text-brand);
+}
+
+.ycoButtonGroup_type_secondary:disabled {
+  border-color: var(--stroke-disabled);
+  color: var(--text-disabled);
+}
+
+.ycoButtonGroup_type_tertiary {
+  color: var(--text-brand);
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}
+
+.ycoButtonGroup_type_tertiary:disabled {
+  color: var(--text-disabled);
+}

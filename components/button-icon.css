@@ -1,0 +1,291 @@
+/* =====================================================================
+   YCO Button icon · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './ButtonIcon.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Button icon (6174:62119)
+   Type Primary / Secondary / Tertiary x Tone Brand / Neutral / Inverse /
+   Destructive x State x Size Large 56 / Medium 42 / Small 36 / Tiny 32 x
+   Shape Square / Circle, plus optional badge dot and badge count.
+   Hover, Press and Focus are real :hover, :active and :focus-visible.
+   ===================================================================== */
+
+.ycoButtonIcon {
+  position: relative;
+  display: inline-grid;
+  flex: none;
+  width: 2.625rem;
+  height: 2.625rem;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: transparent;
+  color: var(--icon-neutral);
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  line-height: 0;
+  outline: 0;
+}
+
+/* The State layer of Figma: a tint drawn over the fill for hover and press. */
+.ycoButtonIcon::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+/* ----- size ----- */
+.ycoButtonIcon_size_large {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.5833rem;
+}
+
+.ycoButtonIcon_size_medium {
+  width: 2.625rem;
+  height: 2.625rem;
+}
+
+.ycoButtonIcon_size_small {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.ycoButtonIcon_size_tiny {
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+}
+
+.ycoButtonIcon_icon {
+  position: relative;
+  display: grid;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  place-items: center;
+}
+
+.ycoButtonIcon_size_large .ycoButtonIcon_icon {
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+}
+
+.ycoButtonIcon_size_small .ycoButtonIcon_icon,
+.ycoButtonIcon_size_tiny .ycoButtonIcon_icon {
+  width: var(--spacing-20);
+  height: var(--spacing-20);
+}
+
+.ycoButtonIcon_glyph {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- shape ----- */
+.ycoButtonIcon_shape_circle {
+  border-radius: 50%;
+}
+
+/* ----- primary: a filled button ----- */
+.ycoButtonIcon_type_primary {
+  color: var(--icon-inverse-strong);
+}
+
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_brand {
+  background: var(--fill-brand-strong);
+}
+
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_neutral {
+  background: var(--fill-strong);
+}
+
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_destructive {
+  background: var(--fill-error-strong);
+}
+
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_inverse {
+  background: var(--fill-inverse-strong);
+  color: var(--icon-neutral);
+}
+
+/* ----- secondary: an outlined button ----- */
+.ycoButtonIcon_type_secondary {
+  border: 1px solid var(--stroke-strong);
+}
+
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_brand {
+  border-color: var(--stroke-brand-strong);
+}
+
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_destructive {
+  border-color: var(--stroke-error-strong);
+}
+
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_inverse {
+  border-color: var(--stroke-inverse-strong);
+}
+
+/* ----- icon colour of secondary and tertiary ----- */
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_brand,
+.ycoButtonIcon_type_tertiary.ycoButtonIcon_tone_brand {
+  color: var(--icon-brand);
+}
+
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_neutral,
+.ycoButtonIcon_type_tertiary.ycoButtonIcon_tone_neutral {
+  color: var(--icon-neutral);
+}
+
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_destructive,
+.ycoButtonIcon_type_tertiary.ycoButtonIcon_tone_destructive {
+  color: var(--icon-error);
+}
+
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_inverse,
+.ycoButtonIcon_type_tertiary.ycoButtonIcon_tone_inverse {
+  color: var(--icon-inverse-strong);
+}
+
+/* ----- hover and press tint ----- */
+.ycoButtonIcon:hover:not(:disabled)::before {
+  background: var(--fill-hover);
+}
+
+.ycoButtonIcon:active:not(:disabled)::before {
+  background: var(--fill-press);
+}
+
+/* Over a dark fill (Primary Neutral) and on inverse surfaces the tint is light. */
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_neutral:hover:not(:disabled)::before,
+.ycoButtonIcon_tone_inverse:not(.ycoButtonIcon_type_primary):hover:not(:disabled)::before {
+  background: var(--fill-inverse-hover);
+}
+
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_neutral:active:not(:disabled)::before,
+.ycoButtonIcon_tone_inverse:not(.ycoButtonIcon_type_primary):active:not(:disabled)::before {
+  background: var(--fill-inverse-press);
+}
+
+/* ----- focus: a 3px ring just outside the button ----- */
+.ycoButtonIcon:focus-visible {
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_destructive:focus-visible {
+  box-shadow: 0 0 0 3px var(--stroke-error-weak);
+}
+
+.ycoButtonIcon_tone_inverse:focus-visible {
+  box-shadow: 0 0 0 3px var(--stroke-inverse-strong);
+}
+
+/* ----- disabled ----- */
+.ycoButtonIcon:disabled {
+  cursor: not-allowed;
+}
+
+.ycoButtonIcon_type_primary:disabled {
+  background: var(--fill-disabled);
+  color: var(--icon-inverse-strong);
+}
+
+.ycoButtonIcon_type_primary.ycoButtonIcon_tone_inverse:disabled {
+  background: var(--fill-inverse-disabled);
+  color: var(--icon-inverse-disabled);
+}
+
+.ycoButtonIcon_type_secondary:disabled,
+.ycoButtonIcon_type_tertiary:disabled {
+  color: var(--icon-disabled);
+}
+
+.ycoButtonIcon_type_secondary:disabled {
+  border-color: var(--stroke-disabled);
+}
+
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_inverse:disabled,
+.ycoButtonIcon_type_tertiary.ycoButtonIcon_tone_inverse:disabled {
+  color: var(--icon-inverse-disabled);
+}
+
+.ycoButtonIcon_type_secondary.ycoButtonIcon_tone_inverse:disabled {
+  border-color: var(--stroke-inverse-disabled);
+}
+
+/* ----- badge dot ----- */
+.ycoButtonIcon_dot {
+  position: absolute;
+  top: 0.5rem;
+  left: 2rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--fill-error-strong);
+}
+
+.ycoButtonIcon_size_large .ycoButtonIcon_dot {
+  top: 0.5833rem;
+  left: 2.3333rem;
+  width: 0.5833rem;
+  height: 0.5833rem;
+}
+
+.ycoButtonIcon_size_small .ycoButtonIcon_dot {
+  top: var(--spacing-4);
+  left: var(--spacing-24);
+}
+
+.ycoButtonIcon_size_tiny .ycoButtonIcon_dot {
+  top: var(--spacing-4);
+  left: var(--spacing-20);
+}
+
+/* ----- badge count ----- */
+.ycoButtonIcon_count {
+  position: absolute;
+  top: -0.5rem;
+  left: 1.9375rem;
+  display: flex;
+  min-width: var(--spacing-24);
+  height: var(--spacing-24);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-8);
+  border: 2px solid var(--stroke-inverse-strong);
+  border-radius: var(--spacing-16);
+  background: var(--fill-error-strong);
+  box-shadow: 0 2px 2px var(--grey-neutral-light-100), 0 4px 4px var(--grey-neutral-light-50);
+  color: var(--background-base);
+  font-size: var(--font-size-tiny);
+  font-weight: 400;
+  line-height: var(--line-height-tiny);
+  white-space: nowrap;
+}
+
+.ycoButtonIcon_tone_inverse .ycoButtonIcon_count {
+  border-color: var(--stroke-strong);
+}
+
+.ycoButtonIcon_size_large .ycoButtonIcon_count {
+  top: -0.5833rem;
+  left: 2.2604rem;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 0.5833rem;
+  border-width: 0.1458rem;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoButtonIcon_size_small .ycoButtonIcon_count,
+.ycoButtonIcon_size_tiny .ycoButtonIcon_count {
+  top: -0.75rem;
+  left: 1.25rem;
+}

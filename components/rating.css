@@ -1,0 +1,98 @@
+/* =====================================================================
+   YCO Rating · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Rating.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Rating (6683:289298), icon (6683:289235)
+   Type Star / Heart x Layout Horizontal / Vertical. Five icons, each
+   Empty, Half or Full, an optional number and an optional reviews link.
+   Display only: Figma draws no interactive state.
+   ===================================================================== */
+
+.ycoRating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-family: var(--font-family-body);
+}
+
+.ycoRating_layout_vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--spacing-4);
+}
+
+.ycoRating_main {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.ycoRating_stars {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.ycoRating_icon {
+  display: block;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: none;
+  overflow: visible;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Star: warning amber. Figma uses a brighter yellow with no token. */
+.ycoRating_type_star .ycoRating_outline {
+  fill: none;
+  stroke: var(--stroke-warning-strong);
+  stroke-width: 2;
+}
+
+.ycoRating_type_star .ycoRating_fill {
+  fill: var(--fill-warning-strong);
+}
+
+/* Heart: error red, 1px outline. */
+.ycoRating_type_heart .ycoRating_outline {
+  fill: none;
+  stroke: var(--fill-error-strong);
+  stroke-width: 1;
+}
+
+.ycoRating_type_heart .ycoRating_fill {
+  fill: var(--fill-error-strong);
+}
+
+.ycoRating_value {
+  color: var(--text-strong);
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+  white-space: nowrap;
+}
+
+.ycoRating_reviews {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  white-space: nowrap;
+}
+
+.ycoRating_link {
+  white-space: nowrap;
+  color: var(--text-brand);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.ycoRating_link:focus-visible {
+  border-radius: var(--corner-radius-6);
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}

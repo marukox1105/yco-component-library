@@ -1,0 +1,203 @@
+/* =====================================================================
+   YCO Alert global · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './AlertGlobal.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Alert global (5801:57029)
+   Tone x Device: Error, Warning, Success, Information, Neutral, Brand,
+   Inverse neutral, Inverse brand x Desktop, Mobile. Optional icon,
+   button and dismiss. The button is the shared Button (tiny, secondary).
+   A full-width banner: it fills its container.
+   ===================================================================== */
+
+.ycoAlertGlobal {
+  position: relative;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-24);
+  border-bottom: 1px solid transparent;
+  background: var(--background-base);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoAlertGlobal_icon {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: var(--icon-neutral);
+}
+
+.ycoAlertGlobal_body {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  align-items: center;
+  gap: var(--spacing-24);
+}
+
+.ycoAlertGlobal_text {
+  min-width: 0;
+  flex: 1 0 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.ycoAlertGlobal_actions {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}
+
+.ycoAlertGlobal_dismiss {
+  display: inline-grid;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: none;
+  place-items: center;
+  margin-left: var(--spacing-12);
+  padding: 0;
+  border: 0;
+  border-radius: var(--corner-radius-6);
+  background: transparent;
+  color: var(--icon-neutral);
+  cursor: pointer;
+}
+
+.ycoAlertGlobal_dismiss:hover {
+  background: var(--fill-hover);
+}
+
+.ycoAlertGlobal_dismiss:active {
+  background: var(--fill-press);
+}
+
+.ycoAlertGlobal_dismiss:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+.ycoAlertGlobal_dismissIcon {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ----- tones ----- */
+.ycoAlertGlobal_tone_error {
+  border-bottom-color: var(--stroke-error-weak);
+  background: var(--fill-error-weak);
+}
+
+.ycoAlertGlobal_tone_error .ycoAlertGlobal_icon {
+  color: var(--icon-error);
+}
+
+.ycoAlertGlobal_tone_warning {
+  border-bottom-color: var(--stroke-warning-weak);
+  background: var(--fill-warning-weak);
+}
+
+.ycoAlertGlobal_tone_warning .ycoAlertGlobal_icon {
+  color: var(--icon-warning);
+}
+
+.ycoAlertGlobal_tone_success {
+  border-bottom-color: var(--stroke-success-weak);
+  background: var(--fill-success-weak);
+}
+
+.ycoAlertGlobal_tone_success .ycoAlertGlobal_icon {
+  color: var(--icon-success);
+}
+
+.ycoAlertGlobal_tone_information {
+  border-bottom-color: var(--stroke-information-weak);
+  background: var(--fill-information-weak);
+}
+
+.ycoAlertGlobal_tone_information .ycoAlertGlobal_icon {
+  color: var(--icon-information);
+}
+
+.ycoAlertGlobal_tone_neutral {
+  border-bottom-color: var(--stroke-weak);
+  background: var(--background-base);
+}
+
+.ycoAlertGlobal_tone_brand {
+  border-bottom-color: var(--stroke-brand-weak);
+  background: var(--fill-brand-weak);
+}
+
+.ycoAlertGlobal_tone_inverse-neutral,
+.ycoAlertGlobal_tone_inverse-brand {
+  color: var(--text-inverse-strong);
+}
+
+.ycoAlertGlobal_tone_inverse-neutral {
+  background: var(--background-inverse);
+}
+
+.ycoAlertGlobal_tone_inverse-brand {
+  background: var(--fill-brand-strong);
+}
+
+.ycoAlertGlobal_tone_inverse-neutral .ycoAlertGlobal_icon,
+.ycoAlertGlobal_tone_inverse-brand .ycoAlertGlobal_icon {
+  color: var(--icon-inverse-strong);
+}
+
+.ycoAlertGlobal_tone_inverse-neutral .ycoAlertGlobal_dismiss,
+.ycoAlertGlobal_tone_inverse-brand .ycoAlertGlobal_dismiss {
+  color: var(--icon-inverse);
+}
+
+.ycoAlertGlobal_tone_inverse-neutral .ycoAlertGlobal_dismiss:hover,
+.ycoAlertGlobal_tone_inverse-brand .ycoAlertGlobal_dismiss:hover {
+  background: var(--fill-inverse-hover);
+}
+
+.ycoAlertGlobal_tone_inverse-neutral .ycoAlertGlobal_dismiss:active,
+.ycoAlertGlobal_tone_inverse-brand .ycoAlertGlobal_dismiss:active {
+  background: var(--fill-inverse-press);
+}
+
+/* ----- device: mobile stacks the button under the text and pins the dismiss top right ----- */
+.ycoAlertGlobal_device_mobile {
+  align-items: flex-start;
+  padding: var(--spacing-16) var(--spacing-48) var(--spacing-16) var(--spacing-32);
+}
+
+.ycoAlertGlobal_device_mobile .ycoAlertGlobal_body {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--spacing-12);
+  padding: 2px 0;
+}
+
+.ycoAlertGlobal_device_mobile .ycoAlertGlobal_text {
+  width: 100%;
+  flex: none;
+}
+
+.ycoAlertGlobal_device_mobile .ycoAlertGlobal_dismiss {
+  position: absolute;
+  top: var(--spacing-16);
+  right: var(--spacing-16);
+  margin: 0;
+}

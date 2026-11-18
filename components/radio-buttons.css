@@ -1,0 +1,217 @@
+/* =====================================================================
+   YCO Radio buttons · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './RadioButtons.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Radio buttons (3832:40131)
+   Radio button (3449:61137): Type Unselected / Selected x Size Large /
+   Small x State Default / Hover / Press / Focus / Disabled x Valid true /
+   false. Radio button group (3449:65285): legend, required / optional
+   marks, hint, error message and the list.
+   The control is a real <input type="radio">; hover, press and focus are
+   :hover, :active and :focus-visible. Arrow keys move within a group.
+   ===================================================================== */
+
+/* ----- group ----- */
+.ycoRadioButtons {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: 364px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoRadioButtons_legend {
+  float: none;
+  width: 100%;
+  margin: 0 0 var(--spacing-4);
+  padding: 0;
+  color: var(--text-strong);
+  font-weight: 400;
+}
+
+.ycoRadioButtons_labelRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  white-space: nowrap;
+}
+
+.ycoRadioButtons_required {
+  color: var(--text-weak);
+}
+
+.ycoRadioButtons_optional,
+.ycoRadioButtons_hint {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoRadioButtons_hint {
+  display: block;
+}
+
+.ycoRadioButtons_error {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: var(--spacing-4) 0;
+  color: var(--text-error);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoRadioButtons_errorIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoRadioButtons_list {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  padding-top: var(--spacing-24);
+}
+
+/* ----- one radio button ----- */
+.ycoRadioButtons_item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: var(--line-height-small);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ycoRadioButtons_size_small {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* The real input stays in the layout (so it can take focus) but is invisible. */
+.ycoRadioButtons_input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  clip-path: inset(50%);
+}
+
+.ycoRadioButtons_circle {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  box-sizing: border-box;
+  border: 1px solid var(--stroke-strong);
+  border-radius: 50%;
+  background: var(--fill-inverse-strong);
+}
+
+/* Hover / press wash over the circle (Figma "State" layer). */
+.ycoRadioButtons_circle::before {
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  content: "";
+}
+
+.ycoRadioButtons_dot {
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  border-radius: 50%;
+  background: var(--icon-inverse-strong);
+  opacity: 0;
+}
+
+.ycoRadioButtons_label {
+  white-space: nowrap;
+}
+
+/* ----- selected ----- */
+.ycoRadioButtons_input:checked + .ycoRadioButtons_circle {
+  border-color: transparent;
+  background: var(--fill-brand-strong);
+}
+
+.ycoRadioButtons_input:checked + .ycoRadioButtons_circle .ycoRadioButtons_dot {
+  opacity: 1;
+}
+
+/* ----- hover, press, focus ----- */
+.ycoRadioButtons_item:hover .ycoRadioButtons_input:enabled + .ycoRadioButtons_circle::before {
+  background: var(--fill-hover);
+}
+
+.ycoRadioButtons_item:active .ycoRadioButtons_input:enabled + .ycoRadioButtons_circle::before {
+  background: var(--fill-press);
+}
+
+.ycoRadioButtons_input:focus-visible + .ycoRadioButtons_circle {
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+/* ----- invalid ----- */
+.ycoRadioButtons_valid_false .ycoRadioButtons_circle {
+  border-width: 2px;
+  border-color: var(--stroke-error-strong);
+  background: var(--fill-error-weak);
+}
+
+.ycoRadioButtons_valid_false .ycoRadioButtons_circle::before {
+  inset: -2px;
+}
+
+.ycoRadioButtons_valid_false .ycoRadioButtons_input:checked + .ycoRadioButtons_circle {
+  border-color: transparent;
+  background: var(--fill-error-strong);
+}
+
+.ycoRadioButtons_valid_false .ycoRadioButtons_input:focus-visible + .ycoRadioButtons_circle {
+  box-shadow: 0 0 0 3px var(--stroke-error-weak);
+}
+
+/* ----- disabled ----- */
+.ycoRadioButtons_item:has(.ycoRadioButtons_input:disabled) {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.ycoRadioButtons_input:disabled + .ycoRadioButtons_circle {
+  border-color: var(--stroke-disabled);
+  background: var(--fill-inverse-strong);
+}
+
+.ycoRadioButtons_input:disabled:checked + .ycoRadioButtons_circle {
+  border-color: transparent;
+  background: var(--fill-disabled);
+}

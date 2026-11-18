@@ -1,0 +1,557 @@
+/* =====================================================================
+   YCO Navigation side · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './NavigationSide.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Navigation side (5635:96897)
+   Sidebar widths Desktop 300 / 992 -> 240 / 769 -> 112 icon rail / Mobile
+   300 / Tool page 112; menu list item (List and Icon, Default / Hover /
+   Press / Active / Active Hover / Active Press / Disable, with NEW badge,
+   external-link mark and more button); side-menu flyout; and the older
+   "Navigation side item" rows (Default / Hover / Press / Selected / Focus,
+   Header, Divider, Slot, Photo, Alert, Card, Button, Search, Avatar).
+   Hover, Press and Focus are real :hover, :active and :focus-visible.
+   ===================================================================== */
+
+.ycoNavigationSide {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: var(--spacing-20) var(--spacing-20) var(--spacing-20) var(--spacing-40);
+  background: var(--background-base);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoNavigationSide_width_wide {
+  max-width: 18.75rem;
+}
+
+.ycoNavigationSide_width_medium {
+  max-width: 15rem;
+  padding: var(--spacing-20);
+}
+
+.ycoNavigationSide_width_rail {
+  max-width: 7rem;
+  align-items: center;
+  padding: var(--spacing-20) var(--spacing-16);
+}
+
+.ycoNavigationSide_list {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ycoNavigationSide_width_rail .ycoNavigationSide_list {
+  align-items: center;
+  gap: var(--spacing-16);
+}
+
+.ycoNavigationSide_divider {
+  width: 100%;
+  height: 1px;
+  flex: none;
+  margin: 0;
+  border: 0;
+  background: var(--stroke-weak);
+}
+
+/* ----- Icons ----- */
+.ycoNavigationSide_icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoNavigationSide_icon_small {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: var(--icon-neutral);
+}
+
+/* ----- Primary button ----- */
+.ycoNavigationSide_button {
+  display: inline-flex;
+  width: 100%;
+  height: 2.75rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-16);
+  border: 0;
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-brand-strong);
+  color: var(--text-inverse-strong);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-small);
+}
+
+.ycoNavigationSide_button:hover {
+  background: var(--brand-800);
+}
+
+.ycoNavigationSide_button:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoNavigationSide_button_icon {
+  width: 3.5rem;
+  padding: 0;
+}
+
+/* ----- Menu list item (List) ----- */
+.ycoNavigationSide_item {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 0;
+  border-radius: var(--spacing-24);
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  font: inherit;
+  font-weight: var(--font-weight-strong);
+  text-align: left;
+  text-decoration: none;
+}
+
+.ycoNavigationSide_label {
+  min-width: 0;
+  flex: 1 0 0;
+}
+
+.ycoNavigationSide_item:hover {
+  background: var(--fill-hover);
+}
+
+.ycoNavigationSide_item:active {
+  background: var(--fill-press);
+}
+
+.ycoNavigationSide_item:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoNavigationSide_item[aria-current="page"] {
+  background: var(--fill-brand-weak);
+  color: var(--text-brand);
+}
+
+.ycoNavigationSide_item[aria-current="page"]:hover {
+  background: var(--fill-brand-hover);
+  box-shadow: inset 0 0 0 2px var(--stroke-selected);
+}
+
+.ycoNavigationSide_item[aria-current="page"]:active {
+  background: var(--fill-brand-press);
+  box-shadow: inset 0 0 0 2px var(--stroke-selected);
+}
+
+.ycoNavigationSide_item:disabled,
+.ycoNavigationSide_item[aria-disabled="true"] {
+  background: transparent;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+/* NEW badge: Figma fill/badge (pink) has no token, so the error fill is used */
+.ycoNavigationSide_new {
+  display: inline-flex;
+  height: var(--spacing-16);
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem 0.375rem;
+  border-radius: 1.5625rem;
+  background: var(--fill-error-strong);
+  color: var(--text-inverse-strong);
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 1rem;
+}
+
+.ycoNavigationSide_more {
+  display: inline-grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--corner-radius-6);
+  background: transparent;
+  color: var(--icon-neutral);
+  cursor: pointer;
+}
+
+.ycoNavigationSide_more:hover {
+  background: var(--fill-hover);
+}
+
+/* ----- Icon rail item (Icon) ----- */
+.ycoNavigationSide_railItem {
+  position: relative;
+  display: flex;
+  width: 5rem;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 1rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.ycoNavigationSide_railIcon {
+  display: flex;
+  width: 4.5rem;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12);
+  border-radius: var(--spacing-24);
+}
+
+.ycoNavigationSide_railItem:hover .ycoNavigationSide_railIcon {
+  background: var(--fill-hover);
+}
+
+.ycoNavigationSide_railItem:active .ycoNavigationSide_railIcon {
+  background: var(--fill-press);
+}
+
+.ycoNavigationSide_railItem:focus-visible {
+  outline: 0;
+}
+
+.ycoNavigationSide_railItem:focus-visible .ycoNavigationSide_railIcon {
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoNavigationSide_railItem[aria-current="page"] {
+  color: var(--text-brand);
+}
+
+.ycoNavigationSide_railItem[aria-current="page"] .ycoNavigationSide_railIcon {
+  background: var(--fill-brand-weak);
+}
+
+.ycoNavigationSide_railItem[aria-current="page"]:hover .ycoNavigationSide_railIcon {
+  background: var(--fill-brand-hover);
+  box-shadow: inset 0 0 0 2px var(--stroke-selected);
+}
+
+.ycoNavigationSide_railItem[aria-current="page"]:active .ycoNavigationSide_railIcon {
+  background: var(--fill-brand-press);
+  box-shadow: inset 0 0 0 2px var(--stroke-selected);
+}
+
+.ycoNavigationSide_railItem[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.ycoNavigationSide_railItem .ycoNavigationSide_new {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* ----- Side-menu flyout ----- */
+.ycoNavigationSide_flyout {
+  display: flex;
+  width: 100%;
+  max-width: 18.875rem;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  padding: var(--spacing-24) var(--spacing-16);
+  border-left: 1px solid var(--stroke-weak);
+  background: var(--background-base);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoNavigationSide_flyoutTitle {
+  margin: 0;
+  font-size: var(--font-size-heading-4);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-heading-4);
+}
+
+.ycoNavigationSide_section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.ycoNavigationSide_sectionTitle {
+  margin: 0;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-small);
+}
+
+.ycoNavigationSide_tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-8);
+}
+
+.ycoNavigationSide_tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.ycoNavigationSide_thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-weak);
+  box-shadow: inset 0 0 0 1px var(--stroke-weak);
+}
+
+.ycoNavigationSide_tile:hover .ycoNavigationSide_thumb {
+  background: var(--fill-hover);
+}
+
+.ycoNavigationSide_tile:focus-visible {
+  outline: 0;
+}
+
+.ycoNavigationSide_tile:focus-visible .ycoNavigationSide_thumb {
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoNavigationSide_hot {
+  position: absolute;
+  bottom: var(--spacing-4);
+  left: var(--spacing-4);
+  padding: 0 0.375rem;
+  border-radius: 1.5625rem;
+  background: var(--background-base);
+  color: var(--text-error);
+  font-size: 0.625rem;
+  font-style: italic;
+  font-weight: var(--font-weight-strong);
+  line-height: 1rem;
+}
+
+/* ----- Older "Navigation side item" rows (320px) ----- */
+.ycoNavigationSide_row {
+  display: flex;
+  width: 100%;
+  height: 2.5rem;
+  box-sizing: border-box;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: 0 var(--spacing-16);
+  border: 0;
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.ycoNavigationSide_row:hover {
+  background: var(--fill-brand-hover);
+  color: var(--text-brand);
+}
+
+.ycoNavigationSide_row:active {
+  background: var(--fill-brand-weak);
+  color: var(--text-brand);
+}
+
+.ycoNavigationSide_row:focus-visible {
+  outline: 2px solid var(--stroke-focus);
+  outline-offset: -2px;
+}
+
+.ycoNavigationSide_row[aria-current="page"] {
+  box-shadow: inset 4px 0 0 var(--stroke-selected);
+  background: var(--fill-brand-weak);
+  color: var(--text-brand);
+  font-weight: var(--font-weight-strong);
+}
+
+.ycoNavigationSide_header {
+  padding: var(--spacing-16) var(--spacing-16) var(--spacing-8);
+  color: var(--text-weak);
+  font-weight: var(--font-weight-strong);
+}
+
+.ycoNavigationSide_rule {
+  width: calc(100% - var(--spacing-48));
+  height: 1px;
+  margin: var(--spacing-24);
+  border: 0;
+  background: var(--stroke-weak);
+}
+
+.ycoNavigationSide_rule_full {
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.ycoNavigationSide_slot {
+  display: grid;
+  min-height: 5rem;
+  margin: var(--spacing-12) var(--spacing-24);
+  place-items: center;
+  border: 1px dashed var(--stroke-strong);
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-weak);
+  color: var(--text-weak);
+  font-family: ui-monospace, monospace;
+  font-size: var(--font-size-tiny);
+  text-align: center;
+}
+
+.ycoNavigationSide_card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin: var(--spacing-12) var(--spacing-24);
+  padding: var(--spacing-12);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-weak);
+}
+
+.ycoNavigationSide_card_icon {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-16);
+  background: var(--fill-weaker);
+}
+
+.ycoNavigationSide_card_brand {
+  align-items: center;
+  border-color: transparent;
+  background: var(--fill-brand-weak);
+  color: var(--text-brand);
+}
+
+.ycoNavigationSide_card_photo {
+  max-width: 12rem;
+  padding: 0;
+  overflow: hidden;
+  background: var(--background-base);
+}
+
+.ycoNavigationSide_cardImage {
+  height: 5rem;
+  background: var(--fill-disabled);
+}
+
+.ycoNavigationSide_cardCaption {
+  padding: var(--spacing-4) var(--spacing-8);
+  color: var(--text-weak);
+  text-align: center;
+}
+
+.ycoNavigationSide_cardTitle {
+  margin: 0;
+  font-weight: var(--font-weight-strong);
+}
+
+.ycoNavigationSide_cardText {
+  margin: 0;
+  color: var(--text-weak);
+}
+
+.ycoNavigationSide_circle {
+  display: grid;
+  width: var(--spacing-40);
+  height: var(--spacing-40);
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--fill-weak);
+}
+
+.ycoNavigationSide_search {
+  display: flex;
+  height: 2.75rem;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: var(--spacing-12) var(--spacing-24);
+  padding: 0 var(--spacing-16);
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-8);
+  color: var(--text-weak);
+}
+
+.ycoNavigationSide_user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-24);
+}
+
+.ycoNavigationSide_avatar {
+  width: var(--spacing-40);
+  height: var(--spacing-40);
+  flex: none;
+  border-radius: 50%;
+  background: var(--fill-disabled);
+}
+
+.ycoNavigationSide_userText {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  flex-direction: column;
+}
+
+.ycoNavigationSide_icon_large {
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+}

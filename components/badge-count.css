@@ -1,0 +1,43 @@
+/* =====================================================================
+   YCO Badge count · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './BadgeCount.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Badge count (3639:1148)
+   Emphasis Strong / Moderate / Weak. A pill at least 24px wide that
+   grows with its number. No interactive states.
+   ===================================================================== */
+
+.ycoBadgeCount {
+  display: inline-flex;
+  min-width: var(--spacing-24);
+  height: var(--spacing-24);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-8);
+  border: 1px solid transparent;
+  border-radius: var(--spacing-16);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
+  font-weight: 400;
+  line-height: var(--line-height-tiny);
+  white-space: nowrap;
+}
+
+.ycoBadgeCount_emphasis_strong {
+  background: var(--fill-error-strong);
+  color: var(--background-base);
+}
+
+.ycoBadgeCount_emphasis_moderate {
+  border-color: var(--stroke-error-weak);
+  background: var(--fill-error-weak);
+  color: var(--text-error);
+}
+
+.ycoBadgeCount_emphasis_weak {
+  border-color: var(--stroke-weak);
+  background: var(--fill-weak);
+  color: var(--text-weak);
+}

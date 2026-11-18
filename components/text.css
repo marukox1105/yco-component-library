@@ -1,0 +1,84 @@
+/* =====================================================================
+   YCO Text · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Text.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Text (5371:9961)
+   Types: H1, H2, H3, H4, Heading 5 (Type8), Small, Tiny, Micro (Type9), Uppercase.
+   Headings use the heading font; the rest use the body font. A weight
+   modifier overrides the type's own weight.
+   ===================================================================== */
+
+.ycoText {
+  margin: var(--spacing-0);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-weight: 400;
+  overflow-wrap: break-word;
+}
+
+.ycoText_type_h1 {
+  font-family: var(--font-family-heading);
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-strong);
+  letter-spacing: -0.5px;
+  line-height: 3rem;
+}
+
+.ycoText_type_h2 {
+  font-family: var(--font-family-heading);
+  font-size: 2rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 2.5rem;
+}
+
+.ycoText_type_h3 {
+  font-family: var(--font-family-heading);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 2rem;
+}
+
+.ycoText_type_h4 {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-heading-4);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-heading-4);
+}
+
+.ycoText_type_h5 {
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+}
+
+.ycoText_type_small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoText_type_tiny {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoText_type_micro {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.ycoText_type_uppercase {
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  letter-spacing: 2px;
+  line-height: var(--line-height-tiny);
+  text-transform: uppercase;
+}
+
+.ycoText_weight_regular {
+  font-weight: 400;
+}
+
+.ycoText_weight_strong {
+  font-weight: var(--font-weight-strong);
+}

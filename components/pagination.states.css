@@ -1,0 +1,4 @@
+/* Doc-only: shows Hover / Press / Focus of a page item without a real pointer. Not exported to yce-frontend. */
+.ycoPagination_page.is-hover { background: var(--fill-hover); }
+.ycoPagination_page.is-press { background: var(--fill-press); }
+.ycoPagination_page.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: 3px; }

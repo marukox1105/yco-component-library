@@ -1,0 +1,5 @@
+/* Doc-only: shows the dropdown's Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoAvatar_dropdown.is-hover { background: var(--fill-hover); }
+.ycoAvatar_dropdown.is-press { background: var(--fill-press); }
+.ycoAvatar_dropdown.is-focus { background: var(--fill-hover); box-shadow: 0 0 0 3px var(--stroke-focus); }
+.ycoAvatar_dropdown_navigation.is-focus { box-shadow: inset 0 0 0 3px var(--stroke-focus); }

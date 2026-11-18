@@ -1,0 +1,2 @@
+/* Doc-only: shows the focused field without a real focus. Not exported to yce-frontend. */
+.ycoPromptComposer_field.is-focus { border-color: var(--stroke-strong); }

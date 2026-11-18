@@ -1,0 +1,6 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoSelect_button.is-hover { background: var(--fill-hover); }
+.ycoSelect_button.is-press { background: var(--fill-press); }
+.ycoSelect_button.is-focus { background: transparent; }
+.ycoSelect_field:has(.is-focus) { border-color: var(--stroke-selected); outline: 3px solid var(--stroke-focus); }
+.ycoSelect_valid_false .ycoSelect_field:has(.is-focus) { border-color: var(--stroke-error-strong); outline-color: var(--stroke-error-weak); }

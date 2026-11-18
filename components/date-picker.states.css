@@ -1,0 +1,11 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoDatePicker_state.is-hover { background: var(--fill-hover); }
+.ycoDatePicker_state.is-press { background: var(--fill-press); }
+.ycoDatePicker_state.is-focus { background: transparent; }
+.ycoDatePicker_field:has(.is-focus) { border-color: var(--stroke-selected); outline: 4px solid var(--stroke-focus); outline-offset: -1px; }
+.ycoDatePicker_valid_false .ycoDatePicker_field:has(.is-focus) { border-color: var(--stroke-error-strong); outline-color: var(--stroke-error-weak); }
+.ycoDatePicker_date.is-hover { background: var(--fill-hover); }
+.ycoDatePicker_date.is-press { background: var(--fill-press); }
+.ycoDatePicker_date.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: 2px; }
+.ycoDatePicker_date_selected.is-hover { background-image: linear-gradient(var(--fill-hover), var(--fill-hover)); background-color: var(--fill-brand-strong); }
+.ycoDatePicker_date_selected.is-press { background-image: linear-gradient(var(--fill-press), var(--fill-press)); background-color: var(--fill-brand-strong); }

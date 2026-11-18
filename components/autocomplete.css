@@ -1,0 +1,426 @@
+/* =====================================================================
+   YCO Autocomplete · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Autocomplete.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Autocomplete (7895:213246)
+   Type Single / Multiple x Open False / True x State Default / Hover /
+   Press / Focus / Disabled x Valid true / false x Size Large (48px) /
+   Small (36px). The open list is part of the component.
+   Hover, Press and Focus are real :hover, :active and :focus-within.
+   ===================================================================== */
+
+.ycoAutocomplete {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 364px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoAutocomplete_text {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  white-space: nowrap;
+}
+
+.ycoAutocomplete_labelRow {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  color: var(--text-strong);
+}
+
+.ycoAutocomplete_size_small .ycoAutocomplete_labelRow {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoAutocomplete_labelRow label {
+  color: inherit;
+  font: inherit;
+}
+
+.ycoAutocomplete_required {
+  color: var(--text-error);
+}
+
+.ycoAutocomplete_optional {
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* Micro (12px / 16px) has no token in styles.css. */
+.ycoAutocomplete_hint {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.ycoAutocomplete_control {
+  position: relative;
+  width: 100%;
+}
+
+.ycoAutocomplete_field {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--fill-inverse-strong);
+}
+
+.ycoAutocomplete_size_small .ycoAutocomplete_field {
+  min-height: 2.25rem;
+}
+
+.ycoAutocomplete_field:focus-within {
+  border-color: var(--stroke-selected);
+}
+
+.ycoAutocomplete_state {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: 0 var(--spacing-16);
+  border-radius: var(--spacing-8);
+  color: var(--text-strong);
+}
+
+.ycoAutocomplete_size_small .ycoAutocomplete_state {
+  padding: 0 var(--spacing-8);
+}
+
+.ycoAutocomplete_state:hover {
+  background: var(--fill-hover);
+}
+
+.ycoAutocomplete_state:active {
+  background: var(--fill-press);
+}
+
+.ycoAutocomplete_state:focus-within {
+  background: transparent;
+  box-shadow: inset 0 0 0 3px var(--stroke-brand-weak);
+}
+
+.ycoAutocomplete_icon,
+.ycoAutocomplete_clearIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: var(--icon-neutral);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoAutocomplete_size_small .ycoAutocomplete_searchIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+input.ycoAutocomplete_input {
+  width: 100%;
+  min-width: 3rem;
+  min-height: 0;
+  height: 100%;
+  flex: 1 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-strong);
+  font: inherit;
+  outline: 0;
+}
+
+.ycoAutocomplete_input::placeholder {
+  color: var(--text-weak);
+  opacity: 1;
+}
+
+.ycoAutocomplete_clear {
+  display: grid;
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--spacing-4);
+  background: transparent;
+  cursor: pointer;
+}
+
+.ycoAutocomplete_clear[hidden] {
+  display: none;
+}
+
+.ycoAutocomplete_clear:focus-visible,
+.ycoAutocomplete_tagRemove:focus-visible {
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: 1px;
+}
+
+/* ----- multiple: tag group ----- */
+.ycoAutocomplete_tags {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8) var(--spacing-4);
+  padding: var(--spacing-8) 0;
+}
+
+.ycoAutocomplete_size_small .ycoAutocomplete_tags {
+  padding: var(--spacing-4) 0;
+}
+
+.ycoAutocomplete_tag {
+  position: relative;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4) var(--spacing-8);
+  border-radius: var(--spacing-16);
+  background: var(--fill-weak);
+}
+
+.ycoAutocomplete_tag::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-16);
+  content: "";
+  pointer-events: none;
+}
+
+.ycoAutocomplete_tagLabel {
+  padding: 0 var(--spacing-4);
+  white-space: nowrap;
+}
+
+.ycoAutocomplete_tagRemove {
+  display: grid;
+  padding: 0;
+  border: 0;
+  border-radius: var(--spacing-4);
+  background: transparent;
+  cursor: pointer;
+}
+
+.ycoAutocomplete_tagIcon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: var(--icon-neutral);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+/* ----- list ----- */
+.ycoAutocomplete_menu {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + var(--spacing-4));
+  left: 0;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 0;
+  padding: var(--spacing-8) 1px;
+  overflow: hidden;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-8);
+  background: var(--background-raised);
+  box-shadow: 0 8px 24px -4px color-mix(in srgb, var(--fill-overlay) 27%, transparent);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  list-style: none;
+}
+
+.ycoAutocomplete_menu[hidden] {
+  display: none;
+}
+
+.ycoAutocomplete_option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
+  cursor: pointer;
+}
+
+.ycoAutocomplete_option[hidden] {
+  display: none;
+}
+
+.ycoAutocomplete_option:hover,
+.ycoAutocomplete_option_active {
+  background: var(--fill-hover);
+}
+
+.ycoAutocomplete_option:active {
+  background: var(--fill-press);
+}
+
+.ycoAutocomplete_option[aria-selected="true"] {
+  background: var(--fill-brand-weak);
+}
+
+.ycoAutocomplete_type_single .ycoAutocomplete_option[aria-selected="true"] {
+  background: transparent;
+}
+
+.ycoAutocomplete_type_single .ycoAutocomplete_option:hover,
+.ycoAutocomplete_type_single .ycoAutocomplete_option_active {
+  background: var(--fill-hover);
+}
+
+.ycoAutocomplete_optionLabel {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.ycoAutocomplete_type_multiple .ycoAutocomplete_optionLabel {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoAutocomplete_optionIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: var(--icon-neutral);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoAutocomplete_check {
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--spacing-4);
+  background: var(--fill-inverse-strong);
+}
+
+.ycoAutocomplete_checkIcon {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: var(--icon-inverse-strong);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoAutocomplete_option[aria-selected="true"] .ycoAutocomplete_check {
+  border-color: var(--fill-brand-strong);
+  background: var(--fill-brand-strong);
+}
+
+.ycoAutocomplete_option[aria-selected="true"] .ycoAutocomplete_checkIcon {
+  display: block;
+}
+
+/* ----- error ----- */
+.ycoAutocomplete_error {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: var(--spacing-4) 0;
+  color: var(--text-error);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 1rem;
+}
+
+.ycoAutocomplete_errorIcon {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- invalid ----- */
+.ycoAutocomplete_valid_false .ycoAutocomplete_field {
+  border-color: var(--stroke-error-strong);
+  background: var(--fill-error-weak);
+}
+
+.ycoAutocomplete_valid_false .ycoAutocomplete_field:focus-within {
+  border-color: var(--stroke-error-strong);
+}
+
+.ycoAutocomplete_valid_false .ycoAutocomplete_state:focus-within {
+  box-shadow: inset 0 0 0 3px var(--stroke-error-weak);
+}
+
+/* ----- disabled ----- */
+.ycoAutocomplete_disabled .ycoAutocomplete_labelRow,
+.ycoAutocomplete_disabled .ycoAutocomplete_required,
+.ycoAutocomplete_disabled .ycoAutocomplete_hint {
+  color: var(--text-disabled);
+}
+
+.ycoAutocomplete_disabled .ycoAutocomplete_field {
+  border-color: var(--stroke-disabled);
+}
+
+.ycoAutocomplete_disabled .ycoAutocomplete_state:hover,
+.ycoAutocomplete_disabled .ycoAutocomplete_state:active {
+  background: transparent;
+}
+
+.ycoAutocomplete_disabled .ycoAutocomplete_icon,
+.ycoAutocomplete_disabled .ycoAutocomplete_clearIcon,
+.ycoAutocomplete_disabled .ycoAutocomplete_tagIcon {
+  stroke: var(--icon-disabled);
+}
+
+.ycoAutocomplete_disabled .ycoAutocomplete_tag {
+  color: var(--text-disabled);
+}
+
+input.ycoAutocomplete_input:disabled {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.ycoAutocomplete_disabled .ycoAutocomplete_input::placeholder {
+  color: var(--text-disabled);
+}
+
+.ycoAutocomplete_clear:disabled,
+.ycoAutocomplete_tagRemove:disabled {
+  cursor: not-allowed;
+}

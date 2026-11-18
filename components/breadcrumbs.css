@@ -1,0 +1,80 @@
+/* =====================================================================
+   YCO Breadcrumbs · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Breadcrumbs.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Breadcrumbs (4993:5844)
+   Type Default (up to eight items, wrapping) / Collapsed (first, "...",
+   current). Items are links; the last one is the current page.
+   ===================================================================== */
+
+.ycoBreadcrumbs {
+  font-family: var(--font-family-body);
+}
+
+.ycoBreadcrumbs_list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ycoBreadcrumbs_type_collapsed .ycoBreadcrumbs_list {
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.ycoBreadcrumbs_item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.ycoBreadcrumbs_item + .ycoBreadcrumbs_item::before {
+  color: var(--icon-neutral);
+  content: "/";
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoBreadcrumbs_link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--corner-radius-6);
+  background: transparent;
+  color: var(--text-weak);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ycoBreadcrumbs_link:hover {
+  color: var(--text-strong);
+  text-decoration: underline;
+}
+
+.ycoBreadcrumbs_link:active {
+  color: var(--text-weaker);
+}
+
+.ycoBreadcrumbs_link:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoBreadcrumbs_link_current {
+  color: var(--text-strong);
+  cursor: default;
+}
+
+.ycoBreadcrumbs_link_current:hover {
+  text-decoration: none;
+}

@@ -1,0 +1,4 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoTabs_tab.is-hover { background: var(--fill-hover); }
+.ycoTabs_tab.is-press { background: var(--fill-press); }
+.ycoTabs_tab.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: 4px; }

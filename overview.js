@@ -14,6 +14,27 @@
     inferred: ["inferred", "Confirm pairing"],
     none: ["none", "No Storybook component"],
   };
+  // Figma row name -> the library page(s) built for it (ids in nav.js).
+  const PAGE_OF = {
+    "Button": ["buttons"], "Button group": ["button-group"], "Button icon": ["button-icon"], "Icon container": ["icon-container"],
+    "Text link": ["text-link"], "Avatar / labelled / dropdown / stack": ["avatar"], "Tag group / Badge": ["tag", "badge"],
+    "Badge count": ["badge-count"], "Badge dot": ["badge-dot"], "Slot": ["slot"], "Scrollbar": ["scrollbar"],
+    "Text input": ["text-input"], "Text area": ["text-area"], "Select": ["select"], "Search input": ["search-input"],
+    "Autocomplete": ["autocomplete"], "Combobox": ["combobox"], "Date picker": ["date-picker"], "File upload": ["file-upload"],
+    "Slider": ["slider"], "Progress indicator / Bar": ["progress-indicator", "loading-bar"], "Checkbox group": ["checkboxes"],
+    "Radio button group": ["radio-buttons"], "Stepper": ["stepper"], "Toggle": ["toggle"], "Prompt Composer": ["prompt-composer"],
+    "Alert": ["toast"], "Alert global": ["alert-global"], "Empty state": ["empty-state"], "Empty Image": ["empty-image"], "Loading bar": ["loading-bar"],
+    "Navigation header": ["navigation-header"], "Footer": ["footer"], "Tabs": ["tabs"], "Pagination": ["pagination"],
+    "Segmented control": ["segmented-control"], "Breadcrumbs": ["breadcrumbs"], "Navigation side": ["navigation-side"],
+    "Modal": ["modal"], "Drawer": ["drawer"], "Card": ["card"], "Tooltip": ["tooltip"], "Dropdown menu / list": ["dropdown-menu"],
+    "Table": ["table"], "Summary list": ["summary-list"], "Accordion": ["accordion"], "Text": ["text"], "Text block": ["text-block"],
+    "Divider": ["divider"], "Hero": ["hero"], "Testimonial": ["testimonial"], "Rating": ["rating"],
+  };
+  const navLabel = {};
+  (window.YCO_NAV || []).forEach((g) => g.items.forEach((i) => { navLabel[i.id] = i.label; }));
+  function pageLinks(name) { return (PAGE_OF[name] || []).filter((id) => navLabel[id]).map((id) =>
+    `<a class="ov-badge page-doc" href="#${id}">${esc(navLabel[id])} page \u2192</a>`).join(" "); }
+
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const comps = C.components;
   const storyCount = (c) => c.stories.reduce((n, s) => n + s.count, 0);
@@ -40,7 +61,7 @@
     const rows = g.items.map((i) => {
       const [cls, label] = MATCH[i.conf];
       return `<tr data-conf="${i.conf}" data-search="${esc((i.name + " " + i.sb.map((id) => comps[id].name + " " + id).join(" ")).toLowerCase())}">
-        <td class="ov-preview-cell">${previewCell(i)}</td><th scope="row" class="ov-name">${esc(i.name)}</th><td>${sbCell(i.sb)}</td>
+        <td class="ov-preview-cell">${previewCell(i)}</td><th scope="row" class="ov-name">${esc(i.name)}<span class="ov-pagelinks">${pageLinks(i.name)}</span></th><td>${sbCell(i.sb)}</td>
         <td><span class="ov-badge ${cls}">${label}</span>${i.note ? `<span class="ov-note">${esc(i.note)}</span>` : ""}</td></tr>`;
     }).join("");
     return `<section class="ov-group" data-group>

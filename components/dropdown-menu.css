@@ -1,0 +1,490 @@
+/* =====================================================================
+   YCO Dropdown menu · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './DropdownMenu.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Dropdown menu (3834:44802):
+     Dropdown menu (3834:49709)   trigger Button / Button icon / Avatar / Avatar side
+                                  navigation, Size Medium / Small, Open, Align
+                                  Bottom or Top x left or right
+     Dropdown menu list (5967:27085)         the 280 wide panel
+     Dropdown menu list item (3557:142467)   Default / Secondary text / Checkbox /
+                                  Avatar / Heading / Divider, States default, hover,
+                                  press, focus, selected, Size Small / Tiny
+   The Button trigger is the Buttons page's .ycoButton (needs: button).
+   ===================================================================== */
+
+.ycoDropdownMenu {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-family-body);
+}
+
+/* ----- triggers ----- */
+.ycoDropdownMenu_trigger {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-8) var(--spacing-16);
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.ycoDropdownMenu_trigger:hover {
+  background: var(--fill-hover);
+}
+
+.ycoDropdownMenu_trigger:active {
+  background: var(--fill-press);
+}
+
+.ycoDropdownMenu_trigger:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+/* Button icon: a square, 42 (Medium) or 32 (Small) */
+.ycoDropdownMenu_trigger_icon {
+  justify-content: center;
+  padding: var(--spacing-8);
+}
+
+.ycoDropdownMenu_trigger_icon.ycoDropdownMenu_size_medium {
+  width: 2.625rem;
+  height: 2.625rem;
+}
+
+.ycoDropdownMenu_trigger_icon.ycoDropdownMenu_size_small {
+  width: 2rem;
+  height: 2rem;
+  padding: var(--spacing-4);
+}
+
+.ycoDropdownMenu_triggerGlyph {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Button trigger: the chevron turns over while open */
+.ycoDropdownMenu_chevron {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 140ms ease;
+}
+
+.ycoDropdownMenu_trigger .ycoDropdownMenu_chevron {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+[aria-expanded="true"] > .ycoDropdownMenu_chevron {
+  transform: rotate(180deg);
+}
+
+/* Avatar triggers */
+.ycoDropdownMenu_trigger_avatar.ycoDropdownMenu_size_medium {
+  min-height: 3.75rem;
+  gap: var(--spacing-12);
+}
+
+.ycoDropdownMenu_trigger_nav {
+  width: 20rem;
+  max-width: 100%;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-24);
+}
+
+.ycoDropdownMenu_triggerBody {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  align-items: center;
+  gap: var(--spacing-12);
+  overflow: clip;
+}
+
+.ycoDropdownMenu_trigger_avatar .ycoDropdownMenu_triggerBody {
+  flex: none;
+  gap: var(--spacing-8);
+}
+
+.ycoDropdownMenu_trigger_avatar.ycoDropdownMenu_size_medium .ycoDropdownMenu_triggerBody {
+  gap: var(--spacing-12);
+}
+
+/* ----- avatar placeholder (a circle; real photos are the caller's) ----- */
+.ycoDropdownMenu_avatar {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-sizing: border-box;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-48);
+  background: var(--fill-weak);
+  color: var(--icon-neutral);
+}
+
+.ycoDropdownMenu_avatar_small {
+  width: 2rem;
+  height: 2rem;
+}
+
+.ycoDropdownMenu_avatarGlyph {
+  width: 62%;
+  height: 62%;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.55;
+}
+
+.ycoDropdownMenu_name {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--text-strong);
+}
+
+.ycoDropdownMenu_nameMain {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoDropdownMenu_nameMeta {
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoDropdownMenu_size_small .ycoDropdownMenu_nameMain {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* ----- list (the panel) ----- */
+.ycoDropdownMenu_list {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  width: 17.5rem;
+  max-width: calc(100vw - 8rem);
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: stretch;
+  padding: var(--spacing-8) 1px;
+  overflow: clip;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--background-raised);
+  box-shadow: var(--shadow);
+  color: var(--text-strong);
+  text-align: left;
+}
+
+.ycoDropdownMenu_list[hidden] {
+  display: none;
+}
+
+.ycoDropdownMenu_list_bottom_left {
+  top: calc(100% + var(--spacing-8));
+  left: 0;
+}
+
+.ycoDropdownMenu_list_bottom_right {
+  top: calc(100% + var(--spacing-8));
+  right: 0;
+}
+
+.ycoDropdownMenu_list_top_left {
+  bottom: calc(100% + var(--spacing-8));
+  left: 0;
+}
+
+.ycoDropdownMenu_list_top_right {
+  right: 0;
+  bottom: calc(100% + var(--spacing-8));
+}
+
+/* ----- list items ----- */
+.ycoDropdownMenu_item_checked {
+  background: var(--fill-brand-weak);
+}
+
+.ycoDropdownMenu_item {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex: none;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 0;
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.ycoDropdownMenu_item_size_tiny {
+  padding-block: var(--spacing-8);
+}
+
+.ycoDropdownMenu_item:hover {
+  background: var(--fill-hover);
+}
+
+.ycoDropdownMenu_item:active {
+  background: var(--fill-press);
+}
+
+.ycoDropdownMenu_item:focus-visible {
+  outline: 0;
+  background: transparent;
+  box-shadow: inset 0 0 0 2px var(--stroke-focus);
+}
+
+.ycoDropdownMenu_item_selected,
+.ycoDropdownMenu_item_selected:hover,
+.ycoDropdownMenu_item_selected:active {
+  background: var(--fill-brand-weak);
+  box-shadow: inset 4px 0 0 var(--stroke-selected);
+}
+
+.ycoDropdownMenu_item_selected:focus-visible {
+  background: var(--fill-brand-weak);
+  box-shadow:
+    inset 4px 0 0 var(--stroke-selected),
+    inset 0 0 0 2px var(--stroke-focus);
+}
+
+.ycoDropdownMenu_item[aria-disabled="true"] {
+  background: transparent;
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.ycoDropdownMenu_item[aria-disabled="true"] .ycoDropdownMenu_itemIcon,
+.ycoDropdownMenu_item[aria-disabled="true"] .ycoDropdownMenu_itemSecondary {
+  color: var(--text-disabled);
+}
+
+.ycoDropdownMenu_itemContent {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.ycoDropdownMenu_itemIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoDropdownMenu_itemText {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ycoDropdownMenu_itemLabel {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  overflow-wrap: anywhere;
+}
+
+.ycoDropdownMenu_item_size_tiny .ycoDropdownMenu_itemLabel {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoDropdownMenu_itemSecondary {
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoDropdownMenu_item_size_tiny .ycoDropdownMenu_itemSecondary {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+/* checkbox item */
+.ycoDropdownMenu_check {
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  box-sizing: border-box;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--spacing-4);
+  background: var(--fill-inverse-strong);
+  color: var(--text-inverse-strong);
+}
+
+.ycoDropdownMenu_checkGlyph {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+
+[aria-checked="true"] > .ycoDropdownMenu_itemContent > .ycoDropdownMenu_check,
+[aria-checked="true"] .ycoDropdownMenu_check {
+  border-color: var(--fill-brand-strong);
+  background: var(--fill-brand-strong);
+}
+
+[aria-checked="true"] .ycoDropdownMenu_checkGlyph {
+  opacity: 1;
+}
+
+.ycoDropdownMenu_checkLabel {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* toggle (switch) on the right of an item */
+.ycoDropdownMenu_switch {
+  position: relative;
+  width: 2.5rem;
+  height: 1.25rem;
+  box-sizing: border-box;
+  flex: none;
+  margin-right: var(--spacing-8);
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-weak);
+  transition: background 140ms ease;
+}
+
+.ycoDropdownMenu_switchKnob {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 1.25rem;
+  height: 1.25rem;
+  box-sizing: border-box;
+  border: 1px solid var(--stroke-strong);
+  border-radius: 50%;
+  background: var(--fill-inverse-strong);
+  transition: transform 140ms ease;
+}
+
+[aria-checked="true"] > .ycoDropdownMenu_itemContent > .ycoDropdownMenu_switch {
+  border-color: var(--fill-brand-strong);
+  background: var(--fill-brand-strong);
+}
+
+[aria-checked="true"] > .ycoDropdownMenu_itemContent > .ycoDropdownMenu_switch .ycoDropdownMenu_switchKnob {
+  transform: translateX(1.25rem);
+  border-color: var(--fill-brand-strong);
+}
+
+/* badge and count pills */
+.ycoDropdownMenu_badge {
+  display: inline-flex;
+  height: 1.5rem;
+  box-sizing: border-box;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-8);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--spacing-16);
+  background: var(--fill-weak);
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  white-space: nowrap;
+}
+
+.ycoDropdownMenu_badgeGlyph {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* avatar item: photo + name + email */
+.ycoDropdownMenu_itemAvatar {
+  display: flex;
+  min-width: 0;
+  flex: 1 0 0;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.ycoDropdownMenu_item_size_tiny .ycoDropdownMenu_nameMain {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoDropdownMenu_item_size_tiny .ycoDropdownMenu_nameMeta {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+/* heading and divider rows */
+.ycoDropdownMenu_heading {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--spacing-16) var(--spacing-16) var(--spacing-4);
+  color: var(--text-weaker);
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.ycoDropdownMenu_divider {
+  width: 100%;
+  box-sizing: border-box;
+  flex: none;
+  padding: var(--spacing-8) 0;
+}
+
+.ycoDropdownMenu_dividerLine {
+  display: block;
+  height: 1px;
+  background: var(--stroke-weak);
+}

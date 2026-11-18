@@ -1,0 +1,4 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoCard.is-hover { box-shadow: var(--shadow); }
+.ycoCard.is-press { box-shadow: none; }
+.ycoCard.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: 2px; }

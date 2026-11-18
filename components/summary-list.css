@@ -1,0 +1,128 @@
+/* =====================================================================
+   YCO Summary list · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './SummaryList.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Summary list (8168:66422)
+   Item types: Term, Description, Link, Action icons, Action links.
+   A list is rows of equal-width columns under a top rule.
+   ===================================================================== */
+
+.ycoSummaryList {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--stroke-weak);
+  font-family: var(--font-family-body);
+}
+
+.ycoSummaryList_row {
+  display: flex;
+  align-items: stretch;
+}
+
+.ycoSummaryList_item {
+  display: flex;
+  min-width: 0;
+  min-height: 5rem;
+  flex: 1 1 0;
+  align-items: center;
+  margin: 0;
+  padding: 0 var(--spacing-24) 0 var(--spacing-0);
+  border-bottom: 1px solid var(--stroke-weak);
+  color: var(--text-weak);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoSummaryList_term {
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+}
+
+.ycoSummaryList_item_end {
+  justify-content: flex-end;
+  gap: var(--spacing-16);
+  padding: 0 var(--spacing-0) 0 var(--spacing-24);
+}
+
+.ycoSummaryList_link {
+  color: var(--text-brand);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.ycoSummaryList_link:focus-visible {
+  border-radius: var(--corner-radius-6);
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: 2px;
+}
+
+.ycoSummaryList_link_small {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  white-space: nowrap;
+}
+
+.ycoSummaryList_actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.ycoSummaryList_iconButton {
+  display: grid;
+  width: 2.625rem;
+  height: 2.625rem;
+  flex: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: none;
+  color: var(--icon-neutral);
+  cursor: pointer;
+}
+
+.ycoSummaryList_iconButton:hover {
+  background: var(--fill-hover);
+}
+
+.ycoSummaryList_iconButton:active {
+  background: var(--fill-press);
+}
+
+.ycoSummaryList_iconButton:focus-visible {
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: -2px;
+}
+
+.ycoSummaryList_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+/* Narrow: the term takes its own line, the rest sit under it. */
+@media (max-width: 40rem) {
+  .ycoSummaryList_row {
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--stroke-weak);
+  }
+
+  .ycoSummaryList_item {
+    min-height: 3.5rem;
+    border-bottom: 0;
+  }
+
+  .ycoSummaryList_term {
+    flex-basis: 100%;
+    min-height: 3rem;
+    padding-top: var(--spacing-8);
+  }
+}

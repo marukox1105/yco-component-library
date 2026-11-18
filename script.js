@@ -727,6 +727,11 @@ async function copyText(text) {
 const hashPage = window.location.hash.replace("#", "");
 const initialPage = hashPage && document.querySelector(`[data-page-link="${hashPage}"]`) ? hashPage : "buttons";
 setActivePage(initialPage);
+// Back / forward and a hand-edited #hash switch pages too (the sidebar uses replaceState, which does not fire this).
+window.addEventListener("hashchange", () => {
+  const id = window.location.hash.replace("#", "");
+  if (id && document.querySelector(`[data-page-link="${id}"]`)) setActivePage(id);
+});
 const initialIsEngine = Boolean(window.YCO && window.YCO.has(initialPage));
 loadComponentCss().then(() => { if (!initialIsEngine) updatePreview(); });
 if (!initialIsEngine) updateAlertPreview();

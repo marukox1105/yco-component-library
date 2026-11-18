@@ -1,0 +1,298 @@
+/* =====================================================================
+   YCO Tooltip · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Tooltip.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Tooltip (4136:45743), set 3550:142326
+   Size Tiny / Small (one line, 12px) / Large (heading + body, 324 wide);
+   Type Top left / Top centre / Top right / Bottom left / Bottom centre /
+   Bottom right / Left / Right. Top and Bottom put the bubble above or below
+   the trigger; Left and Right name the edge the arrow sits on.
+   Shown on hover and keyboard focus of the anchor, or kept open with
+   .ycoTooltip_open. Escape or the dismiss button hides it (.ycoTooltip_hidden).
+   ===================================================================== */
+
+.ycoTooltip_anchor {
+  position: relative;
+  display: inline-flex;
+}
+
+.ycoTooltip {
+  position: absolute;
+  z-index: 10;
+  box-sizing: border-box;
+  border-radius: var(--spacing-4);
+  background: var(--fill-strong);
+  box-shadow: var(--shadow);
+  color: var(--text-inverse-strong);
+  font-family: var(--font-family-body);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease,
+    visibility 120ms ease;
+}
+
+.ycoTooltip_open,
+.ycoTooltip_anchor:hover .ycoTooltip,
+.ycoTooltip_anchor:focus-within .ycoTooltip {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ycoTooltip_hidden,
+.ycoTooltip_anchor:hover .ycoTooltip_hidden,
+.ycoTooltip_anchor:focus-within .ycoTooltip_hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ----- sizes ----- */
+.ycoTooltip_size_tiny {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-8);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  white-space: nowrap;
+}
+
+.ycoTooltip_size_small {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-12);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  white-space: nowrap;
+}
+
+.ycoTooltip_size_large {
+  display: flex;
+  width: 20.25rem;
+  max-width: calc(100vw - 8rem);
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-12);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoTooltip_text {
+  margin: 0;
+}
+
+.ycoTooltip_size_large .ycoTooltip_text {
+  opacity: 0.78;
+}
+
+.ycoTooltip_heading {
+  margin: 0;
+  padding-right: var(--spacing-20);
+  font-weight: var(--font-weight-strong);
+}
+
+/* Large dismiss sits at the corner; Tiny and Small keep it inline after the text. */
+.ycoTooltip_dismiss {
+  display: grid;
+  width: 0.75rem;
+  height: 0.75rem;
+  flex: none;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.78;
+}
+
+.ycoTooltip_dismiss:hover {
+  opacity: 1;
+}
+
+.ycoTooltip_dismiss:focus-visible {
+  outline: 2px solid var(--stroke-focus);
+  outline-offset: 2px;
+}
+
+.ycoTooltip_size_large .ycoTooltip_dismiss {
+  position: absolute;
+  top: var(--spacing-8);
+  right: var(--spacing-8);
+}
+
+.ycoTooltip_dismissGlyph {
+  width: 0.75rem;
+  height: 0.75rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* ----- arrow (a triangle in the bubble's ground colour) ----- */
+.ycoTooltip::after {
+  content: "";
+  position: absolute;
+  background: var(--fill-strong);
+}
+
+.ycoTooltip_size_tiny::after,
+.ycoTooltip_size_small::after {
+  width: 0.75rem;
+  height: 0.375rem;
+}
+
+.ycoTooltip_size_large::after {
+  width: 1rem;
+  height: 0.5rem;
+}
+
+/* above the trigger: arrow on the bottom edge, pointing down */
+.ycoTooltip_placement_top_left,
+.ycoTooltip_placement_top_centre,
+.ycoTooltip_placement_top_right {
+  bottom: calc(100% + 0.375rem);
+}
+
+.ycoTooltip_size_large.ycoTooltip_placement_top_left,
+.ycoTooltip_size_large.ycoTooltip_placement_top_centre,
+.ycoTooltip_size_large.ycoTooltip_placement_top_right {
+  bottom: calc(100% + 0.5rem);
+}
+
+.ycoTooltip_placement_top_left::after,
+.ycoTooltip_placement_top_centre::after,
+.ycoTooltip_placement_top_right::after {
+  top: calc(100% - 1px);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* below the trigger: arrow on the top edge, pointing up */
+.ycoTooltip_placement_bottom_left,
+.ycoTooltip_placement_bottom_centre,
+.ycoTooltip_placement_bottom_right {
+  top: calc(100% + 0.375rem);
+}
+
+.ycoTooltip_size_large.ycoTooltip_placement_bottom_left,
+.ycoTooltip_size_large.ycoTooltip_placement_bottom_centre,
+.ycoTooltip_size_large.ycoTooltip_placement_bottom_right {
+  top: calc(100% + 0.5rem);
+}
+
+.ycoTooltip_placement_bottom_left::after,
+.ycoTooltip_placement_bottom_centre::after,
+.ycoTooltip_placement_bottom_right::after {
+  bottom: calc(100% - 1px);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+/* horizontal alignment and the arrow's offset from that edge */
+.ycoTooltip_placement_top_left,
+.ycoTooltip_placement_bottom_left {
+  left: 0;
+}
+
+.ycoTooltip_placement_top_right,
+.ycoTooltip_placement_bottom_right {
+  right: 0;
+}
+
+.ycoTooltip_placement_top_centre,
+.ycoTooltip_placement_bottom_centre {
+  left: 50%;
+  translate: -50% 0;
+}
+
+.ycoTooltip_placement_top_left::after,
+.ycoTooltip_placement_bottom_left::after {
+  left: 0.5rem;
+}
+
+.ycoTooltip_size_small.ycoTooltip_placement_top_left::after,
+.ycoTooltip_size_small.ycoTooltip_placement_bottom_left::after {
+  left: 1.125rem;
+}
+
+.ycoTooltip_size_large.ycoTooltip_placement_top_left::after,
+.ycoTooltip_size_large.ycoTooltip_placement_bottom_left::after {
+  left: 0.75rem;
+}
+
+.ycoTooltip_placement_top_right::after,
+.ycoTooltip_placement_bottom_right::after {
+  right: 0.5rem;
+}
+
+.ycoTooltip_size_small.ycoTooltip_placement_top_right::after,
+.ycoTooltip_size_small.ycoTooltip_placement_bottom_right::after {
+  right: 1.125rem;
+}
+
+.ycoTooltip_size_large.ycoTooltip_placement_top_right::after,
+.ycoTooltip_size_large.ycoTooltip_placement_bottom_right::after {
+  right: 0.75rem;
+}
+
+.ycoTooltip_placement_top_centre::after,
+.ycoTooltip_placement_bottom_centre::after {
+  left: 50%;
+  translate: -50% 0;
+}
+
+/* beside the trigger: Left has the arrow on its left edge, so the bubble sits to the trigger's right */
+.ycoTooltip_placement_left {
+  top: 50%;
+  left: calc(100% + 0.375rem);
+  translate: 0 -50%;
+}
+
+.ycoTooltip_placement_right {
+  top: 50%;
+  right: calc(100% + 0.375rem);
+  translate: 0 -50%;
+}
+
+.ycoTooltip_size_large.ycoTooltip_placement_left {
+  left: calc(100% + 0.5rem);
+}
+
+.ycoTooltip_size_large.ycoTooltip_placement_right {
+  right: calc(100% + 0.5rem);
+}
+
+.ycoTooltip_placement_left::after,
+.ycoTooltip_placement_right::after {
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.ycoTooltip_size_tiny.ycoTooltip_placement_left::after,
+.ycoTooltip_size_tiny.ycoTooltip_placement_right::after,
+.ycoTooltip_size_small.ycoTooltip_placement_left::after,
+.ycoTooltip_size_small.ycoTooltip_placement_right::after {
+  width: 0.375rem;
+  height: 0.75rem;
+}
+
+.ycoTooltip_size_large.ycoTooltip_placement_left::after,
+.ycoTooltip_size_large.ycoTooltip_placement_right::after {
+  width: 0.5rem;
+  height: 1rem;
+}
+
+.ycoTooltip_placement_left::after {
+  right: calc(100% - 1px);
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}
+
+.ycoTooltip_placement_right::after {
+  left: calc(100% - 1px);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}

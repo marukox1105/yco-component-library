@@ -55,3 +55,6 @@
   .ov-table tr > td.ov-preview-cell { order: 1; }
   .ov-table tr > td:not(.ov-preview-cell) { order: 2; }
 }
+
+.ov-pagelinks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ov-pagelinks a { text-decoration: none; }

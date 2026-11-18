@@ -648,13 +648,14 @@ h3 {
   box-shadow: 0 0 0 4px var(--stroke-focus);
 }
 
-label {
+/* Control-pane form chrome only. :where() keeps the old specificity (so .check-control still wins) but the rules no longer reach a component preview. */
+:where(.control-pane) label {
   color: var(--text-weak);
   font-size: 13px;
   font-weight: 650;
 }
 
-input[type="text"] {
+:where(.control-pane) input[type="text"] {
   width: 100%;
   min-height: 42px;
   padding: 0 12px;

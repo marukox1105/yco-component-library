@@ -1,0 +1,23 @@
+/* Doc-only: a trigger to anchor the tooltip to, and room around it. Not exported to yce-frontend. */
+.ycoTooltip_trigger {
+  min-width: 4.5rem;
+  height: 2.25rem;
+  padding: 0 var(--spacing-16);
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-weak);
+  color: var(--text-strong);
+  font: inherit;
+  font-size: var(--font-size-tiny);
+  cursor: pointer;
+}
+.ycoTooltip_trigger:hover { background: var(--fill-hover); }
+.ycoTooltip_trigger:focus-visible { outline: 0; box-shadow: 0 0 0 4px var(--stroke-focus); }
+
+.ycoTooltip_stage { display: flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: center; padding: 4rem 1rem; }
+.ycoTooltip_stage_start { justify-content: flex-start; }
+.ycoTooltip_stage_end { justify-content: flex-end; }
+.ycoTooltip_stage_size_large.ycoTooltip_stage_v { padding-block: 7.5rem; }
+.ycoTooltip_stage_size_large.ycoTooltip_stage_h { padding-block: 4rem; }
+.ycoTooltip_stage_h { padding-block: 2rem; }
+.ycoTooltip_stage_preview { min-height: 20rem; }

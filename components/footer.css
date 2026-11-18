@@ -1,0 +1,271 @@
+/* =====================================================================
+   YCO Footer · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Footer.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Footer (7217:129740)
+   Device Desktop / Tablet / Mobile x Size Small (logo + social + one link
+   row) / Large (about + five link columns + bottom bar). The logo is a
+   neutral placeholder.
+   ===================================================================== */
+
+.ycoFooter {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-48);
+  padding: var(--spacing-48) 7.5rem;
+  border-top: 1px solid var(--stroke-weak);
+  background: var(--background-base);
+  color: var(--text-weak);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoFooter_device_tablet {
+  padding-right: var(--spacing-48);
+  padding-left: var(--spacing-48);
+}
+
+.ycoFooter_device_mobile {
+  padding-right: var(--spacing-32);
+  padding-left: var(--spacing-32);
+}
+
+.ycoFooter_size_small {
+  gap: var(--spacing-24);
+}
+
+.ycoFooter_size_small.ycoFooter_device_tablet,
+.ycoFooter_size_small.ycoFooter_device_mobile {
+  gap: var(--spacing-32);
+}
+
+/* ----- Logo placeholder ----- */
+.ycoFooter_logo {
+  display: inline-flex;
+  height: 3rem;
+  align-items: center;
+  gap: var(--spacing-8);
+  color: var(--text-strong);
+  text-decoration: none;
+}
+
+.ycoFooter_logoMark {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: var(--corner-radius-8);
+  background: var(--background-inverse);
+  color: var(--text-inverse-strong);
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 1;
+}
+
+.ycoFooter_logoText {
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+}
+
+/* ----- Small ----- */
+.ycoFooter_top {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+}
+
+.ycoFooter_device_mobile .ycoFooter_top {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ycoFooter_bottomSmall {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
+.ycoFooter_navSmall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8) var(--spacing-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ----- Large ----- */
+.ycoFooter_content {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 6rem;
+}
+
+.ycoFooter_device_tablet .ycoFooter_content,
+.ycoFooter_device_mobile .ycoFooter_content {
+  flex-direction: column;
+  gap: var(--spacing-48);
+}
+
+.ycoFooter_device_mobile .ycoFooter_content {
+  gap: var(--spacing-32);
+}
+
+.ycoFooter_about {
+  display: flex;
+  width: 25rem;
+  max-width: 100%;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-24);
+}
+
+.ycoFooter_device_tablet .ycoFooter_about,
+.ycoFooter_device_mobile .ycoFooter_about {
+  width: 100%;
+}
+
+.ycoFooter_aboutText {
+  margin: 0;
+}
+
+.ycoFooter_links {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  flex: 1 0 0;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.ycoFooter_device_mobile .ycoFooter_links {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 2.25rem;
+}
+
+.ycoFooter_device_mobile .ycoFooter_topic:last-child {
+  grid-column: 1 / -1;
+}
+
+.ycoFooter_topic {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.ycoFooter_heading {
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-heading-4);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-heading-4);
+}
+
+.ycoFooter_list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ycoFooter_link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  border-radius: var(--corner-radius-6);
+  color: var(--text-weak);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ycoFooter_link:hover {
+  color: var(--text-strong);
+  text-decoration: underline;
+}
+
+.ycoFooter_link:active {
+  color: var(--text-weaker);
+}
+
+.ycoFooter_link:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoFooter_bottom {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+  padding-top: var(--spacing-48);
+  border-top: 1px solid var(--stroke-weak);
+}
+
+.ycoFooter_device_mobile .ycoFooter_bottom {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ycoFooter_device_mobile .ycoFooter_bottom .ycoFooter_social {
+  order: -1;
+}
+
+.ycoFooter_copyright {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* ----- Social icons ----- */
+.ycoFooter_social {
+  display: flex;
+  gap: var(--spacing-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ycoFooter_socialLink {
+  display: inline-grid;
+  border-radius: var(--corner-radius-6);
+  color: var(--icon-neutral);
+}
+
+.ycoFooter_socialLink:hover {
+  color: var(--icon-brand);
+}
+
+.ycoFooter_socialLink:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoFooter_socialIcon {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoFooter_socialIcon_fill {
+  fill: currentcolor;
+  stroke: none;
+}

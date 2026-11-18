@@ -1,0 +1,89 @@
+/* =====================================================================
+   YCO Text block · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './TextBlock.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Text block (8119:52164)
+   Align Left / Centre; optional icon, heading, secondary text and text link.
+   ===================================================================== */
+
+.ycoTextBlock {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  font-family: var(--font-family-body);
+}
+
+.ycoTextBlock_align_centre {
+  align-items: center;
+  text-align: center;
+}
+
+.ycoTextBlock_icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--fill-brand-weak);
+  color: var(--icon-brand);
+}
+
+.ycoTextBlock_iconSvg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.ycoTextBlock_text {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  overflow-wrap: break-word;
+}
+
+.ycoTextBlock_heading {
+  margin: var(--spacing-0);
+  color: var(--text-strong);
+  font-family: var(--font-family-heading);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 2rem;
+}
+
+.ycoTextBlock_body {
+  margin: var(--spacing-0);
+  color: var(--text-weak);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoTextBlock_link {
+  color: var(--text-brand);
+  font-size: var(--font-size-heading-5);
+  font-weight: var(--font-weight-strong);
+  line-height: 1.625rem;
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.ycoTextBlock_link:hover {
+  background: var(--fill-brand-hover);
+}
+
+.ycoTextBlock_link:active {
+  background: var(--fill-brand-press);
+}
+
+.ycoTextBlock_link:focus-visible {
+  border-radius: var(--corner-radius-6);
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: 2px;
+}

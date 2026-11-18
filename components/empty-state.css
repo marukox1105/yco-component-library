@@ -1,0 +1,74 @@
+/* =====================================================================
+   YCO Empty state · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './EmptyState.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Empty state (4865:151544)
+   Optional icon in a round container, heading, description and up to
+   three shared Buttons (medium: primary, secondary, tertiary).
+   ===================================================================== */
+
+.ycoEmptyState {
+  display: flex;
+  width: 100%;
+  max-width: 536px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-24);
+  font-family: var(--font-family-body);
+}
+
+.ycoEmptyState_iconWrap {
+  display: inline-flex;
+  flex: none;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12);
+  border-radius: var(--spacing-48);
+  background: var(--fill-weak);
+  color: var(--icon-neutral);
+}
+
+.ycoEmptyState_icon {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoEmptyState_text {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}
+
+.ycoEmptyState_heading {
+  width: 100%;
+  margin: 0;
+  padding-right: var(--spacing-48);
+  box-sizing: border-box;
+  color: var(--text-strong);
+  font-family: var(--font-family-heading);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-strong);
+  line-height: 2rem;
+}
+
+.ycoEmptyState_description {
+  width: 100%;
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoEmptyState_actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+}

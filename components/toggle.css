@@ -1,0 +1,136 @@
+/* =====================================================================
+   YCO Toggle · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Toggle.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Toggle (3834:44518, set 3553:142452)
+   Type Unselected / Selected x Size Medium / Small x State Default / Hover /
+   Press / Focus / Disabled. The control is a real checkbox (role="switch");
+   hover, press and focus are :hover, :active and :focus-visible.
+   ===================================================================== */
+
+.ycoToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding-right: var(--spacing-12);
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: var(--line-height-small);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ycoToggle_size_small {
+  gap: var(--spacing-8);
+  padding-right: var(--spacing-8);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+/* The real control stays in the layout (so it can take focus) but is invisible. */
+.ycoToggle_input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  clip-path: inset(50%);
+}
+
+.ycoToggle_track {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 4rem;
+  height: 2rem;
+  box-sizing: border-box;
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-weak);
+  box-shadow: inset 0 1px 4px var(--grey-neutral-light-100);
+}
+
+/* Hover / press wash that sits over the track fill. */
+.ycoToggle_track::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+}
+
+.ycoToggle_thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--grey-solid-0);
+  box-shadow: 0 4px 8px -2px var(--grey-neutral-light-50), 0 2px 4px -2px var(--grey-neutral-light-100);
+  transition: transform 0.15s ease;
+}
+
+.ycoToggle_size_small .ycoToggle_track {
+  width: 2.5rem;
+  height: 1.25rem;
+  border: 1px solid var(--stroke-strong);
+}
+
+/* The thumb is positioned against the padding box, so the 1px border is taken back out. */
+.ycoToggle_size_small .ycoToggle_thumb {
+  top: -1px;
+  left: -1px;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ycoToggle_label {
+  white-space: nowrap;
+}
+
+/* ----- selected ----- */
+.ycoToggle_input:checked + .ycoToggle_track {
+  border-color: transparent;
+  background: var(--fill-brand-strong);
+  box-shadow: none;
+}
+
+.ycoToggle_input:checked + .ycoToggle_track .ycoToggle_thumb {
+  transform: translateX(2rem);
+}
+
+.ycoToggle_size_small .ycoToggle_input:checked + .ycoToggle_track .ycoToggle_thumb {
+  transform: translateX(1.25rem);
+}
+
+/* ----- hover, press, focus ----- */
+.ycoToggle:hover .ycoToggle_input:enabled + .ycoToggle_track::before {
+  background: var(--fill-hover);
+}
+
+.ycoToggle:active .ycoToggle_input:enabled + .ycoToggle_track::before {
+  background: var(--fill-press);
+}
+
+.ycoToggle_input:focus-visible + .ycoToggle_track {
+  outline: 3px solid var(--stroke-focus);
+  outline-offset: 0;
+}
+
+/* ----- disabled ----- */
+.ycoToggle_disabled,
+.ycoToggle:has(.ycoToggle_input:disabled) {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.ycoToggle_input:disabled + .ycoToggle_track {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.ycoToggle_input:disabled:checked + .ycoToggle_track {
+  background: var(--fill-disabled);
+}

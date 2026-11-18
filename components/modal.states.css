@@ -1,0 +1,16 @@
+/* Doc-only: the live overlay is position:fixed in the product. Inside the preview it is drawn within the stage. Not exported. */
+.ycoModal_stage {
+  position: relative;
+  display: flex;
+  min-height: 35rem;
+  background: var(--background-base);
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--corner-radius-8);
+}
+.ycoModal_stage .ycoModal_overlay { position: absolute; z-index: 1; }
+.ycoModal_stage_device_mobile { width: 26.75rem; max-width: calc(100vw - 8.5rem); margin-inline: auto; }
+.ycoModal_stage_variant { min-height: 0; }
+.ycoModal_stage_variant .ycoModal_overlay { position: relative; width: 100%; padding-block: var(--spacing-48); }
+.ycoModal_stageOpen { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.ycoModal_stageOpen[hidden] { display: none; }

@@ -1,0 +1,3 @@
+/* Doc-only: shows the heading Hover state without a real pointer. Not exported to yce-frontend. */
+.ycoTable_th.is-hover { background: var(--fill-weaker); }
+.ycoTable_th.is-hover .ycoTable_sortIcon { opacity: 1; }

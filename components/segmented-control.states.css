@@ -1,0 +1,4 @@
+/* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
+.ycoSegmentedControl_face.is-hover { background: var(--fill-hover); }
+.ycoSegmentedControl_face.is-press { background: var(--fill-press); }
+.ycoSegmentedControl_face.is-focus { outline: 2px solid var(--stroke-focus); outline-offset: 3px; }
