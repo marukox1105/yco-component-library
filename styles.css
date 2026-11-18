@@ -10,14 +10,15 @@
   --blue-dark-50: #a3eaff0f;
   --blue-dark-500: #a3eaff80;
   --blue-dark-800: #a3eaffcc;
-  --amber-light-1000: #8f6c1a;
-  --amber-light-200: #8f6c1a33;
+  --amber-light-1000: #ef9b00;
+  --amber-light-200: #ef9b0033;
   --amber-light-50: #ffc02e0d;
-  --amber-light-800: #8f6c1acc;
+  --amber-light-800: #ef9b00cc;
   --amber-dark-1000: #e0be70;
   --amber-dark-200: #e0be7033;
   --amber-dark-50: #e0be7014;
   --amber-dark-800: #e0be70cc;
+  --yellow-solid-1000: #fec62e;
   --green-light-1000: #067a57;
   --green-light-200: #067a5733;
   --green-light-50: #0acc920d;
@@ -124,6 +125,7 @@
   --fill-success-weak: var(--green-light-50);
   --fill-warning-strong: var(--amber-light-1000);
   --fill-warning-weak: var(--amber-light-50);
+  --fill-yellow: var(--yellow-solid-1000);
   --fill-weak: var(--grey-light-50);
   --fill-weaker: var(--grey-light-25);
   --icon-brand: var(--brand-light-1000);
@@ -240,6 +242,7 @@
   --fill-success-weak: var(--green-dark-50);
   --fill-warning-strong: var(--amber-dark-1000);
   --fill-warning-weak: var(--amber-dark-50);
+  --fill-yellow: var(--yellow-solid-1000);
   --fill-weak: var(--grey-dark-50);
   --fill-weaker: var(--grey-dark-25);
   --icon-brand: var(--brand-dark-1000);

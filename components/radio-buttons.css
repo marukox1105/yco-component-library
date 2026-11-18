@@ -135,6 +135,7 @@
   border: 1px solid var(--stroke-strong);
   border-radius: 50%;
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 /* Hover / press wash over the circle (Figma "State" layer). */
@@ -161,6 +162,7 @@
 .ycoRadioButtons_input:checked + .ycoRadioButtons_circle {
   border-color: transparent;
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
 }
 
 .ycoRadioButtons_input:checked + .ycoRadioButtons_circle .ycoRadioButtons_dot {
@@ -184,7 +186,8 @@
 .ycoRadioButtons_valid_false .ycoRadioButtons_circle {
   border-width: 2px;
   border-color: var(--stroke-error-strong);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoRadioButtons_valid_false .ycoRadioButtons_circle::before {
@@ -194,6 +197,7 @@
 .ycoRadioButtons_valid_false .ycoRadioButtons_input:checked + .ycoRadioButtons_circle {
   border-color: transparent;
   background: var(--fill-error-strong);
+  --yco-base: var(--fill-error-strong);
 }
 
 .ycoRadioButtons_valid_false .ycoRadioButtons_input:focus-visible + .ycoRadioButtons_circle {
@@ -209,9 +213,11 @@
 .ycoRadioButtons_input:disabled + .ycoRadioButtons_circle {
   border-color: var(--stroke-disabled);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 .ycoRadioButtons_input:disabled:checked + .ycoRadioButtons_circle {
   border-color: transparent;
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
 }

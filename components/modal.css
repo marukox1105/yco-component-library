@@ -49,6 +49,7 @@
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-16);
   background: var(--background-raised);
+  --yco-base: var(--background-raised);
   box-shadow: var(--shadow);
   color: var(--text-strong);
   outline: 0;
@@ -96,7 +97,8 @@
   flex: none;
   place-items: center;
   border-radius: var(--corner-radius-8);
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   color: var(--icon-neutral);
 }
 
@@ -125,12 +127,14 @@
   flex: none;
   padding: var(--spacing-12);
   border-radius: var(--spacing-48);
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   color: var(--icon-neutral);
 }
 
 .ycoModal_tone_destructive .ycoModal_icon {
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
   color: var(--icon-error);
 }
 
@@ -187,7 +191,8 @@
   overflow: clip;
   border: 1px dashed var(--stroke-strong);
   border-radius: var(--corner-radius-8);
-  background: var(--fill-weaker);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weaker), var(--fill-weaker));
   color: var(--text-weak);
   font-family: "Roboto Mono", ui-monospace, monospace;
   font-size: var(--font-size-tiny);
@@ -266,7 +271,8 @@
   width: 4px;
   height: 7.75rem;
   border-radius: var(--corner-radius-8);
-  background: var(--fill-press);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-press), var(--fill-press));
   pointer-events: none;
 }
 

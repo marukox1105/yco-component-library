@@ -81,6 +81,7 @@
   border: 1px solid var(--stroke-weak);
   border-radius: var(--corner-radius-8);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 .ycoCombobox_size_small .ycoCombobox_field {
@@ -245,7 +246,8 @@ input.ycoCombobox_input {
   justify-content: center;
   padding: var(--spacing-4) var(--spacing-8);
   border-radius: var(--spacing-16);
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
 }
 
 .ycoCombobox_size_small .ycoCombobox_tag {
@@ -300,6 +302,7 @@ input.ycoCombobox_input {
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-8);
   background: var(--background-raised);
+  --yco-base: var(--background-raised);
   box-shadow: 0 8px 24px -4px color-mix(in srgb, var(--fill-overlay) 27%, transparent);
   color: var(--text-strong);
   font-size: var(--font-size-small);
@@ -333,7 +336,8 @@ input.ycoCombobox_input {
 }
 
 .ycoCombobox_option[aria-selected="true"] {
-  background: var(--fill-brand-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-brand-weak), var(--fill-brand-weak));
 }
 
 .ycoCombobox_type_single .ycoCombobox_option[aria-selected="true"] {
@@ -375,6 +379,7 @@ input.ycoCombobox_input {
   border: 1px solid var(--stroke-strong);
   border-radius: var(--spacing-4);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 .ycoCombobox_checkIcon {
@@ -391,6 +396,7 @@ input.ycoCombobox_input {
 .ycoCombobox_option[aria-selected="true"] .ycoCombobox_check {
   border-color: var(--fill-brand-strong);
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
 }
 
 .ycoCombobox_option[aria-selected="true"] .ycoCombobox_checkIcon {
@@ -425,7 +431,8 @@ input.ycoCombobox_input {
 /* ----- invalid ----- */
 .ycoCombobox_valid_false .ycoCombobox_field {
   border-color: var(--stroke-error-strong);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoCombobox_valid_false .ycoCombobox_field:focus-within,

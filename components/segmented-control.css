@@ -20,7 +20,8 @@
   overflow-x: auto;
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-8);
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   font-family: var(--font-family-body);
 }
 
@@ -96,6 +97,7 @@
 .ycoSegmentedControl_input:checked + .ycoSegmentedControl_face {
   border-color: var(--stroke-strong);
   background: var(--background-raised);
+  --yco-base: var(--background-raised);
   box-shadow: 0 2px 4px -2px var(--grey-light-100), 0 4px 8px -2px var(--grey-light-50);
   color: var(--text-strong);
 }

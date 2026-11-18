@@ -93,7 +93,8 @@
   padding: 0 var(--spacing-8);
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-16);
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   color: var(--text-weak);
   font-size: var(--font-size-tiny);
   font-weight: 400;

@@ -81,6 +81,7 @@
   border: 1px solid var(--stroke-strong);
   border-radius: var(--corner-radius-8);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 /* The focus ring is drawn outside the border, 3px wide, as in Figma. */
@@ -124,7 +125,8 @@
 /* ----- invalid ----- */
 .ycoTextArea_valid_false .ycoTextArea_field {
   border-color: var(--stroke-error-strong);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoTextArea_valid_false .ycoTextArea_field:focus-within {

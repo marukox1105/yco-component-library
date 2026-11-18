@@ -98,7 +98,8 @@
   padding: var(--spacing-32);
   border: 1px dashed var(--stroke-strong);
   border-radius: 1rem;
-  background: var(--fill-weaker);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weaker), var(--fill-weaker));
   color: var(--text-strong);
   font-size: var(--font-size-small);
   font-weight: 400;
@@ -144,7 +145,8 @@
   place-items: center;
   box-sizing: border-box;
   border-radius: 50%;
-  background: var(--fill-brand-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-brand-weak), var(--fill-brand-weak));
   color: var(--icon-brand);
 }
 
@@ -194,6 +196,7 @@
   border: 1px solid transparent;
   border-radius: var(--corner-radius-32);
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
   color: var(--text-inverse-strong);
   font-size: var(--font-size-tiny);
   font-weight: var(--font-weight-strong);
@@ -220,10 +223,12 @@
   padding: var(--spacing-12);
   border-radius: 1.5rem;
   background: var(--background-base);
+  --yco-base: var(--background-base);
 }
 
 .ycoFileUpload_type_photo .ycoFileUpload_zone {
   background: var(--background-base);
+  --yco-base: var(--background-base);
 }
 
 .ycoFileUpload_type_photo .ycoFileUpload_zone:hover,
@@ -266,11 +271,13 @@
 /* ----- invalid ----- */
 .ycoFileUpload_type_invalid .ycoFileUpload_zone {
   border-color: var(--stroke-error-strong);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoFileUpload_type_invalid .ycoFileUpload_iconBox {
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
   color: var(--icon-error);
 }
 
@@ -313,7 +320,8 @@
   flex: none;
   place-items: center;
   border-radius: 50%;
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   color: var(--icon-neutral);
 }
 
@@ -355,7 +363,8 @@ a.ycoFileUpload_fileName {
   flex: 1 0 0;
   overflow: hidden;
   border-radius: var(--corner-radius-32);
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   box-shadow: inset 0 1px 4px var(--grey-neutral-light-100);
 }
 
@@ -364,6 +373,7 @@ a.ycoFileUpload_fileName {
   height: 100%;
   border-radius: var(--corner-radius-32);
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
   box-shadow: inset 0 1px 4px var(--grey-neutral-light-100);
 }
 

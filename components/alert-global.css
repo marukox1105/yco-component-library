@@ -19,6 +19,7 @@
   padding: var(--spacing-12) var(--spacing-24);
   border-bottom: 1px solid transparent;
   background: var(--background-base);
+  --yco-base: var(--background-base);
   color: var(--text-strong);
   font-family: var(--font-family-body);
   font-size: var(--font-size-tiny);
@@ -99,7 +100,8 @@
 /* ----- tones ----- */
 .ycoAlertGlobal_tone_error {
   border-bottom-color: var(--stroke-error-weak);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoAlertGlobal_tone_error .ycoAlertGlobal_icon {
@@ -108,7 +110,8 @@
 
 .ycoAlertGlobal_tone_warning {
   border-bottom-color: var(--stroke-warning-weak);
-  background: var(--fill-warning-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-warning-weak), var(--fill-warning-weak));
 }
 
 .ycoAlertGlobal_tone_warning .ycoAlertGlobal_icon {
@@ -117,7 +120,8 @@
 
 .ycoAlertGlobal_tone_success {
   border-bottom-color: var(--stroke-success-weak);
-  background: var(--fill-success-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-success-weak), var(--fill-success-weak));
 }
 
 .ycoAlertGlobal_tone_success .ycoAlertGlobal_icon {
@@ -126,7 +130,8 @@
 
 .ycoAlertGlobal_tone_information {
   border-bottom-color: var(--stroke-information-weak);
-  background: var(--fill-information-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-information-weak), var(--fill-information-weak));
 }
 
 .ycoAlertGlobal_tone_information .ycoAlertGlobal_icon {
@@ -136,11 +141,13 @@
 .ycoAlertGlobal_tone_neutral {
   border-bottom-color: var(--stroke-weak);
   background: var(--background-base);
+  --yco-base: var(--background-base);
 }
 
 .ycoAlertGlobal_tone_brand {
   border-bottom-color: var(--stroke-brand-weak);
-  background: var(--fill-brand-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-brand-weak), var(--fill-brand-weak));
 }
 
 .ycoAlertGlobal_tone_inverse-neutral,
@@ -150,10 +157,12 @@
 
 .ycoAlertGlobal_tone_inverse-neutral {
   background: var(--background-inverse);
+  --yco-base: var(--background-inverse);
 }
 
 .ycoAlertGlobal_tone_inverse-brand {
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
 }
 
 .ycoAlertGlobal_tone_inverse-neutral .ycoAlertGlobal_icon,

@@ -58,7 +58,7 @@
     },
     variants,
     notes: [
-      "Figma's star is a bright yellow (#FEC62E) with an orange outline; neither has a token. This page uses --fill-warning-strong and --stroke-warning-strong, which are a dark amber in light mode. The designer should add star tokens.",
+      "The star is --fill-yellow (#fec62e) with a --stroke-warning-strong outline (the updated amber, #ef9b00 at 80%), as Figma now defines them.",
       "The heart fill and outline are --fill-error-strong, as in Figma (#DE0000, 1px outline).",
       "Figma only draws the value 3.5 (three full, one half, one empty). The Value control shows any half step from 0 to 5; the icon cells list every Star and Heart state.",
       "Display only: Figma has no hover or selected state, so the page does not make it interactive. The reviews text is a link; Figma gives it no hover style.",

@@ -20,7 +20,8 @@
   align-items: center;
   overflow: hidden;
   border-bottom: 1px solid var(--stroke-weak);
-  background: var(--fill-weaker);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weaker), var(--fill-weaker));
   color: var(--text-strong);
   font-family: var(--font-family-body);
 }
@@ -63,6 +64,7 @@
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-16);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
   color: var(--text-strong);
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-strong);
@@ -117,6 +119,7 @@
   border: 1px solid var(--stroke-weak);
   border-radius: var(--corner-radius-8);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 .ycoHero_field:focus-within {
@@ -176,6 +179,7 @@
   border: 2px solid var(--background-base);
   border-radius: var(--corner-radius-32);
   background: var(--background-base);
+  --yco-base: var(--background-base);
   box-shadow: inset 0 0 0 1px var(--stroke-weak);
 }
 
@@ -188,11 +192,13 @@
   width: 100%;
   height: 100%;
   border-radius: var(--spacing-48);
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
 }
 
 .ycoHero_avatar:nth-child(even) .ycoHero_avatarFace {
-  background: var(--fill-hover);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-hover), var(--fill-hover));
 }
 
 .ycoHero_rating {
@@ -220,7 +226,7 @@
   width: var(--spacing-24);
   height: var(--spacing-24);
   flex: none;
-  fill: var(--fill-warning-strong);
+  fill: var(--fill-yellow);
   stroke: var(--stroke-warning-strong);
   stroke-width: 2;
   stroke-linecap: round;
@@ -236,7 +242,7 @@
 }
 
 .ycoHero_starHalfFill {
-  fill: var(--fill-warning-strong);
+  fill: var(--fill-yellow);
   stroke: none;
 }
 
@@ -283,7 +289,8 @@
   min-height: 0;
   flex: 1 1 auto;
   place-items: center;
-  background: var(--fill-hover);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-hover), var(--fill-hover));
   color: var(--text-weaker);
 }
 

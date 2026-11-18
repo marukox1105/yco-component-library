@@ -36,7 +36,19 @@ Read every variant, not just the default. Page screenshots (`get_screenshot`) ar
    as `.is-hover`, `.is-press`, `.is-focus`.
 4. No fixed copy in the CSS; it must work for any label length. Sizes from Figma, written with spacing / radius tokens
    where one matches, `rem` otherwise.
-5. Keep the file header comment (what it is, Figma node, states covered).
+5. **A translucent fill needs an opaque base under it.** Tokens such as `--fill-weak`, `--fill-hover`, `--fill-brand-weak`,
+   `--fill-error-weak`, `--fill-disabled` are 4-20% tints; used alone they let whatever is behind (an overlapping avatar, the
+   checkered preview, a coloured page) show through. Write the fill as
+   ```css
+   background-color: var(--yco-base, var(--fill-base));
+   background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
+   ```
+   and give every element that paints an opaque background of its own `--yco-base: var(<that token>);` so tints inside it
+   sit on the surface they are actually on (the dark theme's raised surface is not the page colour). Hover and press layers
+   (`::before`, `:hover` on an element with no fill of its own) stay plain tints; they are meant to tint what is under them.
+   `node tools/add-base-fill.mjs --write <id>` does both steps (safe to re-run); `node tools/audit-transparency.mjs <id>` lists
+   what is still translucent.
+6. Keep the file header comment (what it is, Figma node, states covered).
 
 ## The config
 

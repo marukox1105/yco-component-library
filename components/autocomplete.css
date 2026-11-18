@@ -80,6 +80,7 @@
   border: 1px solid var(--stroke-weak);
   border-radius: var(--corner-radius-8);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 .ycoAutocomplete_size_small .ycoAutocomplete_field {
@@ -199,7 +200,8 @@ input.ycoAutocomplete_input {
   justify-content: center;
   padding: var(--spacing-4) var(--spacing-8);
   border-radius: var(--spacing-16);
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
 }
 
 .ycoAutocomplete_tag::after {
@@ -249,6 +251,7 @@ input.ycoAutocomplete_input {
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-8);
   background: var(--background-raised);
+  --yco-base: var(--background-raised);
   box-shadow: 0 8px 24px -4px color-mix(in srgb, var(--fill-overlay) 27%, transparent);
   color: var(--text-strong);
   font-size: var(--font-size-small);
@@ -282,7 +285,8 @@ input.ycoAutocomplete_input {
 }
 
 .ycoAutocomplete_option[aria-selected="true"] {
-  background: var(--fill-brand-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-brand-weak), var(--fill-brand-weak));
 }
 
 .ycoAutocomplete_type_single .ycoAutocomplete_option[aria-selected="true"] {
@@ -324,6 +328,7 @@ input.ycoAutocomplete_input {
   border: 1px solid var(--stroke-strong);
   border-radius: var(--spacing-4);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 .ycoAutocomplete_checkIcon {
@@ -340,6 +345,7 @@ input.ycoAutocomplete_input {
 .ycoAutocomplete_option[aria-selected="true"] .ycoAutocomplete_check {
   border-color: var(--fill-brand-strong);
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
 }
 
 .ycoAutocomplete_option[aria-selected="true"] .ycoAutocomplete_checkIcon {
@@ -374,7 +380,8 @@ input.ycoAutocomplete_input {
 /* ----- invalid ----- */
 .ycoAutocomplete_valid_false .ycoAutocomplete_field {
   border-color: var(--stroke-error-strong);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoAutocomplete_valid_false .ycoAutocomplete_field:focus-within {

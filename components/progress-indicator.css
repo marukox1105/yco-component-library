@@ -54,6 +54,7 @@
 
 .ycoProgressIndicator_step_done {
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
   box-shadow: none;
 }
 

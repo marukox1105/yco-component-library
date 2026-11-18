@@ -19,7 +19,8 @@
   box-sizing: border-box;
   place-items: center;
   border-radius: 50%;
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   color: var(--icon-neutral);
   font-family: var(--font-family-body);
   font-size: var(--font-size-small);
@@ -106,6 +107,7 @@
   place-items: center;
   border-radius: 50%;
   background: var(--background-base);
+  --yco-base: var(--background-base);
   line-height: 0;
 }
 
@@ -172,19 +174,23 @@
 
 .ycoAvatar_status_online {
   background: var(--fill-success-strong);
+  --yco-base: var(--fill-success-strong);
 }
 
 .ycoAvatar_status_busy,
 .ycoAvatar_status_notification {
   background: var(--fill-error-strong);
+  --yco-base: var(--fill-error-strong);
 }
 
 .ycoAvatar_status_away {
-  background: var(--fill-warning-strong);
+  background: var(--fill-yellow);
+  --yco-base: var(--fill-yellow);
 }
 
 .ycoAvatar_status_offline {
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
   color: var(--icon-neutral);
 }
 

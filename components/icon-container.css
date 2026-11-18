@@ -48,7 +48,8 @@
 }
 
 .ycoIconContainer_tone_neutral.ycoIconContainer_style_filled {
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
 }
 
 .ycoIconContainer_tone_neutral.ycoIconContainer_style_stroked {
@@ -60,7 +61,8 @@
 }
 
 .ycoIconContainer_tone_brand.ycoIconContainer_style_filled {
-  background: var(--fill-brand-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-brand-weak), var(--fill-brand-weak));
 }
 
 .ycoIconContainer_tone_brand.ycoIconContainer_style_stroked {
@@ -72,7 +74,8 @@
 }
 
 .ycoIconContainer_tone_inverse.ycoIconContainer_style_filled {
-  background: var(--fill-inverse-hover);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-inverse-hover), var(--fill-inverse-hover));
 }
 
 .ycoIconContainer_tone_inverse.ycoIconContainer_style_stroked {
@@ -84,7 +87,8 @@
 }
 
 .ycoIconContainer_tone_destructive.ycoIconContainer_style_filled {
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoIconContainer_tone_destructive.ycoIconContainer_style_stroked {
@@ -96,7 +100,8 @@
 }
 
 .ycoIconContainer_tone_warning.ycoIconContainer_style_filled {
-  background: var(--fill-warning-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-warning-weak), var(--fill-warning-weak));
 }
 
 .ycoIconContainer_tone_warning.ycoIconContainer_style_stroked {
@@ -108,7 +113,8 @@
 }
 
 .ycoIconContainer_tone_success.ycoIconContainer_style_filled {
-  background: var(--fill-success-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-success-weak), var(--fill-success-weak));
 }
 
 .ycoIconContainer_tone_success.ycoIconContainer_style_stroked {
@@ -120,7 +126,8 @@
 }
 
 .ycoIconContainer_tone_information.ycoIconContainer_style_filled {
-  background: var(--fill-information-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-information-weak), var(--fill-information-weak));
 }
 
 .ycoIconContainer_tone_information.ycoIconContainer_style_stroked {

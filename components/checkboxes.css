@@ -136,6 +136,7 @@
   border: 1px solid var(--stroke-strong);
   border-radius: var(--spacing-4);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
   color: var(--icon-inverse-strong);
 }
 
@@ -195,6 +196,7 @@
 .ycoCheckboxes_input[aria-checked="mixed"] + .ycoCheckboxes_box {
   border-color: transparent;
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
 }
 
 .ycoCheckboxes_input:checked + .ycoCheckboxes_box .ycoCheckboxes_check {
@@ -226,7 +228,8 @@
 .ycoCheckboxes_valid_false .ycoCheckboxes_box {
   border-width: 2px;
   border-color: var(--stroke-error-strong);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoCheckboxes_valid_false .ycoCheckboxes_box::before {
@@ -237,6 +240,7 @@
 .ycoCheckboxes_valid_false .ycoCheckboxes_input[aria-checked="mixed"] + .ycoCheckboxes_box {
   border-color: transparent;
   background: var(--fill-error-strong);
+  --yco-base: var(--fill-error-strong);
 }
 
 .ycoCheckboxes_valid_false .ycoCheckboxes_input:focus-visible + .ycoCheckboxes_box {
@@ -252,10 +256,12 @@
 .ycoCheckboxes_input:disabled + .ycoCheckboxes_box {
   border-color: var(--stroke-disabled);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 .ycoCheckboxes_input:disabled:checked + .ycoCheckboxes_box,
 .ycoCheckboxes_input:disabled[aria-checked="mixed"] + .ycoCheckboxes_box {
   border-color: transparent;
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
 }

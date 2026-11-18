@@ -44,7 +44,7 @@
   stroke-linejoin: round;
 }
 
-/* Star: warning amber. Figma uses a brighter yellow with no token. */
+/* Star: Fill/Yellow with a Stroke/Warning strong outline, as in Figma. */
 .ycoRating_type_star .ycoRating_outline {
   fill: none;
   stroke: var(--stroke-warning-strong);
@@ -52,7 +52,7 @@
 }
 
 .ycoRating_type_star .ycoRating_fill {
-  fill: var(--fill-warning-strong);
+  fill: var(--fill-yellow);
 }
 
 /* Heart: error red, 1px outline. */

@@ -27,7 +27,7 @@
     react: (s) => `// Proposed API: yce-frontend has no BadgeDot yet\nimport BadgeDot from '@/components/common/badge-dot';\n\n<BadgeDot type="${s.type}" size="${s.size}" />`,
     variants: () => SIZES.flatMap((size) => TYPES.map((type) => ({ label: `${YCO.label(type)} / ${YCO.label(size)}`, html: dot({ size, type }) }))),
     notes: [
-      "Away uses --fill-warning-strong (a dark amber); Figma draws it as a brighter yellow that has no token yet.",
+      "Away uses --fill-yellow (#fec62e), the Fill/Yellow variable Figma added in its yellow update.",
       "Offline uses --fill-disabled; Figma's grey is slightly lighter.",
     ],
   });

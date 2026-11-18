@@ -50,7 +50,7 @@
     notes: [
       "Figma's Testimonial set has two variants, Align = Left and Centre; the Avatar, Text and Rating switches are shown on. The last two cells show some switches off.",
       "The avatar photo is a neutral token-coloured circle (--fill-disabled), not an image. The real component takes the photo from the product. The name and email in Figma are a real-looking sample; placeholders are used here.",
-      "The stars are always five full stars here, as in Figma. They use --fill-warning-strong, a dark amber, because Figma's bright yellow (#FEC62E) has no token; see the Rating page.",
+      "The stars are always five full stars here, as in Figma. They use --fill-yellow with a --stroke-warning-strong outline, as on the Rating page.",
       "Rendered as figure and blockquote. A figcaption is avoided for the author because the doc site styles figcaption globally.",
       "The component is 364px wide in Figma; here it fills its container up to 364px.",
     ],

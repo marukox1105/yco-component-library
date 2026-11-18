@@ -44,6 +44,8 @@ The sidebar lists every component on Figma's component board, grouped the way th
 | `node tools/check-components.mjs [id]` | CSS: class prefix, tokens defined in the light theme, no raw colours |
 | `node tools/check-page.mjs <id> <outDir>` | Renders desktop / dark / 375px, clicks every control, writes screenshots, flags console errors, overflow, empty previews |
 | `node tools/check-scenarios.mjs [id ...]` | Real pointer and keyboard scenarios for the interactive pages (open, choose, close, switch) |
+| `node tools/audit-transparency.mjs [id]` | Lists elements whose own fill is translucent (nothing opaque under it) or faded with `opacity` |
+| `node tools/add-base-fill.mjs [--write] [id]` | Adds the opaque base under translucent fills (see `COMPONENT-PAGES.md`, CSS rule 5) |
 | `node tools/check-interactions.mjs <id> ...` | Broad click / key smoke test; its "dead click" count is a hint only (hidden inputs and closed menus read as dead) |
 
 Playwright comes from a checkout of `yco-collab-space` (`PLAYWRIGHT_FROM`, default in the scripts).

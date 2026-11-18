@@ -35,6 +35,7 @@
   border: 1px solid var(--stroke-strong);
   border-radius: var(--corner-radius-32);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 /* Focus ring: 3px, drawn over the border and 2px outside it, as in Figma. */
@@ -161,6 +162,7 @@
   border: 0;
   border-radius: 0 var(--corner-radius-32) var(--corner-radius-32) 0;
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
   box-shadow: 0 2px 2px -2px color-mix(in srgb, var(--fill-overlay) 13%, transparent), 0 4px 4px -2px color-mix(in srgb, var(--fill-overlay) 7%, transparent);
   color: var(--text-inverse-strong);
   font-family: inherit;
@@ -207,7 +209,8 @@
 }
 
 .ycoSearchInput_button:disabled {
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
   box-shadow: none;
   cursor: not-allowed;
 }

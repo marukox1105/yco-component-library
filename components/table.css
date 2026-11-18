@@ -17,6 +17,7 @@
   flex-direction: column;
   gap: var(--spacing-24);
   background: var(--background-base);
+  --yco-base: var(--background-base);
   color: var(--text-strong);
   font-family: var(--font-family-body);
   font-size: var(--font-size-small);
@@ -43,6 +44,7 @@
   border-top: 1px solid var(--stroke-weak);
   border-bottom: 1px solid var(--stroke-weak);
   background: var(--background-sunken);
+  --yco-base: var(--background-sunken);
   color: var(--text-strong);
   font-size: var(--font-size-tiny);
   font-weight: var(--font-weight-strong);
@@ -161,15 +163,18 @@
 }
 
 .ycoTable_td_alt {
-  background: var(--fill-weaker);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weaker), var(--fill-weaker));
 }
 
 .ycoTable_striped .ycoTable_row:nth-child(even) .ycoTable_td {
-  background: var(--fill-weaker);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weaker), var(--fill-weaker));
 }
 
 .ycoTable_row_selected .ycoTable_td {
-  background: var(--fill-brand-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-brand-weak), var(--fill-brand-weak));
 }
 
 .ycoTable_cellRow {
@@ -255,6 +260,7 @@
   border: 1px solid var(--stroke-strong);
   border-radius: var(--spacing-4);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
   color: var(--fill-inverse-strong);
   pointer-events: none;
 }
@@ -275,6 +281,7 @@
 .ycoTable_checkInput:indeterminate + .ycoTable_checkBox {
   border-color: var(--fill-brand-strong);
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
 }
 
 .ycoTable_checkInput:checked + .ycoTable_checkBox .ycoTable_checkMark_tick,
@@ -296,7 +303,8 @@
   padding: 0 var(--spacing-8);
   border: 1px solid var(--stroke-success-weak);
   border-radius: var(--spacing-16);
-  background: var(--fill-success-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-success-weak), var(--fill-success-weak));
   color: var(--text-success);
   font-size: var(--font-size-tiny);
   line-height: var(--line-height-tiny);
@@ -330,7 +338,8 @@
   padding: 0 var(--spacing-12);
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-16);
-  background: var(--fill-weaker);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weaker), var(--fill-weaker));
   font-weight: var(--font-weight-strong);
   white-space: nowrap;
 }
@@ -350,7 +359,8 @@
   place-items: center;
   border: 1px solid var(--stroke-weak);
   border-radius: 50%;
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   color: var(--icon-neutral);
 }
 
@@ -378,6 +388,7 @@
   border: 2px solid var(--background-base);
   border-radius: 50%;
   background: var(--background-base);
+  --yco-base: var(--background-base);
 }
 
 .ycoTable_stackItem:last-child {

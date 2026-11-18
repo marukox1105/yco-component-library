@@ -40,6 +40,7 @@
   align-items: stretch;
   border: 1px solid var(--stroke-weak);
   background: var(--background-raised);
+  --yco-base: var(--background-raised);
   box-shadow: var(--shadow);
   color: var(--text-strong);
   outline: 0;
@@ -140,7 +141,8 @@
   overflow: clip;
   border: 1px dashed var(--stroke-strong);
   border-radius: var(--corner-radius-8);
-  background: var(--fill-weaker);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weaker), var(--fill-weaker));
   color: var(--text-weak);
   font-family: "Roboto Mono", ui-monospace, monospace;
   font-size: var(--font-size-tiny);

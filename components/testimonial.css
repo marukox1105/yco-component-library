@@ -35,7 +35,8 @@
   flex: none;
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-48);
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
 }
 
 .ycoTestimonial_who {
@@ -81,7 +82,7 @@
   width: var(--spacing-24);
   height: var(--spacing-24);
   flex: none;
-  fill: var(--fill-warning-strong);
+  fill: var(--fill-yellow);
   stroke: var(--stroke-warning-strong);
   stroke-width: 2;
   stroke-linecap: round;

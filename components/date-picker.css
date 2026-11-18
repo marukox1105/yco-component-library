@@ -63,6 +63,7 @@
   border: 1px solid var(--stroke-weak);
   border-radius: var(--corner-radius-8);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
 }
 
 .ycoDatePicker_size_small .ycoDatePicker_field {
@@ -178,7 +179,8 @@ input.ycoDatePicker_input {
 /* ----- invalid ----- */
 .ycoDatePicker_valid_false .ycoDatePicker_field {
   border-color: var(--stroke-error-strong);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
 .ycoDatePicker_valid_false .ycoDatePicker_field:focus-within {
@@ -230,6 +232,7 @@ input.ycoDatePicker_input:disabled {
   border: 1px solid var(--stroke-weak);
   border-radius: var(--spacing-8);
   background: var(--background-raised);
+  --yco-base: var(--background-raised);
   box-shadow: 0 8px 12px color-mix(in srgb, var(--fill-overlay) 27%, transparent);
   color: var(--text-strong);
   font-size: var(--font-size-small);
@@ -397,7 +400,8 @@ input.ycoDatePicker_input:disabled {
 }
 
 .ycoDatePicker_date_selected:disabled {
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
   color: var(--text-inverse-strong);
 }
 

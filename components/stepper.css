@@ -82,6 +82,7 @@
   border: 1px solid var(--stroke-strong);
   border-radius: var(--corner-radius-8);
   background: var(--background-base);
+  --yco-base: var(--background-base);
   box-shadow: 0 2px 2px var(--grey-neutral-light-100), 0 4px 4px var(--grey-neutral-light-50);
 }
 
@@ -96,6 +97,7 @@
   padding: 0;
   border: 1px solid var(--stroke-strong);
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
   color: var(--icon-neutral);
   cursor: pointer;
 }
@@ -162,7 +164,8 @@
 /* ----- invalid ----- */
 .ycoStepper_valid_false .ycoStepper_field {
   border-color: var(--stroke-error-strong);
-  background: var(--fill-error-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
   box-shadow: 0 2px 4px var(--grey-neutral-light-100), 0 4px 8px var(--grey-neutral-light-50);
 }
 

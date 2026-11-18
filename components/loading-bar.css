@@ -30,7 +30,8 @@
   min-width: 1px;
   overflow: hidden;
   border-radius: var(--corner-radius-32);
-  background: var(--fill-weak);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
   box-shadow: inset 0 1px 4px var(--grey-neutral-light-100);
 }
 
@@ -39,6 +40,7 @@
   height: 100%;
   border-radius: var(--corner-radius-32);
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
   box-shadow: inset 0 1px 4px var(--grey-neutral-light-100);
   transition: width 0.3s ease;
 }

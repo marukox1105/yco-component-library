@@ -11,7 +11,7 @@
   function tag(o, ctx = {}) {
     const selected = o.selected === "true" || o.selected === true;
     const disabled = o.state === "disabled";
-    const cls = ["ycoTag", `ycoTag_size_${o.size}`, `ycoTag_radius_${o.radius}`, `ycoTag_selected_${selected}`, o.icon === false ? "ycoTag_icon_false" : "", o.weak ? "ycoTag_fill_weak" : "", disabled ? "ycoTag_disabled" : ""].filter(Boolean).join(" ");
+    const cls = ["ycoTag", `ycoTag_size_${o.size}`, `ycoTag_radius_${o.radius}`, `ycoTag_selected_${selected}`, o.icon === false ? "ycoTag_icon_false" : "", disabled ? "ycoTag_disabled" : ""].filter(Boolean).join(" ");
     const sc = ctx.sc || "";
     return `<span class="${cls}">
   <button class="ycoTag_button${sc}" type="button" aria-pressed="${selected}"${disabled ? " disabled" : ""}>${CHECK}<span class="ycoTag_label">${o.text || "Label"}</span></button>${o.dismissible ? `\n  <button class="ycoTag_close" type="button" aria-label="Remove"${disabled ? " disabled" : ""}>${X}</button>` : ""}
@@ -20,7 +20,7 @@
 
   function group(o) {
     const items = [];
-    for (let i = 0; i < o.count; i++) items.push(tag({ selected: "false", size: o.size, radius: "pill", state: "default", dismissible: o.type === "dismissible", weak: o.type === "dismissible", icon: true }));
+    for (let i = 0; i < o.count; i++) items.push(tag({ selected: "false", size: o.size, radius: "pill", state: "default", dismissible: o.type === "dismissible", icon: true }));
     return `<div class="ycoTag_group" role="group" aria-label="Tags">\n${items.join("\n")}\n</div>`;
   }
 
@@ -38,6 +38,7 @@
 
   YCO.page({
     id: "tag",
+    version: 2,
     group: "Elements",
     title: "Tag",
     figma: "3667:21811",
@@ -81,8 +82,10 @@
     },
     variants,
     notes: [
+      "Figma update: every Tag variant, selected or not, is now filled with Fill/Weak (4% grey). Unselected used to be white and is updated here.",
+      "Check with the designer: in the updated Figma a Selected tag has Fill/Weak as its fill but white text and a white check (Text/Inverse strong), which is unreadable. This page keeps the brand fill for Selected (--fill-brand-strong) until that is confirmed.",
       "Fill / Selected exists only in the dark theme; the light CSS uses --fill-brand-strong, which has the same value there. Ask the designer for the light token.",
-      "Figma's Dismissible is a boolean on Tag (the X) and also a separate Tag/Dismissible component used by Tag group, filled with --fill-weak. Both are drawn here; the group's dismissible type adds the weak fill.",
+      "Figma's Dismissible is a boolean on Tag (the X) and also a separate Tag/Dismissible component used by Tag group. Both are drawn here; they now share the Fill/Weak fill.",
       "Selected tags show a check by default (Icon boolean); turning it off drops the check and the padding stays.",
       "Figma Tag group wraps at 600px with 4px between tags and 8px between rows; here it wraps at the container width.",
       "The Figma page also contains premium_icon (PRO / PLUS) and Label_new (NEW / HOT) marketing marks. They use gradients and PerfectP brand colours with no tokens, so they are not built here.",

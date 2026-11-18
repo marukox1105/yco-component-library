@@ -99,6 +99,7 @@
 
 .ycoButtonIcon_type_primary.ycoButtonIcon_tone_brand {
   background: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
 }
 
 .ycoButtonIcon_type_primary.ycoButtonIcon_tone_neutral {
@@ -107,10 +108,12 @@
 
 .ycoButtonIcon_type_primary.ycoButtonIcon_tone_destructive {
   background: var(--fill-error-strong);
+  --yco-base: var(--fill-error-strong);
 }
 
 .ycoButtonIcon_type_primary.ycoButtonIcon_tone_inverse {
   background: var(--fill-inverse-strong);
+  --yco-base: var(--fill-inverse-strong);
   color: var(--icon-neutral);
 }
 
@@ -191,12 +194,14 @@
 }
 
 .ycoButtonIcon_type_primary:disabled {
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
   color: var(--icon-inverse-strong);
 }
 
 .ycoButtonIcon_type_primary.ycoButtonIcon_tone_inverse:disabled {
-  background: var(--fill-inverse-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-inverse-disabled), var(--fill-inverse-disabled));
   color: var(--icon-inverse-disabled);
 }
 
@@ -227,6 +232,7 @@
   height: 0.5rem;
   border-radius: 50%;
   background: var(--fill-error-strong);
+  --yco-base: var(--fill-error-strong);
 }
 
 .ycoButtonIcon_size_large .ycoButtonIcon_dot {
@@ -261,6 +267,7 @@
   border: 2px solid var(--stroke-inverse-strong);
   border-radius: var(--spacing-16);
   background: var(--fill-error-strong);
+  --yco-base: var(--fill-error-strong);
   box-shadow: 0 2px 2px var(--grey-neutral-light-100), 0 4px 4px var(--grey-neutral-light-50);
   color: var(--background-base);
   font-size: var(--font-size-tiny);

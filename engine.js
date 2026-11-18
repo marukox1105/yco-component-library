@@ -221,7 +221,7 @@
     [cfg.css, cfg.statesCss].filter(Boolean).forEach((href) => {
       if (document.querySelector(`link[data-yco-page="${cfg.id}"][href="${href}"]`)) return;
       const l = document.createElement("link");
-      l.rel = "stylesheet"; l.href = `${href}?v=${cfg.version || 1}`; l.dataset.ycoPage = cfg.id;
+      l.rel = "stylesheet"; l.href = `${href}?v=${window.YCO_BUILD || 0}-${cfg.version || 1}`; l.dataset.ycoPage = cfg.id;
       document.head.appendChild(l);
     });
   }

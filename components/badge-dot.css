@@ -33,19 +33,23 @@
 
 .ycoBadgeDot_type_online {
   background: var(--fill-success-strong);
+  --yco-base: var(--fill-success-strong);
 }
 
 .ycoBadgeDot_type_busy,
 .ycoBadgeDot_type_notification {
   background: var(--fill-error-strong);
+  --yco-base: var(--fill-error-strong);
 }
 
 .ycoBadgeDot_type_away {
-  background: var(--fill-warning-strong);
+  background: var(--fill-yellow);
+  --yco-base: var(--fill-yellow);
 }
 
 .ycoBadgeDot_type_offline {
-  background: var(--fill-disabled);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
   color: var(--icon-neutral);
 }
 

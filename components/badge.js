@@ -39,7 +39,7 @@
     notes: [
       "Neutral and Brand use Figma's placeholder icon; the doc page draws a star. Pass any 20px icon (16px for Small).",
       "The Badge dot slot defaults to Badge dot's Online type in Figma (a 12px dot with a ring); it is drawn here as a plain 12px --fill-success-strong dot. Confirm the intended types with the designer.",
-      "Warning text uses --text-warning (a dark amber), as for Badge dot's Away.",
+      "Warning text uses --text-warning, which Figma's yellow update changed from a dark amber to #ef9b00 in the light theme; that is a lower contrast on white, so check it with the designer.",
     ],
   });
 })();

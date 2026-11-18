@@ -31,7 +31,7 @@ for (const slug of slugs) {
     const selectors = [...src.matchAll(/([^{}]+)\{/g)].map((m) => m[1]).filter((s) => !s.trim().startsWith('@'));
     const classes = new Set(selectors.flatMap((s) => [...s.matchAll(/\.([A-Za-z_][\w-]*)/g)].map((m) => m[1])));
     for (const c of classes) if (!c.startsWith(prefix) && !/^is-(hover|press|focus)$/.test(c)) errs.push(`class .${c} must start with ${prefix}`);
-    for (const m of src.matchAll(/var\((--[a-z0-9-]+)/gi)) if (!tokens.has(m[1]) && !errs.includes(`unknown token ${m[1]}`)) errs.push(`unknown token ${m[1]}`);
+    for (const m of src.matchAll(/var\((--[a-z0-9-]+)/gi)) if (!tokens.has(m[1]) && !/^--yco-/.test(m[1]) && !errs.includes(`unknown token ${m[1]}`)) errs.push(`unknown token ${m[1]}`);
     if (/#[0-9a-f]{3,8}\b/i.test(src.replace(/url\([^)]*\)/g, ''))) errs.push('raw hex colour');
     if (/\b(rgb|rgba|hsl|hsla)\(/i.test(src)) errs.push('raw rgb()/hsl() colour');
     if (/@import|url\(\s*['"]?https?:/i.test(src)) errs.push('@import or remote url()');
