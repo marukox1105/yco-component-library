@@ -33,6 +33,12 @@ The file is plain CSS using CSS-Modules class names (`.ycoButton`, `.variant_pri
 
 Same pattern: one `*.module.css` per component (plain CSS, CSS-Modules class names), `<link>`'d here for preview and imported as a CSS Module in `yce-frontend`. Toast is next.
 
+## Component pages — real components, one page each
+
+The sidebar lists every component on Figma's component board, grouped the way the board groups them. A page is built, not screenshotted: a plain-CSS file (`components/<id>.css`, the single source shared with `yce-frontend`) plus a small config (`components/<id>.js`) that the playground engine (`engine.js`) draws as a live preview, controls, HTML / React / CSS code, and a grid of every Figma variant. Entries without a page show *Soon*.
+
+`COMPONENT-PAGES.md` is the contract for adding one. `node tools/check-components.mjs [id]` lints the CSS (class prefix, tokens defined in the light theme, no raw colours). Built so far: Badge dot and Text input (reference pages), plus the original Buttons and Toast.
+
 ## Overview page — Storybook catalogue grouped by Figma
 
 `#overview` lists every component in the `yco-collab-space` Storybook (`platform/ui/**`), laid out the way Figma's *All components* board groups them (Elements, Forms, Feedback, Navigation, Surfaces, Content display, Marketing). Each Figma component shows its Storybook counterpart and a match label:

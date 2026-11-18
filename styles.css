@@ -137,10 +137,12 @@
   --icon-success: var(--green-light-800);
   --icon-warning: var(--amber-light-800);
   --stroke-brand-strong: var(--brand-light-800);
+  --stroke-brand-weak: var(--brand-light-200);
   --stroke-disabled: var(--grey-light-100);
   --stroke-error-strong: var(--red-light-800);
   --stroke-error-weak: var(--red-light-200);
   --stroke-focus: var(--brand-light-200);
+  --stroke-selected: var(--brand-light-1000);
   --stroke-information-strong: var(--teal-light-800);
   --stroke-information-weak: var(--teal-light-200);
   --stroke-inverse-disabled: var(--grey-dark-100);

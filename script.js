@@ -3,7 +3,7 @@ const previewButton = document.querySelector("#previewButton");
 const previewSurface = document.querySelector("#previewSurface");
 const stateLabel = document.querySelector("#stateLabel");
 const codeBlock = document.querySelector("#codeBlock");
-const toast = document.querySelector("#toast");
+const toast = document.querySelector("#copyToast");
 const sidebar = document.querySelector(".sidebar");
 const menuButton = document.querySelector(".menu-button");
 const pages = document.querySelectorAll("[data-page]");
@@ -600,9 +600,10 @@ function setActivePage(pageId) {
     link.removeAttribute("aria-disabled");
   });
 
+  if (window.YCO) window.YCO.show(pageId);
   if (pageId === "toast") {
     updateAlertPreview();
-  } else {
+  } else if (!(window.YCO && window.YCO.has(pageId))) {
     updatePreview();
   }
 }
@@ -724,7 +725,8 @@ async function copyText(text) {
 }
 
 const hashPage = window.location.hash.replace("#", "");
-const initialPage = ["toast", "overview"].includes(hashPage) ? hashPage : "buttons";
+const initialPage = hashPage && document.querySelector(`[data-page-link="${hashPage}"]`) ? hashPage : "buttons";
 setActivePage(initialPage);
-loadComponentCss().then(updatePreview);
-updateAlertPreview();
+const initialIsEngine = Boolean(window.YCO && window.YCO.has(initialPage));
+loadComponentCss().then(() => { if (!initialIsEngine) updatePreview(); });
+if (!initialIsEngine) updateAlertPreview();

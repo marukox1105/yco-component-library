@@ -1,0 +1,60 @@
+/* =====================================================================
+   YCO Badge dot · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './BadgeDot.module.css').
+   Figma: [Comp] YCO_web_components_2025 · Badge dot (6412:85981)
+   Sizes 8 / 12 / 16. Medium and Large carry a glyph; Small and
+   Notification are plain dots.
+   ===================================================================== */
+
+.ycoBadgeDot {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--grey-solid-0);
+  line-height: 0;
+}
+
+.ycoBadgeDot_size_small {
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+}
+
+.ycoBadgeDot_size_medium {
+  width: var(--spacing-12);
+  height: var(--spacing-12);
+}
+
+.ycoBadgeDot_size_large {
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+}
+
+.ycoBadgeDot_type_online {
+  background: var(--fill-success-strong);
+}
+
+.ycoBadgeDot_type_busy,
+.ycoBadgeDot_type_notification {
+  background: var(--fill-error-strong);
+}
+
+.ycoBadgeDot_type_away {
+  background: var(--fill-warning-strong);
+}
+
+.ycoBadgeDot_type_offline {
+  background: var(--fill-disabled);
+  color: var(--icon-neutral);
+}
+
+.ycoBadgeDot_glyph {
+  width: 66%;
+  height: 66%;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
