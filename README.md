@@ -33,6 +33,26 @@ The file is plain CSS using CSS-Modules class names (`.ycoButton`, `.variant_pri
 
 Same pattern: one `*.module.css` per component (plain CSS, CSS-Modules class names), `<link>`'d here for preview and imported as a CSS Module in `yce-frontend`. Toast is next.
 
+## Overview page — Storybook catalogue grouped by Figma
+
+`#overview` lists every component in the `yco-collab-space` Storybook (`platform/ui/**`), laid out the way Figma's *All components* board groups them (Elements, Forms, Feedback, Navigation, Surfaces, Content display, Marketing). Each Figma component shows its Storybook counterpart and a match label:
+
+| Label | Meaning |
+|---|---|
+| In Figma | The Storybook component's contract (`design-library/components/<id>/component.yaml`) records a Figma node. |
+| Confirm pairing | Paired by name or role; the contract records no Figma node (or one that may be a different page). Needs Designer/PM confirmation. |
+| No Storybook component | Figma has it, Storybook does not. |
+
+Storybook components with no Figma counterpart are listed separately under *Storybook only*, plus a short housekeeping list (story titles that do not match their folder, non-component stories).
+
+`components-data.js` is **generated**; do not edit it. To refresh it from a checkout of `yco-collab-space` (needs its `node_modules` for the `yaml` package):
+
+```sh
+NODE_PATH=<checkout>/node_modules node tools/build-catalog.mjs <checkout> components-data.js
+```
+
+The Figma-group membership and the pairings live in `tools/build-catalog.mjs` (`FIGMA_GROUPS`, `NOT_IN_FIGMA`). Edit them there when a pairing is confirmed. No component CSS is copied for these components; only `button.module.css` is vendored.
+
 ## Preview Locally
 
 Open `index.html` directly in a browser, or run a local static server:

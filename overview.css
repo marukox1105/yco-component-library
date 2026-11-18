@@ -1,0 +1,49 @@
+/* Overview page: catalogue of the Storybook components, grouped the way Figma groups them.
+   Doc-only. Uses the tokens in styles.css; no component styles live here. */
+.ov-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.ov-stat { padding: 14px 16px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-md); background: var(--fill-raised); }
+.ov-stat strong { display: block; color: var(--text-strong); font-size: 28px; line-height: 1.1; }
+.ov-stat span { color: var(--text-weak); font-size: 12px; font-weight: 650; }
+
+.ov-toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; }
+.ov-toolbar input[type="search"] { flex: 1 1 220px; min-width: 0; height: 40px; padding: 0 14px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-sm); background: var(--fill-raised); color: var(--text-strong); font: inherit; }
+.ov-toolbar input[type="search"]:focus-visible { outline: 2px solid var(--stroke-focus); outline-offset: 1px; }
+.ov-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.ov-filters button { height: 32px; padding: 0 12px; border: 1px solid var(--stroke-weak); border-radius: 999px; background: var(--fill-raised); color: var(--text-weak); font: inherit; font-size: 13px; font-weight: 650; cursor: pointer; }
+.ov-filters button.is-active { border-color: var(--brand-1000); background: var(--fill-brand-weak); color: var(--brand-1000); }
+
+.ov-group { margin-bottom: 32px; }
+.ov-group > h3 { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+.ov-group > h3 small { color: var(--text-weaker); font-size: 12px; font-weight: 650; }
+.ov-table { width: 100%; border: 1px solid var(--stroke-weak); border-radius: var(--radius-md); background: var(--fill-raised); border-collapse: separate; border-spacing: 0; overflow: hidden; }
+.ov-table th { padding: 10px 14px; background: var(--fill-weaker); color: var(--text-weaker); font-size: 12px; font-weight: 700; text-align: left; text-transform: uppercase; }
+.ov-table td { padding: 12px 14px; border-top: 1px solid var(--stroke-weak); color: var(--text-weak); font-size: 14px; vertical-align: top; line-height: 1.5; }
+.ov-table td:first-child { color: var(--text-strong); font-weight: 650; width: 22%; }
+.ov-sb + .ov-sb { margin-top: 8px; }
+.ov-sb b { color: var(--text-strong); font-weight: 650; }
+.ov-sb code, .ov-note code { padding: 1px 5px; border-radius: 4px; background: var(--fill-weaker); font-size: 12px; }
+.ov-sb small { display: block; color: var(--text-weaker); font-size: 12px; }
+.ov-note { display: block; margin-top: 4px; color: var(--text-weaker); font-size: 12px; }
+.ov-empty-cell { color: var(--text-disabled); }
+
+.ov-badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.ov-badge.figma { background: var(--fill-success-weak); color: var(--text-success); }
+.ov-badge.inferred { background: var(--fill-warning-weak); color: var(--text-warning); }
+.ov-badge.none { background: var(--fill-error-weak); color: var(--text-error); }
+.ov-badge.only { background: var(--fill-weaker); color: var(--text-weak); }
+.ov-badge.page-doc { background: var(--fill-brand-weak); color: var(--brand-1000); }
+.ov-badge.page-draft { background: var(--fill-information-weak); color: var(--text-information); }
+
+.ov-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ov-chip { padding: 8px 12px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-sm); background: var(--fill-raised); color: var(--text-strong); font-size: 13px; font-weight: 650; }
+.ov-chip small { display: block; color: var(--text-weaker); font-size: 11px; font-weight: 500; }
+.ov-list { margin: 0; padding-left: 20px; color: var(--text-weak); line-height: 1.8; }
+.ov-list code { padding: 1px 5px; border-radius: 4px; background: var(--fill-weaker); font-size: 12px; }
+.ov-foot { color: var(--text-weaker); font-size: 12px; }
+
+@media (max-width: 680px) {
+  .ov-table thead { display: none; }
+  .ov-table, .ov-table tbody, .ov-table tr, .ov-table td { display: block; width: 100%; }
+  .ov-table td:first-child { width: 100%; border-top: 1px solid var(--stroke-weak); background: var(--fill-weaker); }
+  .ov-table tr:first-child td:first-child { border-top: 0; }
+}

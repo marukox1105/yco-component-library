@@ -723,7 +723,8 @@ async function copyText(text) {
   return copied;
 }
 
-const initialPage = window.location.hash.replace("#", "") === "toast" ? "toast" : "buttons";
+const hashPage = window.location.hash.replace("#", "");
+const initialPage = ["toast", "overview"].includes(hashPage) ? hashPage : "buttons";
 setActivePage(initialPage);
 loadComponentCss().then(updatePreview);
 updateAlertPreview();
