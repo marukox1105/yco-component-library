@@ -59,9 +59,14 @@
 </section>`;
   }
 
+  // Doc-only: the preview is narrower than a desktop page, so each device is drawn at its design width (1440 / 768 / 428)
+  // and the preview scrolls sideways. Without it the flex columns squeeze and the picture lands on the copy.
+  const WIDTH = { desktop: "90rem", tablet: "48rem", mobile: "26.75rem" };
+  const frame = (html, device) => `<div style="width:${WIDTH[device]};max-width:none;flex:none">${html}</div>`;
+
   const base = { uppercase: false, tag: false, emailField: true, buttonGroup: true, socialProof: true, heading: "Lorem ipsum dolor sit amet tetur elit", description: "Lorem ipsum dolor sit amet, con sec tetur adipiscing elit dolor sit. Donec rutrum, tellus sed fringilla rhoncus." };
   const variants = [];
-  TYPES.forEach((t) => DEVICES.forEach((device) => variants.push({ label: `${t.label} / ${YCO.label(device)}`, html: markup({ ...base, type: t.value, device }), wide: true })));
+  TYPES.forEach((t) => DEVICES.forEach((device) => variants.push({ label: `${t.label} / ${YCO.label(device)}`, html: frame(markup({ ...base, type: t.value, device }), device), wide: true })));
 
   YCO.page({
     id: "hero",
@@ -82,7 +87,7 @@
       { key: "description", label: "Description", type: "text", default: base.description },
     ],
     surface: { wide: true, start: true },
-    render: (s) => markup(s),
+    render: (s, ctx) => (ctx.preview ? frame(markup(s), s.device) : markup(s)),
     mount: (el) => {
       el.querySelectorAll(".ycoHero_form").forEach((f) => f.addEventListener("submit", (e) => e.preventDefault()));
       el.querySelectorAll('a[href="#reviews"]').forEach((a) => a.addEventListener("click", (e) => e.preventDefault()));

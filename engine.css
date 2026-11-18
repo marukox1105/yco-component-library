@@ -1,6 +1,13 @@
 /* Doc-site chrome for engine-built component pages: sidebar groups, wide / dark preview
    surfaces and the variant grid. Not component styles; nothing here is exported. */
-.side-nav .nav-group { margin: 18px 0 2px; padding: 0 16px; color: var(--text-weaker); font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.side-nav .nav-section { display: grid; margin-top: 14px; }
+.side-nav .nav-group { display: flex; width: 100%; min-height: 28px; align-items: center; justify-content: space-between; margin: 0; padding: 0 12px 0 16px; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--text-weaker); cursor: pointer; font: inherit; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-align: left; text-transform: uppercase; }
+.side-nav .nav-group:hover { background: var(--fill-weaker); color: var(--text-weak); }
+.side-nav .nav-group:focus-visible { outline: 0; box-shadow: 0 0 0 3px var(--stroke-focus); }
+.nav-chevron { width: 16px; height: 16px; flex: none; fill: none; stroke: currentcolor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 140ms ease; }
+.nav-group[aria-expanded="false"] .nav-chevron { transform: rotate(-90deg); }
+.side-nav .nav-items { display: grid; gap: 4px; }
+.side-nav .nav-items[hidden] { display: none; }
 .side-link.is-disabled { pointer-events: none; }
 .side-link .soon { margin-left: auto; padding: 1px 7px; border-radius: 999px; background: var(--fill-weaker); color: var(--text-weaker); font-size: 10px; font-weight: 700; }
 .side-link { min-height: 36px; font-size: 14px; }

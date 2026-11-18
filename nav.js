@@ -2,6 +2,8 @@
    An entry is clickable once its page is registered (components/<id>.js calls YCO.page).
    `legacy` entries are the two hand-built pages that predate the engine. `figma` is the
    Figma page node (file JXNIQPJT9I9qFrgtiaCn4i). */
+// Bumped whenever a stylesheet changes, so browsers refetch components/*.css.
+window.YCO_BUILD = "20261118d";
 window.YCO_NAV = [
   { group: null, items: [{ id: "overview", label: "Overview", legacy: true }] },
   { group: "Elements", items: [
@@ -77,8 +79,47 @@ window.YCO_NAV = [
   const nav = document.querySelector("#componentNav");
   if (!nav) return;
   const esc = window.YCO.esc;
-  nav.innerHTML = window.YCO_NAV.map((g) => (g.group ? `<p class="nav-group">${esc(g.group)}</p>` : "") +
-    g.items.map((i) => (i.legacy || window.YCO.has(i.id)
-      ? `<a class="side-link" href="#${i.id}" data-page-link="${i.id}">${esc(i.label)}</a>`
-      : `<a class="side-link is-disabled" href="#" aria-disabled="true" tabindex="-1">${esc(i.label)}<span class="soon">Soon</span></a>`)).join("")).join("");
+  const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const KEY = "yco-nav-collapsed";
+  const CHEVRON = '<svg class="nav-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+
+  // Which groups the viewer collapsed. Storage can be blocked (private window), so every access is guarded.
+  let collapsed = [];
+  try { collapsed = JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { collapsed = []; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(collapsed)); } catch (e) { /* the page works without it */ } };
+
+  const link = (i) => (i.legacy || window.YCO.has(i.id)
+    ? `<a class="side-link" href="#${i.id}" data-page-link="${i.id}">${esc(i.label)}</a>`
+    : `<a class="side-link is-disabled" href="#" aria-disabled="true" tabindex="-1">${esc(i.label)}<span class="soon">Soon</span></a>`);
+
+  nav.innerHTML = window.YCO_NAV.map((g) => {
+    if (!g.group) return g.items.map(link).join("");
+    const id = `navg-${slug(g.group)}`;
+    const open = !collapsed.includes(g.group);
+    return `<section class="nav-section" data-group="${esc(g.group)}">
+      <button class="nav-group" type="button" aria-expanded="${open}" aria-controls="${id}"><span>${esc(g.group)}</span>${CHEVRON}</button>
+      <div class="nav-items" id="${id}"${open ? "" : " hidden"}>${g.items.map(link).join("")}</div>
+    </section>`;
+  }).join("");
+
+  function setOpen(section, open) {
+    const name = section.dataset.group;
+    section.querySelector(".nav-group").setAttribute("aria-expanded", String(open));
+    section.querySelector(".nav-items").hidden = !open;
+    collapsed = open ? collapsed.filter((g) => g !== name) : [...new Set([...collapsed, name])];
+    save();
+  }
+  nav.addEventListener("click", (e) => {
+    const head = e.target.closest(".nav-group");
+    if (head) setOpen(head.closest(".nav-section"), head.getAttribute("aria-expanded") !== "true");
+  });
+
+  // The group that holds the page being shown is always open, so the active item is never hidden.
+  function reveal(id) {
+    const a = id && nav.querySelector(`[data-page-link="${id}"]`);
+    const section = a && a.closest(".nav-section");
+    if (section && section.querySelector(".nav-items").hidden) setOpen(section, true);
+  }
+  reveal(window.location.hash.replace("#", ""));
+  window.addEventListener("hashchange", () => reveal(window.location.hash.replace("#", "")));
 })();
