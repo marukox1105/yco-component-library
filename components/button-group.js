@@ -2,7 +2,7 @@
 (() => {
   const LAYOUTS = ["horizontal", "vertical"];
   const ORDERS = ["default", "reverse"];
-  const SIZES = ["large", "medium", "small"];
+  const SIZES = ["large", "medium", "small", "tiny"];
 
   function markup(s) {
     const items = [];
@@ -50,6 +50,7 @@ ${items.map(([type, text]) => `  <button class="ycoButtonGroup_button ycoButtonG
       "The 18px Medium label has a 26px line in Figma; there is no --line-height-heading-5 token, so --line-height-small (24px) is used. Button height is fixed, so nothing moves.",
       "A vertical Large group is 64px per button in Figma, 8px taller than the horizontal Large (56px). Kept as drawn.",
       "Large and Medium use 28px / 20px of inline padding (24 / 16 plus the 4px label container).",
+      "Sizes follow Button's names: Tiny 32 / Small 36 / Medium 42 / Large 56. Figma draws only 56, 42 and 32, and calls the 32px one Small, so that variant is Tiny here. Small (36px, 16px label) was added to match Button and is not in Figma: confirm with the designer.",
     ],
   });
 })();

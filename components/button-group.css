@@ -4,7 +4,9 @@
    and in yce-frontend (import styles from './ButtonGroup.module.css').
    Figma: [Comp] YCO_web_components_2025 · Button group (3506:64616)
    Layout Horizontal / Vertical x Order Default / Reverse x Size Large /
-   Medium / Small; each group holds a primary, a secondary and a text
+   Medium / Small / Tiny. Sizes follow Button's names (tiny 32 / small 36 /
+   medium 42 / large 56). Figma draws 56 / 42 / 32 only, so Figma's "Small"
+   is Tiny here and Small (36) is the added step. Each group holds a primary, a secondary and a text
    (tertiary) button, any of which may be left out.
    The buttons are drawn here, not borrowed from Button, so this file
    stands alone. Hover, press and focus are real pseudo-classes.
@@ -89,7 +91,16 @@
   line-height: var(--line-height-small);
 }
 
+/* Small: 36px, as Button's small. Not drawn in Figma's Button group. */
 .ycoButtonGroup_size_small .ycoButtonGroup_button {
+  height: 2.25rem;
+  padding: 0 var(--spacing-16);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+/* Tiny: 32px. This is the size Figma's Button group calls Small. */
+.ycoButtonGroup_size_tiny .ycoButtonGroup_button {
   height: var(--spacing-32);
   padding: 0 var(--spacing-16);
   font-size: var(--font-size-tiny);
