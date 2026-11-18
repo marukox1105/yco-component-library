@@ -79,11 +79,15 @@ YCO.page({
 
 ## Checking your page
 
+Several people may be building pages at once, so do not use a shared browser pane. Use the headless checker; it starts its
+own server on a free port:
+
 ```sh
-node tools/check-components.mjs <id>          # class names, tokens, raw colours
-python3 -m http.server 4173 --bind 127.0.0.1  # then open http://127.0.0.1:4173/#<id>
+node tools/check-components.mjs <id>             # class names, tokens, raw colours
+node tools/check-page.mjs <id> <outDir>          # renders desktop, dark and 375px; clicks every control; writes PNGs
 ```
 
-Open the page and confirm: no console errors; every control changes the preview, the HTML tab and the status pill; the
-CSS tab shows your file; the variant grid has every Figma variant and matches the Figma screenshot; dark theme (header
-toggle) is legible; at 375 px wide nothing overflows horizontally. Then list what you could not verify.
+`check-page` exits non-zero and lists problems: console errors, an empty preview or code tab, horizontal scrolling, a
+missing variant grid. Read the PNGs it writes and compare them with `get_screenshot` of the Figma component set
+(download with `curl -fsSL -o <file> <url>`). Confirm every variant in the grid matches Figma, dark theme is legible,
+and nothing overflows at 375 px. Then list what you could not verify.
