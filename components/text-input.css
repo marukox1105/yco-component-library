@@ -54,8 +54,10 @@
   --yco-base: var(--fill-inverse-strong);
 }
 
+/* Focus: a 1px --stroke-selected border with Figma's 3px ring OUTSIDE it (the ring is an outside-aligned stroke). */
 .ycoTextInput_field:focus-within {
   border-color: var(--stroke-selected);
+  box-shadow: 0 0 0 3px var(--stroke-brand-weak);
 }
 
 .ycoTextInput_input {
@@ -86,7 +88,6 @@
 
 .ycoTextInput_input:focus-visible {
   background: transparent;
-  box-shadow: inset 0 0 0 3px var(--stroke-brand-weak);
 }
 
 .ycoTextInput_error {
@@ -119,8 +120,9 @@
   background-image: linear-gradient(var(--fill-error-weak), var(--fill-error-weak));
 }
 
-.ycoTextInput_valid_false .ycoTextInput_input:focus-visible {
-  box-shadow: inset 0 0 0 3px var(--stroke-error-weak);
+.ycoTextInput_valid_false .ycoTextInput_field:focus-within {
+  border-color: var(--stroke-error-strong);
+  box-shadow: 0 0 0 3px var(--stroke-error-weak);
 }
 
 /* ----- disabled ----- */

@@ -209,7 +209,7 @@ ${items}
       "Figma places the open list 24px (valid) or 32px (invalid) below the component; the page anchors it 4px under the whole component, below the error message.",
       "Figma's Open variants show the 4th single item hovered with an icon and the 3rd and 4th multiple items checked; the variant grid copies that. The live preview behaves normally: typing filters, arrows move, Enter picks.",
       "In Figma the Small size keeps 16px value text in a 36px field with 8px side padding; the Multiple list labels are 14px, the Single ones 16px.",
-      "Focus uses the inset 3px --stroke-brand-weak ring (red-tinted when invalid), as in the Text input; the error icon is a 16px circle-x drawn here.",
+      "Focus is a 1px --stroke-selected border with a 3px --stroke-brand-weak ring outside it (red-tinted when invalid), as in the Text input; the error icon is a 16px circle-x drawn here.",
       "Disabled / Invalid hides the error message, as in the other Forms. Multiple with tags grows taller than 48px when it wraps.",
     ],
   });

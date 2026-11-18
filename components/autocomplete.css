@@ -89,6 +89,7 @@
 
 .ycoAutocomplete_field:focus-within {
   border-color: var(--stroke-selected);
+  box-shadow: 0 0 0 3px var(--stroke-brand-weak);
 }
 
 .ycoAutocomplete_state {
@@ -116,7 +117,6 @@
 
 .ycoAutocomplete_state:focus-within {
   background: transparent;
-  box-shadow: inset 0 0 0 3px var(--stroke-brand-weak);
 }
 
 .ycoAutocomplete_icon,
@@ -386,11 +386,9 @@ input.ycoAutocomplete_input {
 
 .ycoAutocomplete_valid_false .ycoAutocomplete_field:focus-within {
   border-color: var(--stroke-error-strong);
+  box-shadow: 0 0 0 3px var(--stroke-error-weak);
 }
 
-.ycoAutocomplete_valid_false .ycoAutocomplete_state:focus-within {
-  box-shadow: inset 0 0 0 3px var(--stroke-error-weak);
-}
 
 /* ----- disabled ----- */
 .ycoAutocomplete_disabled .ycoAutocomplete_labelRow,

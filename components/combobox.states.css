@@ -1,7 +1,6 @@
 /* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
 .ycoCombobox_state.is-hover { background: var(--fill-hover); }
 .ycoCombobox_state.is-press { background: var(--fill-press); }
-.ycoCombobox_state.is-focus { background: transparent; box-shadow: inset 0 0 0 3px var(--stroke-brand-weak); }
-.ycoCombobox_field:has(.is-focus) { border-color: var(--stroke-selected); }
-.ycoCombobox_valid_false .ycoCombobox_state.is-focus { box-shadow: inset 0 0 0 3px var(--stroke-error-weak); }
-.ycoCombobox_valid_false .ycoCombobox_field:has(.is-focus) { border-color: var(--stroke-error-strong); }
+.ycoCombobox_state.is-focus { background: transparent; }
+.ycoCombobox_field:has(.is-focus) { border-color: var(--stroke-selected); box-shadow: 0 0 0 3px var(--stroke-brand-weak); }
+.ycoCombobox_valid_false .ycoCombobox_field:has(.is-focus) { border-color: var(--stroke-error-strong); box-shadow: 0 0 0 3px var(--stroke-error-weak); }

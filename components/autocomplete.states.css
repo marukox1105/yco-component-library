@@ -1,7 +1,6 @@
 /* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
 .ycoAutocomplete_state.is-hover { background: var(--fill-hover); }
 .ycoAutocomplete_state.is-press { background: var(--fill-press); }
-.ycoAutocomplete_state.is-focus { background: transparent; box-shadow: inset 0 0 0 3px var(--stroke-brand-weak); }
-.ycoAutocomplete_field:has(.is-focus) { border-color: var(--stroke-selected); }
-.ycoAutocomplete_valid_false .ycoAutocomplete_state.is-focus { box-shadow: inset 0 0 0 3px var(--stroke-error-weak); }
-.ycoAutocomplete_valid_false .ycoAutocomplete_field:has(.is-focus) { border-color: var(--stroke-error-strong); }
+.ycoAutocomplete_state.is-focus { background: transparent; }
+.ycoAutocomplete_field:has(.is-focus) { border-color: var(--stroke-selected); box-shadow: 0 0 0 3px var(--stroke-brand-weak); }
+.ycoAutocomplete_valid_false .ycoAutocomplete_field:has(.is-focus) { border-color: var(--stroke-error-strong); box-shadow: 0 0 0 3px var(--stroke-error-weak); }

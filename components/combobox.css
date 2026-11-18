@@ -91,6 +91,7 @@
 .ycoCombobox_field:focus-within,
 .ycoCombobox_field:has(.ycoCombobox_input[aria-expanded="true"]:not(:disabled)) {
   border-color: var(--stroke-selected);
+  box-shadow: 0 0 0 3px var(--stroke-brand-weak);
 }
 
 .ycoCombobox_state {
@@ -119,7 +120,6 @@
 .ycoCombobox_state:focus-within,
 .ycoCombobox_state:has(.ycoCombobox_input[aria-expanded="true"]:not(:disabled)) {
   background: transparent;
-  box-shadow: inset 0 0 0 3px var(--stroke-brand-weak);
 }
 
 .ycoCombobox_clearIcon {
@@ -438,12 +438,9 @@ input.ycoCombobox_input {
 .ycoCombobox_valid_false .ycoCombobox_field:focus-within,
 .ycoCombobox_valid_false .ycoCombobox_field:has(.ycoCombobox_input[aria-expanded="true"]:not(:disabled)) {
   border-color: var(--stroke-error-strong);
+  box-shadow: 0 0 0 3px var(--stroke-error-weak);
 }
 
-.ycoCombobox_valid_false .ycoCombobox_state:focus-within,
-.ycoCombobox_valid_false .ycoCombobox_state:has(.ycoCombobox_input[aria-expanded="true"]:not(:disabled)) {
-  box-shadow: inset 0 0 0 3px var(--stroke-error-weak);
-}
 
 /* ----- disabled ----- */
 .ycoCombobox_disabled .ycoCombobox_labelRow,

@@ -1,6 +1,6 @@
 /* Doc-only: shows Hover / Press / Focus without a real pointer. Not exported to yce-frontend. */
 .ycoTextInput_input.is-hover { background: var(--fill-hover); }
 .ycoTextInput_input.is-press { background: var(--fill-press); }
-.ycoTextInput_input.is-focus { background: transparent; box-shadow: inset 0 0 0 3px var(--stroke-brand-weak); }
-.ycoTextInput_field:has(.is-focus) { border-color: var(--stroke-selected); }
-.ycoTextInput_valid_false .ycoTextInput_input.is-focus { box-shadow: inset 0 0 0 3px var(--stroke-error-weak); }
+.ycoTextInput_input.is-focus { background: transparent; }
+.ycoTextInput_field:has(.is-focus) { border-color: var(--stroke-selected); box-shadow: 0 0 0 3px var(--stroke-brand-weak); }
+.ycoTextInput_valid_false .ycoTextInput_field:has(.is-focus) { border-color: var(--stroke-error-strong); box-shadow: 0 0 0 3px var(--stroke-error-weak); }
