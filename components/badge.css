@@ -69,8 +69,32 @@
   width: var(--spacing-12);
   height: var(--spacing-12);
   border-radius: 50%;
+  background: currentcolor;
+}
+
+/* The dot takes its tone's colour, like the icon does. */
+.ycoBadge_tone_error .ycoBadge_dot {
+  background: var(--fill-error-strong);
+}
+
+.ycoBadge_tone_warning .ycoBadge_dot {
+  background: var(--fill-warning-strong);
+}
+
+.ycoBadge_tone_success .ycoBadge_dot {
   background: var(--fill-success-strong);
-  --yco-base: var(--fill-success-strong);
+}
+
+.ycoBadge_tone_information .ycoBadge_dot {
+  background: var(--fill-information-strong);
+}
+
+.ycoBadge_tone_neutral .ycoBadge_dot {
+  background: var(--icon-neutral);
+}
+
+.ycoBadge_tone_brand .ycoBadge_dot {
+  background: var(--fill-brand-strong);
 }
 
 /* ----- tones ----- */

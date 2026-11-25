@@ -11,7 +11,7 @@
     brand: '<path d="m12 4 2.4 5 5.6.7-4.1 3.8 1.1 5.5L12 16.2 7 19l1.1-5.5L4 9.7 9.6 9 12 4Z"/>',
   };
 
-  const markup = (s) => `<span class="ycoBadge ycoBadge_tone_${s.tone} ycoBadge_size_${s.size}">${s.icon ? `<svg class="ycoBadge_icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[s.tone]}</svg>` : ""}${s.dot ? '<span class="ycoBadge_dotSlot" aria-hidden="true"><span class="ycoBadge_dot"></span></span>' : ""}<span class="ycoBadge_label">${s.text || "Label"}</span></span>`;
+  const markup = (s) => `<span class="ycoBadge ycoBadge_tone_${s.tone} ycoBadge_size_${s.size}">${s.leading === "icon" ? `<svg class="ycoBadge_icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[s.tone]}</svg>` : ""}${s.leading === "dot" ? '<span class="ycoBadge_dotSlot" aria-hidden="true"><span class="ycoBadge_dot"></span></span>' : ""}<span class="ycoBadge_label">${s.text || "Label"}</span></span>`;
 
   YCO.page({
     id: "badge",
@@ -22,23 +22,22 @@
     controls: [
       { key: "tone", label: "Tone", type: "chips", options: TONES, default: "error" },
       { key: "size", label: "Size", type: "chips", options: SIZES, default: "medium" },
-      { key: "icon", label: "Icon", type: "toggle", default: true },
-      { key: "dot", label: "Badge dot", type: "toggle", default: false },
+      // One leading marker, never two: an icon and a dot both say "status" and would repeat each other.
+      { key: "leading", label: "Leading marker", type: "chips", options: [{ value: "icon", label: "Icon" }, { value: "dot", label: "Dot" }, { value: "none", label: "None" }], default: "icon" },
       { key: "text", label: "Text", type: "text", default: "Label" },
     ],
     render: markup,
     react: (s) => {
       const p = [`  tone="${s.tone}"`, `  size="${s.size}"`];
-      if (!s.icon) p.push("  icon={false}");
-      if (s.dot) p.push("  dot");
+      if (s.leading !== "icon") p.push(`  leading="${s.leading}"`);
       return `// Proposed API: yce-frontend has no Badge yet\nimport Badge from '@/components/common/badge';\n\n<Badge\n${p.join("\n")}\n>\n  ${s.text || "Label"}\n</Badge>`;
     },
-    variants: SIZES.flatMap((size) => TONES.map((tone) => ({ label: `${YCO.label(tone)} / ${YCO.label(size)}`, html: markup({ tone, size, icon: true, dot: false, text: "Label" }) }))).concat(
-      SIZES.map((size) => ({ label: `With badge dot / ${YCO.label(size)}`, html: markup({ tone: "success", size, icon: true, dot: true, text: "Label" }) })),
+    variants: SIZES.flatMap((size) => TONES.map((tone) => ({ label: `${YCO.label(tone)} / ${YCO.label(size)}`, html: markup({ tone, size, leading: "icon", text: "Label" }) }))).concat(
+      SIZES.flatMap((size) => TONES.map((tone) => ({ label: `With dot / ${YCO.label(tone)} / ${YCO.label(size)}`, html: markup({ tone, size, leading: "dot", text: "Label" }) }))),
     ),
     notes: [
       "Neutral and Brand use Figma's placeholder icon; the doc page draws a star. Pass any 20px icon (16px for Small).",
-      "The Badge dot slot defaults to Badge dot's Online type in Figma (a 12px dot with a ring); it is drawn here as a plain 12px --fill-success-strong dot. Confirm the intended types with the designer.",
+      "Icon and Dot are one choice (Leading marker), and the dot takes the badge's tone colour. Figma's Badge has an independent Badge dot slot that defaults to the Online type (always green), which allowed combinations such as a red badge with a green dot that mean nothing; this page does not offer them. Confirm with the designer.",
       "Warning text uses --text-warning, which Figma's yellow update changed from a dark amber to #ef9b00 in the light theme; that is a lower contrast on white, so check it with the designer.",
     ],
   });
