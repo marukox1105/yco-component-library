@@ -60,13 +60,16 @@
   function group(g) {
     const rows = g.items.map((i) => {
       const [cls, label] = MATCH[i.conf];
-      return `<tr data-conf="${i.conf}" data-search="${esc((i.name + " " + i.sb.map((id) => comps[id].name + " " + id).join(" ")).toLowerCase())}">
-        <td class="ov-preview-cell">${previewCell(i)}</td><th scope="row" class="ov-name">${esc(i.name)}<span class="ov-pagelinks">${pageLinks(i.name)}</span></th><td>${sbCell(i.sb)}</td>
-        <td><span class="ov-badge ${cls}">${label}</span>${i.note ? `<span class="ov-note">${esc(i.note)}</span>` : ""}</td></tr>`;
+      return `<article class="ov-item" data-conf="${i.conf}" data-search="${esc((i.name + " " + i.sb.map((id) => comps[id].name + " " + id).join(" ")).toLowerCase())}">
+        <div class="ov-preview-cell">${previewCell(i)}</div>
+        <div class="ov-main"><h4 class="ov-name">${esc(i.name)}</h4>
+          <div class="ov-status"><span class="ov-badge ${cls}">${label}</span>${pageLinks(i.name)}</div>
+          ${i.note ? `<p class="ov-note">${esc(i.note)}</p>` : ""}</div>
+        <div class="ov-sbcol"><p class="ov-label">Storybook</p>${sbCell(i.sb)}</div></article>`;
     }).join("");
     return `<section class="ov-group" data-group>
       <h3>${esc(g.name)} <small>${g.items.length} in Figma</small></h3>
-      <table class="ov-table"><thead><tr><th>Figma preview</th><th>Figma component</th><th>Storybook</th><th>Match</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+      <div class="ov-items">${rows}</div></section>`;
   }
 
   function onlyGroup() {
@@ -127,7 +130,7 @@
   function apply() {
     mount.querySelectorAll("[data-group]").forEach((sec) => {
       let visible = 0;
-      const rows = sec.querySelectorAll("tr[data-conf]");
+      const rows = sec.querySelectorAll(".ov-item");
       rows.forEach((r) => {
         const show = (filter === "all" || filter === r.dataset.conf) && (!query || r.dataset.search.includes(query));
         r.hidden = !show;
