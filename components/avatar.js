@@ -18,9 +18,9 @@
   const CHEVRON = '<svg class="ycoAvatar_trailing ycoAvatar_chevronDown" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg><svg class="ycoAvatar_trailing ycoAvatar_chevronUp" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>';
   const MORE = '<svg class="ycoAvatar_trailing" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg>';
 
-  // Eight AI-generated portraits (not real people) in assets/avatars/, so the preview shows real photos. The copied HTML uses a placeholder path.
+  // Eight AI-generated portraits (not real people) in assets/avatars/, each on a different background colour so overlapping avatars stay distinct. The copied HTML uses a placeholder path.
   const PHOTOS = 8;
-  const photo = (n, ctx) => (ctx.preview === false ? "photo.jpg" : `assets/avatars/avatar-${(n % PHOTOS) + 1}.jpg`);
+  const photo = (n, ctx) => (ctx.preview === false ? "photo.jpg" : `assets/avatars/avatar-${(n % PHOTOS) + 1}.jpg?v=2`);
 
   const dot = (kind, size) => {
     const status = kind !== "notification";
