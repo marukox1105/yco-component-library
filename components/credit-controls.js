@@ -4,8 +4,6 @@
   const PARTS = [
     { value: "header", label: "Header balance" },
     { value: "generate", label: "Generate" },
-    { value: "badge", label: "Credit badge" },
-    { value: "label", label: "Credit label" },
   ];
   const DEVICES = [
     { value: "desktop", label: "Desktop (showAdd)" },
@@ -15,7 +13,6 @@
   const defaults = {
     part: "header", device: "desktop", balance: "436", clickable: false, state: "default",
     label: "Generate", subtitle: "", cost: "10", costUnknown: false, originalCost: "", discountLabel: "", disabled: false, isLoading: false,
-    credits: "10", labelText: "Label",
   };
 
   const COIN = `<svg class="${P}_coin" viewBox="0 0 26 26" aria-hidden="true"><circle class="${P}_coinRing" cx="13" cy="13" r="12.4"/><path class="${P}_coinMark" d="M16.7 9.3A5.2 5.2 0 1 0 16.7 16.7"/></svg>`;
@@ -59,8 +56,6 @@
 
   function markup(s, ctx) {
     if (s.part === "generate") return generate(s, ctx);
-    if (s.part === "badge") return badge(s.credits);
-    if (s.part === "label") return `<span class="${P}_label">${s.labelText}${has(s.credits) ? `\n  ${badge(s.credits)}` : ""}</span>`;
     return header(s, ctx);
   }
 
@@ -76,31 +71,12 @@
   const TWO = { subtitle: "Second line" };
   const DISC = { originalCost: "20", discountLabel: "20%OFF" };
 
+  // Storybook has three stories: Header Balance (Desktop), Header Balance (Mobile) and one Generate story whose options are
+  // controls. The grid mirrors that; hover, disabled, two lines, discount and the rest are the controls above.
   const variants = [
-    small("Header balance / Desktop", { part: "header" }),
-    small("Header balance / Mobile", { part: "header", device: "mobile" }),
-    small("Header balance / Follows viewport (add hidden at 768px and below)", { part: "header", device: "responsive" }),
-    small("Header balance / Button / Focus", { part: "header", clickable: true, state: "focus" }),
-    small("Header balance / Button / Mobile", { part: "header", clickable: true, device: "mobile" }),
-    small("Credit badge", { part: "badge" }),
-    small("Credit badge / Large number", { part: "badge", credits: "1250" }),
-    small("Credit label", { part: "label" }),
-    small("Credit label / No credits (no badge)", { part: "label", credits: "" }),
-    gen("Generate / Default (44px)", {}),
-    gen("Generate / Hover", { state: "hover" }, YCO.stateClass("hover")),
-    gen("Generate / Press", { state: "press" }, YCO.stateClass("press")),
-    gen("Generate / Focus", { state: "focus" }, YCO.stateClass("focus")),
-    gen("Generate / Disabled (cost known)", { disabled: true }),
-    gen("Generate / Cost not known (42px)", { costUnknown: true }),
-    gen("Generate / Disabled, cost not known (42px)", { costUnknown: true, disabled: true }),
-    gen("Generate / Loading (42px)", { isLoading: true }),
-    gen("Generate / Two lines (56px)", TWO),
-    gen("Generate / Two lines, cost not known", { ...TWO, costUnknown: true }),
-    gen("Generate / Two lines, disabled", { ...TWO, disabled: true }),
-    gen("Generate / Two lines, loading", { ...TWO, isLoading: true }),
-    gen("Generate / Discount", DISC),
-    gen("Generate / Discount, disabled", { ...DISC, disabled: true }),
-    gen("Generate / Two lines, discount", { ...TWO, ...DISC }),
+    small("Header Balance (Desktop)", { part: "header" }),
+    small("Header Balance (Mobile)", { part: "header", device: "mobile" }),
+    gen("Generate", {}),
   ];
 
   const js = (v) => JSON.stringify(v);
@@ -118,8 +94,6 @@
       p.push("  onClick={handleGenerate}");
       return `${imp("GenerateActionBar")}<GenerateActionBar\n${p.join("\n")}\n/>`;
     }
-    if (s.part === "badge") return `${imp("CreditBadge")}<CreditBadge credits={${Number(s.credits) || 0}} />`;
-    if (s.part === "label") return `${imp("CreditLabel")}<CreditLabel label=${js(s.labelText)}${has(s.credits) ? ` credits={${Number(s.credits) || 0}}` : ""} />`;
     const p = [`  balance={${Number(s.balance) || 0}}`];
     if (s.device !== "responsive") p.push(`  showAdd={${s.device === "desktop"}}`);
     if (s.clickable) p.push("  onClick={openCreditsDialog}");
@@ -133,7 +107,7 @@
     figma: "",
     needs: ["button"],
     statesCss: "components/credit-controls.states.css",
-    intro: "How a credit balance and a credit price are shown: the header balance (coin, number, an add button on desktop), the Generate action bar (a brand button carrying its cost, an optional second line and a discount) and the credit badge or label they share.",
+    intro: "How a credit balance and a credit price are shown: the header balance (coin, number, an add button on desktop), the Generate action bar (a brand button carrying its cost, an optional second line and a discount) whose cost pill is the credit badge.",
     controls: [
       { key: "part", label: "Part", type: "chips", options: PARTS, default: defaults.part },
       { key: "device", label: "Header width", type: "chips", options: DEVICES, default: defaults.device, when: (s) => s.part === "header" },
@@ -147,8 +121,6 @@
       { key: "discountLabel", label: "discountLabel", type: "text", default: "", when: (s) => s.part === "generate" },
       { key: "disabled", label: "disabled", type: "toggle", default: false, when: (s) => s.part === "generate" },
       { key: "isLoading", label: "isLoading", type: "toggle", default: false, when: (s) => s.part === "generate" },
-      { key: "labelText", label: "label", type: "text", default: defaults.labelText, when: (s) => s.part === "label" },
-      { key: "credits", label: "credits", type: "text", default: defaults.credits, when: (s) => s.part === "badge" || s.part === "label" },
       {
         key: "state", label: "State", type: "chips", default: "default",
         options: (s) => (s.part === "generate" ? ["default", "hover", "press", "focus"] : ["default", "focus"]),
@@ -165,7 +137,7 @@
       "The collab-space Button also draws a loading spinner and the flat-grey disabled state itself; this site's button.module.css does not yet, so those two are drawn here with ycoCreditControls_spinner and the :disabled rule on ycoCreditControls_generate.",
       "Sizes with no token are in rem: the 28px badge (1.75rem), the 26px header coin and add button (1.625rem), the 42px, 44px and 56px Generate heights, the 12px original price and tag (--font-size-micro and --line-height-micro are not in the light :root here), the 64px left padding on a two-line button with a pill (no --spacing-64), the 22px tag radius, and the 400 and 900 font weights (no --font-weight-weak or black token).",
       "The coin is drawn in CSS and inline SVG from --yellow-solid-1000 and --amber-light-1000 (palette tokens, so it stays gold in dark mode); the designer's own SVG has a slightly different gradient and a 'C' with angled ends. Confirm or supply a token pair.",
-      "The badge tint is --grey-neutral-light-100 (10% black) in every place, as in the source. On the brand button it sits on --fill-brand-strong, so it darkens the button; on a disabled button it is a plain tint over the grey; elsewhere it sits on --fill-base.",
+      "The credit pill inside Generate is no longer a story of its own; its tint is --grey-neutral-light-100 (10% black), as in the source. On the brand button it sits on --fill-brand-strong, so it darkens the button; on a disabled button it is a plain tint over the grey;",
       "The header add button's circle uses --fill-hover where the source SVG bakes in a 10% near-black fill, so it stays visible on the dark theme.",
       "Header balance: left to follow the viewport, the add button is hidden at 768px and below; the stories pin it with showAdd. With onClick the header is a button and gets the focus ring; without it, a plain div.",
     ],

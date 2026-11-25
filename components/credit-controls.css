@@ -123,11 +123,6 @@ button.ycoCreditControls_control {
 }
 
 /* A label followed by the badge. */
-.ycoCreditControls_label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-8);
-}
 
 /* ----- Generate action bar ---------------------------------------------
    A full-width brand .ycoButton. Heights: text only 42px, with the pill 44px,
