@@ -111,7 +111,9 @@
   --fill-disabled: var(--grey-light-200);
   --fill-error-strong: var(--red-light-1000);
   --fill-error-weak: var(--red-light-50);
-  --fill-hover: var(--grey-light-100);
+  /* Order matters: hover is the lighter tint and press the darker one (RD: hover 4%, press 10%). Do not swap the two names to change how strong
+     hover looks; change the level of the token instead (tools/check-tokens.mjs fails if press is lighter than hover). */
+  --fill-hover: var(--grey-light-50);
   --fill-information-strong: var(--teal-light-1000);
   --fill-information-weak: var(--teal-light-50);
   --fill-inverse-hover: var(--grey-dark-50);
@@ -119,7 +121,7 @@
   --fill-inverse-disabled: var(--grey-dark-100);
   --fill-inverse-strong: var(--grey-solid-0);
   --fill-overlay: var(--grey-neutral-light-700);
-  --fill-press: var(--grey-light-50);
+  --fill-press: var(--grey-light-100);
   --fill-strong: var(--grey-light-1000);
   --fill-success-strong: var(--green-light-1000);
   --fill-success-weak: var(--green-light-50);
@@ -224,18 +226,18 @@
   --fill-disabled: var(--grey-dark-200);
   --fill-error-strong: var(--red-dark-1000);
   --fill-error-weak: var(--red-dark-50);
-  --fill-hover: var(--grey-dark-100);
+  --fill-hover: var(--grey-dark-50);
   --fill-information-strong: var(--teal-dark-1000);
   --fill-information-weak: var(--teal-dark-50);
   --fill-inverse-disabled: var(--grey-light-100);
-  --fill-inverse-hover: var(--grey-light-100);
-  --fill-inverse-press: var(--grey-light-50);
+  --fill-inverse-hover: var(--grey-light-50);
+  --fill-inverse-press: var(--grey-light-100);
   --fill-inverse-strong: var(--grey-solid-900);
   --fill-inverse-weak: var(--grey-light-50);
   --fill-overlay: var(--grey-light-900);
   --fill-overlay-strong: var(--grey-light-1000);
   --fill-overlay-weak: var(--grey-light-700);
-  --fill-press: var(--grey-dark-50);
+  --fill-press: var(--grey-dark-100);
   --fill-selected: var(--brand-dark-1000);
   --fill-strong: var(--grey-dark-1000);
   --fill-success-strong: var(--green-dark-1000);
