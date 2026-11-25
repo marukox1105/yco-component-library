@@ -13,9 +13,14 @@
 .tk-sec { margin-bottom: 72px; scroll-margin-top: 72px; }
 .tk-sec > h3 { margin-bottom: 8px; font-size: 24px; }
 .tk-sec > .intro { max-width: 60ch; margin-bottom: 32px; }
-.tk-h { margin: 40px 0 4px; color: var(--text-strong); font-size: 18px; }
-.tk-sub, .tk-scale { margin-top: 32px; }
-.tk-sub h4, .tk-scale h4 { margin-bottom: 12px; color: var(--text-weaker); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+/* Hierarchy by distance: a colour family is far from the next family, scales inside it are closer, and a scale's label hugs its tiles. */
+.tk-pal { margin-top: 88px; padding-top: 40px; border-top: 1px solid var(--stroke-weak); }
+.tk-sec > .intro + .tk-pal { margin-top: 40px; }
+.tk-h { margin: 0 0 4px; color: var(--text-strong); font-size: 20px; }
+.tk-scale { margin-top: 28px; }
+.tk-sub { margin-top: 48px; }
+.tk-sub:first-of-type, .tk-sec > .intro + .tk-sub { margin-top: 0; }
+.tk-sub h4, .tk-scale h4 { margin-bottom: 10px; color: var(--text-weaker); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
 
 /* A colour is drawn over its own backdrop (white for light, the dark surface for dark), because most tokens are translucent. */
 .tk-half { position: relative; display: block; overflow: hidden; }
