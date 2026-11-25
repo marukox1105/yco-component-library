@@ -18,9 +18,9 @@
   const CHEVRON = '<svg class="ycoAvatar_trailing ycoAvatar_chevronDown" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg><svg class="ycoAvatar_trailing ycoAvatar_chevronUp" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>';
   const MORE = '<svg class="ycoAvatar_trailing" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01"/></svg>';
 
-  // A neutral stand-in for a photo, so the doc page needs no image files. The copied HTML uses a placeholder path.
-  const TINTS = ["c9a17f", "9fb8c9", "b7a1c9", "a6c9a1", "c9a1a6"];
-  const photo = (n, ctx) => (ctx.preview === false ? "photo.jpg" : `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23${TINTS[n % TINTS.length]}'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23f1e4d6'/%3E%3Cpath d='M6 40c2-10 9-13 14-13s12 3 14 13z' fill='%23f1e4d6'/%3E%3C/svg%3E`);
+  // Eight AI-generated portraits (not real people) in assets/avatars/, so the preview shows real photos. The copied HTML uses a placeholder path.
+  const PHOTOS = 8;
+  const photo = (n, ctx) => (ctx.preview === false ? "photo.jpg" : `assets/avatars/avatar-${(n % PHOTOS) + 1}.jpg`);
 
   const dot = (kind, size) => {
     const status = kind !== "notification";
@@ -122,7 +122,7 @@
     },
     variants,
     notes: [
-      "The Photo type is an image in Figma; the doc page draws a neutral stand-in. In the copied HTML the src is a placeholder path.",
+      "The Photo type is an image in Figma. The preview uses eight AI-generated portraits (not real people) from assets/avatars/, 192px JPEGs of about 9 KB each. In the copied HTML the src is a placeholder path.",
       "Status dots are Badge dot (online, busy, away, offline) and sit bottom right; Notification sits top right. Medium and Small statuses hang off the avatar edge at the offsets Figma gives (36px and 22px), which look unintended: confirm with the designer.",
       "The dot ring is --background-base; inner dots follow Badge dot colours. Small status dots (12px) keep their glyph-less look only for the Notification dot (8px), as in Figma.",
       "Figma's Disabled dropdown is the default look at 30% opacity; the navigation dropdown's hover and focus fills have square corners in Figma, so the navigation placement uses no radius.",
