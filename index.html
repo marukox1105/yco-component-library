@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./button.module.css?v=1" />
     <link rel="stylesheet" href="./preview-states.css?v=1" />
     <link rel="stylesheet" href="./overview.css?v=4" />
+    <link rel="stylesheet" href="./tokens.css?v=2" />
     <link rel="stylesheet" href="./engine.css?v=4" />
   </head>
   <body>
@@ -39,6 +40,19 @@
           </div>
         </header>
         <div id="overviewBody"></div>
+      </main>
+
+      <main class="content component-page" id="tokens" data-page="tokens" hidden>
+        <header class="page-header">
+          <div>
+            <p class="eyebrow">Foundations</p>
+            <h2>Tokens</h2>
+            <p class="intro">
+              The colour, spacing, radius and type tokens every component page uses, read live from <code>styles.css</code>. Semantic colours show their light and dark value and the primitive they point at. Click any token to copy its <code>var()</code>.
+            </p>
+          </div>
+        </header>
+        <div id="tokensBody"></div>
       </main>
 
       <main class="content component-page" id="enginePage" hidden></main>
@@ -342,8 +356,9 @@
     <script src="./components/credit-controls.js?v=1"></script>
     <script src="./components/ratio.js?v=1"></script>
     <script src="./components/empty-canvas.js?v=1"></script>
-    <script src="./nav.js?v=11"></script>
+    <script src="./nav.js?v=12"></script>
     <script src="./script.js?v=37"></script>
     <script src="./overview.js?v=5"></script>
+    <script src="./tokens.js?v=3"></script>
   </body>
 </html>
