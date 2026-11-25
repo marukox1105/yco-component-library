@@ -3,7 +3,7 @@
    `legacy` entries are the two hand-built pages that predate the engine. `figma` is the
    Figma page node (file JXNIQPJT9I9qFrgtiaCn4i). */
 // Bumped whenever a stylesheet changes, so browsers refetch components/*.css.
-window.YCO_BUILD = "20261125d";
+window.YCO_BUILD = "20261125g";
 window.YCO_NAV = [
   { group: null, items: [{ id: "overview", label: "Overview", legacy: true }] },
   { group: "Elements", items: [
@@ -18,6 +18,7 @@ window.YCO_NAV = [
     { id: "badge-count", label: "Badge count", figma: "4661:66038" },
     { id: "badge-dot", label: "Badge dot", figma: "6478:100529" },
     { id: "scrollbar", label: "Scrollbar", figma: "13491:401" },
+    { id: "credit-controls", label: "Credit controls" },
   ] },
   { group: "Forms", items: [
     { id: "text-input", label: "Text input", figma: "3823:28845" },
@@ -36,12 +37,14 @@ window.YCO_NAV = [
     { id: "stepper", label: "Stepper", figma: "3965:36404" },
     { id: "toggle", label: "Toggle", figma: "3834:44518" },
     { id: "prompt-composer", label: "Prompt Composer", figma: "15742:21191" },
+    { id: "ratio", label: "Ratio" },
   ] },
   { group: "Feedback", items: [
     { id: "toast", label: "Alert (Toast)", legacy: true, figma: "4109:42475" },
     { id: "alert-global", label: "Alert global", figma: "5785:53468" },
     { id: "empty-state", label: "Empty state", figma: "4865:151487" },
     { id: "empty-image", label: "Empty image", figma: "13023:5838" },
+    { id: "empty-canvas", label: "Empty canvas" },
   ] },
   { group: "Navigation", items: [
     { id: "navigation-header", label: "Navigation header", figma: "6143:45465" },

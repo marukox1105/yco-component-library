@@ -1,0 +1,242 @@
+/* =====================================================================
+   YCO Ratio · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in yce-frontend (import styles from './Ratio.module.css').
+   Source: the approved Storybook component UI/Ratio (platform/ui/ratio in
+   the private collab-space repo), the aspect-ratio selector of RD's
+   src/components/common/ratio. No Figma component set yet: values are the
+   approved Storybook values (Figma node 15012-276926 for sizes).
+   Variants: default, gery, gery_v2 (two or three columns), image_extender.
+   States: default, selected, focus, disabled.
+   Each option is a <label> around a real <input type="radio">, so arrow keys
+   move the choice inside the group. Selected is :checked, focus is
+   :focus-visible, disabled is :disabled. Doc-only previews: ratio.states.css.
+   ===================================================================== */
+
+.ycoRatio {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.ycoRatio *,
+.ycoRatio *::before,
+.ycoRatio *::after {
+  box-sizing: border-box;
+}
+
+/* ----- title ----- */
+.ycoRatio_title {
+  margin: 0 0 var(--spacing-16);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: var(--line-height-small);
+}
+
+.ycoRatio_titleVariant_gery {
+  margin-bottom: var(--spacing-4);
+  font-weight: var(--font-weight-strong);
+}
+
+/* ----- the list ----- */
+.ycoRatio_content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+}
+
+.ycoRatio_variant_gery_v2,
+.ycoRatio_variant_image_extender {
+  gap: var(--spacing-8);
+}
+
+/* gery_v2: two columns for two options or fewer, three for more. */
+.ycoRatio_variant_gery_v2 {
+  display: grid;
+}
+
+.ycoRatio_columns_two.ycoRatio_variant_gery_v2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ycoRatio_columns_three.ycoRatio_variant_gery_v2 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ycoRatio_variant_image_extender {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ----- one option ----- */
+.ycoRatio_option {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  height: var(--spacing-40);
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--text-strong);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-brand-weak), var(--fill-brand-weak));
+  border: 3px solid var(--stroke-inverse-strong);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* The real input stays in the layout (so it can take focus) but is invisible. */
+.ycoRatio_input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  clip-path: inset(50%);
+}
+
+.ycoRatio_variant_gery .ycoRatio_option,
+.ycoRatio_variant_gery_v2 .ycoRatio_option {
+  background: var(--background-base);
+  border: 1px solid var(--stroke-strong);
+  --yco-base: var(--background-base);
+}
+
+.ycoRatio_variant_image_extender .ycoRatio_option {
+  height: auto;
+  min-height: 4.625rem;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-4);
+  background: var(--background-base);
+  border: 1px solid var(--stroke-weak);
+  --yco-base: var(--background-base);
+}
+
+/* ----- selected ----- */
+.ycoRatio_option:has(.ycoRatio_input:checked) {
+  background: var(--background-base);
+  border-color: var(--stroke-brand-strong);
+  --yco-base: var(--background-base);
+}
+
+.ycoRatio_variant_gery .ycoRatio_option:has(.ycoRatio_input:checked),
+.ycoRatio_variant_gery_v2 .ycoRatio_option:has(.ycoRatio_input:checked) {
+  border-width: 2px;
+  border-color: var(--stroke-selected);
+}
+
+.ycoRatio_variant_image_extender .ycoRatio_option:has(.ycoRatio_input:checked) {
+  color: var(--text-inverse-strong);
+  background: var(--fill-brand-strong);
+  border-color: var(--fill-brand-strong);
+  --yco-base: var(--fill-brand-strong);
+}
+
+/* ----- focus ----- */
+.ycoRatio_option:has(.ycoRatio_input:focus-visible) {
+  box-shadow: 0 0 0 3px var(--stroke-focus);
+}
+
+/* ----- disabled: the whole option fades, nothing is re-coloured ----- */
+.ycoRatio_option:has(.ycoRatio_input:disabled) {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+/* ----- swatch ----- */
+.ycoRatio_wrapper {
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+  padding: calc(var(--spacing-8) - 1px);
+}
+
+.ycoRatio_shape {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The swatch is a rectangle sized to the option's own w:h, fitted inside its box like object-fit: contain.
+   The page sets width and height inline: portrait (h > w) is width = w / h, height 100%; otherwise width 100%, height = h / w. */
+.ycoRatio_swatch {
+  display: block;
+  border: 1px solid currentcolor;
+  border-radius: 0.125rem;
+}
+
+.ycoRatio_variant_gery .ycoRatio_swatch,
+.ycoRatio_variant_gery_v2 .ycoRatio_swatch {
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
+  border: 0;
+}
+
+.ycoRatio_variant_gery .ycoRatio_input:checked ~ .ycoRatio_wrapper .ycoRatio_swatch,
+.ycoRatio_variant_gery_v2 .ycoRatio_input:checked ~ .ycoRatio_wrapper .ycoRatio_swatch {
+  background: var(--fill-brand-strong);
+}
+
+.ycoRatio_variant_image_extender .ycoRatio_swatch {
+  background: transparent;
+}
+
+.ycoRatio_variant_image_extender .ycoRatio_input:checked ~ .ycoRatio_wrapper .ycoRatio_swatch {
+  border-width: 2px;
+}
+
+/* ----- label ----- */
+.ycoRatio_text {
+  width: var(--spacing-40);
+  overflow: hidden;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-small);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ----- phone: gery_v2 and image_extender become a swipe strip ----- */
+@media (max-width: 768px) {
+  .ycoRatio_variant_gery_v2,
+  .ycoRatio_columns_two.ycoRatio_variant_gery_v2,
+  .ycoRatio_columns_three.ycoRatio_variant_gery_v2 {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-inline: calc(-1 * var(--spacing-16));
+    padding-inline: var(--spacing-16);
+    padding-bottom: var(--spacing-8);
+    overflow: auto hidden;
+    scrollbar-width: none;
+  }
+
+  .ycoRatio_variant_gery_v2::-webkit-scrollbar,
+  .ycoRatio_variant_image_extender::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ycoRatio_variant_gery_v2 .ycoRatio_option {
+    min-width: 6.5rem;
+  }
+
+  .ycoRatio_variant_image_extender {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: var(--spacing-8);
+    overflow: auto hidden;
+    scrollbar-width: none;
+  }
+
+  .ycoRatio_variant_image_extender .ycoRatio_option {
+    min-width: 5.5rem;
+  }
+}

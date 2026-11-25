@@ -1,0 +1,71 @@
+/* Doc-only: a stage that stands in for the page behind the canvas, and a forced hover look.
+   Not exported to the private collab-space repo or yce-frontend. */
+
+/* The canvas fills the room its parent gives it; the stage is that parent, on the page colour (Figma's page grey). */
+.ycoEmptyCanvas_stage {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 30rem;
+  padding: var(--spacing-24);
+  border-radius: var(--spacing-8);
+  background: var(--background-sunken);
+}
+
+.ycoEmptyCanvas_stage_cell {
+  min-height: 0;
+  padding: var(--spacing-16) var(--spacing-8);
+}
+
+/* A variant cell: the photo and the video canvas side by side, wrapping on a narrow screen. */
+.ycoEmptyCanvas_pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-16);
+  width: 100%;
+}
+
+.ycoEmptyCanvas_pair > .ycoEmptyCanvas_stage {
+  flex: 1 1 20rem;
+  min-width: 0;
+}
+
+/* Forced hover: the same declarations as :hover in empty-canvas.css. */
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_photoArt,
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_videoArt {
+  transform: scale(1.06);
+}
+
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_cardBack {
+  transform: translate(5px, -4px) rotate(7deg);
+  fill: color-mix(in srgb, var(--fill-brand-strong) 16%, transparent);
+}
+
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_cardMid {
+  transform: translate(-5px, 4px) rotate(-7deg);
+  fill: color-mix(in srgb, var(--fill-brand-strong) 24%, transparent);
+}
+
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_photoArt .ycoEmptyCanvas_cardFront,
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_stripFrontBody {
+  fill: color-mix(in srgb, var(--fill-brand-strong) 8%, var(--fill-inverse-strong));
+}
+
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_sun,
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_play {
+  fill: var(--fill-brand-strong);
+}
+
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_hills {
+  fill: color-mix(in srgb, var(--fill-brand-strong) 35%, transparent);
+}
+
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_stripBack {
+  transform: translate(48.787px, 77.25px) rotate(-22deg) translate(-38.9707px, -27.604px);
+  fill: color-mix(in srgb, var(--fill-brand-strong) 24%, transparent);
+}
+
+.ycoEmptyCanvas.is-hover .ycoEmptyCanvas_stripFront {
+  transform: translate(72.632px, 39.952px) rotate(17deg) translate(-38.9707px, -27.604px);
+}

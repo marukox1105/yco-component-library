@@ -1,0 +1,271 @@
+/* =====================================================================
+   YCO Credit controls · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in the collab-space repo (platform/ui/credit-controls, rewritten
+   from CreditControls.module.scss and CreditBadge.module.scss).
+   Source: private repo yco-collab-space, Storybook "UI / Credit Controls"
+   (no Figma component set; Footer Button spec YCO_Tool-Pages 7894:35266
+   and 7101:181701).
+   Three parts: the header balance (.ycoCreditControls_control), the
+   Generate action bar (.ycoCreditControls_actionBar, a shared .ycoButton
+   plus the credit badge) and the credit badge / credit label.
+   States: Generate default / hover / press / focus / disabled / loading,
+   with or without a cost, a second line, a discount.
+   ===================================================================== */
+
+/* ----- Coin (the credit glyph) ----------------------------------------
+   Drawn here instead of shipping the designer's SVG: a gold disc with a
+   rim and a white "C". Palette primitives, not semantic tokens, so the
+   coin stays gold in both themes as the SVG does. */
+.ycoCreditControls_coin {
+  display: block;
+  flex: none;
+  width: 1.625rem;
+  height: 1.625rem;
+  border-radius: 50%;
+  background-image: linear-gradient(205deg, var(--yellow-solid-1000) 5%, color-mix(in srgb, var(--amber-light-1000) 75%, var(--yellow-solid-1000)) 100%);
+}
+
+.ycoCreditControls_coinRing {
+  fill: none;
+  stroke: color-mix(in srgb, var(--amber-light-1000) 70%, var(--grey-solid-0));
+  stroke-width: 1.3;
+}
+
+.ycoCreditControls_coinMark {
+  fill: none;
+  stroke: var(--grey-solid-0);
+  stroke-width: 3.2;
+  filter: drop-shadow(0 0 1.3px var(--amber-light-1000));
+}
+
+/* ----- Header balance --------------------------------------------------
+   Coin, number, and (desktop) a round add button. The ground is --fill-weak. */
+.ycoCreditControls_control {
+  --yco-base: var(--fill-base);
+
+  display: inline-flex;
+  min-height: var(--spacing-40);
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-8);
+  margin: 0;
+  border: 0;
+  border-radius: var(--corner-radius-32);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--fill-weak), var(--fill-weak));
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-small);
+}
+
+button.ycoCreditControls_control {
+  cursor: pointer;
+}
+
+.ycoCreditControls_control:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+.ycoCreditControls_addIcon {
+  display: grid;
+  flex: none;
+  width: 1.625rem;
+  height: 1.625rem;
+  place-items: center;
+  border-radius: 50%;
+  background-image: linear-gradient(var(--fill-hover), var(--fill-hover));
+}
+
+.ycoCreditControls_addGlyph {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: var(--text-strong);
+}
+
+/* Left unset, the add button follows the viewport: gone at 768px and below,
+   as in the header. data-add-responsive is set when the app passes no showAdd. */
+@media (max-width: 768px) {
+  .ycoCreditControls_control[data-add-responsive] .ycoCreditControls_addIcon {
+    display: none;
+  }
+}
+
+/* ----- Credit badge ----------------------------------------------------
+   Coin plus number on a 10% black tint. The tint sits on --yco-base, which a
+   brand or disabled button overrides so the pill darkens the button, not the page. */
+.ycoCreditControls_badge {
+  display: inline-flex;
+  height: 1.75rem;
+  align-items: center;
+  padding: 0.125rem var(--spacing-4);
+  border-radius: var(--corner-radius-32);
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(var(--grey-neutral-light-100), var(--grey-neutral-light-100));
+}
+
+.ycoCreditControls_badge .ycoCreditControls_coin {
+  width: 1.25rem;
+  height: 1.25rem;
+  box-shadow: 0 2px 4px color-mix(in srgb, var(--grey-solid-1000) 15%, transparent);
+}
+
+.ycoCreditControls_cost {
+  padding: 0 var(--spacing-4);
+  font-size: var(--font-size-small);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-small);
+}
+
+/* A label followed by the badge. */
+.ycoCreditControls_label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+/* ----- Generate action bar ---------------------------------------------
+   A full-width brand .ycoButton. Heights: text only 42px, with the pill 44px,
+   two lines 56px (subtitle presence decides, not the pill). */
+.ycoCreditControls_actionBar {
+  position: relative;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+/* One line with the pill (Footer Button 7894:35266): 44px, label Heading 5 (18/24). */
+.ycoCreditControls_generate.ycoCreditControls_generate {
+  --yco-base: var(--fill-brand-strong);
+
+  width: 100%;
+  min-height: 2.75rem;
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-small);
+}
+
+/* Text only (42px) and every button without a pill (loading, cost not known): label Heading 4 (20/28). */
+.ycoCreditControls_generate_noCredit.ycoCreditControls_generate_noCredit {
+  min-height: 2.625rem;
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+}
+
+/* Disabled is one flat grey, with white text; the pill and prices stay when the cost is known. */
+.ycoCreditControls_generate.ycoCreditControls_generate:disabled {
+  background-color: var(--fill-base);
+  background-image: linear-gradient(var(--fill-disabled), var(--fill-disabled));
+  color: var(--text-inverse-strong);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.ycoCreditControls_generate:disabled .ycoCreditControls_badge {
+  background-color: transparent;
+}
+
+/* The label and the pill: the label pads 4px each side, 12px between text and pill. */
+.ycoCreditControls_generate .ycoCreditControls_generateLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing-8) + var(--spacing-4));
+}
+
+.ycoCreditControls_generateText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Two lines (56px): the label Heading 4 (20/28) over a Tiny 14px regular line with a 16px line height. */
+.ycoCreditControls_generate_twoLine.ycoCreditControls_generate_twoLine {
+  min-height: 3.5rem;
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+}
+
+.ycoCreditControls_subtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
+  font-weight: 400;
+  line-height: 1rem;
+}
+
+/* Two lines with the pill: the text stays centred in the space the pill leaves,
+   64px of left padding and the pill 20px from the right (Figma 7894:35309). */
+.ycoCreditControls_generate_twoLineCredit.ycoCreditControls_generate_twoLineCredit {
+  padding: 0;
+}
+
+.ycoCreditControls_generate_twoLineCredit .ycoCreditControls_generateLabel {
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 var(--spacing-20) 0 4rem;
+}
+
+.ycoCreditControls_generate_twoLineCredit .ycoCreditControls_generateText {
+  flex: 1 1 auto;
+  padding: 0 var(--spacing-4);
+}
+
+/* A discounted price: the price before the discount, struck through after the pill... */
+.ycoCreditControls_originalCost {
+  margin-left: var(--spacing-8);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+
+/* ...and the tag hanging off the button's top-right corner, 8px above it. */
+.ycoCreditControls_discountTag {
+  position: absolute;
+  top: calc(var(--spacing-8) * -1);
+  right: 0;
+  padding: 0.15625rem var(--spacing-8) 0.09375rem;
+  border-radius: 1.375rem;
+  background-image: linear-gradient(90deg, var(--icon-warning), var(--fill-warning-strong));
+  color: var(--text-inverse-strong);
+  font-size: 0.75rem;
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* Loading: Button's spinner, a ring that fades round its circumference. */
+@keyframes ycoCreditControlsSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ycoCreditControls_spinner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: ycoCreditControlsSpin 0.75s linear infinite;
+  background: conic-gradient(from 0deg, transparent 0%, currentcolor 100%);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), currentcolor calc(100% - 2.5px));
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ycoCreditControls_spinner {
+    animation-duration: 2.5s;
+  }
+}
+
+/* Doc-only wrapper: a 400px panel, with room above for the discount tag. */
+.ycoCreditControls_stage {
+  width: min(25rem, 100%);
+  margin-inline: auto;
+  padding-top: var(--spacing-16);
+}

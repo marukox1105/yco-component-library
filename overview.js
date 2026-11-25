@@ -75,7 +75,8 @@
       <p class="eyebrow">${esc(g.name)}</p>
       <div class="ov-chips">${g.ids.map((id) => {
         const c = comps[id];
-        return `<span class="ov-chip" data-search="${esc((c.name + " " + id).toLowerCase())}">${esc(c.name)}<small>${storyCount(c)} stories · ${esc(c.portability || "")}</small></span>`;
+        const page = navLabel[id] ? `<a class="ov-badge page-doc" href="#${id}">${esc(navLabel[id])} page \u2192</a>` : "";
+        return `<span class="ov-chip" data-search="${esc((c.name + " " + id).toLowerCase())}">${esc(c.name)}<small>${storyCount(c)} stories · ${esc(c.portability || "")}</small>${page}</span>`;
       }).join("")}</div></div>`).join("");
     return `<section class="ov-group" data-conf="only" data-group>
       <h3>Storybook only <small>${total} components with no Figma counterpart</small></h3>

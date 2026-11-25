@@ -1,0 +1,381 @@
+/* =====================================================================
+   YCO Empty canvas · SINGLE SOURCE OF TRUTH
+   Plain CSS, CSS-Modules class names. Same file in the doc site (<link>)
+   and in the private collab-space repo (EmptyCanvas.module.scss, the
+   approved Storybook component, "UI / Empty Canvas").
+   Figma: YCO_Tool-Pages "Drop zone" (file jb5SgyshmuPse0L7IFm0QO),
+   photo copy 7099:176741 / 9439:208738, video copy 7451:103477.
+   The canvas of a tool page before anything is uploaded: a 120px Empty
+   image, a heading with an optional line, one primary action with a plus,
+   and an optional row of example media. It fills the room its parent
+   gives it and centres its content. The video canvas sits on a white card
+   (20px radius); the photo canvas has no card and shows the page.
+   States: default, hover, dragging (the same blue, spread-apart artwork
+   as hover; photo and video artwork only).
+   ===================================================================== */
+
+.ycoEmptyCanvas {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: var(--spacing-12);
+  border-radius: 1.25rem;
+  color: var(--text-strong);
+  font-family: var(--font-family-body);
+  text-align: center;
+}
+
+.ycoEmptyCanvas_card {
+  --yco-base: var(--background-base);
+  background: var(--background-base);
+}
+
+.ycoEmptyCanvas_clickable {
+  cursor: pointer;
+}
+
+/* ----- Artwork ----- */
+.ycoEmptyCanvas_art {
+  display: flex;
+  justify-content: center;
+}
+
+.ycoEmptyCanvas_image {
+  display: block;
+  flex: none;
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
+/* The photo and video artwork sit in a 120x120 slot. At rest they are the Empty image's own grey (on the card) or white
+   (on the page); hovered or dragged over, the cards turn blue and spread apart, which says the whole area takes an upload. */
+.ycoEmptyCanvas_slot {
+  position: relative;
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
+.ycoEmptyCanvas_photoArt {
+  position: absolute;
+  top: 7.5px;
+  left: 14px;
+  overflow: visible;
+  transition: transform 300ms ease;
+}
+
+.ycoEmptyCanvas_photoArt rect,
+.ycoEmptyCanvas_photoArt circle,
+.ycoEmptyCanvas_photoArt path {
+  transition:
+    fill 300ms ease,
+    transform 300ms ease;
+}
+
+.ycoEmptyCanvas_cardBack {
+  fill: var(--stroke-weak);
+  transform-origin: 35.8364px 0;
+}
+
+.ycoEmptyCanvas_cardMid {
+  fill: var(--stroke-strong);
+  transform-origin: 0 44.209px;
+}
+
+.ycoEmptyCanvas_cardFront {
+  fill: var(--fill-inverse-strong);
+}
+
+.ycoEmptyCanvas_card .ycoEmptyCanvas_cardFront {
+  fill: color-mix(in srgb, var(--fill-strong) 3%, var(--fill-inverse-strong));
+}
+
+.ycoEmptyCanvas_sun {
+  fill: color-mix(in srgb, var(--fill-strong) 60%, transparent);
+}
+
+.ycoEmptyCanvas_hills {
+  fill: color-mix(in srgb, var(--fill-strong) 31.5%, transparent);
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_photoArt,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_photoArt {
+  transform: scale(1.06);
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_cardBack,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_cardBack {
+  transform: translate(5px, -4px) rotate(7deg);
+  fill: color-mix(in srgb, var(--fill-brand-strong) 16%, transparent);
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_cardMid,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_cardMid {
+  transform: translate(-5px, 4px) rotate(-7deg);
+  fill: color-mix(in srgb, var(--fill-brand-strong) 24%, transparent);
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_photoArt .ycoEmptyCanvas_cardFront,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_photoArt .ycoEmptyCanvas_cardFront {
+  fill: color-mix(in srgb, var(--fill-brand-strong) 8%, var(--fill-inverse-strong));
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_sun,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_sun {
+  fill: var(--fill-brand-strong);
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_hills,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_hills {
+  fill: color-mix(in srgb, var(--fill-brand-strong) 35%, transparent);
+}
+
+/* Video artwork: two film strips, the back one turned 15 degrees one way and the front one 10 the other. */
+.ycoEmptyCanvas_videoArt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  transition: transform 300ms ease;
+}
+
+.ycoEmptyCanvas_stripBack,
+.ycoEmptyCanvas_stripFront {
+  transform-origin: 0 0;
+  transition: transform 300ms ease;
+}
+
+.ycoEmptyCanvas_stripBack {
+  fill: var(--stroke-strong);
+  transform: translate(53.787px, 73.25px) rotate(-15deg) translate(-38.9707px, -27.604px);
+  transition:
+    fill 300ms ease,
+    transform 300ms ease;
+}
+
+.ycoEmptyCanvas_stripFront {
+  transform: translate(67.632px, 43.952px) rotate(10deg) translate(-38.9707px, -27.604px);
+}
+
+.ycoEmptyCanvas_stripFrontBody {
+  fill: var(--fill-inverse-strong);
+  transition: fill 300ms ease;
+}
+
+.ycoEmptyCanvas_card .ycoEmptyCanvas_stripFrontBody {
+  fill: color-mix(in srgb, var(--fill-strong) 3%, var(--fill-inverse-strong));
+}
+
+.ycoEmptyCanvas_play {
+  fill: color-mix(in srgb, var(--fill-strong) 60%, transparent);
+  transition: fill 300ms ease;
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_videoArt,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_videoArt {
+  transform: scale(1.06);
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_stripBack,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_stripBack {
+  transform: translate(48.787px, 77.25px) rotate(-22deg) translate(-38.9707px, -27.604px);
+  fill: color-mix(in srgb, var(--fill-brand-strong) 24%, transparent);
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_stripFront,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_stripFront {
+  transform: translate(72.632px, 39.952px) rotate(17deg) translate(-38.9707px, -27.604px);
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_stripFrontBody,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_stripFrontBody {
+  fill: color-mix(in srgb, var(--fill-brand-strong) 8%, var(--fill-inverse-strong));
+}
+
+.ycoEmptyCanvas:hover .ycoEmptyCanvas_play,
+.ycoEmptyCanvas_dragging .ycoEmptyCanvas_play {
+  fill: var(--fill-brand-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ycoEmptyCanvas_videoArt,
+  .ycoEmptyCanvas_stripBack,
+  .ycoEmptyCanvas_stripFront,
+  .ycoEmptyCanvas_stripFrontBody,
+  .ycoEmptyCanvas_play,
+  .ycoEmptyCanvas_photoArt,
+  .ycoEmptyCanvas_photoArt rect,
+  .ycoEmptyCanvas_photoArt circle,
+  .ycoEmptyCanvas_photoArt path {
+    transition: none;
+  }
+}
+
+/* The other Empty image types (static; they do not animate): grey cards, white paper on the page, grey paper on the card. */
+.ycoEmptyCanvas_art_ground {
+  fill: var(--fill-hover);
+}
+
+.ycoEmptyCanvas_art_groundStrong {
+  fill: var(--fill-disabled);
+}
+
+.ycoEmptyCanvas_art_paper,
+.ycoEmptyCanvas_art_hole {
+  fill: var(--fill-inverse-strong);
+}
+
+.ycoEmptyCanvas_art_holeDark {
+  fill: var(--fill-hover);
+}
+
+.ycoEmptyCanvas_card .ycoEmptyCanvas_art_paper,
+.ycoEmptyCanvas_card .ycoEmptyCanvas_art_hole {
+  fill: color-mix(in srgb, var(--fill-strong) 3%, var(--fill-inverse-strong));
+}
+
+.ycoEmptyCanvas_art_glyph {
+  fill: var(--text-weak);
+}
+
+.ycoEmptyCanvas_art_glyphLight {
+  fill: var(--text-weaker);
+}
+
+.ycoEmptyCanvas_art_stroke {
+  fill: none;
+  stroke: var(--text-weak);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoEmptyCanvas_art_strokeLight {
+  fill: none;
+  stroke: var(--text-weaker);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ycoEmptyCanvas_art_sparkle {
+  fill: var(--text-weaker);
+}
+
+/* ----- Heading and supporting line, 4px apart ----- */
+.ycoEmptyCanvas_text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  width: 100%;
+}
+
+/* Figma keeps 24px between a supporting line and the action, 16px between a bare heading and the action. */
+.ycoEmptyCanvas_text_withDescription {
+  margin-bottom: var(--spacing-8);
+}
+
+.ycoEmptyCanvas_heading {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-heading-4);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-heading-4);
+}
+
+.ycoEmptyCanvas_description {
+  margin: 0;
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  font-weight: 400;
+  line-height: var(--line-height-tiny);
+}
+
+/* ----- Examples: a Tiny semibold line, then 64px tiles 12px apart ----- */
+.ycoEmptyCanvas_examples {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: 100%;
+  margin-top: var(--spacing-8);
+}
+
+.ycoEmptyCanvas_examplesLabel {
+  margin: 0;
+  color: var(--text-weaker);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+}
+
+.ycoEmptyCanvas_tiles {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-12);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The tiles shrink together when the row is wider than the screen (a phone) instead of overflowing it. */
+.ycoEmptyCanvas_tiles > li {
+  flex: 0 1 4rem;
+  min-width: 0;
+}
+
+.ycoEmptyCanvas_tile {
+  --yco-base: var(--fill-base);
+
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0.75rem;
+  background: none;
+  cursor: default;
+}
+
+.ycoEmptyCanvas_tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+button.ycoEmptyCanvas_tile {
+  cursor: pointer;
+}
+
+button.ycoEmptyCanvas_tile:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--stroke-selected),
+    0 0 0 6px var(--stroke-focus);
+}
+
+/* Placeholder for an example picture (doc site only; production passes an <img>). */
+.ycoEmptyCanvas_tileImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--yco-base, var(--fill-base));
+  background-image: linear-gradient(135deg, var(--fill-hover), var(--fill-disabled));
+}
+
+.ycoEmptyCanvas_tiles > li:nth-child(2n) .ycoEmptyCanvas_tileImage {
+  background-image: linear-gradient(315deg, var(--fill-hover), var(--fill-disabled));
+}
+
+.ycoEmptyCanvas_tiles > li:nth-child(3n) .ycoEmptyCanvas_tileImage {
+  background-image: linear-gradient(45deg, var(--fill-weak), var(--fill-disabled));
+}

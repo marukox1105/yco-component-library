@@ -35,7 +35,7 @@ Same pattern: one `*.module.css` per component (plain CSS, CSS-Modules class nam
 
 ## Component pages — real components, one page each
 
-The sidebar lists every component on Figma's component board, grouped the way the board groups them (52 pages). A page is built, not screenshotted: a plain-CSS file (`components/<id>.css`, the single source shared with `yce-frontend`) plus a small config (`components/<id>.js`) that the playground engine (`engine.js`) draws as a live preview, controls, HTML / React / CSS code, and a grid of every Figma variant. Pages carry a *Notes* box for token gaps and Figma quirks.
+The sidebar lists every component on Figma's component board, grouped the way the board groups them (55 pages). A page is built, not screenshotted: a plain-CSS file (`components/<id>.css`, the single source shared with `yce-frontend`) plus a small config (`components/<id>.js`) that the playground engine (`engine.js`) draws as a live preview, controls, HTML / React / CSS code, and a grid of every Figma variant. Pages carry a *Notes* box for token gaps and Figma quirks.
 
 `COMPONENT-PAGES.md` is the contract for adding or changing one. Checks (all run their own headless Chrome, so they work in parallel):
 

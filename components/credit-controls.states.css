@@ -1,0 +1,15 @@
+/* Doc-only: shows Hover / Press / Focus without a pointer. Never exported. */
+
+.ycoCreditControls_generate.is-hover::before {
+  background: var(--fill-hover);
+}
+
+.ycoCreditControls_generate.is-press::before {
+  background: var(--fill-press);
+}
+
+.ycoCreditControls_generate.is-focus,
+.ycoCreditControls_control.is-focus {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}

@@ -100,3 +100,20 @@
   font-weight: 400;
   line-height: var(--line-height-tiny);
 }
+
+/* A row that must not wrap: it scrolls sideways (drag with a pointer, swipe on touch). */
+.ycoTabs_scroll {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  cursor: grab;
+  scrollbar-width: none;
+  user-select: none;
+}
+
+.ycoTabs_scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.ycoTabs_scroll .ycoTabs_tab {
+  flex: none;
+}

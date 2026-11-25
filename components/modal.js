@@ -46,7 +46,7 @@
     const destructive = s.tone === "destructive";
     const cls = ["ycoModal", `ycoModal_size_${s.size}`, destructive ? "ycoModal_tone_destructive" : "", mobile ? "ycoModal_device_mobile" : ""].filter(Boolean).join(" ");
     const slots = SLOTS.filter((n) => s[`slot${n}`]).map((n, i) => `    <div class="ycoModal_slot${i === 0 ? " ycoModal_slot_first" : ""}">Slot</div>`).join("\n");
-    const hasHeader = s.icon || s.heading || s.secondary;
+    const hasHeader = s.icon || s.heading || s.secondary || s.field;
     const buttons = destructive
       ? btn("destructive", "primary", "Label") + "\n    " + btn("neutral", "secondary", "Label")
       : btn("neutral", "secondary", "Label") + "\n    " + btn("brand", "primary", "Label");
@@ -55,15 +55,15 @@
   <div class="${cls}" role="dialog" aria-modal="true"${labelled} tabindex="-1"${hook("dialog")}>
     <div class="ycoModal_content">
 ${s.image ? `      <div class="ycoModal_image" role="img" aria-label="Image">${PICTURE}</div>\n` : ""}${hasHeader ? `      <div class="ycoModal_header">
-${s.icon ? `        <span class="ycoModal_icon">${DIAMOND}</span>\n` : ""}${s.heading || s.secondary ? `        <div class="ycoModal_text">
-${s.heading ? '          <h2 class="ycoModal_heading" id="modal-heading">Heading</h2>\n' : ""}${s.secondary ? '          <p class="ycoModal_secondary">Secondary text</p>\n' : ""}        </div>\n` : ""}      </div>\n` : ""}${slots ? slots.replace(/^ {4}/gm, "      ") + "\n" : ""}    </div>
+${s.icon ? `        <span class="ycoModal_icon">${DIAMOND}</span>\n` : ""}${s.heading || s.secondary || s.field ? `        <div class="ycoModal_text">
+${s.heading ? '          <h2 class="ycoModal_heading" id="modal-heading">Heading</h2>\n' : ""}${s.field ? '          <label class="ycoModal_field"><span>Folder name</span><input class="ycoModal_fieldInput" type="text" value="Trip to Kyoto" /></label>\n' : s.secondary ? '          <p class="ycoModal_secondary">Secondary text</p>\n' : ""}        </div>\n` : ""}      </div>\n` : ""}${slots ? slots.replace(/^ {4}/gm, "      ") + "\n" : ""}    </div>
 ${s.buttons ? `    <div class="ycoModal_actions">
     ${buttons.replace(/\{\{c\}\}/g, ctx.preview ? " data-yco-close" : "")}
     </div>\n` : ""}${s.dismissible ? `    <button class="ycoModal_close" type="button" aria-label="Close"${hook("close")}>${CLOSE}</button>\n` : ""}${s.scrollbar ? '    <span class="ycoModal_scrollbar" aria-hidden="true"></span>\n' : ""}  </div>
 </div>`.replace(/\n\s*\n/g, "\n");
   }
 
-  const defaults = { type: "modal", device: "desktop", size: "small", tone: "default", icon: true, image: false, heading: true, secondary: true, slot1: true, slot2: false, slot3: false, slot4: false, slot5: false, buttons: true, dismissible: true, scrollbar: false, percent: "100" };
+  const defaults = { type: "modal", device: "desktop", size: "small", tone: "default", icon: true, image: false, heading: true, secondary: true, field: false, slot1: true, slot2: false, slot3: false, slot4: false, slot5: false, buttons: true, dismissible: true, scrollbar: false, percent: "100" };
 
   /** Preview: the scrim is drawn inside a stage, and a trigger brings the modal back after it is closed. */
   const stage = (s, ctx) => `<div class="ycoModal_stage${s.device === "mobile" ? " ycoModal_stage_device_mobile" : ""}">
@@ -94,6 +94,7 @@ ${overlay(s, ctx)}
       { key: "image", label: "Image", type: "toggle", default: false, when: (s) => s.type === "modal" },
       { key: "heading", label: "Heading", type: "toggle", default: true, when: (s) => s.type === "modal" },
       { key: "secondary", label: "Secondary text", type: "toggle", default: true, when: (s) => s.type === "modal" },
+      { key: "field", label: "Field in the text (confirm form)", type: "toggle", default: false, when: (s) => s.type === "modal" },
       ...SLOTS.map((n) => ({ key: `slot${n}`, label: `Slot ${n}`, type: "toggle", default: n === 1, when: (s) => s.type === "modal" })),
       { key: "buttons", label: "Button group", type: "toggle", default: true, when: (s) => s.type === "modal" },
       { key: "dismissible", label: "Dismissible (close button)", type: "toggle", default: true, when: (s) => s.type === "modal" },
@@ -157,10 +158,12 @@ ${overlay(s, ctx)}
         v.push({ label: `Modal / ${label(tone)} / ${label(size)} / Mobile`, wide: true, html: variantStage({ tone, size, device: "mobile" }) });
       }));
       v.push({ label: "Modal / Default / Small / With image", wide: true, html: variantStage({ image: true }) });
+      v.push({ label: "Confirm dialog / With field (rename)", wide: true, html: variantStage({ field: true, slot1: false }) });
       v.push({ label: "Modal / Default / Small / 5 slots, scrollbar", wide: true, html: variantStage({ slot2: true, slot3: true, slot4: true, slot5: true, scrollbar: true }) });
       return v;
     },
     notes: [
+      "Confirm dialog (collab-space's ConfirmDialog, approved in Storybook) is this Small modal with an icon, the tone and two buttons. Its With Field story puts a labelled input in the text slot (here the Field switch): 48px high, 16px side padding, 8px radius, --stroke-weak border; the focus ring is the 4px --stroke-focus the Storybook story uses.",
       "Panel ground uses --background-raised: Figma's --background-overlay exists only in the dark theme here (same value in light).",
       "Shadow: Figma's Shadow/Overlay (0 8 24 -4, black 16%) has no token; --shadow is the nearest and is heavier.",
       "Heading is 24/32 (Heading 3) and the Huge panel's 40px side padding are written in rem: no --font-size-heading-3 or --spacing token pair matches the first, and --spacing-40 is used for the second.",

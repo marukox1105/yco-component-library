@@ -1,0 +1,14 @@
+/* Doc-only: forced focus ring and doc layout for the Ratio page. Not exported to yce-frontend. */
+.ycoRatio_option.is-focus { box-shadow: 0 0 0 3px var(--stroke-focus); }
+
+/* Ratio fills its container (a side panel in the product); the doc shows it at the panel width. */
+[data-role="surface"] .ycoRatio,
+[data-engine="ratio"] figure .ycoRatio { max-width: 364px; }
+
+/* Options are 40px high, so the variant grid needs wider cells than the default 220px. */
+[data-engine="ratio"] section[aria-label="All variants"] > div:last-of-type { grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
+
+/* On a phone the product strip bleeds into the screen gutter; the doc cards have none to bleed into. */
+@media (max-width: 768px) {
+  [data-engine="ratio"] .ycoRatio_variant_gery_v2 { margin-inline: 0; padding-inline: 0; }
+}
