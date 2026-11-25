@@ -1,8 +1,8 @@
 /* Tokens page. Doc-only; uses the tokens in styles.css and defines none. */
 #tokensBody { max-width: 1040px; }
-.tk-toolbar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; margin-bottom: 40px; padding: 12px 0; background: var(--background-base); }
+.tk-toolbar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; margin-bottom: 40px; padding: 12px 4px; margin-inline: -4px; background: var(--background-sunken); }
 .tk-toolbar input[type="search"] { flex: 1 1 260px; min-width: 0; height: 40px; padding: 0 14px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-sm); background: var(--fill-raised); color: var(--text-strong); font: inherit; }
-.tk-toolbar input[type="search"]:focus-visible { outline: 2px solid var(--stroke-focus); outline-offset: 1px; }
+.tk-toolbar input[type="search"]:focus-visible { outline: 0; box-shadow: 0 0 0 3px var(--stroke-focus); }
 .tk-jump { display: flex; flex-wrap: wrap; gap: 4px; }
 .tk-jump a, .tk-toggle { height: 32px; padding: 0 12px; display: inline-flex; align-items: center; border: 0; border-radius: 999px; background: transparent; color: var(--text-weak); font: inherit; font-size: 13px; font-weight: 650; text-decoration: none; cursor: pointer; }
 .tk-jump a:hover, .tk-toggle:hover { background: var(--fill-hover); }
