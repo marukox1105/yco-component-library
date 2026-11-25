@@ -3,7 +3,7 @@
    `legacy` entries are the two hand-built pages that predate the engine. `figma` is the
    Figma page node (file JXNIQPJT9I9qFrgtiaCn4i). */
 // Bumped whenever a stylesheet changes, so browsers refetch components/*.css.
-window.YCO_BUILD = "20261125c";
+window.YCO_BUILD = "20261125d";
 window.YCO_NAV = [
   { group: null, items: [{ id: "overview", label: "Overview", legacy: true }] },
   { group: "Elements", items: [
@@ -17,7 +17,6 @@ window.YCO_NAV = [
     { id: "badge", label: "Badge", figma: "4136:44588" },
     { id: "badge-count", label: "Badge count", figma: "4661:66038" },
     { id: "badge-dot", label: "Badge dot", figma: "6478:100529" },
-    { id: "slot", label: "Slot", figma: "5367:7872" },
     { id: "scrollbar", label: "Scrollbar", figma: "13491:401" },
   ] },
   { group: "Forms", items: [

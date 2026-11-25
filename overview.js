@@ -18,7 +18,7 @@
   const PAGE_OF = {
     "Button": ["buttons"], "Button group": ["button-group"], "Button icon": ["button-icon"], "Icon container": ["icon-container"],
     "Text link": ["text-link"], "Avatar / labelled / dropdown / stack": ["avatar"], "Tag group / Badge": ["tag", "badge"],
-    "Badge count": ["badge-count"], "Badge dot": ["badge-dot"], "Slot": ["slot"], "Scrollbar": ["scrollbar"],
+    "Badge count": ["badge-count"], "Badge dot": ["badge-dot"], "Scrollbar": ["scrollbar"],
     "Text input": ["text-input"], "Text area": ["text-area"], "Select": ["select"], "Search input": ["search-input"],
     "Autocomplete": ["autocomplete"], "Combobox": ["combobox"], "Date picker": ["date-picker"], "File upload": ["file-upload"],
     "Slider": ["slider"], "Progress indicator / Bar": ["progress-indicator", "loading-bar"], "Checkbox group": ["checkboxes"],

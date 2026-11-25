@@ -18,7 +18,7 @@ const FIGMA_GROUPS = [
     F('Button icon', [], 'none', 'Icon-only is a Button option; icon-action-buttons is a different (like / dislike / edit / download) component'),
     F('Icon container', ['icon-container']), F('Text link', ['text-link']),
     F('Avatar / labelled / dropdown / stack', ['avatar']),
-    F('Tag group / Badge'), F('Badge count', ['badge-count']), F('Badge dot', ['badge-dot']), F('Slot'),
+    F('Tag group / Badge'), F('Badge count', ['badge-count']), F('Badge dot', ['badge-dot']), F('Slot', [], 'none', 'A Figma placeholder for where content goes; it is a design aid, not a code component, so the library has no page for it'),
     F('Scrollbar', ['scrollbar'], 'figma', 'Own Figma page, not on the All components board'),
   ]],
   ['Forms', [

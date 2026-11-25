@@ -169,7 +169,7 @@ window.YCO_CATALOG = {
      "name": "Slot",
      "sb": [],
      "conf": "none",
-     "note": "",
+     "note": "A Figma placeholder for where content goes; it is a design aid, not a code component, so the library has no page for it",
      "thumbs": [
       {
        "src": "assets/figma/slot.png",
