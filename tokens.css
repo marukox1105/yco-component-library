@@ -1,59 +1,66 @@
 /* Tokens page. Doc-only; uses the tokens in styles.css and defines none. */
-.tk-toolbar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; padding: 8px 0; background: var(--background-base); }
-.tk-toolbar input[type="search"] { flex: 1 1 240px; min-width: 0; height: 40px; padding: 0 14px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-sm); background: var(--fill-raised); color: var(--text-strong); font: inherit; }
+#tokensBody { max-width: 1040px; }
+.tk-toolbar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; margin-bottom: 40px; padding: 12px 0; background: var(--background-base); }
+.tk-toolbar input[type="search"] { flex: 1 1 260px; min-width: 0; height: 40px; padding: 0 14px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-sm); background: var(--fill-raised); color: var(--text-strong); font: inherit; }
 .tk-toolbar input[type="search"]:focus-visible { outline: 2px solid var(--stroke-focus); outline-offset: 1px; }
-.tk-jump { display: flex; flex-wrap: wrap; gap: 6px; }
-.tk-jump a { height: 32px; padding: 0 12px; display: inline-flex; align-items: center; border: 1px solid var(--stroke-weak); border-radius: 999px; background: var(--fill-raised); color: var(--text-weak); font-size: 13px; font-weight: 650; text-decoration: none; }
-.tk-jump a:hover { background: var(--fill-hover); }
-.tk-jump a:active { background: var(--fill-press); }
+.tk-jump { display: flex; flex-wrap: wrap; gap: 4px; }
+.tk-jump a, .tk-toggle { height: 32px; padding: 0 12px; display: inline-flex; align-items: center; border: 0; border-radius: 999px; background: transparent; color: var(--text-weak); font: inherit; font-size: 13px; font-weight: 650; text-decoration: none; cursor: pointer; }
+.tk-jump a:hover, .tk-toggle:hover { background: var(--fill-hover); }
+.tk-jump a:active, .tk-toggle:active { background: var(--fill-press); }
+.tk-toggle { border: 1px solid var(--stroke-weak); }
+.tk-toggle[aria-pressed="true"] { border-color: var(--brand-1000); background: var(--fill-brand-weak); color: var(--brand-1000); }
 
-.tk-sec { margin-bottom: 40px; scroll-margin-top: 72px; }
-.tk-sec > h3 { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
-.tk-sec > h3 small { color: var(--text-weaker); font-size: 12px; font-weight: 650; }
-.tk-pal { margin-top: 20px; }
-.tk-pal h4 { margin-bottom: 8px; color: var(--text-strong); font-size: 14px; }
-.tk-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
-.tk-swatch { display: grid; grid-template-columns: 36px 1fr; grid-template-areas: "chip name" "chip val"; column-gap: 10px; align-items: center; padding: 8px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-sm); background: var(--fill-raised); color: inherit; font: inherit; text-align: left; cursor: pointer; }
-.tk-swatch .tk-chip { grid-area: chip; }
-.tk-swatch .tk-name { grid-area: name; }
-.tk-swatch small { grid-area: val; }
-.tk-swatch:hover, .tk-row:hover { background: var(--fill-hover); }
-.tk-swatch:active, .tk-row:active { background: var(--fill-press); }
-.tk-swatch:focus-visible, .tk-row:focus-visible { outline: 2px solid var(--stroke-focus); outline-offset: 1px; }
+.tk-sec { margin-bottom: 72px; scroll-margin-top: 72px; }
+.tk-sec > h3 { margin-bottom: 8px; font-size: 24px; }
+.tk-sec > .intro { max-width: 60ch; margin-bottom: 32px; }
+.tk-h { margin: 40px 0 4px; color: var(--text-strong); font-size: 18px; }
+.tk-sub, .tk-scale { margin-top: 32px; }
+.tk-sub h4, .tk-scale h4 { margin-bottom: 12px; color: var(--text-weaker); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
 
-/* A colour is shown over its own backdrop (white for light tokens, the dark surface for dark ones), because many tokens are translucent. */
-.tk-chip { position: relative; display: inline-block; width: 36px; height: 36px; flex: none; border: 1px solid var(--stroke-weak); border-radius: var(--radius-sm); overflow: hidden; }
-.tk-chip.is-light { background: #fff; }
-.tk-chip.is-dark { background: #12181a; }
-.tk-chip i { position: absolute; inset: 0; }
-.tk-chip.tk-none { display: grid; place-items: center; background: transparent; color: var(--text-weaker); }
+/* A colour is drawn over its own backdrop (white for light, the dark surface for dark), because most tokens are translucent. */
+.tk-half { position: relative; display: block; overflow: hidden; }
+.tk-half.is-light { background: #fff; }
+.tk-half.is-dark { background: #12181a; }
+.tk-half i { position: absolute; inset: 0; }
+.tk-half b { position: absolute; inset: 0; display: grid; place-items: center; color: var(--text-weaker); font-size: 11px; font-weight: 600; }
+.tk-half.is-dark b { color: #ffffff99; }
 
-.tk-list { display: flex; flex-direction: column; border: 1px solid var(--stroke-weak); border-radius: var(--radius-md); background: var(--fill-raised); overflow: hidden; }
-.tk-head { display: grid; grid-template-columns: minmax(180px, 1.2fr) 1fr 1fr; gap: 12px; padding: 10px 14px; background: var(--fill-weaker); color: var(--text-weaker); font-size: 12px; font-weight: 700; text-transform: uppercase; }
-.tk-row { display: grid; grid-template-columns: minmax(180px, 1.2fr) 1fr 1fr; gap: 12px; align-items: center; width: 100%; padding: 10px 14px; border: 0; border-top: 1px solid var(--stroke-weak); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
-.tk-head + .tk-row { border-top: 0; }
-.tk-row[hidden], .tk-swatch[hidden], .tk-sec[hidden], .tk-pal[hidden] { display: none; }
-.tk-name { color: var(--text-strong); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; font-weight: 600; overflow-wrap: anywhere; }
-.tk-swatch .tk-name { font-size: 11.5px; }
-.tk-cell { display: grid; grid-template-columns: 36px 1fr; grid-template-areas: "chip val" "chip alias"; column-gap: 10px; align-items: center; min-width: 0; }
-.tk-cell .tk-chip { grid-area: chip; }
-.tk-cell small { grid-area: val; }
-.tk-cell em { grid-area: alias; font-style: normal; }
-.tk-swatch small, .tk-cell small { color: var(--text-weak); font-size: 12px; }
-.tk-cell em { color: var(--text-weaker); font-size: 11px; word-break: break-all; }
-.tk-cell em:empty { display: none; }
+.tk-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 12px; }
+.tk-tile { display: flex; flex-direction: column; gap: 6px; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.tk-big { height: 64px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-md); }
+.tk-step { color: var(--text-strong); font-size: 13px; font-weight: 650; }
 
-.tk-size { grid-template-columns: minmax(180px, 1fr) 140px 1.4fr; }
-.tk-val { color: var(--text-weak); font-size: 13px; }
-.tk-vis { display: flex; align-items: center; min-width: 0; color: var(--text-strong); overflow: hidden; white-space: nowrap; }
+.tk-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 24px 16px; }
+.tk-card { display: flex; flex-direction: column; gap: 8px; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.tk-split { display: grid; grid-template-columns: 1fr 1fr; height: 64px; border: 1px solid var(--stroke-weak); border-radius: var(--radius-md); overflow: hidden; }
+.tk-split .tk-half { height: 100%; }
+.tk-name { color: var(--text-strong); font-size: 13px; font-weight: 650; overflow-wrap: anywhere; }
+.tk-detail { display: none; flex-direction: column; gap: 2px; color: var(--text-weaker); font-size: 11.5px; line-height: 1.4; overflow-wrap: anywhere; }
+.show-values .tk-detail { display: flex; }
+
+.tk-tile:hover .tk-big, .tk-card:hover .tk-split { border-color: var(--stroke-strong); }
+.tk-tile:focus-visible, .tk-card:focus-visible, .tk-size:focus-visible { outline: 2px solid var(--stroke-focus); outline-offset: 4px; border-radius: var(--radius-sm); }
+[data-name][hidden], .tk-sec[hidden], .tk-pal[hidden], [data-sub][hidden] { display: none; }
+
+.tk-sizes { display: flex; flex-direction: column; gap: 4px; }
+.tk-sizes.tk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 24px 16px; }
+.tk-size { display: grid; grid-template-columns: 200px 130px minmax(0, 1fr); grid-template-areas: "name val vis"; gap: 16px; align-items: center; padding: 10px 12px; margin: 0 -12px; border: 0; border-radius: var(--radius-sm); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.tk-size:hover { background: var(--fill-hover); }
+.tk-size:active { background: var(--fill-press); }
+.tk-size .tk-vis { grid-area: vis; display: flex; align-items: center; min-width: 0; color: var(--text-strong); overflow: hidden; white-space: nowrap; }
+.tk-size .tk-name { grid-area: name; }
+.tk-size .tk-val { grid-area: val; color: var(--text-weaker); font-size: 13px; }
+.tk-grid .tk-size { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0; padding: 0; }
+.tk-grid .tk-size:hover { background: transparent; }
 .tk-bar { display: block; height: 12px; border-radius: 2px; background: var(--fill-brand-strong); }
-.tk-box { display: block; width: 40px; height: 40px; border: 2px solid var(--stroke-strong); background: var(--fill-weak); }
+.tk-box { display: block; width: 72px; height: 72px; border: 1px solid var(--stroke-strong); background: var(--fill-weak); }
 
 .tk-note { color: var(--text-weaker); font-size: 12px; }
 .tk-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); padding: 8px 14px; border-radius: var(--radius-sm); background: var(--background-inverse); color: var(--text-inverse-strong, #fff); font-size: 13px; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
 .tk-toast.is-visible { opacity: 1; }
 
 @media (max-width: 680px) {
-  .tk-head { display: none; }
-  .tk-row, .tk-size { grid-template-columns: 1fr; gap: 6px; }
+  .tk-sec { margin-bottom: 56px; }
+  .tk-cards { grid-template-columns: repeat(2, 1fr); }
+  .tk-size { grid-template-columns: 1fr; grid-template-areas: "name" "val" "vis"; gap: 4px; }
 }

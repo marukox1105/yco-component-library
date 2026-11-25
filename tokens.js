@@ -45,30 +45,51 @@
     ["Amber", /^--amber-/], ["Yellow", /^--yellow-/], ["Red", /^--red-/],
   ];
 
-  function chip(c, bg) {
-    if (!c) return '<span class="tk-chip tk-none">—</span>';
-    return `<span class="tk-chip ${bg}"><i style="background:${c.hex};opacity:${c.alpha}"></i></span>`;
-  }
-  const label = (c) => (c ? `${c.hex}${c.alpha < 1 ? ` · ${pct(c.alpha)}` : ""}` : "");
+  const label = (c, raw) => (c ? `${c.hex}${c.alpha < 1 ? ` · ${pct(c.alpha)}` : ""}` : (raw || ""));
+  const lbl = (c, raw) => (c ? `${c.hex}${c.alpha < 1 ? ` ${pct(c.alpha)}` : ""}` : (raw || ""));
 
-  function semanticRow(n, light, dark) {
+  // A colour is drawn over its own backdrop, because most tokens are translucent: white for light, the dark surface for dark.
+  function split(lc, dc, lraw, draw) {
+    const half = (c, bg, raw) => `<span class="tk-half ${bg}">${c ? `<i style="background:${c.hex};opacity:${c.alpha}"></i>` : `<b>${esc(raw || "—")}</b>`}</span>`;
+    return `<span class="tk-split">${half(lc, "is-light", lraw)}${half(dc, "is-dark", draw)}</span>`;
+  }
+
+  function semanticCard(n, prefix, light, dark) {
     const l = resolve(n, "light", light, dark), d = resolve(n, "dark", light, dark);
     const lc = parseColour(l.value), dc = parseColour(d.value);
-    if (!lc && !dc) return "";
-    const alias = l.chain.length ? l.chain.join(" → ") : "";
-    const darkAlias = d.chain.length ? d.chain.join(" → ") : "";
-    return `<button type="button" class="tk-row" data-copy="var(${n})" data-name="${esc(n)}" title="Copy var(${esc(n)})">
-      <span class="tk-name">${esc(n)}</span>
-      <span class="tk-cell">${chip(lc, "is-light")}<small>${esc(label(lc, l.value))}</small><em>${esc(alias)}</em></span>
-      <span class="tk-cell">${chip(dc, "is-dark")}<small>${esc(label(dc, d.value))}</small><em>${esc(darkAlias === alias ? "" : darkAlias)}</em></span>
+    if (!lc && !dc && !l.value) return "";
+    const short = n.replace(`--${prefix}-`, "");
+    const alias = l.chain.length ? l.chain[l.chain.length - 1].replace(/^--/, "") : "";
+    return `<button type="button" class="tk-card" data-copy="var(${n})" data-name="${esc(n)}" title="Copy var(${esc(n)})">
+      ${split(lc, dc, l.value, d.value)}
+      <span class="tk-name">${esc(short)}</span>
+      <span class="tk-detail"><span>${esc(lbl(lc, l.value))}</span><span>${esc(lbl(dc, d.value))}</span>${alias ? `<span>${esc(alias)}</span>` : ""}</span>
     </button>`;
   }
 
-  function paletteRow(n, light) {
-    const c = parseColour(light[n]);
-    const onDark = /-dark-/.test(n);
-    return `<button type="button" class="tk-swatch" data-copy="var(${n})" data-name="${esc(n)}" title="Copy var(${esc(n)})">
-      ${chip(c, onDark ? "is-dark" : "is-light")}<span class="tk-name">${esc(n.replace(/^--/, ""))}</span><small>${esc(label(c))}</small></button>`;
+  function group(names, prefix, light, dark) {
+    // Sub-heading = the first word after the prefix when at least two tokens share it (brand, error, inverse...).
+    const first = (n) => n.replace(`--${prefix}-`, "").split("-")[0];
+    const count = {};
+    names.forEach((n) => { count[first(n)] = (count[first(n)] || 0) + 1; });
+    const buckets = new Map();
+    names.forEach((n) => { const k = count[first(n)] > 1 ? first(n) : "general"; (buckets.get(k) || buckets.set(k, []).get(k)).push(n); });
+    const order = [...buckets.keys()].sort((x, y) => (x === "general" ? -1 : y === "general" ? 1 : x.localeCompare(y)));
+    return order.map((k) => {
+      const cards = buckets.get(k).map((n) => semanticCard(n, prefix, light, dark)).filter(Boolean);
+      return cards.length ? `<div class="tk-sub" data-sub><h4>${k === "general" ? "General" : k}</h4><div class="tk-cards">${cards.join("")}</div></div>` : "";
+    }).join("");
+  }
+
+  function scaleRow(title, list, light) {
+    const dark = /-dark(-|$)/.test(title) || /dark/.test(title);
+    const tiles = [...list].sort((x, y) => parseInt(x.split("-").pop(), 10) - parseInt(y.split("-").pop(), 10)).map((n) => {
+      const c = parseColour(light[n]);
+      return `<button type="button" class="tk-tile" data-copy="var(${n})" data-name="${esc(n)}" title="Copy var(${esc(n)})">
+        <span class="tk-half ${dark ? "is-dark" : "is-light"} tk-big"><i style="background:${c.hex};opacity:${c.alpha}"></i></span>
+        <span class="tk-step">${esc(n.split("-").pop())}</span><span class="tk-detail"><span>${esc(lbl(c))}</span></span></button>`;
+    }).join("");
+    return `<div class="tk-scale" data-sub><h4>${esc(title)}</h4><div class="tk-tiles">${tiles}</div></div>`;
   }
 
   function sizes(light) {
@@ -83,12 +104,12 @@
       <span class="tk-name">${esc(n)}</span><span class="tk-val">${esc(v)}${px(v) != null ? ` · ${px(v)}px` : ""}</span><span class="tk-vis">${vis}</span></button>`;
     return `
     <section class="tk-sec" id="tk-spacing" data-sec><h3>Spacing</h3><p class="intro">Gaps and padding. Use these, not raw pixels.</p>
-      <div class="tk-list">${spacing.map((n) => row(n, light[n], `<i class="tk-bar" style="width:${Math.max(px(light[n]) || 0, 1)}px"></i>`)).join("")}</div></section>
+      <div class="tk-sizes">${spacing.map((n) => row(n, light[n], `<i class="tk-bar" style="width:${Math.max(px(light[n]) || 0, 1)}px"></i>`)).join("")}</div></section>
     <section class="tk-sec" id="tk-radius" data-sec><h3>Corner radius</h3>
-      <div class="tk-list">${radius.map((n) => row(n, light[n], `<i class="tk-box" style="border-radius:${light[n]}"></i>`)).join("")}</div></section>
+      <div class="tk-sizes tk-grid">${radius.map((n) => row(n, light[n], `<i class="tk-box" style="border-radius:${light[n]}"></i>`)).join("")}</div></section>
     <section class="tk-sec" id="tk-type" data-sec><h3>Typography</h3>
-      <div class="tk-list">${ff.map((n) => row(n, light[n].replace(/var\(--font\)/, "system sans"), `<span style="font-family:${light[n].replace(/"/g, "'")}">Aa</span>`)).join("")}
-      ${fs.map((n) => row(n, light[n], `<span style="font-size:${light[n]}">The quick brown fox</span>`)).join("")}
+      <div class="tk-sizes">${ff.map((n) => row(n, light[n].replace(/var\(--font\)/, "system sans"), `<span style="font-family:${light[n].replace(/"/g, "'")}">Aa</span>`)).join("")}
+      ${fs.map((n) => row(n, light[n], `<span style="font-size:${light[n]}">Make something people love</span>`)).join("")}
       ${lh.map((n) => row(n, light[n], "")).join("")}
       ${fw.map((n) => row(n, light[n], `<span style="font-weight:${light[n]}">Strong</span>`)).join("")}</div></section>`;
   }
@@ -97,19 +118,22 @@
     const light = block(css, ":root"), dark = block(css, ':root[data-theme="dark"]');
     const names = Object.keys(light);
     const pal = PALETTE.map(([title, re]) => {
-      const list = names.filter((n) => re.test(n) && parseColour(light[n]));
-      return list.length ? `<div class="tk-pal"><h4>${title}</h4><div class="tk-swatches">${list.map((n) => paletteRow(n, light)).join("")}</div></div>` : "";
+      const byScale = new Map();
+      names.filter((n) => re.test(n) && parseColour(light[n])).forEach((n) => {
+        const k = n.replace(/^--/, "").replace(/-[^-]+$/, ""); (byScale.get(k) || byScale.set(k, []).get(k)).push(n);
+      });
+      return byScale.size ? `<div class="tk-pal"><h3 class="tk-h">${title}</h3>${[...byScale].map(([k, list]) => scaleRow(k, list, light)).join("")}</div>` : "";
     }).join("");
     const sem = SEMANTIC.map(([title, prefix, text]) => {
-      const set = new Set([...names, ...Object.keys(dark)].filter((n) => n.startsWith(`--${prefix}-`)));
-      const rows = [...set].sort().map((n) => semanticRow(n, light, dark)).filter(Boolean);
-      return rows.length ? `<section class="tk-sec" id="tk-${prefix}" data-sec><h3>${title} <small>${rows.length}</small></h3><p class="intro">${text}</p>
-        <div class="tk-list"><div class="tk-head"><span>Token</span><span>Light</span><span>Dark</span></div>${rows.join("")}</div></section>` : "";
+      const set = [...new Set([...names, ...Object.keys(dark)].filter((n) => n.startsWith(`--${prefix}-`)))].sort();
+      const body = group(set, prefix, light, dark);
+      return body ? `<section class="tk-sec" id="tk-${prefix}" data-sec><h3>${title}</h3><p class="intro">${text}</p>${body}</section>` : "";
     }).join("");
     const secs = [["tk-colour", "Colour"], ["tk-fill", "Fill"], ["tk-stroke", "Stroke"], ["tk-text", "Text"], ["tk-icon", "Icon"], ["tk-background", "Background"],
       ["tk-spacing", "Spacing"], ["tk-radius", "Radius"], ["tk-type", "Type"]];
     mount.innerHTML = `
       <div class="tk-toolbar"><input type="search" id="tkSearch" placeholder="Search tokens, e.g. fill-hover" aria-label="Search tokens" />
+        <button type="button" class="tk-toggle" id="tkValues" aria-pressed="false">Show values</button>
         <nav class="tk-jump" aria-label="Jump to">${secs.map(([id, t]) => `<a href="#" data-jump="${id}">${t}</a>`).join("")}</nav></div>
       <section class="tk-sec" id="tk-colour" data-sec><h3>Colour palette <small>primitives</small></h3>
         <p class="intro">The literal colours. Components never use these directly: they use the semantic tokens below, which point at a primitive and change with the theme.</p>${pal}</section>
@@ -132,11 +156,13 @@
       toast.classList.add("is-visible");
       clearTimeout(render.t); render.t = setTimeout(() => toast.classList.remove("is-visible"), 1400);
     });
+    const vals = mount.querySelector("#tkValues");
+    vals.addEventListener("click", () => { const on = vals.getAttribute("aria-pressed") !== "true"; vals.setAttribute("aria-pressed", String(on)); mount.classList.toggle("show-values", on); });
     mount.querySelector("#tkSearch").addEventListener("input", (e) => {
       const q = e.target.value.trim().toLowerCase();
       mount.querySelectorAll("[data-name]").forEach((el) => { el.hidden = !!q && !el.dataset.name.includes(q); });
       mount.querySelectorAll("[data-sec]").forEach((s) => { s.hidden = !!q && ![...s.querySelectorAll("[data-name]")].some((el) => !el.hidden); });
-      mount.querySelectorAll(".tk-pal").forEach((p) => { p.hidden = !!q && ![...p.querySelectorAll("[data-name]")].some((el) => !el.hidden); });
+      mount.querySelectorAll(".tk-pal, [data-sub]").forEach((p) => { p.hidden = !!q && ![...p.querySelectorAll("[data-name]")].some((el) => !el.hidden); });
     });
   }
 
